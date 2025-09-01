@@ -6,6 +6,10 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 3000,
-    allowedHosts: ['*']
+    allowedHosts: [
+      'z4kossco4gs0sowcc8ssscow.168.231.121.95.sslip.io',
+      'marchehealthcare.org',
+      'www.marchehealthcare.org'
+    ]
   }
 })
