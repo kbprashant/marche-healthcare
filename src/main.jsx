@@ -77,7 +77,7 @@ const router = createBrowserRouter([
       { path: 'testimonials', element: <TestimonialsAdmin /> },
     ],
   },
-], { basename: '/marche-healthcare/' });
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 <React.StrictMode>
