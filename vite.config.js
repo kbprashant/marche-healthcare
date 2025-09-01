@@ -3,11 +3,9 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
+  erver: {
     host: '0.0.0.0',
     port: 3000,
-    allowedHosts: [
-      'z4kossco4gs0sowcc8ssscow.168.231.121.95.sslip.io'  // add your Coolify domain here
-    ]
+    allowedHosts: ['*']
   }
 })
