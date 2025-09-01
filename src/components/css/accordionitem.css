@@ -1,0 +1,83 @@
+.rc-accordion-toggle {
+    display: flex;
+    padding: 20px 10px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+}
+
+.rc-accordion-active {
+    background: #E5E5FF;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+}
+
+.rc-accordion-toggle.active .rc-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.rc-accordion-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   margin: 2em 0;
+}
+
+.rc-accordion-header, .rc-collapse{
+    width: 100%;
+    padding: 0 24px;
+}
+.rc-accordion-header{
+    border-top:1px solid #000;
+}
+.rc-accordion-card:last-child {
+    margin-bottom: 0;
+}
+
+.rc-accordion-title {
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.rc-accordion-toggle.active .rc-accordion-title {
+    color: #000;
+}
+
+
+.rc-accordion-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 15px;
+}
+
+.rc-accordion-body p {
+    margin-bottom: 0;
+
+}
+
+.rc-collapse {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+}
+
+.rc-collapse.show {
+    height: auto;
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.rc-accordion-border{
+    border: 1px solid #000;
+}
+
+
+

@@ -1,0 +1,16 @@
+.video-tabbutton {
+  /* font-family: Roboto; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  padding:.2em .8em;
+  border-radius: 45px;
+  border: 1.5px solid #5d5dff;
+  background: #fff;
+  /* padding:1em; */
+}
+
+.video-tabbutton-active{
+  background-color: var(--primary);
+  color: #fff;
+}

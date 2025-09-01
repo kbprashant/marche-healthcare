@@ -1,0 +1,266 @@
+/* Whole Page Background */
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Banner */
+.banner {
+  background: linear-gradient(rgba(12, 30, 58, 0.15), rgba(12, 30, 58, 0.1)),
+    url('/careers/careers.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.banner-text h3 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.banner-text p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+
+/* Video container */
+.expectations-video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The video itself */
+.expectations-video-file {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  background: white; /* prevents white flash before video loads */
+}
+
+
+
+
+
+
+
+
+
+/* What We Expect Section */
+.expectations-section {
+  background-color: white;
+  padding: 60px 20px;
+  margin: 80px;
+  margin-top: 0;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.expectations-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.expectations-text h3,
+.expectations-text h4 {
+  color: #0c1e3a;
+  margin-top: 12px;
+}
+
+.expectations-text p {
+  color: #444;
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+.expectations-text ul {
+  list-style: disc;
+  margin-left: 20px;
+  color: #555;
+  padding-top: 12px;
+}
+
+.expectations-text ul li {
+  margin-bottom: 8px;
+}
+
+/* Image Box */
+.expectations-image {
+  text-align: center;
+  
+}
+
+.expectations-image img {
+  margin: 0 auto;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  max-width: 750px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Current Openings */
+.current-opening {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0c1e3a;
+  margin: 50px 0 25px;
+  position: relative;
+}
+
+.current-opening::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #ff7f50;
+  margin: 12px auto 0;
+  border-radius: 3px;
+}
+
+/* Careers Section */
+.careers-section {
+  background-color: #f9fafc;
+  margin: 80px;
+  padding: 40px 20px;
+  border-radius: 12px;
+}
+
+.job-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.job-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.job-card h3,
+.job-card h4 {
+  color: #0c1e3a;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+/* Job Description - one line default, expand on hover */
+.job-card .job-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.9;
+  color: #555;
+  margin-bottom: 15px;
+  transition: all 0.5s ease;
+  max-height: 25px;
+  line-height: 1.5;
+}
+
+.job-card:hover .job-desc {
+  -webkit-line-clamp: unset;
+  max-height: 350px;
+  overflow: visible;
+  opacity: 1;
+}
+
+/* Job Apply Button */
+.job-card button {
+  background: #560cf5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  align-self: flex-start;
+}
+
+.job-card button:hover {
+  background: #c85d12;
+}
+
+/* Toggle Buttons */
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.toggle-buttons button {
+  padding: 10px 22px;
+  border: 2px solid #0c1e3a;
+  border-radius: 20px;
+  background: white;
+  color: #0c1e3a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-buttons button.active {
+  background: #0c1e3a;
+  color: white;
+}
+
+.toggle-buttons button:hover {
+  background: #1a3b6a;
+  color: white;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .expectations-grid {
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .expectations-text,
+  .expectations-image {
+    width: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .expectations-section,
+  .careers-section {
+    margin: 40px 20px;
+    padding: 30px 15px;
+  }
+
+  .banner-text h3 {
+    font-size: 2rem;
+  }
+
+  .current-opening {
+    font-size: 1.6rem;
+  }
+}
