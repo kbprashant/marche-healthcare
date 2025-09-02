@@ -38,7 +38,8 @@
 
 .value-proposition {
   display: flex;
-  margin: 80px var(--page-margin-primary) ;
+  /* margin: 80px var(--page-margin-primary) ; */
+  margin:auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;

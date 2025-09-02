@@ -12,61 +12,74 @@ const instagramSvg = (
 const youtubeSvg = (
   <path d="M19.6 3.2c-.8-.3-2.8-.3-5.6-.3s-4.8 0-5.6.3c-.8.3-1.4.7-2 1.3-.5.5-1 1.2-1.3 2-.3.8-.3 2.8-.3 5.6s0 4.8.3 5.6c.3.8.7 1.4 1.3 2 .5.5 1.2 1 2 1.3.8.3 2.8.3 5.6.3s4.8 0 5.6-.3c.8-.3 1.4-.7 2-1.3.5-.5 1-1.2 1.3-2 .3-.8.3-2.8.3-5.6s0-4.8-.3-5.6c-.3-.8-.7-1.4-1.3-2-.5-.5-1.2-1-2-1.3zm-7.6 9.9v-5.4l4.6 2.7-4.6 2.7z" />
 );
-const MediaCard = ({
-  id,
-  img,
-  title,
-  content,
-  profile,
-  names,
-  date,
-  link,
-}) => {
-  return (
-    <a
-      href={link}
-      target="_blank"
-      id="media-link"
-      // transition={{ delay: 0.3 }}
-    >
-      <motion.div className="blog-card" whileHover={{scale:"1.05"}}>
-        <img src={img} alt="Blog" className="blog-image-3" />
-        <div className="blog-content">
-          <h3 className="blog-title">{title}</h3>
-          <p className="blog-text">{content}</p>
-        </div>
-        <div className="blog-footer">
-          <div className="author-container">
-            <div className="img-container">
-              <img src={profile} alt="author" className="author" />
-            </div>
-            <div className="author-content">
-              <p className="author-name">{names}</p>
-              <div className="author-time">
-                <p className="blog-date">{date}</p>
-              </div>
+function safeStr(v) {
+  return typeof v === "string" ? v : "";
+}
+
+function pickIcon(linkOrName) {
+  const s = linkOrName.toLowerCase();
+  if (s.includes("linkedin"))  return linkedInSvg;
+  if (s.includes("instagram")) return instagramSvg;
+  if (s.includes("youtube") || s.includes("youtu.be")) return youtubeSvg;
+  if (s.includes("x.com") || s.includes("twitter"))   return twitterSvg;
+  return twitterSvg; // default
+}
+
+const MediaCard = (props) => {
+  const id       = props.id ?? "";
+  const img      = safeStr(props.img);
+  const title    = safeStr(props.title);
+  const content  = safeStr(props.content);
+  const profile  = safeStr(props.profile);
+  const names    = safeStr(props.names);
+  const date     = safeStr(props.date);
+  const link     = safeStr(props.link);           // <= guard
+  const hasLink  = link.length > 0;
+
+  const iconSvg  = pickIcon(link || names);
+
+  const CardBody = (
+    <motion.div className="blog-card" whileHover={{ scale: hasLink ? 1.05 : 1 }}>
+      <img src={img} alt={title || "Post image"} className="blog-image-3" />
+      <div className="blog-content">
+        <h3 className="blog-title">{title}</h3>
+        <p className="blog-text">{content}</p>
+      </div>
+      <div className="blog-footer">
+        <div className="author-container">
+          <div className="img-container">
+            <img src={profile} alt="author" className="author" />
+          </div>
+          <div className="author-content">
+            <p className="author-name">{names}</p>
+            <div className="author-time">
+              <p className="blog-date">{date}</p>
             </div>
           </div>
-            <motion.svg
-              whileHover={{ scale: 1.2 }}
-              width="42"
-              height="35"
-              viewBox="0 0 24 24"
-              fill="black"
-              className="card-social"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {link.includes("linkedin")
-                            ? linkedInSvg
-                            : link.includes("instagram")
-                            ? instagramSvg
-                            : link.includes("youtub")
-                            ? youtubeSvg
-                            : twitterSvg}
-            </motion.svg>
         </div>
-      </motion.div>
+
+        <motion.svg
+          whileHover={{ scale: 1.2 }}
+          width="42"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="black"
+          className="card-social"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {iconSvg}
+        </motion.svg>
+      </div>
+    </motion.div>
+  );
+
+  // If link exists, wrap with <a>; otherwise just show the card as a block.
+  return hasLink ? (
+    <a href={link} target="_blank" rel="noopener noreferrer" id="media-link">
+      {CardBody}
     </a>
+  ) : (
+    CardBody
   );
 };
 

@@ -20,6 +20,19 @@
   border-radius: 27.163px;
 }
 
+<<<<<<< HEAD
+=======
+/* MediaCard main image */
+.blog-image-3 {
+  width: 100%;
+  height: auto;         /* keep aspect ratio */
+  max-height: 216px;    /* <= cap the height */
+  object-fit: cover;    /* crop overflow to keep it tidy */
+  display: block;
+  border-radius: 12px;  /* optional, match your card style */
+}
+
+>>>>>>> 6ae2dffbd62047c6524b35a32de2302a014af9fc
 .blog-content {
   width: 100%;
   display: flex;

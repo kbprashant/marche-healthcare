@@ -52,7 +52,7 @@ const blogCardDetails = [
 
 const VIDEODATA = {
   productvideo: {
-    src: "./home/background1.mp4",
+    src: "./home/background-video3.mp4",
   },
   trainingvideo: {
     src: "./videos/videobg.mp4",

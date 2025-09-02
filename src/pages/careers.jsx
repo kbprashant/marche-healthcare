@@ -34,9 +34,20 @@ const jobs = [
 
 export default function Careers() {
   const [selectedCategory, setSelectedCategory] = useState("Full Time");
-  const navigate = useNavigate(); // ✅ Initialize navigation
+  const [jobs, setJobs] = useState([]);
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
-  const filteredJobs = jobs.filter(job => job.type === selectedCategory);
+  useEffect(()=>{
+    (async()=>{
+      const url = new URL(`${API_BASE}/careers_public_list.php`, window.location.origin);
+      url.searchParams.set("type", selectedCategory);
+      const res = await fetch(url);
+      const data = await res.json();
+      setJobs(data?.items || []);
+    })();
+  }, [selectedCategory]);
+
+  const filteredJobs = jobs;
 
   const handleApply = (job) => {
     // Navigate to CareersApply page and optionally pass job info via state
@@ -58,7 +69,7 @@ export default function Careers() {
         <div className="expectations-grid md:flex md:items-center md:gap-10">
           <div className="expectations-text md:w-1/2">
             <h2 className="text-3xl font-bold text-[#0c1e3a] mb-4">
-              What We Expect at Marche Healthcare
+              What We Expect at Marche Healthcare ASDSD
             </h2>
             <h3 className="text-xl font-semibold text-[#0c1e3a] mb-4">
               We don’t just want employees who “fit a job description.” We want individuals who bring:
