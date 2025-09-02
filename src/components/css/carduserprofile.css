@@ -1,0 +1,65 @@
+.card-user-profile {
+  display: flex;
+  width: 317px;
+  height: 439px;
+  padding: 22px 0px;
+  flex-direction: column;
+  align-items: center;
+  gap: 21.413px;
+  flex-shrink: 0;
+  border-radius: 26px;
+  background: #fff3f3;
+  border: 1px solid #5d5dff;
+  cursor: pointer;
+}
+/* .card-user-profile .profile-img {
+  width: 231px;
+  height: 231px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+} */
+
+.card-user-profile img {
+  width: 60%;
+  border-radius: 50%;
+}
+
+.card-user-profile .profile-img{
+  text-align: center;
+}
+
+.card-user-profile h3,
+.card-user-profile h4 {
+  color: #000;
+  font-size: 1.8em;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.card-user-profile h4 {
+  color: #111;
+  font-size: 1.2em;
+  opacity: 0.7;
+}
+.card-user-profile .card-social-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: 0 auto;
+}
+
+.user-card-active {
+  background: linear-gradient(139deg, #5d5dff -309.51%, #c3c3ff 107.73%);
+  border: 0px;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .user-card-active {
+   display: none;
+  }
+}

@@ -1,0 +1,310 @@
+#contact {
+  width: 100%;
+}
+.banner {
+  background: linear-gradient(rgba(12, 30, 58, 0.15), rgba(12, 30, 58, 0.1)),
+    url('/careersapply/career2.jpg') center/cover no-repeat;
+  height: 500px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  filter: brightness(1.8);
+}
+
+.banner img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+.banner-text {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.678);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-text h3 {
+  font-size: var(--font-size-banner-primary);
+  line-height: 110%;
+  margin-bottom: 4%;
+}
+
+.banner-text p {
+  font-size: var(--font-size-paragraph-primary);
+  color: rgba(255, 255, 255, 0.872);
+  padding:0 10px;
+
+}
+
+#cards {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 4%;
+  padding: 80px var(--page-margin-primary);
+  /* padding: 4%; */
+
+}
+
+.contact-card {
+  text-align: center;
+}
+
+#cards .contact-card {
+  width: 900px;
+  background-color: #f0f0ff;
+  border-radius: 16px;
+  padding: 20px 30px;
+  transition: box-shadow 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cards .contact-card:hover {
+  /* box-shadow:  rgba(139, 152, 234, 0.25) 5px 5px,  rgba(152, 152, 253, 0.25) 10px 10px, rgba(169, 153, 250, 0.2) 15px 15px, rgba(141, 173, 247, 0.1) 20px 20px, rgba(162, 191, 244, 0.05) 25px 25px; */
+
+  /* box-shadow:10px 10px rgb(108, 108, 241); */
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+#cards .contact-card h3 {
+  font-size: 28px;
+  margin: 8px 0px 16px;
+  justify-self: center;
+}
+
+#cards .contact-card p {
+  font-weight: 400;
+  margin-bottom: 16px;
+  text-align: center;
+}
+#cards .contact-card a {
+  color: var(--primary);
+}
+#cards .contact-card .logo-in-cards>svg{
+  width: 64px;
+  height: 64px;
+}
+/* #cards .contact-card .logo-in-contact{
+  margin: 0 .2em;
+  width: 24px;
+  height: 24px;
+  &:hover{
+    color: white;
+  }
+} */
+#cards .contact-card .logo-inside-logo-div
+{
+  width: 1.8em;
+  height: 1.8em;
+  &:hover
+  {
+    fill:var(--primary);
+    
+  }
+}
+
+#form {
+  width: 100%;
+  /* padding: 4%; */
+  padding: 80px var(--page-margin-primary);
+
+}
+
+#form h3 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+#form p {
+  font-size: 18px;
+  margin-bottom: 36px;
+}
+
+.splitter {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 4%;
+  justify-content: space-between;
+}
+
+.contact-form {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 12px;
+}
+.contact-form div {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 6px;
+}
+
+.contact-form div label {
+  font-weight: 500;
+  color: rgb(67, 60, 60);
+}
+
+.contact-form div input,
+.contact-form div select,
+.contact-form div textarea {
+  appearance: none; /* Removes default OS styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.contact-form div select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='black'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 30px; /* Prevents text overlap with the icon */
+}
+
+
+.contact-form div input,
+select,
+textarea:focus {
+  outline: none;
+  /* border: 1px solid #5D5DFF; */
+}
+.contact-form textarea{
+  height: 100px;
+  resize: none;
+}
+
+.contact-form .agree {
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: flex-end;
+}
+
+.contact-form button {
+  width: fit-content;
+  border-radius: 6px;
+  color: white;
+  background-color: var(--primary);
+  padding: 12px 24px;
+  border: none;
+  letter-spacing: 1px;
+  margin-top: 6px;
+}
+
+.splitter .group-images {
+  width: 50%;
+  max-width: 452px;
+  /* height: 95%; */
+}
+
+.splitter .group-images img {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius-primary);
+}
+
+@media screen and (max-width:1080px) {
+  .splitter .group-images {
+    /* width: 100%; */
+    display:none;
+  }
+}
+/* Medium devices (landscape tablets, 770px and up) */
+@media only screen and (max-width: 770px) {
+  .banner {
+    width: 100%;
+    height: 300px;
+  }
+
+  #cards {
+    width: 100%;
+    padding: 1em;
+  }
+
+  .banner-text h3 {
+    font-size: 6vw;
+    line-height: 110%;
+    margin-bottom: 4%;
+  }
+
+  .banner-text p {
+    font-size: 2vw;
+    color: rgba(255, 255, 255, 0.872);
+  }
+
+  .splitter {
+    width: 100%;
+    display: flex;
+    flex-flow: column-reverse;
+    gap: 4%;
+    justify-content: center;
+    align-items: center;
+    /* justify-content: space-between; */
+  }
+
+  #cards {
+    flex-flow: column;
+    justify-content: center;
+  }
+
+  #cards .contact-card {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+  .splitter .contact-form {
+    width: 100%;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+  .banner-text {
+    h3 {
+      font-size: 2.5rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+  .backtotop {
+    right: 7px;
+    bottom: 30px;
+  }
+
+  
+  #form{
+    margin-top: -80px;
+  }
+  #form h3 {
+    font-size: 25px;
+    margin-bottom: -8px;
+}
+#form p {
+  font-size: 14px;
+  margin-bottom: 11px;
+}
+.contact-form div input, .contact-form div select, .contact-form div textarea {
+ 
+  padding: 4px;
+  font-size: 15px;
+}
+}
+

@@ -1,0 +1,646 @@
+.abt-banner {
+  background: url("/about/aboutus.jpg") center center / cover;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 20px;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+    font-size: 1.2vw;
+
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+}
+.abt-banner h1 {
+  text-align: center;
+  font-size: var(--font-size-banner-primary);
+  color: var(--text-primary);
+  font-weight: 700;
+  animation: fadeoff 0.8s forwards;
+  opacity: 0;
+}
+@keyframes fadeoff {
+  to {
+    opacity: 1;
+  }
+}
+.aboutCompany {
+  display: flex;
+  align-items: center;
+  padding: 80px var(--page-margin-primary);
+  /* align-items: center; */
+  gap: 2%;
+  background: var(--Colors-Background-white, #fff);
+  .abt-running-paragraph {
+    /* background-color: rgb(207, 214, 255); */
+    border-radius: 8px;
+    /* box-shadow: 0 10px 20px 1px rgb(149, 148, 148); */
+    padding: 30px 0;
+    font-family: "Roboto";
+    /* text-align: justify; */
+    line-height: 0.8;
+    span {
+      font-size: 56px;
+      font-weight: 100;
+    }
+  }
+}
+
+.aboutCompany .abt-img,
+.vision-frame .abt-img {
+  width: 100%;
+  border-radius: 54px;
+  max-width: 520px;
+  img {
+    height: 100%;
+    width: 420px;
+  }
+}
+.aboutCompany .aboutCompany-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0em;
+}
+
+.aboutCompany .about-subheading {
+  color: var(--Black, #000);
+  text-align: center;
+  /* font-family: Roboto; */
+  font-size: var(--font-size-paragraph-primary);
+  font-style: normal;
+  font-weight: 600;
+  margin: -20px 0;
+}
+
+.aboutCompany h3 {
+  /* font-family: Roboto; */
+  font-size: var(--font-size-heading-primary);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.aboutCompany .abtcom-para {
+  color: var(--Black, #000);
+  align-self: stretch;
+  /* font-family: Roboto; */
+  font-size: var(--font-size-paragraph-primary);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 180%;
+}
+
+.purpose-container {
+  position: relative;
+  width: 100%;
+  padding: 0px var(--page-margin-primary) 80px;
+  height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.purpose-container .purpose-image {
+  border-radius: var(--border-radius-primary);
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.purpose-container .purpose-overlay {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+  border-radius: 21px;
+  width: 70%;
+  /* backdrop-filter: blur(17.950000762939453px); */
+  padding: 40px;
+}
+
+.purpose-container .purpose-heading {
+  /* font-family: Roboto; */
+  font-size: var(--font-size-heading-primary);
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 0.4em;
+
+  line-height: 80%; /* 105.6px */
+  /* background: linear-gradient(90deg, #4255ff 0%, #7381fe 118.57%); */
+  color: white;
+  /* background-clip: text; */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
+}
+
+.purpose-container .purpose-text {
+  /* color: var(--Black, #000); */
+  color: white;
+  text-align: center;
+  /* font-family: Roboto; */
+  font-size: var(--font-size-paragraph-primary);
+  font-style: normal;
+  /* font-weight: 700;   */
+  line-height: 140%; /* 33.6px */
+  margin-bottom: 20px;
+}
+
+.purpose-container .author-info {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  backdrop-filter: blur(10px);
+  background-color: white;
+  padding: 8px 10px;
+  border-radius: var(--border-radius-primary);
+}
+
+.purpose-container .author-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: url("../assets/author.png") lightgray 0px 0px / cover no-repeat; /* Update the image path */
+}
+
+.purpose-container .author-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+}
+
+.purpose-container .author-name {
+  color: var(--Black, #000);
+  /* font-family: Roboto; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 50%; /* 24px */
+}
+
+.purpose-container .author-position {
+  color: var(--Black, #000);
+  /* font-family: Roboto; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 10%; /* 24px */
+}
+
+.purpose-container .divider {
+  width: 2px;
+  height: 32px;
+  background: #000;
+  margin: 0 16px;
+}
+
+.purpose-container .social-icons {
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  background: #fff;
+  border: none;
+  border-radius: 24px;
+}
+
+.aboutMission {
+  background: #fff;
+  /* padding: 6em 3em; */
+}
+
+.aboutMission .abtMission-frame1 {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  flex-shrink: 0;
+  margin-left: 40px;
+}
+
+.aboutMission .mission-image {
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.aboutMission .abtMission-frame2 {
+  width: 100%;
+  padding: 0 var(--page-margin-primary);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: -200px;
+}
+
+.aboutMission .abtContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-self: stretch;
+}
+
+.aboutMission .abtCont-Hd {
+  align-self: stretch;
+  color: var(--Black, #000);
+  font-size: var(--font-size-heading-primary);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 105.6px */
+}
+
+.aboutMission .abtCont-para {
+  color: var(--Black, #000);
+  align-self: stretch;
+  /* font-family: Roboto; */
+  font-size: var(--font-size-paragraph-primary);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 27px */
+}
+
+.aboutMission .abtframe-card {
+  display: flex;
+  width: 320px;
+  height: 300px;
+  padding: 1em;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: space-between;
+  border-radius: 50px;
+  /* border: 1.5px solid #26262626; */
+  /* background: rgba(139, 139, 236, 0.2); */
+  background-color: #7381fe3d;
+  backdrop-filter: blur(35px);
+  margin-top: 0px;
+  &:hover {
+    scale: 1.06;
+    box-shadow: rgba(46, 44, 143, 0.25) 0px 54px 55px,
+      rgba(51, 43, 158, 0.12) 0px -12px 30px,
+      rgba(11, 24, 146, 0.12) 0px 4px 6px, rgba(24, 34, 173, 0.17) 0px 12px 13px,
+      rgba(23, 26, 168, 0.09) 0px -3px 5px;
+    transition: scale 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+  }
+}
+
+.aboutMission .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 1em;
+  align-self: stretch;
+}
+
+.aboutMission .card-body h3 {
+  /* font-family: Roboto; */
+  font-size: 29px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.aboutMission .card-body h6 {
+  /* font-family: Roboto; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.aboutMission .card-body p {
+  color: #000;
+
+  /* Body/body1 */
+  /* font-family: Roboto; */
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 23px; /* 143.75% */
+  letter-spacing: 0.5px;
+}
+
+.aboutVision {
+  width: 100%;
+  background: var(--Colors-Background-white, #fff);
+  padding: 80px var(--page-margin-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aboutVision .vision-frame {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  /* padding: 73px 98px; */
+}
+
+.aboutVision .vision-content {
+  max-width: 600px;
+}
+
+.aboutVision .vision-heading {
+  font-size: var(--font-size-heading-primary);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  color: var(--Black, #000);
+  margin-bottom: 24px;
+  p {
+    font-size: var(--font-size-paragraph-primary);
+  }
+}
+
+.aboutVision .vision-paragraph {
+  /* font-family: Roboto; */
+  font-size: var(--font-size-paragraph-primary);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  color: var(--Black, #000);
+}
+
+.about-team {
+  background: #f0f0ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  /* width: 100%; */
+  /* margin: 80px var(--page-margin-primary); */
+  padding-top: 20px;
+}
+
+.about-team .team-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.about-team .team-header h2 {
+  font-size: var(--font-size-heading-primary);
+}
+
+.about-team .team-header p {
+  width: 70%;
+  text-align: center;
+  font-size: var(--font-size-paragraph-primary);
+  line-height: 1.5em;
+}
+
+.about-team .team-heading,
+.about-team .team-paragraph {
+  color: #000;
+}
+
+.about-team .team-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3em;
+}
+
+.about-team .team-button {
+  padding: 0.6em;
+  margin: 0 auto;
+  border-radius: 17px;
+  border: 1px solid #5d5dff;
+  background: #fff;
+  display: flex;
+  justify-content: space-around;
+}
+
+.about-team .team-button button {
+  font-family: "Roboto";
+  color: #000;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  background: #fff;
+}
+.about-team .team-button .active {
+  background: #c3c3ff;
+}
+
+.about-team .team-cards-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2em;
+  padding-top: 2em;
+  padding-bottom: 5em;
+}
+
+.about-team .team-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+@media screen and (max-width: 1100px) {
+  .aboutCompany {
+    /* flex-direction: column;   */
+  }
+  .aboutMission .abtframe-card {
+    width: 28vw;
+  }
+  .aboutCompany .abt-img,
+  .vision-frame .abt-img {
+    max-width: 1000px;
+    margin-top: 50px;
+    img {
+      width: 50vw;
+      height: 50vw;
+    }
+  }
+  .vision-frame .abt-img {
+    width: 50vw;
+    height: 50vw;
+  }
+}
+@media screen and (max-width: 900px) {
+  .abt-banner h1 {
+    font-size: 3rem;
+  }
+  .aboutMission .abtMission-frame1 {
+    margin-left: 0px;
+  }
+
+  .aboutMission .abtMission-frame2 {
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 150px;
+  }
+  .aboutMission .abtframe-card {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .banner img {
+    width: 100%;
+    height: auto;
+  }
+  .aboutCompany {
+    flex-direction: column;
+  }
+
+  .purpose-container .purpose-heading,.aboutVision .vision-heading ,.aboutCompany h3{
+    font-size: 3.5rem;
+  }
+
+  .purpose-container .purpose-text,.aboutVision .vision-paragraph,.aboutCompany .aboutCompany-content{
+    font-size: 1.5rem;
+  }
+  .aboutMission {
+    padding: 5em 1em;
+  }
+
+  .aboutVision {
+    padding: 0;
+  }
+  .aboutVision .vision-frame {
+    flex-direction: column-reverse;
+  }
+  .aboutVision .vision-frame img,
+  .aboutCompany .abt-img img {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  .aboutMission .abtMission-frame2 {
+    padding: 80px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .aboutCompany {
+    padding: 5em 1em;
+    text-align: center;
+  }
+  .aboutCompany .aboutCompany-content {
+    align-items: center;
+  }
+
+  .aboutCompany .abtcom-para {
+    font-size: 0.9rem;
+  }
+  .purpose-container {
+    height: 500px;
+  }
+
+  .purpose-container .purpose-heading {
+    font-size: 2.5rem;
+  }
+
+  .purpose-container .purpose-text {
+    font-size: 1rem;
+    margin: 0px 20px;
+  }
+
+  .purpose-container .author-name {
+    font-size: 0.8rem;
+  }
+  .purpose-container .author-position{
+    font-size: 0.6rem;
+  }
+
+  .aboutMission .mission-image {
+    display: none;
+  }
+  .aboutMission .abtMission-frame2 {
+    padding: 0px;
+    margin-top: -400px;
+  }
+  .aboutMission .abtframe-card {
+    height: auto;
+  }
+  .aboutVision .vision-frame {
+    padding: 2em 10px;
+  }
+
+  .about-team {
+    padding: 3em 10px;
+  }
+  .about-team .team-heading {
+    font-size: 88px;
+  }
+
+  .our-team {
+    padding: 3em 10px;
+  }
+
+  .abt-banner {
+    height: 300px;
+  }
+  .abt-banner h1 {
+    font-size: 2rem;
+    /* margin-left: 240px;   */
+  }
+  .aboutCompany h3 {
+    font-size: 2.5rem;
+  }
+  .aboutCompany .abt-running-paragraph span {
+    font-size: 1.3rem;
+    font-weight: 100;
+    line-height: 30px;
+  }
+  .aboutCompany .abt-img img,
+  .vision-frame .abt-img img {
+    display: none;
+  }
+  .purpose-container .purpose-image {
+    width: 100%;
+    height: 100%;
+  }
+  .fogdiv{
+    display: none;
+  }
+  .purpose-container {
+    padding: 0px 10px;
+  }
+  .aboutMission {
+    padding: 2em 10px 0;
+  }
+  .aboutVision .vision-heading,
+  .about-team .team-header h2 {
+    font-size: 2.5rem;
+  }
+  .about-team .team-header h2 {
+    margin-bottom: 0px;
+  }
+  .aboutVision {
+    padding: 0px 30px;
+  }
+  .aboutVision .vision-paragraph,
+  .about-team .team-header p {
+    font-size: 1rem;
+  }
+  .aboutVision .vision-frame img {
+    margin-top: -20px;
+  }
+  .about-team .team-container {
+    gap: 0em;
+  }
+  .backtotop {
+    right: 50px;
+    bottom: 30px;
+  }
+}
+
+/* font-size: 88px; */

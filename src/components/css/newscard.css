@@ -1,0 +1,124 @@
+.blog-card {
+  margin: 0 auto;
+  width: 90%;
+  display: flex;
+  padding: 12.537px 0px;
+  flex-direction: column;
+  align-items: center;
+  gap: 25.074px;
+  align-self: stretch;
+  transition: all 0.3s;
+  /* background-color: wheat; */
+  &:hover {
+    .card-social {
+      fill: var(--primary);
+    }
+  }
+}
+.blog-card img {
+  width: 100%;
+  border-radius: 27.163px;
+}
+
+.blog-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.blog-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.blog-footer .author-container {
+  display: flex;
+  gap: 1em;
+  height: auto;
+}
+.blog-footer .author-content {
+  display: flex;
+  flex-direction: column;
+}
+.blog-footer .img-container {
+  display: inline-block;
+}
+
+.blog-footer .img-container img {
+  background-color: #fff;
+  object-fit: contain;
+}
+
+.blog-footer .card-social {
+  width: 1.5em;
+}
+
+.newspagecardcontainer {
+  width: 100%;
+  padding: 20px var(--page-margin-primary);
+  /* padding: 3em; */
+}
+.newspagecardcontainer .swiper-pagination {
+  text-align: center;
+}
+#media-link:hover{
+  color:black
+}
+/* Medium devices (landscape tablets, 770px and up) */
+@media only screen and (max-width: 770px) {
+  .blog-card {
+    gap: 1em;
+  }
+  .blogs-and-events .blog-content {
+    padding: 1em 0;
+    text-align: left;
+  }
+
+  .blog-content .blog-title {
+    font-size: 1.2rem;
+  }
+  .blog-content .blog-text {
+    font-size: 1rem;
+  }
+  .author-container .author {
+    width: 5vw;
+  }
+
+  .author-content {
+    gap: 0;
+  }
+
+  .newspagecardcontainer .swiper-pagination {
+    bottom: 10px !important;
+    text-align: center;
+  }
+
+  /* .newspagecardcontainer .blog-card {
+    height: 55vh;
+  } */
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  /* .newspagecardcontainer .swiper-wrapper{
+    display: none;
+  } */
+  .blog-card {
+    width: 100% !important;
+  }
+  .author-container .author {
+    width: 100%;
+  }
+  .blogs-and-events .blog-event {
+    gap: 0;
+  }
+  .blogs-and-events .read-more {
+    display: none;
+  }
+
+  .newspagecardcontainer {
+    width: 100%;
+    padding: 2em;
+  }
+}

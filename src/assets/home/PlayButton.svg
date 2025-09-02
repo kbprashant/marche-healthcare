@@ -1,0 +1,16 @@
+<svg width="200" height="160" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Play Button">
+<rect id="Rectangle 1103" x="55" y="41" width="88" height="78" fill="white"/>
+<g id="Vector" filter="url(#filter0_b_253_1418)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M53.5 34H145.5C151.851 34 157 39.1486 157 45.5V114.5C157 120.851 151.851 126 145.5 126H53.5C47.1486 126 42 120.851 42 114.5V45.5C42 39.1486 47.1486 34 53.5 34ZM94.7275 98.515L117.095 83.565C118.3 82.7796 119.027 81.4386 119.027 80C119.027 78.5614 118.3 77.2204 117.095 76.435L94.7275 61.485C93.4067 60.5926 91.7019 60.5012 90.2931 61.2475C88.8849 61.9939 88.0029 63.4561 88 65.05V94.95C88.0029 96.5439 88.8849 98.0061 90.2931 98.7525C91.7019 99.4988 93.4067 99.4074 94.7275 98.515Z" fill="#5D5DFF" fill-opacity="0.6"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_b_253_1418" x="5.3" y="-2.7" width="188.4" height="165.4" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="18.35"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_253_1418"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_253_1418" result="shape"/>
+</filter>
+</defs>
+</svg>

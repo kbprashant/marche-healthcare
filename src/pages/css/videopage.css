@@ -1,0 +1,217 @@
+.vid-banner {
+  height: 500px;
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  filter: brightness(1.8);
+  .banner-text h3 {
+    font-size: var(--font-size-banner-primary);
+  }
+}
+.vid-banner video {
+  width: 100vw;
+  height: 500px;
+  object-fit: cover;
+}
+
+.video-gallery {
+  margin-top: -7px;
+}
+
+.video-gallery .card-group {
+  padding: 10em 0 3em;
+}
+
+.video-gallery .category {
+  background: linear-gradient(91deg, #5d5dff 0.09%, #d1d1ff 155.72%);
+  display: flex;
+  height: 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* margin-top: 80px; */
+}
+
+.video-gallery .category-container {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 16.657px;
+
+  border-radius: 56.984px;
+  background: #fff;
+}
+
+.btn-outline-rounded {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 31.41px */
+  text-transform: capitalize;
+  padding: 16px;
+  border-radius: 77.705px;
+  border: 2.475px solid #5d5dff;
+}
+
+.video-gallery .category .active {
+  color: #fff;
+  background: #5d5dff;
+}
+
+.video-gallery .sub-category {
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.video-gallery .sub-category h2 {
+  font-size: var(--font-size-banner-primary);
+  font-style: normal;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.video-gallery .sub-category p {
+  font-size: var(--font-size-paragraph-primary);
+  font-style: normal;
+  font-weight: 400;
+  /* padding: 0 100px; */
+}
+
+.video-gallery .sub-category .button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 11px;
+}
+.video-gallery .sub-category .button-group .active {
+  color: #fff;
+  background: #5d5dff;
+}
+.video-gallery .video-section {
+  padding: 0px var(--page-margin-primary);
+  text-align: center;
+  /* height: 100vh; */
+  .card-in-video {
+    h2 {
+      font-size: var(--font-size-paragraph-primary);
+    }
+  }
+}
+.video-gallery .video-section h2 {
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.video-gallery .video-section p {
+  font-size: var(--font-size-paragraph-primary);
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* .video-gallery .video-player {
+  margin: 4em auto;
+  height: 100vh;
+} */
+
+.video-gallery .card-group .card {
+  /* width: 97%; */
+  margin: 0 auto;
+  /* width: 365px;
+  height: 281; */
+}
+.video-gallery .card img {
+  width: 100%;
+}
+
+.video-gallery .card-body h2 {
+  padding: 0.5em 0;
+  font-size: 1.3rem;
+}
+#youtubevideosection {
+  height: 45vw;
+  aspect-ratio: 4/2;
+  margin:-50px auto 4em;
+}
+
+.dark {
+  background-color: var(--primary);
+  color: white;
+}
+/* Medium devices (landscape tablets, 770px and up) */
+@media only screen and (max-width: 770px) {
+  .video-gallery .video-section {
+    padding: 3em 1em;
+  }
+  .video-gallery .card-body h2 {
+    padding: 0.5em 0;
+    font-size: 1.6rem;
+  }
+  .video-gallery .card-group .card {
+    width: 30vh;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .video-gallery .video-section {
+    padding: 0;
+  }
+
+  .video-gallery .category {
+    background: none;
+  }
+  .video-gallery .category-container {
+    flex-wrap: wrap;
+  }
+  .btn-outline-rounded {
+    width: 100%;
+  }
+  .video-gallery .sub-category .button-group {
+    flex-wrap: wrap;
+  }
+  
+  .vid-banner video {
+    width: 100%;
+    height: 300px;
+  }
+  .vid-banner {
+    width: 100%;
+    height: 300px;
+    .banner-text {
+      h3 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+  .video-gallery {
+    margin: 65px 45px 0px;
+  }
+  .video-gallery .sub-category h2 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .video-gallery .sub-category p {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .video-gallery .sub-category {
+    padding: 80px 0 0;
+  }
+  #youtubevideosection{
+    width: 100%;
+    margin-top:20px;
+  }
+  .video-gallery{
+    margin: auto 10px;
+  }
+}

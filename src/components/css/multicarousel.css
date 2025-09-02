@@ -1,0 +1,87 @@
+.multicarousel {
+  width: 100%;
+  margin-bottom: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.multicarousel .slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  padding: 3em;
+  transition: transform 0.5s ease-in-out;
+  
+
+}
+
+.multicarousel .slide-hidden {
+  display: none;
+  transform: translateX(-100%); /* Hide slides off-screen initially */
+  opacity: 0; /* Make hidden slides invisible */
+}
+
+.multicarousel .arrow {
+  position: absolute;
+  width: 2rem;
+  height: 2em;
+}
+.multicarousel .arrow:hover {
+  cursor: pointer;
+}
+
+.multicarousel .arrow-left {
+  left: -10px;
+}
+
+.multicarousel .arrow-right {
+  right: 0px;
+}
+
+.multicarousel .indicators {
+  display: flex;
+  position: absolute;
+  bottom: -1rem;
+}
+
+.multicarousel .indicator  {
+  margin: 0 0.2rem;
+  background-color: var(--primary);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  outline: none;
+  border: 1px solid var(--primary);
+  cursor: pointer;
+}
+
+.multicarousel .indicator-inactive  {
+  background-color: #fff;
+}
+
+
+
+/* Medium devices (landscape tablets, 770px and up) */
+@media only screen and (max-width: 770px) {
+  .multicarousel{
+ flex-direction: column;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+  .multicarousel .slide{
+    flex-direction: column;
+    padding: 0em;
+  }
+
+  .multicarousel .arrow{
+    display: none;
+  }
+
+}
