@@ -69,7 +69,7 @@ export default function Careers() {
         <div className="expectations-grid md:flex md:items-center md:gap-10">
           <div className="expectations-text md:w-1/2">
             <h2 className="text-3xl font-bold text-[#0c1e3a] mb-4">
-              What We Expect at Marche Healthcare ASDSD
+              What We Expect at Marche Healthcare
             </h2>
             <h3 className="text-xl font-semibold text-[#0c1e3a] mb-4">
               We don’t just want employees who “fit a job description.” We want individuals who bring:
