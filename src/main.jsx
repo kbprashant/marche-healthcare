@@ -49,7 +49,7 @@ const router = createBrowserRouter([
     element: <Timeline />,
   },
   {
-    path: '/careers',        // 👈 New route
+    path: '//careers',        // 👈 New route
     element: <Careers />,
   },
   
