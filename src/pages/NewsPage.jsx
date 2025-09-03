@@ -10,9 +10,9 @@ import NewsCard from "../components/NewsCard";
 import NewsfullDetails from "../components/NewsFullDetails";
 
 // === DB API (env driven) ===
-const API_BASE =
-  import.meta.env.VITE_API_BASE_URL ||
-  `${window.location.protocol}//${window.location.host}/api`;
+ const API_BASE =
+   import.meta.env.VITE_API_BASE_URL ||
+   `${window.location.protocol}//${window.location.host}/api`;
 
 // ---- icons ----
 const linkedInSvg = (
@@ -99,9 +99,9 @@ const NewsPage = () => {
       try {
         setSpLoading(true);
         setSpError("");
-        const res = await fetch(`${API_BASE}/list_posts.php?limit=24`, { cache: "no-store" });
+        const res = await fetch(`${API_BASE}/public/broadcasts?category=social&limit=24`, { cache: "no-store" });
         const data = await res.json();
-        if (!data.ok) throw new Error(data.error || "FAILED_TO_FETCH");
+        if (!data?.ok) throw new Error(data?.error || "FAILED_TO_FETCH");
         if (active) setDbSocialPosts(Array.isArray(data.items) ? data.items : []);
       } catch (err) {
         if (active) setSpError(err.message || "Something went wrong");
@@ -161,18 +161,19 @@ const NewsPage = () => {
               )}
 
               {(!spLoading && dbSocialPosts.length > 0 ? dbSocialPosts : blogCardDetails).map((p, idx) => {
-const card = dbSocialPosts.length > 0
-  ? {
-      id: p.id ?? idx,
-      img: p.image_url || "",
-      title: p.title || "",
-      content: p.description || "",
-      profile: "./companyLogo.png",
-      names: "Marche Health Care",
-      date: (p.published_at || "").slice(0, 10),
-      link: p.post_url || "",
-    }
-  : p;
+              const card = dbSocialPosts.length > 0
+                ? {
+                    id: p.id ?? idx,
+                    img: p.image_url || "",                 // from broadcasts.image_url
+                    title: p.title || "",
+                    content: p.summary || "",               // use summary; body_html is for detail pages
+                    profile: "./companyLogo.png",
+                    names: (p.social_source ? p.social_source[0].toUpperCase() + p.social_source.slice(1) : "Marche Healthcare"),
+                    date: (p.scheduled_at || p.created_at || "").slice(0,10),
+                    link: p.link_url || "",
+                    social_source: p.social_source || null,
+                  }
+                : p;
 
 
                 return (

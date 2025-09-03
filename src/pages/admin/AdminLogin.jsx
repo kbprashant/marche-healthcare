@@ -3,19 +3,16 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import "../css/admin-login.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://localhost/api";
+// set in .env → VITE_API_BASE_URL=http://localhost:8080/api/admin
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/admin";
 
 export default function AdminLogin() {
   const nav = useNavigate();
   const location = useLocation();
   const { login, loading, setLoading, isAuthed, booting } = useAuth();
-  const from = useMemo(
-    () => location.state?.from?.pathname || "/admin",
-    [location]
-  );
+  const from = useMemo(() => location.state?.from?.pathname || "/admin", [location]);
 
-  useEffect(() => {   if (!booting && isAuthed) nav(from, { replace: true });
-  }, [booting, isAuthed, from, nav]);
+  useEffect(() => { if (!booting && isAuthed) nav(from, { replace: true }); }, [booting, isAuthed, from, nav]);
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPwd, setShowPwd] = useState(false);
@@ -35,35 +32,24 @@ export default function AdminLogin() {
     }
     try {
       setLoading(true);
-const res = await fetch(`${API_BASE}/login.php`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  credentials: "include",
-  body: JSON.stringify({ email: form.email, password: form.password }),
-});
+      const res = await fetch(`${API_BASE}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.email, password: form.password }),
+      });
+      const data = await res.json().catch(() => ({}));
 
-
-      if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || `HTTP ${res.status}`);
+      if (!res.ok || !data?.token) {
+        const msg = data?.error || `HTTP ${res.status}`;
+        throw new Error(msg === "Invalid email or password" ? msg : "Login failed");
       }
-      const data = await res.json();
-      if (!data?.token) throw new Error("Invalid response from server");
-
       login({ token: data.token, admin: data.admin || { email: form.email } });
       nav(from, { replace: true });
     } catch (err) {
-      setError(
-        err?.message?.includes("Unexpected token")
-          ? "Server sent invalid JSON. Please check API response."
-          : err?.message || "Login failed"
-      );
-    } finally {
-      setLoading(false);
-    }
+      setError(err?.message || "Login failed");
+    } finally { setLoading(false); }
   }
 
-  // ✅ RETURN YOUR JSX
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -77,35 +63,17 @@ const res = await fetch(`${API_BASE}/login.php`, {
 
         <form onSubmit={onSubmit} className="auth-form" noValidate>
           <label className="auth-label">Email</label>
-          <input
-            className="auth-input"
-            type="email"
-            name="email"
-            placeholder="you@company.com"
-            value={form.email}
-            onChange={onChange}
-            autoComplete="email"
-            required
-          />
+          <input className="auth-input" type="email" name="email"
+            placeholder="you@company.com" value={form.email}
+            onChange={onChange} autoComplete="email" required />
 
           <label className="auth-label">Password</label>
           <div className="auth-input-group">
-            <input
-              className="auth-input"
-              type={showPwd ? "text" : "password"}
-              name="password"
-              placeholder="••••••••"
-              value={form.password}
-              onChange={onChange}
-              autoComplete="current-password"
-              required
-              minLength={6}
-            />
-            <button
-              type="button"
-              className="ghost-btn"
-              onClick={() => setShowPwd((s) => !s)}
-            >
+            <input className="auth-input" type={showPwd ? "text" : "password"}
+              name="password" placeholder="••••••••"
+              value={form.password} onChange={onChange}
+              autoComplete="current-password" required minLength={6}/>
+            <button type="button" className="ghost-btn" onClick={() => setShowPwd(s => !s)}>
               {showPwd ? "Hide" : "Show"}
             </button>
           </div>
@@ -120,7 +88,6 @@ const res = await fetch(`${API_BASE}/login.php`, {
         </div>
       </div>
 
-      {/* Optional video background (ensure path exists or import asset) */}
       <video className="auth-bg" autoPlay muted loop playsInline>
         <source src="/home/background-video.mp4" type="video/mp4" />
       </video>

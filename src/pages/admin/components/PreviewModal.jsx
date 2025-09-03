@@ -1,61 +1,68 @@
 import { useEffect, useState } from "react";
+import "../css/admin.modals.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
-
-export default function PreviewModal({ id, onClose }) {
+export default function PreviewModal({ id, apiBase, token, onClose }) {
   const [item, setItem] = useState(null);
 
+  async function authFetch(url, init = {}) {
+    const headers = {
+      ...(init.headers || {}),
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    const res = await fetch(url, { ...init, headers });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+    return data;
+  }
+
   useEffect(() => {
-    if (!id) return;
     (async () => {
       try {
-        const res = await fetch(`${API_BASE}/broadcasts_get.php?id=${id}`, {
-          credentials: "include",
-        });
-        const data = await res.json();
+        const data = await authFetch(`${apiBase}/broadcasts/${id}`);
         if (data?.ok) setItem(data.item);
-      } catch (e) {
-        console.error(e);
-      }
+      } catch (e) { console.error(e); }
     })();
-  }, [id]);
+  }, [apiBase, id]);
+
+  function handleKeyDown(e) {
+    if (e.key === "Escape") onClose();
+  }
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal modal-lg">
+    <div className="modal" role="dialog" aria-modal="true" onClick={onClose} onKeyDown={handleKeyDown}>
+      <div className="modal-card" onClick={(e)=>e.stopPropagation()}>
         <div className="modal-header">
-          <h3>Preview</h3>
-          <button className="iconbtn" onClick={onClose}>✕</button>
+          <h3 id="preview-title">Preview</h3>
+          <button className="modal-close" aria-label="Close" onClick={onClose}>×</button>
         </div>
 
-        {!item ? (
-          <div style={{ padding: 20 }}>Loading…</div>
-        ) : (
-          <div className="preview">
-            <div className="badge">{item.category}</div>
-            <div className={`badge ${item.status}`}>{item.status}</div>
-            <h2 style={{ marginTop: 10 }}>{item.title}</h2>
-            {item.image_url ? (
-              <img
-                src={item.image_url}
-                alt=""
-                style={{ maxWidth: "100%", borderRadius: 8, margin: "12px 0" }}
+        <div className="modal-content">
+          {!item ? (
+            <div>Loading…</div>
+          ) : (
+            <div className="preview" aria-labelledby="preview-title">
+              <h4 className="preview-title">{item.title}</h4>
+
+              {item.image_url && (
+                <img className="preview-media" alt="" src={item.image_url} />
+              )}
+
+              <div
+                className="rich"
+                dangerouslySetInnerHTML={{ __html: item.body_html || "" }}
               />
-            ) : null}
-            {item.summary ? <p style={{ opacity: 0.85 }}>{item.summary}</p> : null}
-            {item.body_html ? (
-              <div dangerouslySetInnerHTML={{ __html: item.body_html }} />
-            ) : null}
-            {item.link_url ? (
-              <p>
-                <a href={item.link_url} target="_blank" rel="noreferrer">
-                  Open Link ↗
-                </a>
-              </p>
-            ) : null}
-            <small>Scheduled: {item.scheduled_at || "—"}</small>
-          </div>
-        )}
+
+              {item.link_url && (
+                <p style={{ marginTop: 10 }}>
+                  <a href={item.link_url} target="_blank" rel="noreferrer">
+                    {item.link_url}
+                  </a>
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

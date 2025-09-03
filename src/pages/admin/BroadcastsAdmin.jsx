@@ -1,29 +1,41 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import PreviewModal from "./components/PreviewModal";
 import BroadcastFormModal from "./components/BroadcastFormModal";
 import SectionHeader from "../../components/SectionHeader";
+import { useAuth } from "../../auth/AuthContext";
 import "./admin.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/admin";
 
 export default function BroadcastsAdmin() {
-  const [tab, setTab] = useState("social"); // 'social' | 'news'
+  const { token } = useAuth();
+  const [tab, setTab] = useState("social");
   const [query, setQuery] = useState("");
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const [showForm, setShowForm] = useState(false);
-  const [editing, setEditing] = useState(null); // row or null
-  const [preview, setPreview] = useState(null); // row or null
+  const [editing, setEditing] = useState(null);
+  const [preview, setPreview] = useState(null);
+
+  async function authFetch(url, init = {}) {
+    const headers = {
+      ...(init.headers || {}),
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    const res = await fetch(url, { ...init, headers });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+    return data;
+  }
 
   async function load() {
     setLoading(true);
     try {
-      const url = new URL(`${API_BASE}/broadcasts_list.php`, window.location.origin);
+      const url = new URL(`${API_BASE}/broadcasts`, window.location.origin);
       url.searchParams.set("category", tab);
       if (query) url.searchParams.set("q", query);
-      const res = await fetch(url, { credentials: "include" });
-      const data = await res.json();
+      const data = await authFetch(url.toString());
       setRows(data?.items || []);
     } catch (e) {
       console.error(e);
@@ -32,32 +44,25 @@ export default function BroadcastsAdmin() {
       setLoading(false);
     }
   }
-  useEffect(() => { load(); }, [tab, query]);
+  useEffect(() => { load(); /* eslint-disable-next-line */ }, [tab, query]);
 
   const openNew = () => { setEditing(null); setShowForm(true); };
+
   const openEdit = async (id) => {
     try {
-      const res = await fetch(`${API_BASE}/broadcasts_get.php?id=${id}`, { credentials:"include" });
-      const data = await res.json();
-      if (data?.ok) {
-        setEditing(data.item);
-        setShowForm(true);
-      }
+      const data = await authFetch(`${API_BASE}/broadcasts/${id}`);
+      if (data?.ok) { setEditing(data.item); setShowForm(true); }
     } catch (e) { console.error(e); }
   };
+
   const doDelete = async (id) => {
     if (!confirm("Delete broadcast? This cannot be undone.")) return;
     try {
-      const res = await fetch(`${API_BASE}/broadcasts_delete.php?id=${id}`, {
-        method: "POST",
-        credentials: "include"
-      });
-      const data = await res.json();
+      const data = await authFetch(`${API_BASE}/broadcasts/${id}`, { method: "DELETE" });
       if (data?.ok) setRows(rows => rows.filter(r => r.id !== id));
-      else alert(data?.error || "Delete failed");
     } catch (e) {
       console.error(e);
-      alert("Delete failed");
+      alert(e.message || "Delete failed");
     }
   };
 
@@ -91,7 +96,10 @@ export default function BroadcastsAdmin() {
         ) : rows.map(r => (
           <div className="trow" key={r.id}>
             <div>{r.id}</div>
-            <div className="tcell-title">{r.title}</div>
+            <div className="tcell-title">{r.title}
+                 {r.category === 'social' && r.social_source && (
+                <span className="badge" style={{ marginLeft: 8 }}>{r.social_source}</span>)}
+             </div>
             <div className="badge">{r.category}</div>
             <div className={`badge ${r.status}`}>{r.status}</div>
             <div>{r.scheduled_at || "—"}</div>
@@ -106,13 +114,15 @@ export default function BroadcastsAdmin() {
 
       {showForm && (
         <BroadcastFormModal
+          apiBase={API_BASE}
+          token={token}
           initial={editing ? editing : { category: tab, status: "draft" }}
           onClose={()=>setShowForm(false)}
           onSaved={() => { setShowForm(false); load(); }}
         />
       )}
 
-      {preview && <PreviewModal id={preview.id} onClose={()=>setPreview(null)} />}
+      {preview && <PreviewModal id={preview.id} apiBase={API_BASE} token={token} onClose={()=>setPreview(null)} />}
     </div>
   );
 }

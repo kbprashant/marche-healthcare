@@ -16,13 +16,22 @@ function safeStr(v) {
   return typeof v === "string" ? v : "";
 }
 
-function pickIcon(linkOrName) {
-  const s = linkOrName.toLowerCase();
-  if (s.includes("linkedin"))  return linkedInSvg;
-  if (s.includes("instagram")) return instagramSvg;
-  if (s.includes("youtube") || s.includes("youtu.be")) return youtubeSvg;
-  if (s.includes("x.com") || s.includes("twitter"))   return twitterSvg;
-  return twitterSvg; // default
+function detectSourceFromLink(u = "") {
+  const s = u.toLowerCase();
+  if (s.includes("linkedin")) return "linkedin";
+  if (s.includes("instagram")) return "instagram";
+  if (s.includes("youtube") || s.includes("youtu.be")) return "youtube";
+  if (s.includes("x.com") || s.includes("twitter")) return "twitter";
+  return null;
+}
+
+
+function SocialIcon({ source }) {
+  if (source === "linkedin")  return <svg viewBox="0 0 24 24">{linkedInSvg}</svg>;
+  if (source === "twitter")   return <svg viewBox="0 0 24 24">{twitterSvg}</svg>;
+  if (source === "instagram") return <svg viewBox="0 0 24 24">{instagramSvg}</svg>;
+  if (source === "youtube")   return <svg viewBox="0 0 24 24">{youtubeSvg}</svg>;
+  return null;
 }
 
 const MediaCard = (props) => {
@@ -33,10 +42,11 @@ const MediaCard = (props) => {
   const profile  = safeStr(props.profile);
   const names    = safeStr(props.names);
   const date     = safeStr(props.date);
+  const socialSource = safeStr(props.social_source); // explicit, from DB
   const link     = safeStr(props.link);           // <= guard
   const hasLink  = link.length > 0;
 
-  const iconSvg  = pickIcon(link || names);
+  const resolvedSource = socialSource || detectSourceFromLink(link);
 
   const CardBody = (
     <motion.div className="blog-card" whileHover={{ scale: hasLink ? 1.05 : 1 }}>
@@ -67,7 +77,8 @@ const MediaCard = (props) => {
           className="card-social"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {iconSvg}
+          
+          <SocialIcon source={resolvedSource} />
         </motion.svg>
       </div>
     </motion.div>
