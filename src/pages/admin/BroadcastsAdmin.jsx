@@ -5,11 +5,11 @@ import SectionHeader from "../../components/SectionHeader";
 import { useAuth } from "../../auth/AuthContext";
 import "./admin.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/admin";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api/admin";
 
 export default function BroadcastsAdmin() {
   const { token } = useAuth();
-  const [tab, setTab] = useState("social");
+  const [tab, setTab] = useState("social"); // -> maps to backend "kind"
   const [query, setQuery] = useState("");
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,25 +18,26 @@ export default function BroadcastsAdmin() {
   const [preview, setPreview] = useState(null);
 
   async function authFetch(url, init = {}) {
-    const headers = {
-      ...(init.headers || {}),
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
-    const res = await fetch(url, { ...init, headers });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
-    return data;
+    const hdrs = { ...(init.headers || {}), Authorization: `Bearer ${token}` };
+    // Only set JSON header when NOT sending FormData
+    if (!(init.body instanceof FormData)) hdrs["Content-Type"] = "application/json";
+
+    const res = await fetch(url, { ...init, headers: hdrs });
+    const text = await res.text();
+    let data = null; try { data = text ? JSON.parse(text) : null; } catch {}
+    if (!res.ok) throw new Error((data && data.error) || `HTTP ${res.status}`);
+    return { data, status: res.status };
   }
 
   async function load() {
     setLoading(true);
     try {
       const url = new URL(`${API_BASE}/broadcasts`, window.location.origin);
-      url.searchParams.set("category", tab);
+      url.searchParams.set("kind", tab);      // backend expects ?kind=
       if (query) url.searchParams.set("q", query);
-      const data = await authFetch(url.toString());
-      setRows(data?.items || []);
+      const { data } = await authFetch(url.toString());
+      // backend returns an array of rows
+      setRows(Array.isArray(data) ? data : (data?.items || data?.rows || []));
     } catch (e) {
       console.error(e);
       setRows([]);
@@ -50,16 +51,16 @@ export default function BroadcastsAdmin() {
 
   const openEdit = async (id) => {
     try {
-      const data = await authFetch(`${API_BASE}/broadcasts/${id}`);
-      if (data?.ok) { setEditing(data.item); setShowForm(true); }
+      const { data } = await authFetch(`${API_BASE}/broadcasts/${id}`);
+      if (data) { setEditing(data); setShowForm(true); }
     } catch (e) { console.error(e); }
   };
 
   const doDelete = async (id) => {
     if (!confirm("Delete broadcast? This cannot be undone.")) return;
     try {
-      const data = await authFetch(`${API_BASE}/broadcasts/${id}`, { method: "DELETE" });
-      if (data?.ok) setRows(rows => rows.filter(r => r.id !== id));
+      const { status } = await authFetch(`${API_BASE}/broadcasts/${id}`, { method: "DELETE" });
+      if (status === 204) setRows((rows) => rows.filter((r) => r.id !== id));
     } catch (e) {
       console.error(e);
       alert(e.message || "Delete failed");
@@ -96,13 +97,15 @@ export default function BroadcastsAdmin() {
         ) : rows.map(r => (
           <div className="trow" key={r.id}>
             <div>{r.id}</div>
-            <div className="tcell-title">{r.title}
-                 {r.category === 'social' && r.social_source && (
-                <span className="badge" style={{ marginLeft: 8 }}>{r.social_source}</span>)}
-             </div>
-            <div className="badge">{r.category}</div>
+            <div className="tcell-title">
+              {r.title}
+              { (r.kind ?? r.category) === 'social' && r.social_source && (
+                <span className="badge" style={{ marginLeft: 8 }}>{r.social_source}</span>
+              )}
+            </div>
+            <div className="badge">{r.kind ?? r.category}</div>
             <div className={`badge ${r.status}`}>{r.status}</div>
-            <div>{r.scheduled_at || "—"}</div>
+            <div>{r.publish_at ? new Date(r.publish_at).toLocaleString() : "—"}</div>
             <div className="row-actions">
               <button className="btn ghost" onClick={()=>setPreview(r)}>Preview</button>
               <button className="btn ghost" onClick={()=>openEdit(r.id)}>Edit</button>
@@ -116,13 +119,20 @@ export default function BroadcastsAdmin() {
         <BroadcastFormModal
           apiBase={API_BASE}
           token={token}
-          initial={editing ? editing : { category: tab, status: "draft" }}
+          initial={editing ? editing : { kind: tab, status: "draft" }}
           onClose={()=>setShowForm(false)}
           onSaved={() => { setShowForm(false); load(); }}
         />
       )}
 
-      {preview && <PreviewModal id={preview.id} apiBase={API_BASE} token={token} onClose={()=>setPreview(null)} />}
+      {preview && (
+        <PreviewModal
+          id={preview.id}
+          apiBase={API_BASE}
+          token={token}
+          onClose={()=>setPreview(null)}
+        />
+      )}
     </div>
   );
 }

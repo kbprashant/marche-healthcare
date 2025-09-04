@@ -1,21 +1,29 @@
 import { useState } from "react";
 
-const validCategories = ["social", "news"];
-const validStatuses = ["draft", "scheduled", "published", "archived"];
+const validKinds = ["social", "news"];
+// Backend allows: draft | published | archived
+const validStatuses = ["draft", "published", "archived"];
+
+function toLocalInputValue(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
 
 export default function BroadcastFormModal({ apiBase, token, initial, onClose, onSaved }) {
   const [form, setForm] = useState({
     id: initial?.id || null,
-    category: initial?.category || "social",
+    kind: initial?.kind || initial?.category || "social",
     title: initial?.title || "",
     summary: initial?.summary || "",
-    body_html: initial?.body_html || "",
-    image_url: initial?.image_url || "",
-    link_url: initial?.link_url || "",
+    body: initial?.body || "",
     status: initial?.status || "draft",
-    scheduled_at: initial?.scheduled_at || "",
+    publish_at: toLocalInputValue(initial?.publish_at),
     social_source: initial?.social_source || "",
+    image_path: initial?.image_path || "",
   });
+  const [imageFile, setImageFile] = useState(null);
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState("");
 
@@ -25,42 +33,45 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
   }
 
   async function authFetch(url, init = {}) {
-    const headers = {
-      ...(init.headers || {}),
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
+    const headers = { ...(init.headers || {}), Authorization: `Bearer ${token}` };
+    // Do not set Content-Type when sending FormData
     const res = await fetch(url, { ...init, headers });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
-    return data;
+    const text = await res.text();
+    let data = null; try { data = text ? JSON.parse(text) : null; } catch {}
+    if (!res.ok) throw new Error((data && data.error) || `HTTP ${res.status}`);
+    return { data, status: res.status };
   }
 
   async function onSubmit(e) {
     e.preventDefault();
     setErr("");
-    if (!form.title || !validCategories.includes(form.category)) {
+    if (!form.title || !validKinds.includes(form.kind)) {
       setErr("Please provide a title and valid category.");
       return;
     }
     try {
       setSaving(true);
-      const body = JSON.stringify({
-        category: form.category,
-        title: form.title,
-        summary: form.summary || null,
-        body_html: form.body_html || null,
-        image_url: form.image_url || null,
-        link_url: form.link_url || null,
-        status: validStatuses.includes(form.status) ? form.status : "draft",
-        scheduled_at: form.scheduled_at || null,
-        social_source: form.category === "social" ? (form.social_source || null) : null,
-      });
+
+      // Build multipart body
+      const fd = new FormData();
+      fd.append("kind", form.kind);
+      fd.append("title", form.title);
+      if (form.summary) fd.append("summary", form.summary);
+      if (form.body) fd.append("body", form.body);
+      if (form.status && validStatuses.includes(form.status)) fd.append("status", form.status);
+      if (form.publish_at) {
+        // convert local datetime-local to ISO
+        fd.append("publish_at", new Date(form.publish_at).toISOString());
+      }
+      if (form.kind === "social" && form.social_source) fd.append("social_source", form.social_source);
+      if (imageFile) fd.append("image", imageFile);
 
       if (form.id) {
-        await authFetch(`${apiBase}/broadcasts/${form.id}`, { method: "PUT", body });
+        await authFetch(`${apiBase}/broadcasts/${form.id}`, { method: "PUT", body: fd });
       } else {
-        await authFetch(`${apiBase}/broadcasts`, { method: "POST", body });
+        // Image is required on create—enforce in UI
+        if (!imageFile) { setErr("Please upload an image."); setSaving(false); return; }
+        await authFetch(`${apiBase}/broadcasts`, { method: "POST", body: fd });
       }
       onSaved();
     } catch (e) {
@@ -82,12 +93,12 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
 
         <form onSubmit={onSubmit} className="form-grid">
           <label>Category</label>
-          <select name="category" value={form.category} onChange={onChange}>
+          <select name="kind" value={form.kind} onChange={onChange}>
             <option value="social">social</option>
             <option value="news">news</option>
           </select>
 
-          {form.category === "social" && (
+          {form.kind === "social" && (
             <>
               <label>Source</label>
               <select name="social_source" value={form.social_source} onChange={onChange}>
@@ -106,22 +117,24 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
           <label>Summary</label>
           <input name="summary" value={form.summary} onChange={onChange} />
 
-          <label>Body (HTML)</label>
-          <textarea name="body_html" rows={6} value={form.body_html} onChange={onChange} />
+          <label>Body (HTML allowed)</label>
+          <textarea name="body" rows={6} value={form.body} onChange={onChange} />
 
-          <label>Image URL</label>
-          <input name="image_url" value={form.image_url} onChange={onChange} />
-
-          <label>Link URL</label>
-          <input name="link_url" value={form.link_url} onChange={onChange} />
+          <label>Image Upload {form.id ? "(optional on edit)" : "(required)"}</label>
+          <input type="file" accept="image/*" onChange={(e)=>setImageFile(e.target.files?.[0] || null)} />
 
           <label>Status</label>
           <select name="status" value={form.status} onChange={onChange}>
             {validStatuses.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
 
-          <label>Scheduled At</label>
-          <input type="datetime-local" name="scheduled_at" value={form.scheduled_at || ""} onChange={onChange} />
+          <label>Publish At (optional)</label>
+          <input
+            type="datetime-local"
+            name="publish_at"
+            value={form.publish_at}
+            onChange={onChange}
+          />
 
           <div className="modal-actions">
             <button type="button" className="btn ghost" onClick={onClose}>Cancel</button>
