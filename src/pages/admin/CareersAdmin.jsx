@@ -1,54 +1,64 @@
+// src/pages/admin/CareersAdmin.jsx
 import { useEffect, useState } from "react";
 import SectionHeader from "../../components/SectionHeader";
 import CareerFormModal from "./components/CareerFormModal";
-import "./admin.css";
+import { useAuth } from "../../auth/AuthContext";            // ✅ same as Broadcasts
+import "./admin-css/admin.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api/admin";
 
-export default function CareersAdmin(){
-  const [category, setCategory] = useState("fulltime"); // fulltime | parttime
+export default function CareersAdmin() {
+  const { token } = useAuth();                               // ✅ same as Broadcasts
+  const [category, setCategory] = useState("fulltime");
   const [query, setQuery] = useState("");
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // modal state
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  async function load(){
+  async function authFetch(url, init = {}) {
+    const headers = { ...(init.headers || {}), Authorization: `Bearer ${token}` };
+    if (!(init.body instanceof FormData)) headers["Content-Type"] = "application/json";
+    const res = await fetch(url, { ...init, headers });      // ✅ no credentials, Bearer only
+    const text = await res.text();
+    let data = null; try { data = text ? JSON.parse(text) : null; } catch {}
+    if (!res.ok) throw new Error((data && data.error) || `HTTP ${res.status}`);
+    return { data, status: res.status };
+  }
+
+  async function load() {
     setLoading(true);
-    try{
-      const url = new URL(`${API_BASE}/careers_list.php`, window.location.origin);
+    try {
+      const url = new URL(`${API_BASE}/careers`, window.location.origin);
       url.searchParams.set("category", category);
       if (query) url.searchParams.set("q", query);
-      const res = await fetch(url, { credentials: "include" });
-      const data = await res.json();
-      setRows(data?.items || []);
-    } finally{ setLoading(false); }
+      const { data } = await authFetch(url.toString());
+      setRows(data?.items || data || []);
+    } catch (e) {
+      console.error(e);
+      setRows([]);
+    } finally {
+      setLoading(false);
+    }
   }
-  useEffect(()=>{ load(); }, [category, query]);
+  useEffect(() => { load(); /* eslint-disable-next-line */ }, [category, query]);
 
-  function openAdd() { setEditId(null); setShowForm(true); }
-  function openEdit(id) { setEditId(id); setShowForm(true); }
-  function onSaved() { load(); }
+  const openAdd  = () => { setEditId(null); setShowForm(true); };
+  const openEdit = (id) => { setEditId(id); setShowForm(true); };
 
-  async function onDelete(id){
+  async function onDelete(id) {
     if (!confirm("Delete this job?")) return;
-    const res = await fetch(`${API_BASE}/careers_delete.php`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify({ id })
-    });
-    const data = await res.json();
-    if (data?.ok) load();
-    else alert(data?.error || "Delete failed");
+    try {
+      await authFetch(`${API_BASE}/careers/${id}`, { method: "DELETE" });
+      load();
+    } catch (e) { alert(e.message || "Delete failed"); }
   }
 
   return (
     <div className="admin-page">
       <div className="admin-header">
-        <SectionHeader title="Careers" content="Add, edit or remove Full-time and Part-time roles" />
+        <SectionHeader title="Careers" content="Add, edit or remove Full-time / Internship roles" />
         <div className="admin-actions">
           <button className="btn primary" onClick={openAdd}>+ Add Job</button>
         </div>
@@ -56,7 +66,7 @@ export default function CareersAdmin(){
 
       <div className="tabbar">
         <button className={`tab ${category==="fulltime"?"active":""}`} onClick={()=>setCategory("fulltime")}>Full-time</button>
-        <button className={`tab ${category==="parttime"?"active":""}`} onClick={()=>setCategory("parttime")}>Part-time</button>
+        <button className={`tab ${category==="internship"?"active":""}`} onClick={()=>setCategory("internship")}>Internship</button>
       </div>
 
       <div className="filters">
@@ -67,6 +77,7 @@ export default function CareersAdmin(){
         <div className="thead">
           <div>ID</div><div>Title</div><div>Category</div><div>Status</div><div>Updated</div><div>Actions</div>
         </div>
+
         {loading ? (
           <div className="empty">Loading…</div>
         ) : rows.length === 0 ? (
@@ -86,13 +97,16 @@ export default function CareersAdmin(){
         ))}
       </div>
 
-      <CareerFormModal
-        open={showForm}
-        onClose={()=>setShowForm(false)}
-        API_BASE={API_BASE}
-        editId={editId}
-        onSaved={onSaved}
-      />
+      {showForm && (
+        <CareerFormModal
+          open={showForm}
+          onClose={()=>setShowForm(false)}
+          API_BASE={API_BASE}
+          editId={editId}
+          onSaved={load}
+          token={token}                                  // ✅ pass token exactly like Broadcasts
+        />
+      )}
     </div>
   );
 }

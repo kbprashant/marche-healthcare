@@ -1,0 +1,45 @@
+/* Backdrop & card */
+.modal-backdrop{
+  position:fixed; inset:0; z-index:1000;
+  background:rgba(0,0,0,.45);
+  -webkit-backdrop-filter:blur(2px);
+  backdrop-filter:blur(2px);
+  display:grid; place-items:center;
+  padding:24px;
+}
+.modal-card{
+  width:min(920px,96vw);
+  max-height:90vh;
+  background:#fff;
+  border:1px solid #ececff;
+  border-radius:14px;
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  overflow:hidden;
+  display:flex; flex-direction:column;
+}
+
+/* Sections */
+.modal-header, .modal-footer{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 18px; background:#fff;
+}
+.modal-header{ border-bottom:1px solid #eee; position:sticky; top:0; z-index:1; }
+.modal-footer{ border-top:1px solid #eee; }
+
+/* Content */
+.modal-content{ padding:16px 18px; overflow:auto; }
+
+/* Two-column form grid */
+.grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; align-items:start; }
+.grid2 .grid-span-2{ grid-column:1 / -1; }
+.grid2 label{ display:flex; flex-direction:column; gap:6px; font-weight:600; color:#444; }
+.grid2 :is(input,select,textarea){ width:100%; border:1px solid #e1e1e1; border-radius:12px; padding:10px 12px; font-size:14px; }
+.grid2 textarea{ min-height:140px; resize:vertical; }
+
+/* Errors */
+.form-error{ margin:10px 18px 0; color:#b00020; background:#fff1f1; border:1px solid #ffd7d7; padding:10px 12px; border-radius:10px; }
+
+@media (max-width:680px){
+  .grid2{ grid-template-columns:1fr; }
+  .grid2 .grid-span-2{ grid-column:1 / -1; }
+}

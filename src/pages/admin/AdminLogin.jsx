@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
-import "../css/admin-login.css";
+import "./admin-css/admin-login.css";
 
 // Set this in Coolify → Frontend → Environment:
 // VITE_API_BASE_URL=http://s8swwkkkk88kk0wgg44gogog.168.231.121.95.sslip.io/admin

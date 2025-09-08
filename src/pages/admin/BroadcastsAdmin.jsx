@@ -3,7 +3,7 @@ import PreviewModal from "./components/PreviewModal";
 import BroadcastFormModal from "./components/BroadcastFormModal";
 import SectionHeader from "../../components/SectionHeader";
 import { useAuth } from "../../auth/AuthContext";
-import "./admin.css";
+import "./admin-css/admin.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api/admin";
 
@@ -51,10 +51,17 @@ export default function BroadcastsAdmin() {
 
   const openEdit = async (id) => {
     try {
-      const { data } = await authFetch(`${API_BASE}/broadcasts/${id}`);
-      if (data) { setEditing(data); setShowForm(true); }
-    } catch (e) { console.error(e); }
+      const { data } = await authFetch(`${API_BASE}/broadcasts/${id}`); // your authFetch returns {data}
+      const row = data?.item ?? data;    // unwrap if server responds { ok, item }
+      if (!row?.id) throw new Error("Malformed response");
+      setEditing(row);
+      setShowForm(true);
+    } catch (e) {
+      console.error(e);
+      alert(e.message || "Failed to open broadcast");
+    }
   };
+
 
   const doDelete = async (id) => {
     if (!confirm("Delete broadcast? This cannot be undone.")) return;

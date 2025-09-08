@@ -1,0 +1,2 @@
+/* Scope to career modal only */
+.career-modal .modal-card{ width:min(880px,96vw); }

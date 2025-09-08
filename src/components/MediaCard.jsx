@@ -49,7 +49,7 @@ const MediaCard = (props) => {
   const resolvedSource = socialSource || detectSourceFromLink(link);
 
   const CardBody = (
-    <motion.div className="blog-card" whileHover={{ scale: hasLink ? 1.05 : 1 }}>
+    <motion.div className="blog-card" whileHover={{ scale: 1.05 }}>
       <img src={img} alt={title || "Post image"} className="blog-image-3" />
       <div className="blog-content">
         <h3 className="blog-title">{title}</h3>

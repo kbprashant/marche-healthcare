@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+// src/pages/VideoPage.jsx
+import { useEffect, useMemo, useState } from "react";
 import "./css/videopage.css";
 import { Layouts } from "../Layouts/Layouts";
 import VideoPlayer from "../components/VideoPlayer";
@@ -6,454 +7,122 @@ import { useLocation } from "react-router-dom";
 import SwiperCarousel from "../components/SwiperCarousel";
 import { motion } from "framer-motion";
 
-const VIDEODATA = {
-  product: {
-    src: "./home/background-video.mp4",
-    title: "Product Video",
-    description:
-      "Learn more about our product through this comprehensive video.",
-    buttons: ["Feature1", "Feature2", "Feature3"],
-  },
-  training: {
-    src: "./videos/videobg.mp4",
-    title: "Training Video",
-    description: "Get trained with our step-by-step training videos.",
-    buttons: ["Module1", "Module2", "Module3"],
-  },
-  surgery: {
-    src: "./home/background-video.mp4",
-    title: "Surgery Video",
-    description: "Watch detailed surgery videos for better understanding.",
-    buttons: ["Hello", "Hernia", "Thyroid", "Lung"],
-  },
-};
+const API_PUBLIC = import.meta.env.VITE_API_PUBLIC_BASE_URL || "http://localhost:8080/api";
 
-const VideoPage = () => {
-  const [videoTitle, setVideoTitle] = useState(
-    "Magic - Natural Teath Whitening"
+const TOPS = [
+  { key: "product", label: "Product" },
+  { key: "surgery", label: "Surgery" },
+  { key: "training", label: "Training" },
+];
+
+// helper: build embed or empty string
+function toYouTubeEmbed(url) {
+  if (!url) return "";
+  const m = String(url).match(
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/
   );
-  const [videoLink, setVideoLink] = useState("product");
-  const [classification, setClassification] = useState(
-    VIDEODATA[videoLink].buttons[0]
-  );
-  const [videoUrl, setVideoUrl] = useState(
-    "https://youtu.be/3ivRlCAEr8s?feature=shared "
-  );
-  const [embedUrl, setEmbedUrl] = useState("");
-  useEffect(() => {
-    const videoId = extractVideoId(videoUrl);
-    if (videoId) {
-      setEmbedUrl(`https://www.youtube.com/embed/${videoId}`);
-    } else {
-      alert("Invalid YouTube URL. Please enter a valid link.");
-    }
-  }, [videoUrl]);
+  return m ? `https://www.youtube.com/embed/${m[1]}` : "";
+}
 
-  const extractVideoId = (url) => {
-    const match = url.match(
-      /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/watch\?v=)([\w-]{11})/
-    );
-    return match ? match[1] : null;
-  };
+export default function VideoPage() {
+  const [topCat, setTopCat] = useState("product");
+  const [subcats, setSubcats] = useState([]);        // [{id,name}]
+  const [subcatId, setSubcatId] = useState("all");   // "all" | number
+  const [videos, setVideos] = useState([]);          // API rows
+  const [loading, setLoading] = useState(false);
 
-  function videoTabHandle(selectedButton) {
-    setVideoLink(selectedButton);
-  }
+  // UI bits you already had
+  const [videoTitle, setVideoTitle] = useState("");
+  const [embedUrl, setEmbedUrl] = useState("");      // iframe, when youtube
+  const [fileUrl, setFileUrl] = useState("");        // non-youtube video src
+  const [mobileView, setMobileView] = useState(false);
 
-  // navigaiton
+  // location hash scroll (unchanged)
   const location = useLocation();
-
   useEffect(() => {
     if (location.hash) {
-      const element = document.getElementById(location.hash.slice(1));
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+      const el = document.getElementById(location.hash.slice(1));
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
-  }, [location, classification]);
+  }, [location, subcatId]);
+
+  // responsive helper (unchanged)
   useEffect(() => {
-    setClassification(VIDEODATA[videoLink].buttons[0]);
-  }, [videoLink]);
-  const videoCards = [
-    {
-      idName: "product",
-      name: "Product Video",
-    },
-    {
-      idName: "surgery",
-      name: "Surgery Video",
-    },
-    {
-      idName: "training",
-      name: "Training Video",
-    },
-  ];
-  const videoCardDetials = {
-    product: {
-      Feature1: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 5,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 6,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-      ],
-      Feature2: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-      ],
-      Feature3: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 5,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-      ],
-    },
-    surgery: {
-      Hello: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 5,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 6,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-      ],
-      Hernia: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-      ],
-      Thyroid: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 5,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-      ],
-      Lung: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 5,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 6,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 7,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 8,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-      ],
-    },
-    training: {
-      Module1: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 5,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 6,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-      ],
-      Module2: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-      ],
-      Module3: [
-        {
-          id: 1,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 2,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-        {
-          id: 3,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name3",
-          play: "https://youtu.be/hmPEH57VuV0?feature=shared",
-        },
-        {
-          id: 4,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name1",
-          play: "https://youtu.be/3ivRlCAEr8s?feature=shared ",
-        },
-        {
-          id: 5,
-          link: "./videos/card-thumbnail.png",
-          name: "Video name2",
-          play: "https://youtu.be/-k3x_1pAs6Q?feature=shared",
-        },
-      ],
-    },
-  };
-
-  const [mobileView, setMobileView] = useState(false);
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setMobileView(true);
-      } else {
-        setMobileView(false);
-      }
-    };
-
-    // Initial call to set initial state based on window width
-    handleResize();
-
-    // Event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup function to remove event listener
-    return () => window.removeEventListener("resize", handleResize);
+    const onResize = () => setMobileView(window.innerWidth <= 768);
+    onResize(); window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  // load sub-categories whenever topCat changes
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(
+          `${API_PUBLIC}/public/video_subcategories?top_category=${encodeURIComponent(topCat)}`
+        );
+        const data = await res.json();
+        const items = Array.isArray(data?.items) ? data.items : [];
+        setSubcats(items);
+        setSubcatId(items[0]?.id ? String(items[0].id) : "all");
+      } catch {
+        setSubcats([]);
+        setSubcatId("all");
+      }
+    })();
+  }, [topCat]);
+
+  // load videos when topCat or subcatId changes
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      try {
+        const u = new URL(`${API_PUBLIC}/public/videos`, window.location.origin);
+        u.searchParams.set("top_category", topCat);
+        if (subcatId !== "all") u.searchParams.set("sub_category", subcatId);
+        const res = await fetch(u.toString());
+        const data = await res.json();
+        const items = Array.isArray(data?.items) ? data.items : [];
+        setVideos(items);
+
+        // pick “hero” video
+        const first = items[0];
+        if (first) {
+          setVideoTitle(first.title || "");
+          const yt = toYouTubeEmbed(first.youtube_url);
+          setEmbedUrl(yt);
+          setFileUrl(yt ? "" : (first.src_url || ""));
+        } else {
+          setVideoTitle("");
+          setEmbedUrl("");
+          setFileUrl("");
+        }
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [topCat, subcatId]);
+
+  // adapt API results to SwiperCarousel’s expected shape
+  const classificationName = useMemo(() => {
+    if (subcatId === "all") return "All";
+    return subcats.find((s) => String(s.id) === String(subcatId))?.name || "All";
+  }, [subcatId, subcats]);
+
+  const videoCardDetials = useMemo(() => {
+    const mapped = videos.map(v => ({
+      id: v.id,
+      link: v.thumbnail_url || "./videos/card-thumbnail.png",
+      name: v.title,
+      play: v.youtube_url || v.src_url || "",
+    }));
+    return {
+      [topCat]: {
+        [classificationName]: mapped,
+      },
+    };
+  }, [videos, topCat, classificationName]);
+
+  const topLabel = TOPS.find(t => t.key === topCat)?.label || "";
 
   return (
     <Layouts title={"Video-Page"}>
@@ -461,112 +130,91 @@ const VideoPage = () => {
         <video src="./videos/bulb-vedio .mp4" autoPlay muted loop></video>
         <div className="banner-text">
           <h3>Videos</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            varius enim in eros elementum tristique.
-          </p>
+          <p>Browse {topLabel} videos by sub-category.</p>
         </div>
       </section>
+
       <section className="video-gallery">
+        {/* Top categories */}
         <div className="category">
           <div id="productvideo" className="category-container">
             {mobileView ? (
               <select
                 className="btn-outline-rounded"
-                value={videoLink}
-                onChange={(e) => setVideoLink(e.target.value)}
+                value={topCat}
+                onChange={(e) => setTopCat(e.target.value)}
               >
-                {videoCards.map((card) => (
-                  <option value={card.idName}>{card.name}</option>
+                {TOPS.map((c) => (
+                  <option key={c.key} value={c.key}>{c.label}</option>
                 ))}
               </select>
             ) : (
-              videoCards.map((card) => (
+              TOPS.map((c) => (
                 <button
-                  className={
-                    videoLink === card.idName
-                      ? "btn-outline-rounded dark"
-                      : "btn-outline-rounded "
-                  }
-                  onClick={() => {
-                    videoTabHandle(card.idName);
-                  }}
+                  key={c.key}
+                  className={topCat === c.key ? "btn-outline-rounded dark" : "btn-outline-rounded"}
+                  onClick={() => setTopCat(c.key)}
                 >
-                  {card.name}
+                  {c.label}
                 </button>
               ))
             )}
           </div>
         </div>
+
+        {/* Sub-categories (classification) */}
         <div className="sub-category">
-          <h2>{VIDEODATA[videoLink].title}</h2>
-          <p>{VIDEODATA[videoLink].description}</p>
+          <h2>{topLabel} Videos</h2>
+          <p>Filter by sub-category.</p>
+
           <div className="button-group">
             {mobileView ? (
               <select
                 className="btn-outline-rounded"
-                value={classification}
-                onChange={(e) => {
-                  setClassification(e.target.value);
-                  const element = document.getElementById(
-                    "youtubevideosection"
-                  );
-                  if (element) {
-                    window.scrollTo({
-                      top: element.offsetTop,
-                      behavior: "smooth", // This makes the scrolling smooth
-                    });
-                  }
-                }}
+                value={subcatId}
+                onChange={(e) => setSubcatId(e.target.value)}
               >
-                {VIDEODATA[videoLink].buttons.map((buttonText, index) => (
-                  <option value={buttonText}>{buttonText}</option>
+                {subcats.length ? null : <option value="all">All</option>}
+                {subcats.map((sc) => (
+                  <option key={sc.id} value={String(sc.id)}>{sc.name}</option>
                 ))}
               </select>
             ) : (
-              VIDEODATA[videoLink].buttons.map((buttonText, index) => (
-                <motion.button
-                  key={buttonText}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ duration: 0.1, delay: index * 0.5 }}
-                  className={
-                    classification === buttonText
-                      ? "btn-outline-rounded dark"
-                      : "btn-outline-rounded"
-                  }
-                  onClick={(e) => {
-                    setClassification(e.target.textContent);
-                    const element = document.getElementById(
-                      "youtubevideosection"
-                    );
-                    if (element) {
-                      window.scrollTo({
-                        top: element.offsetTop,
-                        behavior: "smooth", // This makes the scrolling smooth
-                      });
+              <>
+                {subcats.length === 0 ? (
+                  <motion.button className="btn-outline-rounded dark" disabled>All</motion.button>
+                ) : null}
+                {subcats.map((sc, idx) => (
+                  <motion.button
+                    key={sc.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, x: 0, y: 0 }}
+                    transition={{ duration: 0.1, delay: idx * 0.1 }}
+                    className={
+                      String(subcatId) === String(sc.id)
+                        ? "btn-outline-rounded dark"
+                        : "btn-outline-rounded"
                     }
-                  }}
-                >
-                  {buttonText}
-                </motion.button>
-              ))
+                    onClick={() => {
+                      setSubcatId(String(sc.id));
+                      const el = document.getElementById("youtubevideosection");
+                      if (el) window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+                    }}
+                  >
+                    {sc.name}
+                  </motion.button>
+                ))}
+              </>
             )}
           </div>
         </div>
+
+        {/* Player + carousel */}
         <div className="video-section">
-          {/* <div className="video-section-header">
-            <h2>Video Title</h2>
-            <p>
-              Gain insights into our products functionality and benefits via our
-              video showcase
-            </p>
-          </div> */}
-          <div
-            // style={{ height: "100vh", margin: "4em auto" }}
-            id="youtubevideosection"
-          >
-            {embedUrl && (
+          <div id="youtubevideosection">
+            {loading ? (
+              <div className="empty" style={{ minHeight: 300 }}>Loading…</div>
+            ) : embedUrl ? (
               <iframe
                 width="100%"
                 height="100%"
@@ -575,25 +223,32 @@ const VideoPage = () => {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-              ></iframe>
+                style={{ aspectRatio: "16/9" }}
+              />
+            ) : fileUrl ? (
+              <VideoPlayer src={fileUrl} />
+            ) : (
+              <div className="empty" style={{ minHeight: 300 }}>No video selected.</div>
             )}
           </div>
+
           <div>
-            <h1 style={{ textAlign: "left", marginTop: "-50px" }}>
-              {videoTitle}
-            </h1>
+            <h1 style={{ textAlign: "left", marginTop: "-50px" }}>{videoTitle}</h1>
           </div>
+
           <SwiperCarousel
-            setVideoYtLink={setVideoUrl}
+            setVideoYtLink={(url) => {
+              const yt = toYouTubeEmbed(url);
+              setEmbedUrl(yt);
+              setFileUrl(yt ? "" : url);
+            }}
             setVideoTitle={setVideoTitle}
             videoCardDetials={videoCardDetials}
-            videoLink={videoLink}
-            classification={classification}
+            videoLink={topCat}
+            classification={classificationName}
           />
         </div>
       </section>
     </Layouts>
   );
-};
-
-export default VideoPage;
+}

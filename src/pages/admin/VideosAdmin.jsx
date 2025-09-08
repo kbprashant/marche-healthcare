@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import VideoSubcatsModal from "../../components/VideoSubcatsModal";
+import VideoSubcatsModal from "./components/VideoSubcatsModal";
 import VideoFormModal from "./components/VideoFormModal";
 import SectionHeader from "../../components/SectionHeader";
-import "./admin.css";
+import "./admin-css/admin.css";
 
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
@@ -37,7 +37,7 @@ const [editing, setEditing] = useState(null);
 async function loadSubcats() {
   try {
    const res = await fetch(
-     `${API_BASE}/video_subcategories.php?top_category=${topCat}`,
+     `${API_BASE}/video_subcategories?top_category=${topCat}`,
      { credentials: "include", headers: { ...authHeaders() } }
    );
     if (!res.ok) throw new Error(`HTTP ${res.status} - ${await res.text()}`);
@@ -53,7 +53,7 @@ async function loadSubcats() {
 async function loadVideos() {
   setLoading(true);
   try {
-    const url = new URL(`${API_BASE}/videos_list.php`, window.location.origin);
+    const url = new URL(`${API_BASE}/videos`, window.location.origin);
     url.searchParams.set("top_category", topCat);
     if (subcat !== "all") url.searchParams.set("sub_category", subcat);
     if (query) url.searchParams.set("q", query);
@@ -72,11 +72,10 @@ async function loadVideos() {
 
 async function remove(id){
   if (!confirm(`Delete video #${id}?`)) return;
- const res = await fetch(`${API_BASE}/video_delete.php`, {
-   method: 'POST',
-   headers: { 'Content-Type': 'application/json', ...authHeaders() },
-   credentials: 'include',
-    body: JSON.stringify({ id })
+  const res = await fetch(`${API_BASE}/videos/${id}`, {
+    method: 'DELETE',
+    headers: { ...authHeaders() },
+    credentials: 'include'
   });
   if (!res.ok){ const t = await res.text(); alert(t || 'Delete failed'); return; }
   loadVideos();

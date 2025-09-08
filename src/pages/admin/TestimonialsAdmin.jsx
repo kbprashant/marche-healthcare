@@ -1,27 +1,33 @@
+// src/pages/admin/TestimonialsAdmin.jsx
 import { useEffect, useMemo, useState } from "react";
 import SectionHeader from "../../components/SectionHeader";
-import "./admin.css";
+import { useAuth } from "../../auth/AuthContext";
+import "./admin-css/admin.css";
+import "./admin-css/modals/base.css";
+import "./admin-css/modals/testimonial.css";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/admin";
+const API_ORIGIN = new URL(API_BASE).origin;
+const toAbsoluteUrl = (p) => { try { return new URL(p).href; } catch { return p ? `${API_ORIGIN}${p.startsWith('/') ? p : `/${p}`}` : ''; } };
 
-function TestimonialRow({ row, onEdit, onDelete, onToggle }) {
-  return (
-    <div className="table-row">
+
+ function TestimonialRow({ row, onEdit, onDelete, onToggle }) {
+   return (
+     <div className="trow">
       <div className="cell w-12">
-        {row.avatar_url ? <img src={row.avatar_url} alt="" className="avatar" /> : <div className="avatar placeholder">?</div>}
+       {row.image ? <img src={toAbsoluteUrl(row.image)} alt="" className="avatar" /> : <div className="avatar placeholder">?</div>}
       </div>
       <div className="cell grow">
         <div className="title">{row.person_name}</div>
         <div className="sub">
           {[row.person_title, row.company].filter(Boolean).join(" • ")}
-          {row.rating ? ` • ★${row.rating}/5` : ""}
         </div>
         <div className="muted clamp-2">{row.message}</div>
       </div>
       <div className="cell w-20">
         <span className={`badge ${row.is_active ? "ok" : "muted"}`}>{row.is_active ? "Active" : "Hidden"}</span>
       </div>
-      <div className="cell w-44 actions">
+      <div className="cell w-44 row-actions">
         <button onClick={()=>onToggle(row)} className="btn secondary">{row.is_active ? "Hide" : "Activate"}</button>
         <button onClick={()=>onEdit(row)} className="btn">Edit</button>
         <button onClick={()=>onDelete(row)} className="btn danger">Delete</button>
@@ -30,58 +36,83 @@ function TestimonialRow({ row, onEdit, onDelete, onToggle }) {
   );
 }
 
-function TestimonialFormModal({ open, initial, onClose, onSaved }) {
+function TestimonialFormModal({ open, initial, onClose, onSaved, authFetch }) {
   const [form, setForm] = useState({
     id: 0, person_name: "", person_title: "", company: "",
-    rating: "", message: "", avatar_url: "", is_active: 1
+    message: "", is_active: 1, imageFile: null, imagePreview: ""
   });
+
   useEffect(()=>{ 
     if (open) setForm({
       id: initial?.id || 0,
       person_name: initial?.person_name || "",
       person_title: initial?.person_title || "",
       company: initial?.company || "",
-      rating: initial?.rating ?? "",
       message: initial?.message || "",
-      avatar_url: initial?.avatar_url || "",
-      is_active: initial?.is_active ?? 1
+      is_active: initial?.is_active ? 1 : 0,
+      imageFile: null,
+      imagePreview: initial?.image || ""
     });
   }, [open, initial]);
 
+  function onPickFile(e) {
+    const f = e.target.files?.[0] || null;
+    setForm(prev => ({ ...prev, imageFile: f, imagePreview: f ? URL.createObjectURL(f) : prev.imagePreview }));
+  }
+
   async function save() {
-    const payload = { ...form, rating: form.rating ? Number(form.rating) : null };
-    const res = await fetch(`${API_BASE}/testimonials_save.php`, {
-      method: "POST",
-      headers: { "Content-Type":"application/json" },
-      credentials: "include",
-      body: JSON.stringify(payload),
-    });
-    const data = await res.json();
-    if (data?.error) { alert(data.error); return; }
-    onSaved();
+    const fd = new FormData();
+    if (form.id) {
+      // update
+      fd.set("person_name", form.person_name);
+      fd.set("person_title", form.person_title);
+      fd.set("company", form.company);
+      fd.set("message", form.message);
+      fd.set("is_active", String(form.is_active));
+      if (form.imageFile) fd.set("image", form.imageFile);
+      const res = await authFetch(`${API_BASE}/testimonials/${form.id}`, { method: "PUT", body: fd, isMultipart: true });
+      if (res?.error) { alert(res.error); return; }
+      onSaved();
+    } else {
+      // create
+      if (!form.imageFile) { 
+        if (!confirm("No image selected. Continue without an image?")) return; 
+      }
+      fd.set("person_name", form.person_name);
+      fd.set("person_title", form.person_title);
+      fd.set("company", form.company);
+      fd.set("message", form.message);
+      fd.set("is_active", String(form.is_active));
+      if (form.imageFile) fd.set("image", form.imageFile);
+      const res = await authFetch(`${API_BASE}/testimonials`, { method: "POST", body: fd, isMultipart: true });
+      if (res?.error) { alert(res.error); return; }
+      onSaved();
+    }
   }
 
   if (!open) return null;
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" onClick={(e)=>e.stopPropagation()}>
+    <div className="modal-backdrop testimonial-modal" onClick={onClose}>
+      <div className="modal-card" onClick={(e)=>e.stopPropagation()}>
         <div className="modal-header">
           <h3>{form.id ? "Edit Testimonial" : "New Testimonial"}</h3>
           <button className="icon" onClick={onClose}>×</button>
         </div>
-        <div className="modal-body grid2">
+        <div className="modal-content grid2">
           <label>Person Name<input value={form.person_name} onChange={e=>setForm(f=>({...f, person_name:e.target.value}))} /></label>
           <label>Title/Role<input value={form.person_title} onChange={e=>setForm(f=>({...f, person_title:e.target.value}))} /></label>
           <label>Company<input value={form.company} onChange={e=>setForm(f=>({...f, company:e.target.value}))} /></label>
-          <label>Rating (1–5)<input type="number" min="1" max="5" value={form.rating} onChange={e=>setForm(f=>({...f, rating:e.target.value}))} /></label>
-          <label className="colspan2">Message<textarea rows={4} value={form.message} onChange={e=>setForm(f=>({...f, message:e.target.value}))} /></label>
-          <label className="colspan2">Avatar URL<input value={form.avatar_url} onChange={e=>setForm(f=>({...f, avatar_url:e.target.value}))} placeholder="/uploads/people/jane.png" /></label>
+          <label className="grid-span-2">Message<textarea rows={4} value={form.message} onChange={e=>setForm(f=>({...f, message:e.target.value}))} /></label>
           <label>Active?
             <select value={form.is_active} onChange={e=>setForm(f=>({...f, is_active:Number(e.target.value)}))}>
               <option value={1}>Yes</option>
               <option value={0}>No</option>
             </select>
           </label>
+          <label className="grid-span-2">Image
+            <input type="file" accept="image/*" onChange={onPickFile} />
+          </label>
+          {form.imagePreview ? <img className="image-preview" src={form.imagePreview} alt="" style={{maxWidth:180, borderRadius:12}}/> : null}
         </div>
         <div className="modal-footer">
           <button className="btn secondary" onClick={onClose}>Cancel</button>
@@ -93,6 +124,7 @@ function TestimonialFormModal({ open, initial, onClose, onSaved }) {
 }
 
 export default function TestimonialsAdmin() {
+  const { token } = useAuth();
   const [q, setQ] = useState("");
   const [status, setStatus] = useState("all");
   const [rows, setRows] = useState([]);
@@ -103,16 +135,33 @@ export default function TestimonialsAdmin() {
   const [openForm, setOpenForm] = useState(false);
   const [editRow, setEditRow] = useState(null);
 
+  const authFetch = useMemo(()=>async (url, init={})=>{
+    const headers = new Headers(init.headers || {});
+     if (!init.isMultipart && init.body && !(init.body instanceof FormData)) {
+       headers.set('Content-Type', 'application/json');
+     }
+    if (token) headers.set('Authorization', `Bearer ${token}`);
+    const res = await fetch(url, { ...init, headers, credentials: 'include' });
+      // Gracefully handle 204 / non-JSON
+      const ct = res.headers.get('content-type') || '';
+      if (ct.includes('application/json')) {
+        const data = await res.json().catch(()=>null);
+        // normalize shape so callers can rely on .ok
+        return { ok: res.ok, status: res.status, ...data };
+      }
+      // No JSON body → still report HTTP ok
+      return { ok: res.ok, status: res.status };
+  }, [token]);
+
   async function load(p = page) {
     setLoading(true);
     try {
-      const url = new URL(`${API_BASE}/testimonials_list.php`, window.location.origin);
-      if (q) url.searchParams.set("q", q);
-      if (status) url.searchParams.set("status", status);
-      url.searchParams.set("page", String(p));
-      url.searchParams.set("limit", String(limit));
-      const res = await fetch(url, { credentials: "include" });
-      const data = await res.json();
+      const u = new URL(`${API_BASE}/testimonials`, window.location.origin);
+      if (q) u.searchParams.set("q", q);
+      if (status) u.searchParams.set("status", status);
+      u.searchParams.set("page", String(p));
+      u.searchParams.set("limit", String(limit));
+      const data = await authFetch(u.toString());
       setRows(data?.items || []);
       setTotal(data?.total || 0);
       setPage(data?.page || p);
@@ -125,21 +174,17 @@ export default function TestimonialsAdmin() {
 
   async function deleteRow(r) {
     if (!confirm(`Delete testimonial by "${r.person_name}"?`)) return;
-    const form = new FormData(); form.set('id', String(r.id));
-    const res = await fetch(`${API_BASE}/testimonials_delete.php`, { method:'POST', credentials:'include', body: form });
-    const data = await res.json();
-    if (!data?.ok) { alert(data?.error || 'Delete failed'); return; }
+    const data = await authFetch(`${API_BASE}/testimonials/${r.id}`, { method: 'DELETE' });
+    if (!data || data.ok === false) { alert(data?.error || 'Delete failed'); return; }
     load();
   }
 
   async function toggleRow(r) {
-    const res = await fetch(`${API_BASE}/testimonials_save.php`, {
-      method: 'POST', credentials:'include',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ id: r.id, is_active: r.is_active ? 0 : 1, person_name: r.person_name, message: r.message, person_title: r.person_title, company: r.company, rating: r.rating, avatar_url: r.avatar_url })
+    const data = await authFetch(`${API_BASE}/testimonials/${r.id}/active`, {
+      method: 'PATCH',
+      body: JSON.stringify({ is_active: !r.is_active })
     });
-    const data = await res.json();
-    if (data?.error) { alert(data.error); return; }
+    if (!data || data.ok === false) { alert(data?.error || 'Update failed'); return; }
     load();
   }
 
@@ -165,14 +210,14 @@ export default function TestimonialsAdmin() {
         </div>
       </div>
 
-      <div className="table">
-        <div className="table-head">
-          <div className="cell w-12">Avatar</div>
-          <div className="cell grow">Person</div>
-          <div className="cell w-20">Status</div>
-          <div className="cell w-44">Actions</div>
-        </div>
-        <div className="table-body">
+       <div className="table testimonials-table">
+       <div className="thead">
+         <div className="cell w-12">Image</div>
+         <div className="cell grow">Person</div>
+         <div className="cell w-20">Status</div>
+         <div className="cell w-44">Actions</div>
+       </div>
+       <div className="table-body">
           {loading ? <div className="muted p-3">Loading…</div> :
             rows.length ? rows.map(r=>(
               <TestimonialRow key={r.id} row={r} onEdit={openEdit} onDelete={deleteRow} onToggle={toggleRow} />
@@ -191,6 +236,7 @@ export default function TestimonialsAdmin() {
         initial={editRow}
         onClose={()=>setOpenForm(false)}
         onSaved={()=>{ setOpenForm(false); load(); }}
+        authFetch={authFetch}
       />
     </div>
   );

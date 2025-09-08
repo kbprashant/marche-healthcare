@@ -9,6 +9,7 @@ import MediaCard from "../components/MediaCard";
 import NewsCard from "../components/NewsCard";
 import NewsfullDetails from "../components/NewsFullDetails";
 
+
 // === DB API (env driven) ===
  const API_BASE =
    import.meta.env.VITE_API_BASE_URL ||
@@ -68,6 +69,37 @@ const NewsPage = () => {
   const [spLoading, setSpLoading] = useState(true);
   const [spError, setSpError] = useState("");
 
+  const [dbNewsPosts, setDbNewsPosts] = useState([]);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [newsError, setNewsError] = useState("");
+
+  // 🔹 helper: make URLs absolute so images load, even if API returns "/uploads/.."
+  const apiOrigin = (API_BASE.startsWith("http")
+    ? new URL(API_BASE)
+    : new URL(API_BASE, window.location.origin)
+  ).origin;
+  const abs = (u) => (u && /^https?:\/\//i.test(u) ? u : `${apiOrigin}${u || ""}`);
+
+  // 🔹 fetch News & Events broadcasts
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        setNewsLoading(true);
+        setNewsError("");
+        const res = await fetch(`${API_BASE}/public/broadcasts?category=news&limit=24`, { cache: "no-store" });
+        const data = await res.json();
+        if (!data?.ok) throw new Error(data?.error || "FAILED_TO_FETCH");
+        if (active) setDbNewsPosts(Array.isArray(data.items) ? data.items : []);
+      } catch (e) {
+        if (active) setNewsError(e.message || "Something went wrong");
+      } finally {
+        if (active) setNewsLoading(false);
+      }
+    })();
+    return () => { active = false; };
+  }, []);
+
   // Hash section handling
   useEffect(() => {
     if (location.hash === "#socialmedia") setSelectedSection("socialmedia");
@@ -111,6 +143,26 @@ const NewsPage = () => {
     })();
     return () => { active = false; };
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      try {
+        setNewsLoading(true);
+        setNewsError("");
+        const res = await fetch(`${API_BASE}/public/broadcasts?category=news&limit=24`, { cache: "no-store" });
+        const data = await res.json();
+        if (!data?.ok) throw new Error(data?.error || "FAILED_TO_FETCH");
+        if (active) setDbNewsPosts(Array.isArray(data.items) ? data.items : []);
+      } catch (e) {
+        if (active) setNewsError(e.message || "Something went wrong");
+      } finally {
+        if (active) setNewsLoading(false);
+      }
+    })();
+    return () => { active = false; };
+  }, []);
+
 
   const SECTION_DATA = {
     socialmedia: {
@@ -164,7 +216,7 @@ const NewsPage = () => {
               const card = dbSocialPosts.length > 0
                 ? {
                     id: p.id ?? idx,
-                    img: p.image_url || "",                 // from broadcasts.image_url
+                    img: abs(p.image_url || ""),                // from broadcasts.image_url
                     title: p.title || "",
                     content: p.summary || "",               // use summary; body_html is for detail pages
                     profile: "./companyLogo.png",
@@ -209,27 +261,55 @@ const NewsPage = () => {
                 slidesPerView={slideState.noOfSlide}
                 pagination={{
                   clickable: true,
-                  renderBullet: (index, className) => `<span class="${className} custom-bullet">${index + 1}</span>`,
+                  renderBullet: (i, cls) => `<span class="${cls} custom-bullet">${i + 1}</span>`,
                 }}
                 style={{ margin: "50px 0", paddingBottom: "50px" }}
               >
-                {(newsCardDetails.length ? newsCardDetails : blogCardDetails).map((item, idx) => (
-                  <SwiperSlide key={`news-${item.id || idx}`}>
-                    <NewsCard
-                      isActive={!!item.isActive}
-                      img={item.img}
-                      title={item.title}
-                      names={item.names}
-                      content={item.content}
-                      date={item.date}
-                      profile={item.profile}
-                      onSelected={() => {
-                        setVisibleSwiper(false);
-                        setSelctedCardList([{ ...item, isActive: "true" }]);
-                      }}
-                    />
+                {newsLoading && (
+                  <SwiperSlide key="loading-news">
+                    <div style={{ textAlign: "center", padding: 40 }}>Loading news…</div>
                   </SwiperSlide>
-                ))}
+                )}
+
+                {!newsLoading && newsError && (
+                  <SwiperSlide key="error-news">
+                    <div style={{ textAlign: "center", color: "crimson", padding: 40 }}>
+                      {newsError}. Showing sample card below.
+                    </div>
+                  </SwiperSlide>
+                )}
+
+                {(dbNewsPosts.length ? dbNewsPosts : newsCardDetails).map((p, idx) => {
+                  const item = dbNewsPosts.length
+                    ? {
+                        id: p.id ?? idx,
+                        img: abs(p.image_url || ""),   // ✅ absolute URL
+                        title: p.title || "",
+                        content: p.summary || "",
+                        profile: "./companyLogo.png",
+                        names: "Marche Healthcare",
+                        date: (p.scheduled_at || p.created_at || "").slice(0,10),
+                      }
+                    : p;
+
+                  return (
+                    <SwiperSlide key={`news-${item.id || idx}`}>
+                      <NewsCard
+                        isActive={!!item.isActive}
+                        img={item.img}
+                        title={item.title}
+                        names={item.names}
+                        content={item.content}
+                        date={item.date}
+                        profile={item.profile}
+                        onSelected={() => {
+                          setVisibleSwiper(false);
+                          setSelctedCardList([{ ...item, isActive: "true" }]);
+                        }}
+                      />
+                    </SwiperSlide>
+                  );
+                })}
               </Swiper>
               <div className="custom-pagination"></div>
             </>

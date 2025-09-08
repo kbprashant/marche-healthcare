@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
-import "./admin.css";
+import "./admin-css/admin.css";
 
 /* Small helper for the sidenav */
 function NavItem({ to, label }) {

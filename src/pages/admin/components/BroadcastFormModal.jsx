@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "../admin-css/modals/base.css";
+import "../admin-css/modals/broadcast.css";
 
 const validKinds = ["social", "news"];
 // Backend allows: draft | published | archived
@@ -82,65 +84,68 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
   }
 
   return (
-    <div className="modal">
-      <div className="modal-card">
+    <div className="modal-backdrop broadcast-modal" onClick={onClose}>
+      <div className="modal-card" onClick={(e)=>e.stopPropagation()}>
         <div className="modal-header">
           <h3>{form.id ? "Edit Broadcast" : "New Broadcast"}</h3>
           <button className="btn ghost" onClick={onClose}>×</button>
         </div>
 
-        {err && <div className="auth-error" role="alert">{err}</div>}
+        <div className="modal-content">
+          {err && <div className="form-error" role="alert">{err}</div>}
 
-        <form onSubmit={onSubmit} className="form-grid">
-          <label>Category</label>
-          <select name="kind" value={form.kind} onChange={onChange}>
-            <option value="social">social</option>
-            <option value="news">news</option>
-          </select>
-
-          {form.kind === "social" && (
-            <>
-              <label>Source</label>
-              <select name="social_source" value={form.social_source} onChange={onChange}>
-                <option value="">(select)</option>
-                <option value="linkedin">LinkedIn</option>
-                <option value="twitter">Twitter / X</option>
-                <option value="instagram">Instagram</option>
-                <option value="youtube">YouTube</option>
+          <form onSubmit={onSubmit} className="grid2">
+            <label>Category
+              <select name="kind" value={form.kind} onChange={onChange}>
+                <option value="social">social</option>
+                <option value="news">news</option>
               </select>
-            </>
-          )}
+            </label>
 
-          <label>Title</label>
-          <input name="title" value={form.title} onChange={onChange} required />
+            {form.kind === "social" ? (
+              <label>Source
+                <select name="social_source" value={form.social_source} onChange={onChange}>
+                  <option value="">(select)</option>
+                  <option value="linkedin">LinkedIn</option>
+                  <option value="twitter">Twitter / X</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="youtube">YouTube</option>
+                </select>
+              </label>
+            ) : <span />}
 
-          <label>Summary</label>
-          <input name="summary" value={form.summary} onChange={onChange} />
+            <label className="grid-span-2">Title
+              <input name="title" value={form.title} onChange={onChange} required />
+            </label>
 
-          <label>Body (HTML allowed)</label>
-          <textarea name="body" rows={6} value={form.body} onChange={onChange} />
+            <label className="grid-span-2">Summary
+              <input name="summary" value={form.summary} onChange={onChange} />
+            </label>
 
-          <label>Image Upload {form.id ? "(optional on edit)" : "(required)"}</label>
-          <input type="file" accept="image/*" onChange={(e)=>setImageFile(e.target.files?.[0] || null)} />
+            <label className="grid-span-2">Body (HTML allowed)
+              <textarea name="body" rows={6} value={form.body} onChange={onChange} />
+            </label>
 
-          <label>Status</label>
-          <select name="status" value={form.status} onChange={onChange}>
-            {validStatuses.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
+            <label>Image Upload {form.id ? "(optional on edit)" : "(required)"}
+              <input type="file" accept="image/*" onChange={(e)=>setImageFile(e.target.files?.[0] || null)} />
+            </label>
 
-          <label>Publish At (optional)</label>
-          <input
-            type="datetime-local"
-            name="publish_at"
-            value={form.publish_at}
-            onChange={onChange}
-          />
+            <label>Status
+              <select name="status" value={form.status} onChange={onChange}>
+                {validStatuses.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </label>
 
-          <div className="modal-actions">
-            <button type="button" className="btn ghost" onClick={onClose}>Cancel</button>
-            <button className="btn primary" disabled={saving}>{saving ? "Saving…" : "Save"}</button>
-          </div>
-        </form>
+            <label className="grid-span-2">Publish At (optional)
+              <input type="datetime-local" name="publish_at" value={form.publish_at} onChange={onChange} />
+            </label>
+
+            <div className="grid-span-2" style={{ display:"flex", justifyContent:"flex-end", gap:8 }}>
+              <button type="button" className="btn ghost" onClick={onClose}>Cancel</button>
+              <button className="btn primary" disabled={saving}>{saving ? "Saving…" : "Save"}</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

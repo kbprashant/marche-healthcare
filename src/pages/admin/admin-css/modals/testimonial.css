@@ -1,0 +1,8 @@
+/* src\pages\admin\admin-css\modals\testimonial.css */
+
+/* Scope to testimonial modal only */
+.testimonial-modal .modal-card{ width:min(820px,96vw); }
+/* nice preview sizing if present */
+.testimonial-modal .image-preview{
+  max-width:180px; border-radius:12px; border:1px solid #eee; display:block; margin-top:6px;
+}

@@ -1,0 +1,5 @@
+.preview-modal .modal-card{ width:min(720px,96vw); }
+.preview-modal .preview-media{
+  display:block; max-width:100%; height:auto;
+  border:1px solid #eee; border-radius:10px; margin:8px 0 14px;
+}
