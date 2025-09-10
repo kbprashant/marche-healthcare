@@ -22,7 +22,7 @@ function toAbsoluteUrl(pathOrUrl) {
     return u.href;
   } catch {
     // relative path → prefix with API origin
-    const origin = new URL(API_PUBLIC).origin;
+    const origin = new URL(API_BASE).origin;
     return `${origin}${pathOrUrl.startsWith("/") ? pathOrUrl : `/${pathOrUrl}`}`;
   }
 }
@@ -33,7 +33,7 @@ export default function SwiperSingle() {
   const load = useMemo(
     () => async () => {
       try {
-        const res = await fetch(`${API_PUBLIC}/admin/public/testimonials?limit=10`);
+        const res = await fetch(`${API_BASE}/admin/public/testimonials?limit=10`);
         const data = await res.json();
         setItems(Array.isArray(data?.items) ? data.items : []);
       } catch {
