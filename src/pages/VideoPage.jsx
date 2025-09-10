@@ -59,7 +59,7 @@ export default function VideoPage() {
     (async () => {
       try {
         const res = await fetch(
-          `${API_BASE}/public/video_subcategories?top_category=${encodeURIComponent(topCat)}`
+          `${API_PUBLIC}/public/video_subcategories?top_category=${encodeURIComponent(topCat)}`
         );
         const data = await res.json();
         const items = Array.isArray(data?.items) ? data.items : [];
@@ -77,7 +77,7 @@ export default function VideoPage() {
     (async () => {
       setLoading(true);
       try {
-        const u = new URL(`${API_BASE}/public/videos`, window.location.origin);
+        const u = new URL(`${API_PUBLIC}/public/videos`, window.location.origin);
         u.searchParams.set("top_category", topCat);
         if (subcatId !== "all") u.searchParams.set("sub_category", subcatId);
         const res = await fetch(u.toString());
