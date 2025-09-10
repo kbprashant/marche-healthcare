@@ -111,7 +111,7 @@ export default function Careers() {
 
           <div className="expectations-video md:w-1/2 mt-6 md:mt-0">
             <video 
-              src="/marche-healthcare/careers/video.mp4"
+              src="/careers/video.mp4"
               className="expectations-video-file"
               autoPlay
               loop
