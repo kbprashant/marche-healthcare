@@ -34,7 +34,7 @@ export default function SwiperSingle() {
   const load = useMemo(
     () => async () => {
       try {
-        const res = await fetch(`${API_BASE}/admin/public/testimonials?limit=10`);
+        const res = await fetch(`${API_BASE}/public/testimonials?limit=10`);
         const data = await res.json();
         setItems(Array.isArray(data?.items) ? data.items : []);
       } catch {
