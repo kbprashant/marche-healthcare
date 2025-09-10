@@ -83,6 +83,45 @@ export default function Careers() {
         </div>
       </div>
 
+            {/* Expectations Section */}
+      <section className="expectations-section py-20 px-6 md:px-20">
+        <div className="expectations-grid md:flex md:items-center md:gap-10">
+          <div className="expectations-text md:w-1/2">
+            <h2 className="text-3xl font-bold text-[#0c1e3a] mb-4">
+              What We Expect at Marche Healthcare
+            </h2>
+            <h3 className="text-xl font-semibold text-[#0c1e3a] mb-4">
+              We don’t just want employees who “fit a job description.” We want individuals who bring:
+            </h3>
+            <p className="text-gray-600 mb-4">
+              At Marche Healthcare, we don’t just hire employees – we nurture changemakers who share our vision of creating a healthier future through innovation, compassion, and technology.
+            </p>
+            <p className="text-gray-600 mb-4">
+              We strongly believe that healthcare is not just about treatment — it’s about people’s lives, their families, and their trust. That’s why we expect every member of our team to embrace our core values of empathy, integrity, and excellence in everything they do.
+            </p>
+            <h3 className="font-semibold mb-2">Our Expectations</h3>
+            <ul className="list-disc ml-5 text-gray-600">
+              <li><b>Passion for Healthcare Innovation:</b> Curiosity, creativity, and drive to design impactful solutions.</li>
+              <li><b>Commitment to Excellence:</b> Precision, quality, and accountability in all work.</li>
+              <li><b>Teamwork and Collaboration:</b> Open communication and positive contribution to the team.</li>
+              <li><b>Ethics and Responsibility:</b> Uphold trust, privacy, and ethical practices.</li>
+              <li><b>Adaptability and Continuous Learning:</b> Be flexible, learn constantly, embrace change.</li>
+            </ul>
+          </div>
+
+          <div className="expectations-video md:w-1/2 mt-6 md:mt-0">
+            <video 
+              src="/marche-healthcare/careers/video.mp4"
+              className="expectations-video-file"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </div>
+        </div>
+      </section>
+
       {/* Current Openings */}
       <h3 className="current-opening">Current Openings</h3>
 
