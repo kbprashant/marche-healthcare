@@ -11,7 +11,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "./css/caruseltwo.css";
 import "swiper/swiper-bundle.css";
 
-const API_PUBLIC = import.meta.env.VITE_API_PUBLIC_BASE_URL || "/api";
+// const API_PUBLIC = import.meta.env.VITE_API_PUBLIC_BASE_URL || "/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
 // Build absolute URL for images returned as "/uploads/…"
 function toAbsoluteUrl(pathOrUrl) {
