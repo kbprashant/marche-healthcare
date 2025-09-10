@@ -6,6 +6,7 @@ import VideoPlayer from "../components/VideoPlayer";
 import { useLocation } from "react-router-dom";
 import SwiperCarousel from "../components/SwiperCarousel";
 import { motion } from "framer-motion";
+import { getYouTubeId, ytThumb } from "../utils/youtube";
 
 const API_PUBLIC = import.meta.env.VITE_API_PUBLIC_BASE_URL || "http://localhost:8080/api";
 
@@ -109,12 +110,17 @@ export default function VideoPage() {
   }, [subcatId, subcats]);
 
   const videoCardDetials = useMemo(() => {
-    const mapped = videos.map(v => ({
-      id: v.id,
-      link: v.thumbnail_url || "./videos/card-thumbnail.png",
-      name: v.title,
-      play: v.youtube_url || v.src_url || "",
-    }));
+   const mapped = videos.map(v => {
+     const id = getYouTubeId(v.youtube_url);
+     const auto = id ? ytThumb(id, "max") : "";
+     return {
+       id: v.id,
+       // order: explicit thumbnail from DB → YouTube auto → local placeholder
+       link: v.thumbnail_url || auto || "./videos/card-thumbnail.png",
+       name: v.title,
+       play: v.youtube_url || v.src_url || "",
+     };
+   });
     return {
       [topCat]: {
         [classificationName]: mapped,

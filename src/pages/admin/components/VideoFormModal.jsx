@@ -1,3 +1,4 @@
+// src/pages/admin/components/VideoFormModal.jsx
 import { useEffect, useMemo, useState } from "react";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
@@ -16,10 +17,19 @@ const TOPS = [
   { key: "training", label: "Training" },
 ];
 
+// build a thumbnail from a YouTube URL
+function youTubeThumb(url) {
+  if (!url) return "";
+  const m = String(url).match(
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/
+  );
+  const id = m?.[1];
+  return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : "";
+}
+
 export default function VideoFormModal({
   open = true,
   initialTopCat = "product",
-  subcats = [],
   editing = null,
   onClose,
   onSaved,
@@ -29,11 +39,10 @@ export default function VideoFormModal({
     top_category: initialTopCat,
     sub_category_id: "",
     youtube_url: "",
-    src_url: "",
+    // thumbnail_url is derived; keep a field only for preview/override if needed
     thumbnail_url: "",
     status: "pending",
     description: "",
-    tags: "",
   });
   const [saving, setSaving] = useState(false);
   const isEdit = !!editing?.id;
@@ -47,11 +56,9 @@ export default function VideoFormModal({
         top_category: editing.top_category ?? initialTopCat,
         sub_category_id: editing.sub_category_id ?? "",
         youtube_url: editing.youtube_url ?? "",
-        src_url: editing.src_url ?? "",
         thumbnail_url: editing.thumbnail_url ?? "",
         status: editing.status ?? "pending",
         description: editing.description ?? "",
-        tags: editing.tags ?? "",
       });
     } else {
       setForm((f) => ({ ...f, top_category: initialTopCat }));
@@ -76,28 +83,12 @@ export default function VideoFormModal({
     if (form.top_category) load();
   }, [form.top_category]);
 
+  // keep a live derived thumbnail for preview when youtube_url changes
+  const derivedThumb = useMemo(() => youTubeThumb(form.youtube_url), [form.youtube_url]);
+
   const update = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
-  const fetchJson = useMemo(
-    () => async (url, init = {}) => {
-      const res = await fetch(url, {
-        ...init,
-        credentials: "include",
-        headers: { "Content-Type": "application/json", ...(init.headers || {}), ...authHeaders() },
-      });
-      const ct = res.headers.get("content-type") || "";
-      const body = ct.includes("application/json") ? await res.json().catch(() => null) : null;
-      if (!res.ok) {
-        const msg = body?.error || body?.message || `HTTP ${res.status}`;
-        throw new Error(msg);
-      }
-      return body ?? { ok: true };
-    },
-    []
-  );
-
   async function submit() {
-    // basic validation
     if (!form.title.trim()) { alert("Title is required"); return; }
     if (!["product", "surgery", "training"].includes(form.top_category)) {
       alert("Invalid top category"); return;
@@ -105,25 +96,30 @@ export default function VideoFormModal({
 
     setSaving(true);
     try {
-      // build payload without mutating form state
       const payload = {
         title: form.title.trim(),
         top_category: form.top_category,
         sub_category_id: form.sub_category_id ? Number(form.sub_category_id) : null,
         youtube_url: form.youtube_url?.trim() || null,
-        src_url: form.src_url?.trim() || null,
-        thumbnail_url: form.thumbnail_url?.trim() || null,
+        // send the derived thumbnail so admin list/public page can use it
+        thumbnail_url: (form.thumbnail_url?.trim() || derivedThumb) || null,
         status: form.status || "pending",
         description: form.description || "",
-        tags: form.tags || "", // server can split by comma if needed
       };
 
       const url = isEdit
         ? `${API_BASE}/videos/${editing.id}`
         : `${API_BASE}/videos`;
-
       const method = isEdit ? "PUT" : "POST";
-      const data = await fetchJson(url, { method, body: JSON.stringify(payload) });
+
+      const res = await fetch(url, {
+        method,
+        credentials: "include",
+        headers: { "Content-Type": "application/json", ...authHeaders() },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(()=>null);
+      if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
 
       onSaved?.(data);
     } catch (e) {
@@ -176,17 +172,11 @@ export default function VideoFormModal({
               <input className="input" value={form.youtube_url} onChange={(e)=>update("youtube_url", e.target.value)} placeholder="https://youtu.be/..." />
             </label>
 
-            <label style={{flex:"1 1 320px"}}>
-              <div>Thumbnail URL</div>
-              <input className="input" value={form.thumbnail_url} onChange={(e)=>update("thumbnail_url", e.target.value)} placeholder="https://.../thumb.jpg" />
-            </label>
-
             <label style={{width:180}}>
               <div>Status</div>
               <select className="input" value={form.status} onChange={(e)=>update('status', e.target.value)}>
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
-                <option value="archived">Archived</option>
               </select>
             </label>
 
@@ -195,10 +185,17 @@ export default function VideoFormModal({
               <textarea className="input" rows={3} value={form.description} onChange={(e)=>update("description", e.target.value)} />
             </label>
 
-            <label style={{flex:"1 1 100%"}}>
-              <div>Tags (comma separated)</div>
-              <input className="input" value={form.tags} onChange={(e)=>update("tags", e.target.value)} placeholder="training,intro,..." />
-            </label>
+            {/* Live preview of derived thumb */}
+            {(form.thumbnail_url || derivedThumb) ? (
+              <div style={{marginTop:8}}>
+                <div className="muted" style={{marginBottom:6}}>Thumbnail preview</div>
+                <img
+                  src={form.thumbnail_url || derivedThumb}
+                  alt="thumb preview"
+                  style={{ width: 260, height: "auto", borderRadius: 8 }}
+                />
+              </div>
+            ) : null}
           </div>
 
           <div style={{display:"flex", justifyContent:"flex-end", gap:8, marginTop:12}}>
