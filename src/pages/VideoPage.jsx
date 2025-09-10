@@ -8,7 +8,7 @@ import SwiperCarousel from "../components/SwiperCarousel";
 import { motion } from "framer-motion";
 import { getYouTubeId, ytThumb } from "../utils/youtube";
 
-const API_PUBLIC = import.meta.env.VITE_API_PUBLIC_BASE_URL || "http://localhost:8080/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
 const TOPS = [
   { key: "product", label: "Product" },
