@@ -17,7 +17,7 @@ import SwiperSingle from "../components/SwiperSingle";
 
 import { Link } from "react-router-dom";
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 // animation
@@ -44,7 +44,7 @@ const blogCardDetails = [
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros",
     profile: "./companyLogo.png",
-    names: "Full name2",
+    names: "Full name2",  
     date: "11 Jan 2022 ",
     linkedin: "https://www.linkedin.com/company/marche-healthcare/",
   },
@@ -122,45 +122,27 @@ export default function HomePage() {
       <div className="value-proposition">
         <div className="value-column">
           <SectionHeader
-            title={`Videos`}
-            content={`Gain insights into our product's functionality and benefits via
-              our video showcase`}
+            title="Videos"
+            content="Gain insights into our product's functionality and benefits via our video showcase"
           />
         </div>
+
         <div className="video-player">
           <div className="video-wrapper">
-            <VideoPlayer src={VIDEODATA[videoLink].src} />
+            <div className="video-aspect">
+              <VideoPlayer src={VIDEODATA[videoLink].src} />
+            </div>
+
+            {/* Buttons BELOW the video */}
             <ul className="videotabbuttons">
-              <VideoTabButton
-                state={videoLink}
-                title="Product Video"
-                onSelect={() => {
-                  videoTabHandle("productvideo");
-                }}
-              />
-
-              <VideoTabButton
-                state={videoLink}
-                title="Training Video"
-                onSelect={() => {
-                  videoTabHandle("trainingvideo");
-                }}
-              />
-
-              <VideoTabButton
-                state={videoLink}
-                title="Surgery Video"
-                onSelect={() => {
-                  videoTabHandle("surgeryvideo");
-                }}
-              />
-
-              <a href={"/marche-healthcare/videos"}>
-                <VideoTabButton title={"View All"}></VideoTabButton>
-              </a>
+              <VideoTabButton state={videoLink} title="Product Video"  onSelect={() => videoTabHandle("productvideo")} />
+              <VideoTabButton state={videoLink} title="Training Video" onSelect={() => videoTabHandle("trainingvideo")} />
+              <VideoTabButton state={videoLink} title="Surgery Video"  onSelect={() => videoTabHandle("surgeryvideo")} />
+              <a href="/marche-healthcare/videos"><VideoTabButton title="View All" /></a>
             </ul>
           </div>
         </div>
+
       </div>
 
       <div className="marche-values-div">
@@ -282,57 +264,128 @@ export default function HomePage() {
       <div className="our-partners">
         <SectionHeader
           title={`Our Partners`}
-          content={`Your support fuels our mission to innovate and ensure health equity worldwide. Together, we are making advanced healthcare accessible for all.`}
+          content={`Your support fuels our mission to innovate and ensure health equity worldwide. Together, we are making advanced healthcare accessible for all.`}
         />
-        <div className="partners-logos">
-          <Swiper
-            slidesPerView={slideState.noOfSlide} // Number of slides visible
-            slidesPerGroup={1} // Moves 1 slide at a time
-            autoplay={{ delay: 2000, disableOnInteraction: false }} // Auto slide every 2 sec
-            loop={true} // Enables infinite scrolling
-            modules={[Autoplay]} // Import Autoplay module
-          >
-            <SwiperSlide>
-              <motion.div
-                // initial={{ opacity: 0, y: 100 }}
-                // whileInView={{ opacity: 1, y: 0 }}
-                // transition={{ duration: .7, ease: "easeInOut", delay: 0.1 }}
-                className="logo-container"
-              >
-                <img src={`./home/partner1.png`} alt="birac Logo" />
-              </motion.div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <motion.div
-                // initial={{ opacity: 0, y: 100 }}
-                // whileInView={{ opacity: 1, y: 0 }}
-                // transition={{ duration: .7, ease: "easeInOut", delay: 0.1 }}
-                className="logo-container"
-              >
-                <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
-              </motion.div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <motion.div
-                // initial={{ opacity: 0, y: 100 }}
-                // whileInView={{ opacity: 1, y: 0 }}
-                // transition={{ duration: .7, ease: "easeInOut", delay: 0.1 }}
-                className="logo-container"
-              >
-                <img src={`./home/partner3.png`} alt="incubation Logo" />
-              </motion.div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <motion.div
-                // initial={{ opacity: 0, y: 100 }}
-                // whileInView={{ opacity: 1, y: 0 }}
-                // transition={{ duration: .7, ease: "easeInOut", delay: 0.1 }}
-                className="logo-container"
-              >
-                <img src={`./home/partner4.png`} alt="startupTn Logo" />
-              </motion.div>
-            </SwiperSlide>
-          </Swiper>
+        <div className="partners-logos-container">
+          <div className="partners-logos-scroll">
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner1.png`} alt="birac Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner3.png`} alt="incubation Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner4.png`} alt="startupTn Logo" />
+            </motion.div>
+            {/* Duplicate logos for infinite scroll effect */}
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner1.png`} alt="birac Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner3.png`} alt="incubation Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner4.png`} alt="startupTn Logo" />
+            </motion.div>
+
+            {/* Duplicate logos for infinite scroll effect */}
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner1.png`} alt="birac Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner3.png`} alt="incubation Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner4.png`} alt="startupTn Logo" />
+            </motion.div>
+
+            {/* Duplicate logos for infinite scroll effect */}
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner1.png`} alt="birac Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner3.png`} alt="incubation Logo" />
+            </motion.div>
+            <motion.div
+              className="logo-container"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <img src={`./home/partner4.png`} alt="startupTn Logo" />
+            </motion.div>
+          </div>
         </div>
       </div>
 

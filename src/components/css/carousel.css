@@ -1,3 +1,4 @@
+/* src/components/css/carousel.css */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 a {
@@ -20,7 +21,7 @@ header a {
 /* carousel */
 .carousel {
   height: 100vh;
-  margin-top: 50px;
+  margin-top: 100px;
   /* width: 100vw; */
   overflow: hidden;
   position: relative;
@@ -30,6 +31,7 @@ header a {
   height: 100%;
   position: absolute;
   inset: 0 0 0 0;
+  transition: transform 0.3s ease-in-out;
 }
 .carousel .list .item img {
   width: 100%;
@@ -91,24 +93,35 @@ header a {
 .thumbnail {
   position: absolute;
   bottom: 50px;
-
   width: max-content;
   z-index: 100;
   display: flex;
   gap: 20px;
-  left: 70%;
+  left: 12%;
+  transition: transform 0.3s ease-in-out;
 }
 .thumbnail .item {
-  width: 150px;
-  height: 220px;
+  width: 100px;
+  height: 100px;
   flex-shrink: 0;
   position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.thumbnail .item:hover {
+  transform: scale(1.05);
 }
 .thumbnail .item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
+  transition: transform 0.3s ease;
+  box-shadow: 0px 75px 21px 0px rgba(0, 0, 0, 0),
+  0px 48px 19px 0px rgba(0, 0, 0, 0.01), 
+  0px 27px 16px 0px rgba(0, 0, 0, 0.05),
+  0px 12px 12px 0px rgba(0, 0, 0, 0.09), 
+  0px 3px 7px 0px rgba(0, 0, 0, 0.1);
 }
 .thumbnail .item .content {
   color: #fff;
@@ -116,6 +129,7 @@ header a {
   bottom: 10px;
   left: 10px;
   right: 10px;
+  transition: opacity 0.2s ease;
 }
 .thumbnail .item .content .title {
   font-weight: 500;
@@ -144,11 +158,13 @@ header a {
   color: #fff;
   font-family: monospace;
   font-weight: bold;
-  transition: 0.5s;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 .arrows button:hover {
   background-color: #fff;
   color: #000;
+  transform: scale(1.1);
 }
 
 /* animation */
@@ -157,7 +173,6 @@ header a {
 }
 
 /* animation text in first item */
-
 .carousel .list .item:nth-child(1) .content .author,
 .carousel .list .item:nth-child(1) .content .title,
 .carousel .list .item:nth-child(1) .content .topic,
@@ -166,7 +181,7 @@ header a {
   transform: translateY(50px);
   filter: blur(20px);
   opacity: 0;
-  animation: showContent 0.5s 1s linear 1 forwards;
+  animation: showContent 0.4s 0.8s linear 1 forwards;
 }
 @keyframes showContent {
   to {
@@ -176,52 +191,44 @@ header a {
   }
 }
 .carousel .list .item:nth-child(1) .content .title {
-  animation-delay: 1.2s !important;
+  animation-delay: 0.5s !important;
 }
 .carousel .list .item:nth-child(1) .content .topic {
-  animation-delay: 1.4s !important;
+  animation-delay: 0.7s !important;
 }
 .carousel .list .item:nth-child(1) .content .des {
-  animation-delay: 1.6s !important;
+  animation-delay: 0.9s !important;
 }
 .carousel .list .item:nth-child(1) .content .buttons {
-  animation-delay: 1.8s !important;
+  animation-delay: 1.1s !important;
 }
-/* create animation when next click */
+
+/* MODIFIED: Big image animation now comes from left bottom */
 .carousel.next .list .item:nth-child(1) img {
   width: 150px;
-  height: 220px;
+  height: 150px;
   position: absolute;
   bottom: 50px;
-  right: 20%;
+  left: 20%; /* Changed from right to left */
   border-radius: 30px;
-  animation: showImage 0.5s linear 1 forwards;
+  animation: showImage 0.4s linear 1 forwards;
 }
 @keyframes showImage {
   to {
     bottom: 0;
-    right: 0;
+    left: 0; /* Changed from right to left */
     width: 100%;
     height: 100%;
     border-radius: 0;
   }
 }
 
-.carousel.next .thumbnail .item:nth-last-child(1) {
-  overflow: hidden;
-  animation: showThumbnail 0.5s linear 1 forwards;
-}
 .carousel.prev .list .item img {
   z-index: 100;
 }
-@keyframes showThumbnail {
-  from {
-    width: 0;
-    opacity: 0;
-  }
-}
+
 .carousel.next .thumbnail {
-  animation: effectNext 0.5s linear 1 forwards;
+  animation: effectNext 0.3s linear 1 forwards;
 }
 
 @keyframes effectNext {
@@ -231,7 +238,6 @@ header a {
 }
 
 /* running time */
-
 .carousel .time {
   position: absolute;
   z-index: 1;
@@ -241,11 +247,12 @@ header a {
   background-color: var(--primary);
   right: 0;
   top: 0;
+  transition: width 0.1s linear;
 }
 
 .carousel.next .time,
 .carousel.prev .time {
-  animation: runningTime 3s linear 1 forwards;
+  animation: runningTime 1s linear 1 forwards;
 }
 @keyframes runningTime {
   from {
@@ -256,33 +263,33 @@ header a {
   }
 }
 
-/* prev click */
-
+/* MODIFIED: Prev animation now goes to left bottom */
 .carousel.prev .list .item:nth-child(2) {
   z-index: 2;
 }
 
 .carousel.prev .list .item:nth-child(2) img {
-  animation: outFrame 0.5s linear 1 forwards;
+  animation: outFrame 0.4s linear 1 forwards;
   position: absolute;
   bottom: 0;
-  right: 0;
+  left: 0; /* Changed from right to left */
 }
 @keyframes outFrame {
   to {
-    width: 150px;
-    height: 220px;
+    width: 100px;
+    height: 100px;
     bottom: 50px;
-    right: 20%;
+    left: 12%; /* Changed from right to left */
     border-radius: 20px;
   }
 }
 
-.carousel.prev .thumbnail .item:nth-child(1) {
+.carousel.prev .thumbnail .item:first-child {
   overflow: hidden;
   opacity: 0;
-  animation: showThumbnail 0.5s linear 1 forwards;
+  animation: showThumbnail 0.3s linear 1 forwards;
 }
+
 .carousel.next .arrows button,
 .carousel.prev .arrows button {
   pointer-events: none;
@@ -292,7 +299,7 @@ header a {
 .carousel.prev .list .item:nth-child(2) .content .topic,
 .carousel.prev .list .item:nth-child(2) .content .des,
 .carousel.prev .list .item:nth-child(2) .content .buttons {
-  animation: contentOut 1.5s linear 1 forwards !important;
+  animation: contentOut 1.2s linear 1 forwards !important;
 }
 
 @keyframes contentOut {
@@ -302,9 +309,109 @@ header a {
     opacity: 0;
   }
 }
-@media screen and (max-width: 678px) {
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 768px) {
+  .carousel {
+    margin-top: 70px; /* Reduced margin for mobile */
+    height: 80vh; /* Reduced height for mobile */
+  }
+  
   .carousel .list .item .content {
-    padding-right: 0;
+    position: absolute;
+    top: 15% !important; /* Adjusted for mobile */
+    width: 90% !important;
+    padding-right: 0 !important;
+    text-align: center;
+  }
+  
+  .carousel .list .item .author {
+    font-size: 0.8rem;
+    letter-spacing: 5px;
+  }
+  
+  .carousel .list .item .title,
+  .carousel .list .item .topic {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+  
+  .carousel .list .item .des {
+    font-size: 0.9rem;
+    margin: 10px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .carousel .list .item .buttons {
+    grid-template-columns: 1fr !important;
+    justify-content: center;
+    margin-top: 15px;
+  }
+  
+  .carousel .list .item .buttons button {
+    width: 150px;
+    margin: 0 auto;
+  }
+  
+  .thumbnail {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .thumbnail .item {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .arrows {
+    top: auto;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    justify-content: space-between;
+  }
+}
+
+/* Tablet Responsive Styles */
+@media screen and (max-width: 992px) and (min-width: 769px) {
+  .carousel .list .item .content {
+    padding-right: 10%;
+    top: 15%;
+  }
+
+  .carousel .list .item .title,
+  .carousel .list .item .topic {
+    font-size: 3.5em;
+  }
+
+  .carousel .list .item .des {
+    font-size: 1em;
+  }
+}
+
+/* Small Mobile Devices */
+@media screen and (max-width: 480px) {
+  .carousel {
+    height: 100vh;
+    margin-top: 100px;
+  }
+  
+  .carousel .list .item .content {
+    top: 20% !important;
+  }
+  
+  .carousel .list .item .title,
+  .carousel .list .item .topic {
+    font-size: 1.6rem !important;
+  }
+  
+  .thumbnail {
+    display: none; /* Hide thumbnails on very small screens */
   }
 }
 
@@ -316,11 +423,6 @@ header a {
   padding: 20px;
 }
 
-/* Hide default Swiper bullets */
-/* .swiper-pagination-bullets{
-    display: none !important;
-  }
-   */
 .custom-pagination {
   display: flex;
   justify-content: center;
@@ -328,15 +430,12 @@ header a {
 }
 
 .custom-bullet {
-  /* width: 40px;
-    height: 40px; */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
   font-weight: bold;
   color: white;
-  /* background-color: white; */
   border-radius: 5px;
   margin: 0 5px;
   cursor: pointer;
@@ -352,73 +451,3 @@ header a {
     scale: 1.2;
   }
 }
-.carousel .list .item .content {
-    padding-right: 30%;
-    font-size: 1rem;
-  }
-  
-  @media screen and (max-width: 992px) {
-    .carousel .list .item .content {
-      padding-right: 10%;
-      top: 15%;
-    }
-  
-    .carousel .list .item .title,
-    .carousel .list .item .topic {
-      font-size: 2.5em;
-    }
-  
-    .carousel .list .item .des {
-      font-size: 1em;
-    }
-  }
-
-  @media screen and (max-width: 678px) {
-    .carousel .list .item .content {
-      position: absolute;
-      width: 90%;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-  
-    .carousel .list .item .title,
-    .carousel .list .item .topic {
-      font-size: 1.6rem;
-      text-align: center;
-    }
-  
-    .carousel .list .item .des {
-      font-size: 0.9rem;
-      text-align: center;
-      margin: 0 auto;
-    }
-  
-    .carousel .list .item .buttons {
-      grid-template-columns: 1fr;
-      gap: 10px;
-      justify-items: center;
-      margin-top: 10px;
-    }
-  
-    .arrows {
-      width: 100%;
-      justify-content: space-evenly;
-      bottom: 15px;
-      top: auto;
-    }
-  
-    .thumbnail {
-      display: none;
-    }
-  
-    nav ul {
-      flex-direction: column;
-      gap: 10px;
-      padding: 10px;
-    }
-  }
-  

@@ -1,69 +1,47 @@
+/* Tighten horizontal padding; huge padding breaks mobile layout */
 .video-player {
   width: 100%;
-  /* padding: 0 10px; */
+  padding: 0 12px;        /* was 0 80px */
   position: relative;
 }
 
+/* Keep wrapper constrained and centered */
 .video-wrapper {
   width: 100%;
+  max-width: 880px;       /* match reference style */
   margin: 0 auto;
-  /* height: auto;  */
-  overflow: hidden;
-  /* position: relative; */
-display: flex;
-flex-direction: column;
-  align-items: center;
-}
-
-.video-thumbnail {
-  width: 100%;
-  display: block;
-  border-radius: var(--border-radius-primary);
-
-}
-
-.play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 16px;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 20%;
-}
-
-.value-proposition .videotabbuttons {
-  height: 10%;
-  /* position: absolute; */
-  /* top: 75%;
-  right: 0%; */
-  border-radius: 60px 0px 0px 60px;
-  background: #fff;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding:1.5em;
+  gap: 12px;
 }
 
-.play-hide {
-  display: none;
+/* 16:9 responsive frame (put this around <VideoPlayer /> in the page) */
+.video-aspect {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  border-radius: var(--border-radius-primary);
+  overflow: hidden;
+  background: #000;       /* black letterboxing like the screenshot */
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
+/* Actual <video> element fills the frame */
+.video-el {               /* was .video-thumbnail */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .value-proposition .value-column{
-    width: 100%;
-  }
+/* Remove tab styling from this file to avoid conflicts with homepage.css.
+   (Leave your .videotabbuttons styling in homepage.css only.) */
 
-  .value-proposition .videotabbuttons {
-    background-color: transparent;
-  }
- 
-  .value-proposition .video-tabbutton{
-    font-size: 0.7rem;
-  }
-  
+/* Mobile tweaks */
+@media (max-width: 768px){
+  .video-player { padding: 0 8px; }
+
+  .video-aspect {border-radius: 8px;}
 }

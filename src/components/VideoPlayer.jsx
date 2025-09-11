@@ -1,52 +1,28 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, reverseEasing } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import "./css/videoplayer.css";
 
-const VideoPlayer = ({ src }) => {
+const VideoPlayer = ({ src, poster }) => {
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  useEffect(() => {
-    function playVedio(){
 
-      videoRef.current.play();
-    }
-    playVedio();
-  }, []);
-  function tooglePlayPause() {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(!isPlaying);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(!isPlaying);
-      }
-    }
-  }
+  // Try autoplay muted; if blocked, user can press Play (controls are visible)
+  useEffect(() => {
+    videoRef.current?.play?.().catch(() => {});
+  }, [src]);
 
   return (
     <div className="vedio-div">
       <motion.video
-        // initial={{ scale: 0.7 }}
-        // whileInView={{ scale: 1 }}
-        // transition={{ duration: 2 }}
-        //  viewport={{amount:"all"}}
         ref={videoRef}
-        className="video-thumbnail"
+        className="video-el"     // <-- new class
         src={src}
-        autoPlay={true}
+        poster={poster}
+        autoPlay
         muted
         loop
-        // controls={isPlaying}
-      ></motion.video>
-      <div>
-        {/* <img
-          className={isPlaying ? `play-hide` : "play-button"}
-          src="./home/VectorPlayButton.png"
-          alt="playButton"
-          onClick={tooglePlayPause}
-        /> */}
-      </div>
+        controls               // <-- native controls (mobile friendly)
+        playsInline            // <-- iOS: keeps video inline, fullscreen button works
+      />
     </div>
   );
 };

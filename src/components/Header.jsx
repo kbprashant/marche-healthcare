@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./css/header.css";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo_icon.png";
 
 const Nav = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -13,7 +13,7 @@ const Nav = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-  // Detect scroll
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -25,20 +25,12 @@ const Nav = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 1080) {
-        setIsSmallWindow(true);
-      } else {
-        setIsSmallWindow(false);
-      }
+      setIsSmallWindow(window.innerWidth <= 1080);
     };
 
-    // Initial call to set initial state based on window width
     handleResize();
 
-    // Event listener for window resize
     window.addEventListener("resize", handleResize);
-
-    // Cleanup function to remove event listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -55,7 +47,6 @@ const Nav = () => {
         { name: "Team", path: "/about#ourteam" },
       ],
     },
-
     {
       title: "Products",
       path: "/products",
@@ -63,17 +54,15 @@ const Nav = () => {
     },
     { title: "Videos", path: "/videos", subItems: [] },
     {
-      title: "BroadCast",
+      title: "Broadcast",
       path: "/news",
       subItems: [
         { name: "Social Media", path: "/news#socialmedia" },
         { name: "News & Events", path: "/news#newsandevents" },
       ],
     },
-    { title: "careers", path: "/careers", subItems: [] },
+    { title: "Careers", path: "/careers", subItems: [] },
     { title: "Contact", path: "/contact", subItems: [] },
-    
-
   ];
 
   return (
@@ -84,6 +73,7 @@ const Nav = () => {
             isMenuOpen ? "navbar-bg-primary" : ""
           }`}
         >
+          {/* Logo positioning for small screens */}
           <div className={`logo-container1`}>
             <Link to="/">
               <img src={logo} alt="Logo" className="logo" />
@@ -93,8 +83,8 @@ const Nav = () => {
             <img
               src="menu-svg.svg"
               style={{ height: "100%", scale: "0.6" }}
-              onClick={(e) => {setIsMenuOpen((r) => !r)
-                ;
+              onClick={() => {
+                setIsMenuOpen((r) => !r);
                 setIsScrolled(false);
               }}
             />
@@ -108,12 +98,11 @@ const Nav = () => {
                 >
                   <NavLink
                     to={item.path}
-                    className=" nav-link"
+                    className="nav-link"
                     onClick={scrollToTop}
                   >
                     {item.title}
                   </NavLink>
-
                   {item.subItems.length > 0 && (
                     <div
                       className={`submenu ${
@@ -124,7 +113,7 @@ const Nav = () => {
                         <div
                           key={subIndex}
                           className="submenu-item"
-                          style={{ transitionDelay: `${subIndex * 0.1}s` }} // Dynamic delay
+                          style={{ transitionDelay: `${subIndex * 0.1}s` }}
                         >
                           <Link to={sub.path} className="submenu-link">
                             {sub.name}
@@ -149,17 +138,15 @@ const Nav = () => {
             setActiveMenu(null);
           }}
         >
-          {/* Logo added here */}
           <div
             className={`logo-container1 ${
-              isScrolled && !isHovered ? "hide-logo" : ""
+              isScrolled && !isHovered ? "logo-scrolled" : "" // 🔥 NEW CLASS
             }`}
           >
             <Link to="/">
               <img src={logo} alt="Logo" className="logo" />
             </Link>
           </div>
-
           <ul className="nav-list">
             {menuItems.map((item, index) => (
               <li
@@ -169,12 +156,11 @@ const Nav = () => {
               >
                 <NavLink
                   to={item.path}
-                  className=" nav-link"
+                  className="nav-link"
                   onClick={scrollToTop}
                 >
                   {item.title}
                 </NavLink>
-
                 {item.subItems.length > 0 && (
                   <div
                     className={`submenu ${
@@ -185,7 +171,7 @@ const Nav = () => {
                       <div
                         key={subIndex}
                         className="submenu-item"
-                        style={{ transitionDelay: `${subIndex * 0.1}s` }} // Dynamic delay
+                        style={{ transitionDelay: `${subIndex * 0.1}s` }}
                       >
                         <Link to={sub.path} className="submenu-link">
                           {sub.name}

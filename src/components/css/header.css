@@ -1,22 +1,19 @@
-.master-navbar{
-  
+.master-navbar {
+  position: relative;
 }
 
 .logo-container1 {
-  position: fixed;
+  position: absolute; /* Changed from fixed to absolute */
   left: 20px;
-  /* top: 50%; */
-  /* transform: translateY(-50%); */
+  top: 50%;
+  transform: translateY(-50%);
   transition: all 0.4s ease-in-out;
-  
-  /* 🔥 Bigger circle */
-  width: 120px;  /* Increased size */
-  /* border-radius: 50%;  */
-  
+  width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 1001; /* Ensure it stays above other elements */
 }
 
 /* 🔥 When navbar expands, move the logo up and add glow */
@@ -25,43 +22,41 @@
   left: 100px;
   transform: translateY(50%);
   height: 120px;
+  width: 120px; /* Explicitly set width */
   border-radius: 50%;
-
-  
-  /* Slightly transparent white glow */
   background-color: rgba(255, 255, 255, 0.9);
-  
-  /* 🔥 Bigger glow effect to spread like a lamp */
-  
 }
 
-/* 🔥 Keep the logo the same size */
-.logo-container1 img {
-  width: 110px;  /* Adjust logo size inside the circle */
+/* Keep logo size consistent in expanded state */
+.navbar-expanded .logo-container1 img {
+  width: 100px; /* Fixed size instead of auto */
   height: auto;
-  object-fit: contain; /* Prevents distortion */
 }
 
-
-/* Optional: If you want a subtle hover effect */
-.logo-container1:hover {
- 
-  box-shadow: 0 0 50px 25px rgba(255, 255, 255, 0.4);
-}
-
-
-.logo {
-  height: 50px;
-  transition: all 0.4s ease-in-out;
+/* 🔥 Keep the logo the same size in normal state */
+.logo-container1 img {
+  width: 56px;
+  height: auto;
+  object-fit: contain;
+  transition: all 0.4s ease-in-out; /* Smooth transition */
 }
 
 /* Hide logo when navbar is scrolled */
 .hide-logo {
   opacity: 0;
-  transform: scale(0);
+  transform: scale(0) translateY(-50%); /* Maintain the vertical centering */
+  pointer-events: none; /* Prevent clicks on hidden logo */
 }
 
+/* Optional: If you want a subtle hover effect */
+.logo-container1:hover {
+  box-shadow: 0 0 50px 25px rgba(255, 255, 255, 0.4);
+}
 
+.logo {
+  height: 50px;
+  transition: all 0.4s ease-in-out;
+}
 
 body {
   padding-top: 60px; /* Same as navbar height */
@@ -81,27 +76,37 @@ body.scrolled {
   top: 0;
   left: 50%; /* Ensure it stays centered */
   transform: translateX(-50%); /* Prevents shifting */
-  border-radius: 20px;
+  border-radius: 0px;
   transition: all 0.4s ease-in-out;
   z-index: 1000;
   padding: 0 25px;
-  
 }
 
-/* Default Navbar */
-
-/* Navbar Shrinks on Scroll */
+/* Navbar Shrinks on Scroll - Apply glass morphism only here */
 .navbar-small {
   width: 80%;
+  max-height: 50px;
   justify-content: center;
   padding: 1px 0;
-  border-radius: 20px;
+  border-radius: 30px;
   left: 50%;
+  top: 2%;
   transform: translateX(-50%);
-  background: #f0f0f0;
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  backdrop-filter: blur(35px); /* Glass effect blur */
+  -webkit-backdrop-filter: blur(35px); /* Safari support */
   padding: 0 25px;
+  border: 1px solid rgba(232, 232, 232, 0.2); /* Subtle border */
+  box-shadow: 0px 75px 21px 0px rgba(0, 0, 0, 0),
+    0px 48px 19px 0px rgba(0, 0, 0, 0.01), 
+    0px 27px 16px 0px rgba(0, 0, 0, 0.05),
+    0px 12px 12px 0px rgba(0, 0, 0, 0.09), 
+    0px 3px 7px 0px rgba(0, 0, 0, 0.1);
 }
 
+.navbar-small img{
+  opacity: 0%;
+}
 
 .nav-list {
   list-style: none;
@@ -112,8 +117,8 @@ body.scrolled {
   flex-wrap: wrap;
   justify-content: center;
   gap: min(5vw, 20px);
-  
 }
+
 /* Navigation Links */
 .nav-link {
   list-style: none;
@@ -122,7 +127,6 @@ body.scrolled {
   gap: 20px;
   font-size: 18px;
   transition: font-size .2s ease-in-out;
-  
 }
 
 .nav-item {
@@ -130,19 +134,20 @@ body.scrolled {
   cursor: pointer;
   font-size: 18px;
   padding: 10px 15px;
-  
   transition: color 0.3s ease-in-out;
 }
-/* Main menu items */
 
+/* Main menu items */
 .nav-item:hover .submenu {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
+
 .nav-item:hover {
   color: #ffcc00;
 }
+
 .navbar-small .nav-item {
   font-size: clamp(12px, 1.2vw, 14px); /* Adjusts size based on viewport */
   gap: 10px;
@@ -155,7 +160,6 @@ body.scrolled {
 .navbar-small .nav-link {
   font-size: clamp(12px, 1.2vw, 16px); /* Responsive text size */
 }
-
 
 /* Submenu */
 .submenu {
@@ -173,8 +177,6 @@ body.scrolled {
   flex-direction: column;
   flex-wrap: wrap; /* Ensures wrapping if needed */
   min-width: 150px; /* Prevents text overflow */
-  /* background: #fff; */
-  /* box-shadow: 0px 4px 8px rgba(0,0,0,0.2); */
 }
 
 .submenu-item {
@@ -185,19 +187,17 @@ body.scrolled {
   white-space: nowrap;
   transition: opacity 0.4s ease, transform 1s ease;
 }
+
 /* ====== INDIVIDUAL SUBMENU ITEMS ANIMATION ====== */
 .submenu-item {
   display: inline-block; /* Ensure items stay on one line */
   white-space: nowrap;
- 
   font-size: 16px;
   padding: 5px 10px;
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.4s ease-in-out, transform 1s ease-in-out;
 }
-
-
 
 /* When hovered, show submenu */
 li:hover .submenu {
@@ -218,11 +218,10 @@ li:hover .submenu-item {
 /* Expanded state when hovering */
 .navbar.navbar-expanded {
   height: 250px;
-  align-items: flex-start ;
+  align-items: flex-start;
   background-color: var(--primary);
- 
-  
 }
+
 .navbar-expanded .nav-link, 
 .navbar-expanded .submenu-link {
   color: #f0f0f0;
@@ -233,21 +232,12 @@ li:hover .submenu-item {
   display: none; /* hide by default */
 }
 
-
-/* ====== NAV LIST STYLE ====== */
-
-
-
-
-
 /* Animate each sub-item one-by-one */
 .submenu.show .submenu-item {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
-
-/* Delay each item to appear one after another */
 
 /* Fade out & slide out each sub-item one by one */
 .submenu.hide .submenu-item {
@@ -259,36 +249,38 @@ li:hover .submenu-item {
   color: #ffcc00;
 }
 
-.nav-list-smallsize{
+.nav-list-smallsize {
   position: absolute;
-  top:50px;
-  left:0px;
+  top: 50px;
+  left: 0px;
   background-color: #f0f0f0;
   width: 100%;
   border-radius: 50px;
   background-color: var(--primary);
-  /* color: white; */
 }
 
-.navbar-bg-primary{
-  /* background-color: var(--primary); */
+.navbar-bg-primary {
   border-radius: 20px 20px 0 0;
 }
-@media (max-width: 1080px) { /* Adjust breakpoint */
-  .navbar{
-  justify-content: flex-end;
 
+@media (max-width: 1080px) { /* Adjust breakpoint */
+  .navbar {
+    justify-content: flex-end;
   }
+  
   .navbar-small {
     width: 60%; /* More width for small screens */
-  justify-content: flex-end;
-}
-.nav-list-smallsize{
-  background-color: #f0f0f0;
-  border-radius: 0 0 20px 20px;
-  /* width: 100vw; */
-  /* left:-100px; */
-}
+    justify-content: flex-end;
+    background: rgba(255, 255, 255, 0.2); /* Maintain glass effect on mobile */
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+  }
+  
+  .nav-list-smallsize {
+    background-color: #f0f0f0;
+    border-radius: 0 0 20px 20px;
+  }
+  
   .nav-list {
     gap: 15px; /* Reduce spacing */
     flex-wrap: wrap; /* Allow items to wrap */
@@ -298,5 +290,29 @@ li:hover .submenu-item {
     white-space: nowrap; /* Prevent items from breaking into two lines */
     overflow: hidden;
     text-overflow: ellipsis; /* Truncate long text */
+  }
+  
+  /* Mobile-specific logo positioning */
+  .logo-container1 {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px; /* Smaller logo for mobile */
+  }
+  
+  .logo-container1 img {
+    width: 70px; /* Smaller logo for mobile */
+  }
+  
+  /* Mobile expanded state */
+  .navbar-expanded .logo-container1 {
+    left: 20px;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .navbar-expanded .logo-container1 img {
+    width: 60px;
   }
 }

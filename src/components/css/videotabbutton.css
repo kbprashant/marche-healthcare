@@ -1,16 +1,42 @@
+/* src\components\css\videotabbutton.css */
 .video-tabbutton {
-  /* font-family: Roboto; */
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  padding:.2em .8em;
+  padding: 0.5em 1.2em;
   border-radius: 45px;
   border: 1.5px solid #5d5dff;
   background: #fff;
-  /* padding:1em; */
+  color: #5d5dff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
-.video-tabbutton-active{
+.video-tabbutton:hover {
+  background-color: #f0f0ff;
+}
+
+.video-tabbutton-active {
   background-color: var(--primary);
   color: #fff;
+  border-color: var(--primary);
+}
+
+/* Medium devices (tablets, 768px and down) */
+@media screen and (max-width: 768px) {
+  .video-tabbutton {
+    font-size: 14px;
+    padding: 0.4em 1em;
+  }
+}
+
+/* Small devices (phones, 480px and down) */
+@media screen and (max-width: 480px) {
+  .video-tabbutton {
+    font-size: 14px;
+    padding: 0.8em;
+    width: 100%;
+    text-align: center;
+  }
 }
