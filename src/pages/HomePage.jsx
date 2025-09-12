@@ -44,7 +44,7 @@ const blogCardDetails = [
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros",
     profile: "./companyLogo.png",
-    names: "Full name2",  
+    names: "Full name2",
     date: "11 Jan 2022 ",
     linkedin: "https://www.linkedin.com/company/marche-healthcare/",
   },
@@ -72,6 +72,12 @@ export default function HomePage() {
 
   const [videoLink, setVideoLink] = useState("productvideo");
 
+    // Add state for tracking if we're on mobile
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Add ref for the swiper container
+  const swiperRef = useRef(null);
+
   function videoTabHandle(selectedButton) {
     setVideoLink(selectedButton);
   }
@@ -81,37 +87,50 @@ export default function HomePage() {
   });
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setSlideState((prevState) => ({
-          ...prevState,
-          noOfSlide: 1,
-          navigation: false,
-        }));
-      } else if (window.innerWidth > 768   && window.innerWidth <= 1100) {
-        setSlideState((prevState) => ({
-          ...prevState,
-          noOfSlide: 2,
-          navigation: false,
-        }));
-      } else {
-        setSlideState((prevState) => ({
-          ...prevState,
-          noOfSlide: 3,
-          navigation: true,
-        }));
-      }
-    };
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setSlideState((prevState) => ({
+        ...prevState,
+        noOfSlide: 1,
+        navigation: false,
+      }));
+      setIsMobile(true);
+    } else if (window.innerWidth > 768 && window.innerWidth <= 1100) {
+      setSlideState((prevState) => ({
+        ...prevState,
+        noOfSlide: 2,
+        navigation: false,
+      }));
+      setIsMobile(false);
+    } else {
+      setSlideState((prevState) => ({
+        ...prevState,
+        noOfSlide: 3,
+        navigation: true,
+      }));
+      setIsMobile(false);
+    }
+  };
 
-    // Initial call to set initial state based on window width
-    handleResize();
-
-    // Event listener for window resize
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup function to remove event listener
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Add mobile detection
+  const checkMobile = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+  
+  // Initial calls
+  handleResize();
+  checkMobile();
+  
+  // Event listeners
+  window.addEventListener("resize", handleResize);
+  window.addEventListener('resize', checkMobile);
+  
+  // Combined cleanup function
+  return () => {
+    window.removeEventListener("resize", handleResize);
+    window.removeEventListener('resize', checkMobile);
+  };
+}, []);
 
   return (
     <Layouts title={"Home-Page"}>
