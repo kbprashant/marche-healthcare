@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./css/homepage.css";
 
 import { SplitStringUsingRegex } from "../utils/SplitStringUsingRegex";
