@@ -1,4 +1,6 @@
 /* src\pages\css\homepage.css */
+
+/* Keep the original desktop margins but add consistent mobile margins */
 .home-top{
   margin-top: -110px;
     
@@ -335,52 +337,6 @@
   }
 }
 
-/* Mobile responsiveness */
-@media screen and (max-width: 768px) {
-  .our-partners {
-    padding: 80px 20px;
-  }
-  
-  .partners-logos-container {
-    margin: 1em auto;
-  }
-  
-  .our-partners .logo-container {
-    width: 180px;
-    height: 120px;
-    margin: 0 15px;
-  }
-  
-  .partners-logos-scroll {
-    animation-duration: 10s; /* Faster animation on mobile */
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .our-partners .logo-container {
-    width: 150px;
-    height: 100px;
-    margin: 0 10px;
-  }
-  
-  .partners-logos-scroll {
-    animation-duration: 8s; /* Even faster on very small screens */
-  }
-}
-
-/* For devices that prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .partners-logos-scroll {
-    animation: none;
-    overflow-x: auto; /* Allow manual scrolling instead */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  }
-  
-  .partners-logos-container {
-    overflow-x: auto; /* Fallback for manual scrolling */
-  }
-}
-
 .blogs-and-events {
   align-items: center;
   /* padding: 60px 20px; */
@@ -620,6 +576,8 @@
     align-items: center;
   }
 }
+
+/* Mobile Responsive Styles */
 @media only screen and (max-width: 770px) {
   .main-content {
     width: 100%;
@@ -630,9 +588,29 @@
     padding: 0;
     font-size: 3rem;
   }
+  
+  /* Apply consistent mobile margins */
   .value-proposition {
-    padding: 30px 15px;
+    padding: 30px 20px;
+    margin: 60px 20px;
   }
+  
+  .marche-values-div {
+    margin: 60px 20px;
+  }
+  
+  .testmonialslide {
+    padding: 60px 20px;
+  }
+  
+  .our-partners {
+    padding: 60px 20px;
+  }
+  
+  .blogs-and-events {
+    margin: 60px 20px;
+  }
+  
   .value-proposition .value-column {
     margin-bottom: 30px;
   }
@@ -652,12 +630,10 @@
     justify-content: center;
   }
 
-
   .blogs-and-events .blog-image-1 {
     width: 100%;
     height: auto;
     margin: 0 auto;
-    /* align-self: center; */
   }
 
   .blogs-and-events .blog-frame-column {
@@ -692,7 +668,6 @@
 
   .author{
     font-size: 12px;
-  
   }
   .title{
     font-size: 30px;
@@ -702,57 +677,39 @@
     font-size: 30px;
   }
   .team-heading {
-    font-size:35px ;
+    font-size:35px;
     font-weight: 700;
     margin-bottom: 40px;
     margin-top: -83px;
-}
-.background-video{
-  display: none;
-}
-.team-header{
-  color: black; 
-  display: none;
-}
-.team-paragraph{
-  color:#000;
-  display: none;
-}
-.testmonialslide {
-  padding: 0px var(--page-margin-primary);
-}
-.marche-values-div {
-  margin: 0px var(--page-margin-primary);
-}
-.team-card{
-  transform: translateX(-10px) translateY(10px);
+  }
+  
+  .background-video{
+    display: none;
+  }
+  .team-header{
+    color: black; 
+    display: none;
+  }
+  .team-paragraph{
+    color:#000;
+    display: none;
+  }
+  
+  .team-card{
+    transform: translateX(-10px) translateY(10px);
+  }
+
+  .swiper-slide {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  
+  .overlay{
+    margin-top: -230px;
+  }
 }
 
-.our-partners {
- 
-  padding: 80px var(--page-margin-primary);
-}
-
-.swiper-slide {
-  transition: none !important;
-  transform: none !important;
-  opacity: 1 !important;
-}
-.testmonialslide{
-  padding:0 10px;
-}
-.value-proposition,.blogs-and-events{
-  margin: 100px 20px;
-}
-.our-partners{
-  padding:100px 20px;
-}
-.overlay{
-  margin-top: -230px;
-}
-}
-
-/* Medium devices (tablets, 768px and down) */
 @media screen and (max-width: 768px) {
   .value-proposition {
     padding: 0px;
@@ -770,12 +727,22 @@
     width: 100%;
     justify-content: space-between;
   }
+  
+  /* Mobile responsive adjustments for partners section */
+  .our-partners .logo-container {
+    width: 180px;
+    height: 120px;
+    margin: 0 15px;
+  }
+  
+  .partners-logos-scroll {
+    animation-duration: 10s;
+  }
 }
 
-/* Small devices (phones, 480px and down) */
 @media screen and (max-width: 480px) {
   .value-proposition {
-    padding: 20px 10px;
+    padding: 20px 20px;
   }
   
   .value-proposition .value-heading {
@@ -802,8 +769,18 @@
     text-align: center;
     padding: 0.8em;
   }
+  
+  /* Mobile responsive adjustments for partners section */
+  .our-partners .logo-container {
+    width: 150px;
+    height: 100px;
+    margin: 0 10px;
+  }
+  
+  .partners-logos-scroll {
+    animation-duration: 8s;
+  }
 }
-
 
 @media (max-width: 768px){
   .value-proposition .videotabbuttons{
@@ -825,11 +802,10 @@
   }
   .home-our-team .team-card {
     transform: none !important;
-    box-shadow: none !important;          /* fully remove all layered shadows */
-    border: 2px solid var(--primary) !important; /* subtle border */
+    box-shadow: none !important;
+    border: 2px solid var(--primary) !important;
   }
 
-  /* If the icon tile appears “glowy”, flatten it too */
   .home-our-team .team-icon-container {
     box-shadow: none !important;
     background: #fff;
@@ -838,5 +814,91 @@
   .home-our-team .team-icon {
     box-shadow: none !important;
     background: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .value-proposition {
+    padding: 20px 0 !important; /* Remove horizontal padding */
+    margin: 40px 0 !important; /* Adjust margins */
+    width: 100% !important;
+  }
+  
+  .video-player {
+    padding: 0 !important;
+    width: 100%;
+  }
+  
+  .video-wrapper {
+    max-width: 100% !important;
+  }
+  
+  .video-aspect {
+    border-radius: 0 !important; /* Remove rounded corners on mobile */
+  }
+}
+
+/* Swiper styles for the tab buttons */
+.videotabbuttons-container {
+  width: 100%;
+}
+
+.videotabbuttons-swiper {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.videotabbutton-slide {
+  width: auto !important; /* Let slides size to content */
+}
+
+/* Ensure buttons are properly styled in swiper */
+.videotabbutton-slide .video-tabbutton {
+  white-space: nowrap;
+}
+
+.value-proposition .videotabbuttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 1em;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile-specific button container styles */
+@media (max-width: 768px) {
+  .videotabbuttons {
+    flex-direction: row; /* Keep buttons in a row */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+    padding: 0.8em 1em;
+    justify-content: flex-start; /* Align buttons to start */
+    border-radius: 30px;
+  }
+  
+  .videotabbuttons::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+  
+  .videotabbuttons li {
+    flex: 0 0 auto; /* Don't allow buttons to shrink */
+  }
+}
+
+/* For devices that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .partners-logos-scroll {
+    animation: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .partners-logos-container {
+    overflow-x: auto;
   }
 }

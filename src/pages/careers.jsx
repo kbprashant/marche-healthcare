@@ -83,7 +83,7 @@ export default function Careers() {
         </div>
       </div>
 
-            {/* Expectations Section */}
+      {/* Expectations Section */}
       <section className="expectations-section py-20 px-6 md:px-20">
         <div className="expectations-grid md:flex md:items-center md:gap-10">
           <div className="expectations-text md:w-1/2">
