@@ -139,29 +139,21 @@ export default function HomePage() {
       </div>
 
       <div className="value-proposition">
-        <div className="value-column">
-          <SectionHeader
-            title="Videos"
-            content="Gain insights into our product's functionality and benefits via our video showcase"
-          />
-        </div>
-
         <div className="video-player">
           <div className="video-wrapper">
             <div className="video-aspect">
-              <VideoPlayer src={VIDEODATA[videoLink].src} />
+              <VideoPlayer src={VIDEODATA[videoLink].src} className="video-el" />
             </div>
 
             {/* Buttons BELOW the video */}
             <ul className="videotabbuttons">
-              <VideoTabButton state={videoLink} title="Product Video"  onSelect={() => videoTabHandle("productvideo")} />
+              <VideoTabButton state={videoLink} title="Product Video" onSelect={() => videoTabHandle("productvideo")} />
               <VideoTabButton state={videoLink} title="Training Video" onSelect={() => videoTabHandle("trainingvideo")} />
-              <VideoTabButton state={videoLink} title="Surgery Video"  onSelect={() => videoTabHandle("surgeryvideo")} />
+              <VideoTabButton state={videoLink} title="Surgery Video" onSelect={() => videoTabHandle("surgeryvideo")} />
               <a href="/marche-healthcare/videos"><VideoTabButton title="View All" /></a>
             </ul>
           </div>
         </div>
-
       </div>
 
       <div className="marche-values-div">

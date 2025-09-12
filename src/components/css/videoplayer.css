@@ -3,7 +3,7 @@
 /* Tighten horizontal padding; huge padding breaks mobile layout */
 .video-player {
   width: 100%;
-  padding: 0 12px;        /* was 0 80px */
+  padding: 0 0px;        /* was 0 80px */
   position: relative;
 }
 
@@ -23,7 +23,6 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   position: relative;
-  border-radius: var(--border-radius-primary);
   overflow: hidden;
   background: #000;       /* black letterboxing like the screenshot */
 }
@@ -36,6 +35,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  padding: 0px;
 }
 
 /* Remove tab styling from this file to avoid conflicts with homepage.css.

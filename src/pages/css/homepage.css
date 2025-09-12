@@ -82,25 +82,18 @@
   font-weight: 400;
 }
 
-.value-proposition .value-paragraph {
-  align-self: stretch;
-  color: var(--Black, #000);
-  text-align: center;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 130%;
-}
 
-.video-player {
+.value-proposition .video-player {
   width: 100%;
-  padding: 0 20px;
+  padding: 0;
   position: relative;
+  margin: 40px 0;
 }
 
-.video-wrapper {
+.value-proposition .video-wrapper {
   width: 100%;
-  max-width: 1000px;
+  max-height: 800px;
+  max-width: 1400px; /* Increased from 1000px */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -108,31 +101,44 @@
   gap: 20px;
 }
 
-.value-proposition .videotabbuttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 1em;
-  flex-wrap: wrap;
-  background: #fff;
-  border-radius: 60px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.value-proposition .videotabbuttons.mobile {
-  flex-direction: column;
-  border-radius: 20px;
-  padding: 1em;
-  gap: 8px;
-}
-
-.value-proposition .videotabbuttons.mobile .video-tabbutton {
+.value-proposition .video-aspect {
   width: 100%;
-  text-align: center;
-  padding: 0.8em;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background: #000;
 }
 
+/* Ensure video element fills container */
+.value-proposition .video-el {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Adjust tab buttons for larger video */
+.value-proposition .videotabbuttons {
+  margin-top: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .value-proposition .video-player {
+    margin: 20px 0;
+  }
+  
+  .value-proposition .video-wrapper {
+    max-width: 100%;
+    gap: 15px;
+  }
+  
+  .value-proposition .video-aspect {
+    border-radius: 12px;
+  }
+}
 .home-our-team {
   position: relative;
   display: flex;
@@ -621,6 +627,97 @@
     width: 100%;
     justify-content: space-between;
   }
+
+  @media (max-width: 768px) {
+  .value-proposition {
+    padding: 20px 0 !important; /* Remove horizontal padding */
+    margin: 40px 0 !important; /* Adjust margins */
+    width: 100% !important;
+  }
+  
+  .video-player {
+    padding: 0 !important;
+    width: 100%;
+  }
+  
+  .video-wrapper {
+    max-width: 100% !important;
+  }
+  
+  .video-aspect {
+    border-radius: 0 !important; /* Remove rounded corners on mobile */
+  }
+}
+
+/* Swiper styles for the tab buttons */
+.videotabbuttons-container {
+  width: 100%;
+}
+
+.videotabbuttons-swiper {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.videotabbutton-slide {
+  width: auto !important; /* Let slides size to content */
+}
+
+/* Ensure buttons are properly styled in swiper */
+.videotabbutton-slide .video-tabbutton {
+  white-space: nowrap;
+}
+
+.value-proposition .videotabbuttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 1em;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile-specific button container styles */
+@media (max-width: 768px) {
+  .videotabbuttons {
+    flex-direction: row; /* Keep buttons in a row */
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+    padding: 0.8em 1em;
+    justify-content: flex-start; /* Align buttons to start */
+    border-radius: 30px;
+  }
+  
+  .videotabbuttons::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+  }
+  
+  .videotabbuttons li {
+    flex: 0 0 auto; /* Don't allow buttons to shrink */
+  }
+}
+
+/* For devices that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .partners-logos-scroll {
+    animation: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .partners-logos-container {
+    overflow-x: auto;
+  }
+}
+
+
+
+
+
   .home-our-team .team-header {
     width: 100%;
   }
@@ -814,91 +911,5 @@
   .home-our-team .team-icon {
     box-shadow: none !important;
     background: #fff;
-  }
-}
-
-@media (max-width: 768px) {
-  .value-proposition {
-    padding: 20px 0 !important; /* Remove horizontal padding */
-    margin: 40px 0 !important; /* Adjust margins */
-    width: 100% !important;
-  }
-  
-  .video-player {
-    padding: 0 !important;
-    width: 100%;
-  }
-  
-  .video-wrapper {
-    max-width: 100% !important;
-  }
-  
-  .video-aspect {
-    border-radius: 0 !important; /* Remove rounded corners on mobile */
-  }
-}
-
-/* Swiper styles for the tab buttons */
-.videotabbuttons-container {
-  width: 100%;
-}
-
-.videotabbuttons-swiper {
-  width: 100%;
-  padding: 0 16px;
-}
-
-.videotabbutton-slide {
-  width: auto !important; /* Let slides size to content */
-}
-
-/* Ensure buttons are properly styled in swiper */
-.videotabbutton-slide .video-tabbutton {
-  white-space: nowrap;
-}
-
-.value-proposition .videotabbuttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 1em;
-  flex-wrap: wrap;
-  background: #fff;
-  border-radius: 60px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Mobile-specific button container styles */
-@media (max-width: 768px) {
-  .videotabbuttons {
-    flex-direction: row; /* Keep buttons in a row */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scrollbar-width: none; /* Hide scrollbar Firefox */
-    padding: 0.8em 1em;
-    justify-content: flex-start; /* Align buttons to start */
-    border-radius: 30px;
-  }
-  
-  .videotabbuttons::-webkit-scrollbar {
-    display: none; /* Hide scrollbar Chrome/Safari */
-  }
-  
-  .videotabbuttons li {
-    flex: 0 0 auto; /* Don't allow buttons to shrink */
-  }
-}
-
-/* For devices that prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .partners-logos-scroll {
-    animation: none;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .partners-logos-container {
-    overflow-x: auto;
   }
 }
