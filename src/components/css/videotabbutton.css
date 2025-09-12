@@ -23,23 +23,20 @@
   border-color: var(--primary);
 }
 
-/* Mobile-specific button container styles */
-@media (max-width: 768px) {
-  .videotabbuttons {
-    flex-direction: row; /* Keep buttons in a row */
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scrollbar-width: none; /* Hide scrollbar Firefox */
-    padding: 0.8em 1em;
-    justify-content: flex-start; /* Align buttons to start */
-    border-radius: 30px;
+/* Medium devices (tablets, 768px and down) */
+@media screen and (max-width: 768px) {
+  .video-tabbutton {
+    font-size: 14px;
+    padding: 0.4em 1em;
   }
-  
-  .videotabbuttons::-webkit-scrollbar {
-    display: none; /* Hide scrollbar Chrome/Safari */
-  }
-  
-  .videotabbuttons li {
-    flex: 0 0 auto; /* Don't allow buttons to shrink */
+}
+
+/* Small devices (phones, 480px and down) */
+@media screen and (max-width: 480px) {
+  .video-tabbutton {
+    font-size: 14px;
+    padding: 0.8em;
+    width: 100%;
+    text-align: center;
   }
 }

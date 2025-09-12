@@ -171,7 +171,7 @@ export default function VideoPage() {
         {/* Sub-categories (classification) */}
         <div className="sub-category">
           <h2>{topLabel} Videos</h2>
-          <p>Filter by sub-category.</p>
+          {/* <p>Filter by sub-category.</p> */}
 
           <div className="button-group">
             {mobileView ? (
