@@ -40,51 +40,34 @@ export default function CareersApply() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Gmail check
-    if (!formData.email.endsWith("@gmail.com")) {
-      alert("❌ Only Gmail addresses are allowed!");
-      return;
-    }
+  // Gmail check
+  if (!formData.email.endsWith("@gmail.com")) {
+    alert("❌ Only Gmail addresses are allowed!");
+    return;
+  }
 
-    if (!formData.resumeFile) {
-      alert("❌ Please upload your resume (PDF only, max 5 MB).");
-      return;
-    }
+  if (!formData.resumeFile) {
+    alert("❌ Please upload your resume (PDF only, max 5 MB).");
+    return;
+  }
 
-    const formDataObj = new FormData();
-    formDataObj.append("job_title", jobTitle);
-    formDataObj.append("job_id", job?.id ?? "");
-    formDataObj.append("from_name", formData.name);
-    formDataObj.append("from_email", formData.email);
-    formDataObj.append("phone", formData.phone);
-    formDataObj.append("resume", formData.resumeFile);
-    formDataObj.append("message", formData.message);
+  const formDataToSend = new FormData();
+  formDataToSend.append("name", formData.name);
+  formDataToSend.append("email", formData.email);
+  formDataToSend.append("phone", formData.phone);
+  formDataToSend.append("message", formData.message);
+  formDataToSend.append("resume", formData.resumeFile); // file upload
 
-    try {
-      // ⚠️ EmailJS doesn’t support file upload directly in the free plan.
-      // You would need to either:
-      // (1) Upload the file to your backend / storage (S3, Firebase, etc.) and send the link via EmailJS
-      // OR
-      // (2) Switch to a backend API to handle file + email.
+  try {
+    const res = await fetch("/api/apply", {
+      method: "POST",
+      body: formDataToSend,
+    });
 
-      await emailjs.send(
-        "service_oqbjzyl",
-        "template_y40v1jw",
-        {
-          job_title: jobTitle,
-          job_id: job?.id ?? "",
-          from_name: formData.name,
-          from_email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          // Instead of file, send a placeholder note:
-          resume_info: "Resume file uploaded (Check backend storage)", 
-        },
-        "X-W0hi00f7BB_nraM"
-      );
-
+    const data = await res.json();
+    if (data.success) {
       alert("✅ Application submitted successfully!");
       setFormData({
         name: "",
@@ -93,11 +76,14 @@ export default function CareersApply() {
         resumeFile: null,
         message: "",
       });
-    } catch (err) {
-      console.error(err);
-      alert("❌ Failed to send application. Please check EmailJS config.");
+    } else {
+      alert("❌ " + (data.error || "Failed to submit"));
     }
-  };
+  } catch (err) {
+    console.error(err);
+    alert("❌ Failed to connect to server");
+  }
+};
 
   return (
     <Layouts title={"Careers Apply"}>
@@ -150,12 +136,14 @@ export default function CareersApply() {
             </div>
 
             <div>
-              <label htmlFor="resumeFile">Upload Resume (PDF, max 5 MB)</label>
+              <label htmlFor="resume">Upload Resume (PDF only, max 5MB)</label>
               <input
                 type="file"
-                id="resumeFile"
+                id="resume"
                 accept="application/pdf"
-                onChange={handleFileChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, resumeFile: e.target.files[0] })
+                }
                 required
               />
             </div>
