@@ -1,11 +1,9 @@
+// src\components\VideoPlayer.jsx
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import "./css/videoplayer.css";
 
-const VideoPlayer = ({ src, poster }) => {
-  const videoRef = useRef(null);
-
-  // Try autoplay muted; if blocked, user can press Play (controls are visible)
+const VideoPlayer = ({ src, poster, videoRef }) => {
   useEffect(() => {
     videoRef.current?.play?.().catch(() => {});
   }, [src]);
@@ -20,7 +18,7 @@ const VideoPlayer = ({ src, poster }) => {
         autoPlay
         muted
         loop
-        controls               // <-- native controls (mobile friendly)
+        //controls               // <-- native controls (mobile friendly)
         playsInline            // <-- iOS: keeps video inline, fullscreen button works
       />
     </div>

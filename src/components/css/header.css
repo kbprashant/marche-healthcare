@@ -1,3 +1,4 @@
+/* src\components\css\header.css */
 .master-navbar {
   position: relative;
 }
@@ -59,24 +60,24 @@
 }
 
 body {
-  padding-top: 60px; /* Same as navbar height */
+  padding-top: 80px; /* Increased to account for the margin above navbar */
 }
 body.scrolled {
-  padding-top: 40px; /* Adjust for smaller navbar */
+  padding-top: 60px; /* Adjust for smaller navbar with margin */
 }
 
 .navbar {
-  width: 100%; /* Full width initially */
+  width: 94%; /* Reduced width from 100% */
   background: #f0f0f0;
   padding: 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0;
+  top: 20px; /* Added margin above */
   left: 50%; /* Ensure it stays centered */
   transform: translateX(-50%); /* Prevents shifting */
-  border-radius: 0px;
+  border-radius: 30px; /* Added rounded edges */
   transition: all 0.4s ease-in-out;
   z-index: 1000;
   padding: 0 25px;
@@ -84,7 +85,7 @@ body.scrolled {
 
 /* Navbar Shrinks on Scroll - Apply glass morphism only here */
 .navbar-small {
-  width: 80%;
+  width: 60%; /* Reduced from 80% */
   max-height: 50px;
   justify-content: center;
   padding: 1px 0;
@@ -220,6 +221,7 @@ li:hover .submenu-item {
   height: 250px;
   align-items: flex-start;
   background-color: var(--primary);
+  border-radius: 30px 30px 30px 30px; /* Rounded edges for expanded state */
 }
 
 .navbar-expanded .nav-link, 
@@ -266,6 +268,8 @@ li:hover .submenu-item {
 @media (max-width: 1080px) { /* Adjust breakpoint */
   .navbar {
     justify-content: flex-end;
+    width: 92%; /* Slightly reduced for mobile */
+    top: 15px; /* Smaller margin for mobile */
   }
   
   .navbar-small {
@@ -274,6 +278,7 @@ li:hover .submenu-item {
     background: rgba(255, 255, 255, 0.2); /* Maintain glass effect on mobile */
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
+    top: 15px; /* Consistent margin for mobile */
   }
   
   .nav-list-smallsize {

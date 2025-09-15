@@ -5,22 +5,17 @@ import { SplitStringUsingRegex } from "../utils/SplitStringUsingRegex";
 import { motion } from "framer-motion";
 
 import { Layouts } from "../Layouts/Layouts";
-import VideoPlayer from "../components/VideoPlayer";
 import SectionHeader from "../components/SectionHeader";
-import VideoTabButton from "../components/VideoTabButton";
 
 import Author from "../assets/home/author.png";
 import Carousel from "../components/Carousel";
 import CaruselTwo from "../components/CaruselTwo";
 import NewsCard from "../components/NewsCard";
 import SwiperSingle from "../components/SwiperSingle";
+import YoutubeVideoPlayer from "../components/YoutubeVideoPlayer";
 
 import { Link } from "react-router-dom";
-import { SwiperSlide, Swiper } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/autoplay";
-// animation
+/* animation */
 const charVariants = {
   hidden: { opacity: 0 },
   reveal: { opacity: 1 },
@@ -50,17 +45,6 @@ const blogCardDetails = [
   },
 ];
 
-const VIDEODATA = {
-  productvideo: {
-    src: "./home/background-video3.mp4",
-  },
-  trainingvideo: {
-    src: "./videos/videobg.mp4",
-  },
-  surgeryvideo: {
-    src: "./home/background-video.mp4",
-  },
-};
 export default function HomePage() {
   const scrollToProduct = () => {
     scroll.scrollTo("/news", {
@@ -70,67 +54,62 @@ export default function HomePage() {
     });
   };
 
-  const [videoLink, setVideoLink] = useState("productvideo");
-
-    // Add state for tracking if we're on mobile
+  // Add state for tracking if we're on mobile
   const [isMobile, setIsMobile] = useState(false);
-  
+
   // Add ref for the swiper container
   const swiperRef = useRef(null);
 
-  function videoTabHandle(selectedButton) {
-    setVideoLink(selectedButton);
-  }
   const [slideState, setSlideState] = useState({
     noOfSlide: 3,
     navigation: true,
   });
 
   useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth <= 768) {
-      setSlideState((prevState) => ({
-        ...prevState,
-        noOfSlide: 1,
-        navigation: false,
-      }));
-      setIsMobile(true);
-    } else if (window.innerWidth > 768 && window.innerWidth <= 1100) {
-      setSlideState((prevState) => ({
-        ...prevState,
-        noOfSlide: 2,
-        navigation: false,
-      }));
-      setIsMobile(false);
-    } else {
-      setSlideState((prevState) => ({
-        ...prevState,
-        noOfSlide: 3,
-        navigation: true,
-      }));
-      setIsMobile(false);
-    }
-  };
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setSlideState((prevState) => ({
+          ...prevState,
+          noOfSlide: 1,
+          navigation: false,
+        }));
+        setIsMobile(true);
+      } else if (window.innerWidth > 768 && window.innerWidth <= 1100) {
+        setSlideState((prevState) => ({
+          ...prevState,
+          noOfSlide: 2,
+          navigation: false,
+        }));
+        setIsMobile(false);
+      } else {
+        setSlideState((prevState) => ({
+          ...prevState,
+          noOfSlide: 3,
+          navigation: true,
+        }));
+        setIsMobile(false);
+      }
+    };
 
-  // Add mobile detection
-  const checkMobile = () => {
-    setIsMobile(window.innerWidth <= 768);
-  };
-  
-  // Initial calls
-  handleResize();
-  checkMobile();
-  
-  // Event listeners
-  window.addEventListener("resize", handleResize);
-  window.addEventListener('resize', checkMobile);
-  
-  // Combined cleanup function
-  return () => {
-    window.removeEventListener("resize", handleResize);
-    window.removeEventListener('resize', checkMobile);
-  };
-}, []);
+    // Add mobile detection
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial calls
+    handleResize();
+    checkMobile();
+
+    // Event listeners
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", checkMobile);
+
+    // Combined cleanup function
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
   return (
     <Layouts title={"Home-Page"}>
@@ -138,22 +117,9 @@ export default function HomePage() {
         <Carousel />
       </div>
 
+      {/* Keep only YouTube player in the value-proposition section */}
       <div className="value-proposition">
-        <div className="video-player">
-          <div className="video-wrapper">
-            <div className="video-aspect">
-              <VideoPlayer src={VIDEODATA[videoLink].src} className="video-el" />
-            </div>
-
-            {/* Buttons BELOW the video */}
-            <ul className="videotabbuttons">
-              <VideoTabButton state={videoLink} title="Product Video" onSelect={() => videoTabHandle("productvideo")} />
-              <VideoTabButton state={videoLink} title="Training Video" onSelect={() => videoTabHandle("trainingvideo")} />
-              <VideoTabButton state={videoLink} title="Surgery Video" onSelect={() => videoTabHandle("surgeryvideo")} />
-              <a href="/marche-healthcare/videos"><VideoTabButton title="View All" /></a>
-            </ul>
-          </div>
-        </div>
+        <YoutubeVideoPlayer />
       </div>
 
       <div className="marche-values-div">
@@ -240,6 +206,7 @@ export default function HomePage() {
                     </p>
                   </div>
                 </motion.div>
+
                 <motion.div
                   initial={{ x: -100, y: 100 }}
                   whileInView={{ x: 0, y: 0 }}
@@ -307,93 +274,17 @@ export default function HomePage() {
             >
               <img src={`./home/partner4.png`} alt="startupTn Logo" />
             </motion.div>
-            {/* Duplicate logos for infinite scroll effect */}
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
+            {/* Duplicate logos for infinite scroll effect (kept as-is) */}
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
               <img src={`./home/partner1.png`} alt="birac Logo" />
             </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
               <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
             </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
               <img src={`./home/partner3.png`} alt="incubation Logo" />
             </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner4.png`} alt="startupTn Logo" />
-            </motion.div>
-
-            {/* Duplicate logos for infinite scroll effect */}
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner1.png`} alt="birac Logo" />
-            </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
-            </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner3.png`} alt="incubation Logo" />
-            </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner4.png`} alt="startupTn Logo" />
-            </motion.div>
-
-            {/* Duplicate logos for infinite scroll effect */}
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner1.png`} alt="birac Logo" />
-            </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
-            </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
-              <img src={`./home/partner3.png`} alt="incubation Logo" />
-            </motion.div>
-            <motion.div
-              className="logo-container"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-            >
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
               <img src={`./home/partner4.png`} alt="startupTn Logo" />
             </motion.div>
           </div>
@@ -453,13 +344,6 @@ export default function HomePage() {
                         >
                           <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.25c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 12.25h-3v-5.5c0-1.38-.56-2-1.75-2-1.14 0-1.75.79-1.75 2v5.5h-3v-11h3v1.62c.41-.79 1.27-1.62 2.75-1.62 1.94 0 3.5 1.12 3.5 4.01v6.99z" />
                         </motion.svg>
-                        {/* <a
-                  href="https://www.linkedin.com/company/marche-healthcare/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  
-                </a> */}
                       </div>
                       <p className="blog-text">
                         Lorem ipsum dolor, sit amet consectetur adipisicing
