@@ -15,6 +15,10 @@ import SwiperSingle from "../components/SwiperSingle";
 import YoutubeVideoPlayer from "../components/YoutubeVideoPlayer";
 
 import { Link } from "react-router-dom";
+
+/* API base (matches other pages) */
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
+
 /* animation */
 const charVariants = {
   hidden: { opacity: 0 },
@@ -65,6 +69,10 @@ export default function HomePage() {
     navigation: true,
   });
 
+  // New: broadcast state (latest published social broadcast)
+  const [broadcast, setBroadcast] = useState(null);
+  const [bcLoading, setBcLoading] = useState(true);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
@@ -110,6 +118,38 @@ export default function HomePage() {
       window.removeEventListener("resize", checkMobile);
     };
   }, []);
+
+  // Fetch latest broadcast (category=social, limit=1)
+  useEffect(() => {
+    let mounted = true;
+    async function loadLatestBroadcast() {
+      try {
+        const res = await fetch(`${API_BASE}/public/broadcasts?category=social&limit=1`, { cache: "no-store" });
+        const data = await res.json();
+        if (!mounted) return;
+        if (data?.ok && Array.isArray(data.items) && data.items.length > 0) {
+          setBroadcast(data.items[0]);
+        } else {
+          setBroadcast(null);
+        }
+      } catch (err) {
+        console.error("Failed to load broadcast:", err);
+        setBroadcast(null);
+      } finally {
+        if (mounted) setBcLoading(false);
+      }
+    }
+    loadLatestBroadcast();
+    return () => { mounted = false; };
+  }, []);
+
+  // helper to resolve image URL (absolute when needed)
+  function resolveImageUrl(url) {
+    if (!url) return null;
+    if (/^https?:\/\//i.test(url)) return url;
+    // relative path begins with /uploads/... -> prefix origin
+    return `${window.location.origin}${url}`;
+  }
 
   return (
     <Layouts title={"Home-Page"}>
@@ -302,64 +342,108 @@ export default function HomePage() {
             </div>
 
             <div className="blogs-cards-container">
-              <a
-                href="https://www.linkedin.com/company/marche-healthcare/"
-                target="_blank"
-              >
+              {bcLoading ? (
+                // optional loading state
                 <div className="blog-card-1">
-                  <img
-                    src="./home/surgery.jpg"
-                    alt="Blog"
-                    className="blog-image-1"
-                  />
                   <div className="blog-content">
                     <div className="blog-content-inside">
-                      <h3 className="blog-title">
-                        Blog title heading will go here
-                      </h3>
-                      <div className="blog-footer">
-                        <div className="author-container">
-                          <div className="img-container">
-                            <img
-                              src="./companyLogo.png"
-                              alt="author"
-                              className="author"
-                            />
-                          </div>
-                          <div className="author-content">
-                            <p className="author-name">Marche Healthcare</p>
-                            <div className="author-time">
-                              <p className="blog-date">12-12-2022</p>
-                            </div>
-                          </div>
-                        </div>
-                        <motion.svg
-                          whileHover={{ scale: 1.2 }}
-                          width="42"
-                          height="35"
-                          viewBox="0 0 24 24"
-                          fill="black"
-                          className="card-social"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.25c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 12.25h-3v-5.5c0-1.38-.56-2-1.75-2-1.14 0-1.75.79-1.75 2v5.5h-3v-11h3v1.62c.41-.79 1.27-1.62 2.75-1.62 1.94 0 3.5 1.12 3.5 4.01v6.99z" />
-                        </motion.svg>
-                      </div>
-                      <p className="blog-text">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. A labore eos hic, doloremque quasi sed! Et enim
-                        debitis alias non perferendis labore voluptas tenetur,
-                        veniam placeat iusto culpa officia ea. Lorem ipsum
-                        dolor, sit amet consectetur adipisicing elit. A labore
-                        eos hic, doloremque quasi sed! Et enim debitis alias non
-                        perferendis labore voluptas tenetur, veniam placeat
-                        iusto culpa officia ea.
-                        <span className="read-more">Read more...</span>
-                      </p>
+                      <h3 className="blog-title">Loading latest broadcast...</h3>
                     </div>
                   </div>
                 </div>
-              </a>
+              ) : broadcast ? (
+                (() => {
+                  const imageSrc = resolveImageUrl(broadcast.image_url) || "./home/surgery.jpg";
+                  const title = broadcast.title || "Untitled Broadcast";
+                  const summary = broadcast.summary || (broadcast.body_html ? String(broadcast.body_html).replace(/<[^>]+>/g, '') : "");
+                  const dateStr = broadcast.created_at ? new Date(broadcast.created_at).toLocaleDateString() : "";
+                  const externalLink = broadcast.link_url && /^https?:\/\//i.test(broadcast.link_url) ? broadcast.link_url : null;
+                  const cardHref = externalLink || "/news";
+
+                  return (
+                    <a href={cardHref} target={externalLink ? "_blank" : undefined} rel={externalLink ? "noopener noreferrer" : undefined}>
+                      <div className="blog-card-1">
+                        <img src={imageSrc} alt="Broadcast" className="blog-image-1" />
+                        <div className="blog-content">
+                          <div className="blog-content-inside">
+                            <h3 className="blog-title">{title}</h3>
+                            <div className="blog-footer">
+                              <div className="author-container">
+                                <div className="img-container">
+                                  <img src="./companyLogo.png" alt="author" className="author" />
+                                </div>
+                                <div className="author-content">
+                                  <p className="author-name">Marche Healthcare</p>
+                                  <div className="author-time">
+                                    <p className="blog-date">{dateStr}</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <motion.svg
+                                whileHover={{ scale: 1.2 }}
+                                width="42"
+                                height="35"
+                                viewBox="0 0 24 24"
+                                fill="black"
+                                className="card-social"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.25c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 12.25h-3v-5.5c0-1.38-.56-2-1.75-2-1.14 0-1.75.79-1.75 2v5.5h-3v-11h3v1.62c.41-.79 1.27-1.62 2.75-1.62 1.94 0 3.5 1.12 3.5 4.01v6.99z" />
+                              </motion.svg>
+                            </div>
+                            <p className="blog-text">
+                              {summary}
+                              <span className="read-more">Read more...</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })()
+              ) : (
+                // no broadcast found -> show default card (keeps previous design)
+                <a href="https://www.linkedin.com/company/marche-healthcare/" target="_blank" rel="noopener noreferrer">
+                  <div className="blog-card-1">
+                    <img src="./home/surgery.jpg" alt="Blog" className="blog-image-1" />
+                    <div className="blog-content">
+                      <div className="blog-content-inside">
+                        <h3 className="blog-title">Blog title heading will go here</h3>
+                        <div className="blog-footer">
+                          <div className="author-container">
+                            <div className="img-container">
+                              <img src="./companyLogo.png" alt="author" className="author" />
+                            </div>
+                            <div className="author-content">
+                              <p className="author-name">Marche Healthcare</p>
+                              <div className="author-time">
+                                <p className="blog-date">12-12-2022</p>
+                              </div>
+                            </div>
+                          </div>
+                          <motion.svg
+                            whileHover={{ scale: 1.2 }}
+                            width="42"
+                            height="35"
+                            viewBox="0 0 24 24"
+                            fill="black"
+                            className="card-social"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.25c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 12.25h-3v-5.5c0-1.38-.56-2-1.75-2-1.14 0-1.75.79-1.75 2v5.5h-3v-11h3v1.62c.41-.79 1.27-1.62 2.75-1.62 1.94 0 3.5 1.12 3.5 4.01v6.99z" />
+                          </motion.svg>
+                        </div>
+                        <p className="blog-text">
+                          Lorem ipsum dolor, sit amet consectetur adipisicing elit. A labore eos
+                          hic, doloremque quasi sed! Et enim debitis alias non perferendis labore
+                          voluptas tenetur, veniam placeat iusto culpa officia ea.
+                          <span className="read-more">Read more...</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              )}
             </div>
           </div>
 

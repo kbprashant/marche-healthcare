@@ -1,3 +1,4 @@
+/* src\components\css\caruseltwo.css */
 .mycarousel {
   display: flex;
   justify-content: center;
@@ -55,7 +56,7 @@
 
 .testimonial-home {
   display: flex;
-  height: 890px;
+  min-height: 890px;
   padding: 10px;
   flex-direction: column;
   justify-content: center;
@@ -63,8 +64,6 @@
   gap: 10px;
   background: var(--Colors-Background-white, #fff);
 }
-
-/*  */
 
 .testimonial-home .arrow-left {
   width: 58px;
@@ -84,6 +83,7 @@
   gap: 33px;
   padding-top: 30px;
   margin: 5em 0;
+  width: 100%;
 }
 
 .testimonial-home .testimonial-home-card {
@@ -117,6 +117,7 @@
   height: 15px;
 }
 
+/* UPDATED TESTIMONIAL CARD STYLES FOR VERTICAL CENTER ALIGNMENT */
 .testmonial-card {
   background: url("/testimonialbg.png") center center / cover;
   width: 90%;
@@ -124,14 +125,21 @@
   padding: 2em;
   border-radius: 74px;
   margin: 0 auto;
+  min-height: 600px;
+  max-height: 600px;
+  overflow: hidden;
+  align-items: center; /* Center content vertically */
 }
+
 .testmonial-card .content {
   color: #fff;
   width: 60%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: center; /* Center content vertically */
   gap: 1em;
+  height: 100%;
+  padding: 2em 0; /* Add vertical padding for better centering */
 }
 
 .testmonial-card .review {
@@ -141,35 +149,67 @@
   margin: 0 auto;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  max-height: 300px;
+  flex-shrink: 0;
 }
+
 .testmonial-card .details {
   width: 70%;
-
   margin: 0 auto;
   display: flex;
   align-items: center;
   gap: 1em;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 .testmonial-card h5 {
   font-size: 1.2em;
   font-weight: normal;
+  margin: 0;
 }
 
 .testmonial-card .desigination {
   color: #b9c8f3;
   font-size: 0.9em;
+  margin: 0;
 }
 
 .testmonial-card .details .icon {
   width: 40px;
   display: inline;
+  flex-shrink: 0;
 }
 
 .testmonial-card img {
   filter: grayscale(100%);
   border-radius: 60px;
   width: 40%;
+  height: 540px;
+  object-fit: cover;
+  flex-shrink: 0;
+  align-self: center; /* Center image vertically */
 }
+
+/* SWIPER CONTAINER STYLES FOR CONSISTENT HEIGHT */
+.testimonial-home .swiper {
+  width: 100%;
+  height: 650px; /* Increased height to accommodate larger cards */
+}
+
+.testimonial-home .swiper-wrapper {
+  align-items: center;
+}
+
+.testimonial-home .swiper-slide {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Medium devices (landscape tablets, 770px and up) */
 @media only screen and (max-width: 770px) {
   .testimonial-home-content {
@@ -178,14 +218,36 @@
 
   .testmonial-card {
     width: 97%;
+    min-height: 350px;
+    max-height: 350px;
+    flex-direction: column;
+    align-items: stretch; /* Stretch to fill container */
   }
+  
+  .testmonial-card .content {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start; /* Reset for mobile */
+    padding: 1em 0;
+  }
+  
   .testmonial-card .review {
     font-size: 0.9rem;
     font-weight: normal;
     line-height: 1.5em;
+    -webkit-line-clamp: 4;
+    max-height: 120px;
   }
+  
   .testmonial-card h5 {
     font-size: 1em;
+  }
+
+  .testmonial-card img {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1em;
+    align-self: center; /* Keep image centered */
   }
 
   .testmonialslide .swiper-pagination {
@@ -195,27 +257,36 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
- 
   .testmonial-card {
     border-radius: 34px;
-    padding: 2em 1em;
+    padding: 1.5em 1em;
+    min-height: 500px;
+    max-height: 500px;
     flex-direction: column-reverse;
     width: 100%;
     background: transparent;
     background-color: #5d5dff;
+    align-items: stretch; /* Stretch to fill container */
   }
+  
   .testmonial-card .content {
     width: 100%;
-    flex-direction: column-reverse;
-    gap: 0;
+    height: auto;
+    gap: 0.5em;
+    justify-content: flex-start; /* Reset for mobile */
+    padding: 0.5em 0;
   }
+  
   .testmonial-card .review {
-    padding: 0 1em;
+    padding: 0 0.5em;
     font-size: 1em;
     width: 100%;
     font-weight: normal;
     line-height: 1.2em;
+    -webkit-line-clamp: 6;
+    max-height: 144px;
   }
+  
   .testmonial-card .details {
     width: 90%;
     padding: 1em 0;
@@ -223,20 +294,23 @@
   }
 
   .testmonial-card h5 {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
+  
   .testmonial-card .desigination {
-    color: #b9c8f3;
-    font-size: 0.5em;
+    font-size: 0.8em;
   }
+  
   .testmonial-card img {
-    width: 350px;
-    height: 300px;
+    width: 100%;
+    height: 200px;
     object-fit: cover;
-    object-position: 0% 10%;
-    margin: 0 auto;
+    object-position: center;
+    margin: 0 auto 1em;
     border-radius: 20px;
+    align-self: center; /* Keep image centered */
   }
+  
   .testimonial-home {
     height: auto;
   }
@@ -246,7 +320,6 @@
     display: none;
   }
 
-
   .testmonialslide .swiper-button-prev,
   .swiper-button-next {
     display: none !important;
@@ -255,12 +328,33 @@
   .testmonialslide .swiper-pagination {
     bottom: 30px!important;
   }
-
-  
 }
+
 @media screen and (max-width:400px) {
-  .testmonial-card img{
-    width: 80%;
-    height: 50%;
+  .testmonial-card {
+    min-height: 550px;
+    max-height: 550px;
   }
+  
+  .testmonial-card img{
+    width: 90%;
+    height: 180px;
+  }
+  
+  .testmonial-card .review {
+    -webkit-line-clamp: 7;
+    max-height: 168px;
+  }
+}
+
+/* Ensure swiper container has consistent height */
+.swiper-container {
+  height: 650px !important; /* Increased to match larger card height */
+}
+
+.swiper-slide {
+  height: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
