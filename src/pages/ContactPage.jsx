@@ -235,7 +235,7 @@ const ContactPage = () => {
                 </option>
                 <option value="Request-demo">Request a Demo</option>
                 <option value="Purchase">Purchase</option>
-                <option value="Career">Career Oportunity</option>
+                {/* <option value="Career">Career Oportunity</option> */}
                 <option value="Find-distributor">Find a Distributor</option>
                 <option value="meeting">Meeting</option>
                 {/* <option value="IFU-download">IFU Download</option> */}

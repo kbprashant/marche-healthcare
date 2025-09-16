@@ -1,9 +1,10 @@
 import { useLocation } from "react-router-dom";
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import "./css/careersapply.css";
 import { Layouts } from "../Layouts/Layouts";
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
 export default function CareersApply() {
   const { state } = useLocation();
@@ -40,50 +41,44 @@ export default function CareersApply() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  // Gmail check
-  if (!formData.email.endsWith("@gmail.com")) {
-    alert("❌ Only Gmail addresses are allowed!");
-    return;
-  }
-
-  if (!formData.resumeFile) {
-    alert("❌ Please upload your resume (PDF only, max 5 MB).");
-    return;
-  }
-
-  const formDataToSend = new FormData();
-  formDataToSend.append("name", formData.name);
-  formDataToSend.append("email", formData.email);
-  formDataToSend.append("phone", formData.phone);
-  formDataToSend.append("message", formData.message);
-  formDataToSend.append("resume", formData.resumeFile); // file upload
-
-  try {
-    const res = await fetch("/api/apply", {
-      method: "POST",
-      body: formDataToSend,
-    });
-
-    const data = await res.json();
-    if (data.success) {
-      alert("✅ Application submitted successfully!");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        resumeFile: null,
-        message: "",
-      });
-    } else {
-      alert("❌ " + (data.error || "Failed to submit"));
+    if (!formData.resumeFile) {
+      alert("❌ Please upload your resume (PDF only, max 5 MB).");
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    alert("❌ Failed to connect to server");
-  }
-};
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("phone", formData.phone);
+    formDataToSend.append("message", formData.message);
+    formDataToSend.append("resume", formData.resumeFile);
+
+    try {
+      const res = await fetch(`${API_BASE}/apply`, {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        alert("✅ Application submitted successfully!");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          resumeFile: null,
+          message: "",
+        });
+      } else {
+        alert("❌ " + (data.error || "Failed to submit"));
+      }
+    } catch (err) {
+      console.error(err);
+      alert("❌ Failed to connect to server");
+    }
+  };
 
   return (
     <Layouts title={"Careers Apply"}>
@@ -113,7 +108,7 @@ export default function CareersApply() {
             </div>
 
             <div>
-              <label htmlFor="email">Email (Gmail only)</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
@@ -141,9 +136,7 @@ export default function CareersApply() {
                 type="file"
                 id="resume"
                 accept="application/pdf"
-                onChange={(e) =>
-                  setFormData({ ...formData, resumeFile: e.target.files[0] })
-                }
+                onChange={handleFileChange}
                 required
               />
             </div>
