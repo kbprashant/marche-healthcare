@@ -8,7 +8,7 @@
 }
 
 .rc-accordion-active {
-    background: #E5E5FF;
+    background: #ffffff;
     border-right: 1px solid #000;
     border-left: 1px solid #000;
 }
@@ -77,6 +77,185 @@
 
 .rc-accordion-border{
     border: 1px solid #000;
+}
+
+/* layout for image + text inside accordion body */
+.rc-accordion-body-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.rc-accordion-img {
+  width: 180px;
+  max-width: 40%;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.rc-accordion-text {
+  flex: 1 1 auto;
+}
+
+@media (max-width: 768px) {
+  .rc-accordion-body-row {
+    flex-direction: column;
+  }
+  .rc-accordion-img {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* specs table inside accordion */
+.rc-accordion-specs {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px; /* allows horizontal scroll on small screens */
+}
+
+.specs-table th,
+.specs-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #111;
+}
+
+.specs-table thead th {
+  background: #560cf5; /* dark-blue header to match image */
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.specs-table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+@media (max-width: 900px) {
+  .specs-table {
+    min-width: 700px;
+  }
+  .specs-table th,
+  .specs-table td {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+/* Center title, image and description for Complete lineup accordions */
+.complete-lineup .rc-accordion-header {
+  padding: 0;
+}
+
+.complete-lineup .rc-accordion-toggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* center title + icon horizontally */
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Ensure the title is centered */
+.complete-lineup .rc-accordion-title {
+  margin: 0;
+  text-align: center;
+  width: auto;
+}
+
+/* Stack image above text and center them */
+.complete-lineup .rc-accordion-body-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 16px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Make image centered and a reasonable size */
+.complete-lineup .rc-accordion-img {
+  width: 220px;
+  max-width: 80%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0;
+  border-radius: 6px;
+}
+
+/* Center the descriptive text */
+.complete-lineup .rc-accordion-text {
+  text-align: center;
+  max-width: 900px;
+}
+
+/* Keep the collapse animation intact */
+.complete-lineup .rc-collapse {
+  transition: height 0.35s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .complete-lineup .rc-accordion-img {
+    width: 100%;
+    max-width: 100%;
+  }
+  .complete-lineup .rc-accordion-title {
+    font-size: 1rem;
+  }
+}
+
+/* CTA / Apply button inside accordion */
+.rc-accordion-cta {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 0px;
+  box-sizing: border-box;
+}
+
+.btn-apply {
+  background: #5D5DFF;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(93,93,255,0.12);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn-apply:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.95);
+}
+
+.btn-apply:focus {
+  outline: 3px solid rgba(93,93,255,0.14);
+  outline-offset: 2px;
+}
+
+/* Mobile: center CTA to match stacked layout */
+@media (max-width: 768px) {
+  .rc-accordion-cta {
+    justify-content: center;
+  }
 }
 
 

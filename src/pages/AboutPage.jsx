@@ -55,7 +55,7 @@ const USERS = {
       id: 1,
       isActive: false,
       profileImg: "./profilePic.png",
-      name: "Dr. M. Mari Raj",
+      name: "Dr. Mari Raj",
       position: "Founder & CEO",
       twitter: "https://x.com/dr_mariraj?t=VuX2qMmZH_aW1omgQP0UQQ&s=08",
       linkedin:
@@ -68,7 +68,7 @@ const USERS = {
       isActive: false,
       // profileImg: `./about/Photo.png`,
       profileImg: `./about/Photo.png`,
-      name: "John Carter",
+      name: "Dr. Muthukumar",
       position: "Founder & CEO",
       twitter: "https://x.com/info_march49738",
       linkedin: "https://www.linkedin.com/company/marche-healthcare/",
@@ -81,7 +81,7 @@ const USERS = {
       id: 1,
       isActive: false,
       profileImg: `./about/Photo.png`,
-      name: "John Carter",
+      name: "Dr. Muthukumar",
       position: "Founder & CEO",
       twitter: "https://x.com/info_march49738",
       linkedin: "https://www.linkedin.com/company/marche-healthcare/",
@@ -92,7 +92,7 @@ const USERS = {
       id: 2,
       isActive: false,
       profileImg: "./profilePic.png",
-      name: "Dr. M. Mari Raj",
+      name: "Dr. Mari Raj",
       position: "Founder & CEO",
       twitter: "https://x.com/dr_mariraj?t=VuX2qMmZH_aW1omgQP0UQQ&s=08",
       linkedin:
@@ -104,7 +104,7 @@ const USERS = {
       id: 3,
       isActive: false,
       profileImg: `./about/Photo.png`,
-      name: "John Carter",
+      name: "Dr. Muthukumar",
       position: "Founder & CEO",
       twitter: "https://x.com/info_march49738",
       linkedin: "https://www.linkedin.com/company/marche-healthcare/",
@@ -115,7 +115,7 @@ const USERS = {
       id: 4,
       isActive: false,
       profileImg: "./profilePic.png",
-      name: "Dr. M. Mari Raj",
+      name: "Dr. Mari Raj",
       position: "Founder & CEO",
       twitter: "https://x.com/info_march49738",
       linkedin: "https://www.linkedin.com/company/marche-healthcare/",
@@ -350,6 +350,8 @@ export default function AboutPage() {
       </div>
 
       <div id="ourpurpose" className="purpose-container">
+        
+        
         <img
           src={`./doctorimage.jpg`}
           alt="Purpose Background"
@@ -382,7 +384,7 @@ export default function AboutPage() {
               <div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <a
-                    href="https://www.linkedin.com/company/marche-healthcare/"
+                    href="https://www.linkedin.com/in/dr-mariraj/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -436,7 +438,7 @@ export default function AboutPage() {
               <div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <a
-                    href="https://www.linkedin.com/company/marche-healthcare/"
+                    href="https://www.linkedin.com/in/dr-mariraj/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

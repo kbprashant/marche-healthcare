@@ -31,6 +31,7 @@ const toAbsoluteUrl = (p) => { try { return new URL(p).href; } catch { return p 
         <button onClick={()=>onToggle(row)} className="btn secondary">{row.is_active ? "Hide" : "Activate"}</button>
         <button onClick={()=>onEdit(row)} className="btn">Edit</button>
         <button onClick={()=>onDelete(row)} className="btn danger">Delete</button>
+        
       </div>
     </div>
   );
@@ -39,7 +40,7 @@ const toAbsoluteUrl = (p) => { try { return new URL(p).href; } catch { return p 
 function TestimonialFormModal({ open, initial, onClose, onSaved, authFetch }) {
   const [form, setForm] = useState({
     id: 0, person_name: "", person_title: "", company: "",
-    message: "", is_active: 1, imageFile: null, imagePreview: ""
+    message: "", is_active: 1, imageFile: null, imagePreview: "", linkedin: ""
   });
 
   useEffect(()=>{ 
@@ -51,7 +52,8 @@ function TestimonialFormModal({ open, initial, onClose, onSaved, authFetch }) {
       message: initial?.message || "",
       is_active: initial?.is_active ? 1 : 0,
       imageFile: null,
-      imagePreview: initial?.image || ""
+      imagePreview: initial?.image || "",
+      linkedin: initial?.linkedin || ""
     });
   }, [open, initial]);
 
@@ -62,31 +64,26 @@ function TestimonialFormModal({ open, initial, onClose, onSaved, authFetch }) {
 
   async function save() {
     const fd = new FormData();
-    if (form.id) {
-      // update
-      fd.set("person_name", form.person_name);
-      fd.set("person_title", form.person_title);
-      fd.set("company", form.company);
-      fd.set("message", form.message);
-      fd.set("is_active", String(form.is_active));
-      if (form.imageFile) fd.set("image", form.imageFile);
-      const res = await authFetch(`${API_BASE}/testimonials/${form.id}`, { method: "PUT", body: fd, isMultipart: true });
-      if (res?.error) { alert(res.error); return; }
-      onSaved();
-    } else {
-      // create
-      if (!form.imageFile) { 
-        if (!confirm("No image selected. Continue without an image?")) return; 
+    fd.set("person_name", form.person_name);
+    fd.set("person_title", form.person_title || "");
+    fd.set("company", form.company || "");
+    fd.set("message", form.message);
+    fd.set("is_active", String(form.is_active ? 1 : 0));
+    fd.set("linkedin", form.linkedin || "");
+    if (form.imageFile) fd.set("image", form.imageFile);
+
+    try {
+      if (form.id) {
+        const data = await authFetch(`${API_BASE}/testimonials/${form.id}`, { method: 'PUT', body: fd, isMultipart: true });
+        if (!data || data.ok === false) { alert('Save failed'); return; }
+      } else {
+        const data = await authFetch(`${API_BASE}/testimonials`, { method: 'POST', body: fd, isMultipart: true });
+        if (!data || data.ok === false) { alert('Create failed'); return; }
       }
-      fd.set("person_name", form.person_name);
-      fd.set("person_title", form.person_title);
-      fd.set("company", form.company);
-      fd.set("message", form.message);
-      fd.set("is_active", String(form.is_active));
-      if (form.imageFile) fd.set("image", form.imageFile);
-      const res = await authFetch(`${API_BASE}/testimonials`, { method: "POST", body: fd, isMultipart: true });
-      if (res?.error) { alert(res.error); return; }
-      onSaved();
+      onSaved && onSaved();
+    } catch (e) {
+      console.error(e);
+      alert('Save failed');
     }
   }
 
@@ -113,6 +110,9 @@ function TestimonialFormModal({ open, initial, onClose, onSaved, authFetch }) {
             <input type="file" accept="image/*" onChange={onPickFile} />
           </label>
           {form.imagePreview ? <img className="image-preview" src={form.imagePreview} alt="" style={{maxWidth:180, borderRadius:12}}/> : null}
+          <label>LinkedIn URL
+            <input value={form.linkedin} onChange={e => setForm(f => ({ ...f, linkedin: e.target.value }))} placeholder="https://www.linkedin.com/in/..." />
+          </label>
         </div>
         <div className="modal-footer">
           <button className="btn secondary" onClick={onClose}>Cancel</button>

@@ -73,7 +73,7 @@ export default function SwiperSingle() {
 
                   {/* Keep your LinkedIn button; link to company page (optional) */}
                   <a
-                    href="https://www.linkedin.com/company/marche-healthcare/"
+                    href={t.linkedin || "https://www.linkedin.com/company/marche-healthcare/"}
                     target="_blank"
                     rel="noreferrer"
                     className="icon"

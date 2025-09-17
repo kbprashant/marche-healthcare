@@ -50,7 +50,7 @@ const Nav = () => {
     {
       title: "Products",
       path: "/products",
-      subItems: [{ name: "Marche Robo", path: "/products#marche-robo" }],
+      subItems: [{ name: "NovaLap 360 D8", path: "/products#marche-robo" }],
     },
     { title: "Videos", path: "/videos", subItems: [] },
     {

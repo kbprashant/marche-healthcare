@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import "./css/scrollingcontainer.css";
 
@@ -8,10 +8,20 @@ function ScrollingContainer({
   subHeading,
   mobileView,
   setMobileView,
+  showFog = true,
 }) {
+  const containerRef = useRef(null);
+
   const [zoomHeight, setZoomHeight] = useState(0);
   const [zoomWidth, setZoomWidth] = useState(0);
-  const { scrollYProgress } = useScroll();
+
+  // Scope scroll to this container so only this section drives the animation
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    // Offsets ensure animation happens as the section enters/exits viewport.
+    offset: ["start end", "end start"],
+  });
+
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.3, 0.65, 1],
@@ -42,87 +52,84 @@ function ScrollingContainer({
     [0, 0.4, 1],
     ["auto", "none", "none"]
   );
+
   useEffect(() => {
     setZoomWidth(window.innerWidth * 0.67);
     setZoomHeight(window.innerHeight * 0.67);
   }, []);
 
   return (
-    <div>
-      <div style={{ position: "relative", marginBottom: "100px" }}>
-        {mobileView ? (
-          <div>
-            <div className="scrollcontainer">
-              <div className="stickydiv">
+    // Attach the ref to the top-level wrapper so useScroll() targets this section
+    <div ref={containerRef} style={{ position: "relative", marginBottom: "100px" }}>
+      {mobileView ? (
+        <div>
+          <div className="scrollcontainer">
+            <div className="stickydiv">
+              <div
+                className="zoomoutdiv"
+                style={{
+                  width: "100%",
+                  opacity,
+                  scale,
+                  y,
+                }}
+              >
                 <div
-                  className="zoomoutdiv"
-                  style={{
-                    width:"100%",
-                    opacity,
-                    scale,
-                    y,
-                  }}
+                  className="bgimagediv"
+                  style={{ backgroundImage: `url(${bgimg})`, borderRadius }}
                 >
-                  <div
-                    className="bgimagediv"
-                    style={{ backgroundImage: `url(${bgimg})`, borderRadius }}
-                  >
-                    <span style={{ display: "none" }}>something</span>
-                  </div>
-                </div>
-              </div>
-              <div className="texthoverdiv">
-                <div className="textdiv">
-                  <div
-                    className="texthovered"
-                    style={{} }
-                  >
-                    <h3 style={{fontSize:"2.5rem"}}>{heading}</h3>
-                    <h4 style={{fontSize:"1rem"}}>{subHeading}</h4>
-                  </div>
+                  <span style={{ display: "none" }}>something</span>
                 </div>
               </div>
             </div>
-            <div className="fogdiv"></div>
+            <div className="texthoverdiv">
+              <div className="textdiv">
+                <div className="texthovered" style={{}}>
+                  <h3 style={{ fontSize: "2.5rem" }}>{heading}</h3>
+                  <h4 style={{ fontSize: "1rem" }}>{subHeading}</h4>
+                </div>
+              </div>
+            </div>
           </div>
-        ) : (
-          <>
-            <div className="scrollcontainer">
-              <div className="stickydiv">
+          {showFog &&<div className="fogdiv"></div>}
+        </div>
+      ) : (
+        <>
+          <div className="scrollcontainer">
+            <div className="stickydiv">
+              <motion.div
+                className="zoomoutdiv"
+                style={{
+                  height: zoomHeight,
+                  width: zoomWidth,
+                  opacity,
+                  scale,
+                  y,
+                }}
+              >
                 <motion.div
-                  className="zoomoutdiv"
-                  style={{
-                    height: zoomHeight,
-                    width: zoomWidth,
-                    opacity,
-                    scale,
-                    y,
-                  }}
+                  className="bgimagediv"
+                  style={{ backgroundImage: `url(${bgimg})`, borderRadius }}
                 >
-                  <motion.div
-                    className="bgimagediv"
-                    style={{ backgroundImage: `url(${bgimg})`, borderRadius }}
-                  >
-                    <span style={{ display: "none" }}>something</span>
-                  </motion.div>
+                  <span style={{ display: "none" }}>something</span>
+                </motion.div>
+              </motion.div>
+            </div>
+            <div className="texthoverdiv">
+              <div className="textdiv">
+                <motion.div
+                  className="texthovered"
+                  style={{ opacity: opacityText, y: yText }}
+                >
+                  <h3>{heading}</h3>
+                  <h4>{subHeading}</h4>
                 </motion.div>
               </div>
-              <div className="texthoverdiv">
-                <div className="textdiv">
-                  <motion.div
-                    className="texthovered"
-                    style={{ opacity: opacityText, y: yText }}
-                  >
-                    <h3>{heading}</h3>
-                    <h4>{subHeading}</h4>
-                  </motion.div>
-                </div>
-              </div>
             </div>
-            <div className="fogdiv"></div>
-          </>
-        )}
-      </div>
+          </div>
+          {showFog && <div className="fogdiv"></div>}
+        </>
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import "./css/careers.css";
 import React, { useEffect, useMemo, useState } from "react";
 import { Layouts } from "../Layouts/Layouts";
 import { useNavigate } from "react-router-dom";
+import AccordionItem from "../components/AccordionItem";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
@@ -29,6 +30,7 @@ export default function Careers() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  const [activeJob, setActiveJob] = useState(null);
   const navigate = useNavigate();
 
   // fetch published jobs from public API
@@ -71,6 +73,11 @@ export default function Careers() {
       // otherwise open our internal apply page with job in state
       navigate("/careersapply", { state: { job } });
     }
+  };
+
+  const handleToggleJob = (id) => {
+    if (activeJob === id) setActiveJob(null);
+    else setActiveJob(id);
   };
 
   return (
@@ -144,23 +151,36 @@ export default function Careers() {
         {!loading && err && <div className="job-card" style={{ color: "crimson" }}>{err}</div>}
 
         {!loading &&
-          jobs.map((job) => (
-            <div key={job.id} className="job-card">
-              <h3>{job.title}</h3>
-              <h4 style={{ textTransform: "capitalize" }}>{job.category}</h4>
+          jobs.map((job) => {
+            const faqObj = {
+              header: job.title,
+              id: job.id,
+              text: job.description || "",
+            };
 
-              <p className="job-desc">{job.description}</p>
-
-              <div className="job-meta">
-                {job.location && <div><b>Location:</b> {job.location}</div>}
-                {job.experience && <div><b>Experience:</b> {job.experience}</div>}
-                {job.salary && <div><b>Salary:</b> {job.salary}</div>}
-                {job.skills && <div><b>Skills:</b> {job.skills}</div>}
+            return (
+              <div
+                key={job.id}
+                onMouseEnter={() => setActiveJob(job.id)}
+                onMouseLeave={() => setActiveJob(null)}
+              >
+                <AccordionItem
+                  active={activeJob}
+                  handleToggle={handleToggleJob}
+                  faq={{
+                    ...faqObj,
+                    cta: (
+                      <div className="job-apply-cta">
+                        <button className="btn-apply" onClick={() => handleApply(job)}>
+                          Apply
+                        </button>
+                      </div>
+                    ),
+                  }}
+                />
               </div>
-
-              <button onClick={() => handleApply(job)}>Apply</button>
-            </div>
-          ))}
+            );
+          })}
       </div>
     </Layouts>
   );

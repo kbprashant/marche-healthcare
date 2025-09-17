@@ -13,6 +13,7 @@ import CaruselTwo from "../components/CaruselTwo";
 import NewsCard from "../components/NewsCard";
 import SwiperSingle from "../components/SwiperSingle";
 import YoutubeVideoPlayer from "../components/YoutubeVideoPlayer";
+import ModelViewer3D from "../components/ModelViewer3D";
 
 import { Link } from "react-router-dom";
 
@@ -151,6 +152,16 @@ export default function HomePage() {
     return `${window.location.origin}${url}`;
   }
 
+  useEffect(() => {
+    if (!window.customElements || !window.customElements.get('model-viewer')) {
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.src = 'https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+  }, []);
+
   return (
     <Layouts title={"Home-Page"}>
       <div className="home-top">
@@ -161,6 +172,11 @@ export default function HomePage() {
       <div className="value-proposition">
         <YoutubeVideoPlayer />
       </div>
+
+      {/* 3D Model Section */}
+      {/* <div className="model-3d-section">
+        <ModelViewer3D />
+      </div> */}
 
       <div className="marche-values-div">
         <h2 className="team-heading">Marche’s Values</h2>
@@ -456,6 +472,8 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+
+
     </Layouts>
   );
 }
