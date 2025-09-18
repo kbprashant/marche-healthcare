@@ -118,7 +118,7 @@
   font-size: var(--font-size-heading-primary);
   font-style: normal;
   font-weight: 700;
-  line-height: 120%;
+  line-height: 60%;
   /* 57.6px */
 }
 
@@ -128,7 +128,7 @@
   font-size: var(--font-size-paragraph-primary);
   font-style: normal;
   font-weight: 400;
-  line-height: 150%;
+  line-height: 60%;
   /* 27px */
 }
 

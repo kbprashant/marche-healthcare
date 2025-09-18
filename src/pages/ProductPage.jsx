@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./css/productpage.css";
 import { Layouts } from "../Layouts/Layouts";
 import blogImg from "../assets/products/card-img.png";
@@ -9,9 +9,8 @@ import functionl2Img from "../assets/products/functional-2.png";
 import functionl3Img from "../assets/products/functional-3.png";
 import AccordionItem from "../components/AccordionItem";
 import FaqAccordion from "../components/FaqAccordion";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
 import { Element } from "react-scroll";
 
 const faqs = [
@@ -60,24 +59,20 @@ const faqProducts = [
   },
 ];
 
-
 const ProductPage = () => {
   const [accordion, setAccordion] = useState(false);
-  // last accordion
   const [active, setActive] = useState(null);
-
-  // navigation
   const location = useLocation();
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (location.hash) {
       const element = document.getElementById(location.hash.slice(1));
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [location]);
-
 
   const handleToggle = (index) => {
     if (active === index) {
@@ -86,14 +81,44 @@ const ProductPage = () => {
       setActive(index);
     }
   };
+
+  // Function to trigger backend API call
+  const handleContactClick = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "contact_button_clicked",
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send request to backend");
+      }
+
+      const data = await response.json();
+      console.log("Backend response:", data);
+    } catch (error) {
+      console.error("Error contacting backend:", error);
+    } finally {
+      // Navigate to contact page regardless of API success/failure
+      navigate("/contact");
+    }
+  };
+
   return (
     <Layouts title={"Product-Page"}>
-      <main  className="product-main">
-        <motion.div 
-        initial={{opacity:0}} 
-        animate={{opacity:1}} 
-        transition={{ delay:0.5,duration:1}} 
-        className="content">
+      <main className="product-main">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="content"
+        >
           <h1>Describe what your company does in a few words</h1>
           <p>
             Describe exactly what the company does and what a customer can
@@ -121,7 +146,7 @@ const ProductPage = () => {
             </p>
           </div>
         </div>
-        <div  className="short-about-action">
+        <div className="short-about-action">
           <button className="btn">Instrument name</button>
           <button className="btn-outline">Complete lineup</button>
         </div>
@@ -133,7 +158,6 @@ const ProductPage = () => {
             <h2>How functional</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
           </div>
-
           <div className="content">
             <motion.div initial={{opacity:0,x:-100}} whileInView={{opacity:1, x:0}} transition={{delay:0.1,duration:0.3}} className="card">
               <img src={blogImg} alt="blog" />
@@ -146,7 +170,6 @@ const ProductPage = () => {
                 </p>
               </div>
             </motion.div>
-
             <motion.div initial={{opacity:0,x:100}} whileInView={{opacity:1,x:0}} transition={{delay:0.1,duration:0.3}} className="card">
               <img src={blogImg} alt="blog" />
               <div className="card-body">
@@ -160,8 +183,6 @@ const ProductPage = () => {
             </motion.div>
           </div>
         </div>
-
-        
 
         <div className="functional functional-2">
           <div className="func-header">
@@ -180,9 +201,9 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
-        <motion.div initial={{opacity:0,x:-100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}}  className="functional-desc">
+        <motion.div initial={{opacity:0,x:-100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}} className="functional-desc">
           <div className="content-img">
-            <img src={functionl0Img} alt="functionl1Img" />
+            <img src={functionl0Img} alt="functional-0" />
           </div>
           <div className="content">
             <h2>Tell the visitor what the company name is about</h2>
@@ -190,36 +211,27 @@ const ProductPage = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Suspendisse varius enim in eros elementum tristique. Duis cursus,
               mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-              libero vitae erat.dolor interdum nulla, ut commodo diam libero
-              vitae erat.dolor interdum nulla, ut commodo diam libero vitae
-              erat.dolor interdum nulla, ut commodo diam libero vitae erat.dolor
-              interdum nulla, ut commodo diam libero vitae erat.dolor interdum
-              nulla, ut commodo diam libero vitae erat.
+              libero vitae erat.
             </p>
           </div>
         </motion.div>
-        <motion.div initial={{opacity:0,x:100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}}  className="functional-desc">
+        <motion.div initial={{opacity:0,x:100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}} className="functional-desc">
           <div className="content">
             <h2>Tell the visitor what the company name is about</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Suspendisse varius enim in eros elementum tristique. Duis cursus,
               mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-              libero vitae erat.dolor interdum nulla, ut commodo diam libero
-              vitae erat.dolor interdum nulla, ut commodo diam libero vitae
-              erat.dolor interdum nulla, ut commodo diam libero vitae erat.dolor
-              interdum nulla, ut commodo diam libero vitae erat.dolor interdum
-              nulla, ut commodo diam libero vitae erat.
+              libero vitae erat.
             </p>
           </div>
           <div className="content-img">
-            <img src={functionl1Img} alt="functionl1Img" />
+            <img src={functionl1Img} alt="functional-1" />
           </div>
         </motion.div>
-
-        <motion.div initial={{opacity:0,x:-100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}}  className="functional-desc">
+        <motion.div initial={{opacity:0,x:-100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}} className="functional-desc">
           <div className="content-img">
-            <img src={functionl2Img} alt="functionl1Img" />
+            <img src={functionl2Img} alt="functional-2" />
           </div>
           <div className="content">
             <h2>Tell the visitor what the company name is about</h2>
@@ -227,31 +239,22 @@ const ProductPage = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Suspendisse varius enim in eros elementum tristique. Duis cursus,
               mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-              libero vitae erat.dolor interdum nulla, ut commodo diam libero
-              vitae erat.dolor interdum nulla, ut commodo diam libero vitae
-              erat.dolor interdum nulla, ut commodo diam libero vitae erat.dolor
-              interdum nulla, ut commodo diam libero vitae erat.dolor interdum
-              nulla, ut commodo diam libero vitae erat.
+              libero vitae erat.
             </p>
           </div>
         </motion.div>
-
-        <motion.div initial={{opacity:0,x:100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}}  className="functional-desc">
+        <motion.div initial={{opacity:0,x:100}} whileInView={{opacity:1,x:0}} transition={{delay:0.2,duration:0.7}} className="functional-desc">
           <div className="content">
             <h2>Tell the visitor what the company name is about</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Suspendisse varius enim in eros elementum tristique. Duis cursus,
               mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-              libero vitae erat.dolor interdum nulla, ut commodo diam libero
-              vitae erat.dolor interdum nulla, ut commodo diam libero vitae
-              erat.dolor interdum nulla, ut commodo diam libero vitae erat.dolor
-              interdum nulla, ut commodo diam libero vitae erat.dolor interdum
-              nulla, ut commodo diam libero vitae erat.
+              libero vitae erat.
             </p>
           </div>
           <div className="content-img">
-            <img src={functionl3Img} alt="functionl1Img" />
+            <img src={functionl3Img} alt="functional-3" />
           </div>
         </motion.div>
 
@@ -260,21 +263,19 @@ const ProductPage = () => {
             <h2>Product Name</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
           </div>
-          <img src="./products/specification.png" alt="specification." />
+          <img src="./products/specification.png" alt="specification" />
         </div>
 
         <div className="functional asked-questions">
           <div className="func-header">
-            <h2>Completet lineup</h2>
+            <h2>Complete lineup</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
           </div>
           <div className="functional-faq">
             <div className="content-img">
-              {faqProducts.map((faq, index) => {
-                return <FaqAccordion key={index} index={index} faq={faq} setAcc={setAccordion} currAcc={accordion} />;
-              })}
-
-
+              {faqProducts.map((faq, index) => (
+                <FaqAccordion key={index} index={index} faq={faq} setAcc={setAccordion} currAcc={accordion} />
+              ))}
             </div>
             <div className="content">
               <h2>Frequently asked questions</h2>
@@ -292,25 +293,23 @@ const ProductPage = () => {
             <h2>FAQs</h2>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique.{" "}
+              Suspendisse varius enim in eros elementum tristique.
             </p>
           </div>
           <div className="content">
-            {faqs.map((faq, index) => {
-              return (
-                <AccordionItem
-                  key={index}
-                  active={active}
-                  handleToggle={handleToggle}
-                  faq={faq}
-                />
-              );
-            })}
+            {faqs.map((faq, index) => (
+              <AccordionItem
+                key={index}
+                active={active}
+                handleToggle={handleToggle}
+                faq={faq}
+              />
+            ))}
           </div>
           <div className="fav-footer">
             <h2>Still have a question?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-            <button>Contact</button>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button onClick={handleContactClick}>Contact</button> {/* Updated to use handleContactClick */}
           </div>
         </div>
       </section>
