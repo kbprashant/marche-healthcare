@@ -319,8 +319,20 @@ const NewsPage = () => {
             <NewsfullDetails
               setCardList={setSelctedCardList}
               selectedCardState={selctedCardList}
-              footerCard={(newsCardDetails.length ? newsCardDetails : blogCardDetails)
-                .filter((obj) => obj.id !== activeCard.id)}
+              footerCard={
+                (!newsLoading && dbNewsPosts.length > 0
+                  ? dbNewsPosts.map((p, idx) => ({
+                      id: p.id ?? idx,
+                      img: abs(p.image_url || ""),
+                      title: p.title || "",
+                      content: p.summary || "",
+                      profile: "./companyLogo.png",
+                      names: "Marche Healthcare",
+                      date: (p.scheduled_at || p.created_at || "").slice(0, 10),
+                    }))
+                  : (newsCardDetails.length ? newsCardDetails : blogCardDetails)
+                ).filter((obj) => obj.id !== activeCard?.id)
+              }
             />
           ) : null}
         </div>

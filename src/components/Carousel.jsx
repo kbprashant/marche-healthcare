@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./css/carousel.css";
-import img1 from "../images/new-img1.jpg";
-import img2 from "../images/new-img2.jpg";
+import img1 from "../images/new-img4.jpg";
+import img2 from "../images/new-img1.jpg";
 import img3 from "../images/new-img3.jpg";
 // Add mobile-specific images
 import img1Mobile from "../images/mob-img1.jpg";
@@ -24,32 +24,32 @@ const Carousel = () => {
 
   const items = [
     { 
-      img: isMobile ? img3Mobile : img3, 
+      img: isMobile ? img3Mobile : img1, 
       author: "LUNDEV", 
-      title: "DESIGN SLIDER", 
-      topic: "Marche Robo", 
-      description:  "State-of-the-art technology designed for the demands of modern healthcare. Our innovative solutions are crafted to meet the highest standards, ensuring superior performance and improved patient outcomes in today's fast-paced medical environment " 
+      title: "NovaLap 360 D8", 
+      topic: "Feel as your hands, Do more than your hands", 
+      description:  "NovaLap 360D8 is a multi-DoF articulating laparoscopic system that delivers robotic-like dexterity without robotic infrastructure."
     },
-    { 
-      img: isMobile ? img1Mobile : img1, 
+      { 
+      img: isMobile ? img1Mobile : img2, 
       author: "LUNDEV", 
-      title: "DESIGN SLIDER", 
-      topic: "ANIMAL", 
-      description: "Lorem ipsum dolor sit amet..." 
+      title: "NovaLap 360 D8", 
+      topic: "Feel as your hands, Do more than your hands", 
+      description:  "NovaLap 360D8 is a multi-DoF articulating laparoscopic system that delivers robotic-like dexterity without robotic infrastructure."
     },
-    { 
-      img: isMobile ? img2Mobile : img2, 
-      author: "LUNDEV", 
-      title: "DESIGN SLIDER", 
-      topic: "ANIMAL", 
-      description: "Lorem ipsum dolor sit amet..." 
-    }
+    // { 
+    //   img: isMobile ? img2Mobile : img2, 
+    //   author: "LUNDEV", 
+    //   title: "DESIGN SLIDER", 
+    //   topic: "ANIMAL", 
+    //   description: "Lorem ipsum dolor sit amet..." 
+    // }
   ];
   
   const thumbnails = [
-    { img: isMobile ? img3Mobile : img3, title: "Name Slider", description: "Description" },
-    { img: isMobile ? img1Mobile : img1, title: "Name Slider", description: "Description" },
-    { img: isMobile ? img2Mobile : img2, title: "Name Slider", description: "Description" }
+    { img: isMobile ? img3Mobile : img1, title: "Name Slider", description: "Description" },
+    { img: isMobile ? img1Mobile : img2, title: "Name Slider", description: "Description" },
+    // { img: isMobile ? img2Mobile : img2, title: "Name Slider", description: "Description" }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -143,7 +143,7 @@ const Carousel = () => {
               <div className="des">{item.description}</div>
               <Link to="/products">  
                 <div className="buttons">
-                  <button>SEE MORE</button>
+                  <button>KNOW MORE</button>
                 </div>
               </Link>
             </div>

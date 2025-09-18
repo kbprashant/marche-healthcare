@@ -1,0 +1,36 @@
+/* src/components/css/modelviewer3d.css */
+/* 3D model section */
+.model-3d-section {
+  padding: 20px 0px;
+}
+
+.model-viewer-container {
+  margin: var(--page-margin-primary);
+  box-sizing: border-box;
+  border: 2px solid var(--primary);
+  border-radius: var(--border-radius-primary);
+  overflow: hidden;
+}
+
+model-viewer {
+  width: 100%;
+  height: 500px;
+  display: block;
+  --poster-color: transparent;
+}
+
+/* Adjust the model size within the viewer */
+model-viewer::part(default-ar-button) {
+  transform: scale(1.2);
+}
+
+/* Make the model itself appear larger */
+model-viewer::part(model) {
+  transform: scale(1.1) !important;
+}
+
+@media (max-width: 900px) {
+  model-viewer {
+    height: 340px;
+  }
+}

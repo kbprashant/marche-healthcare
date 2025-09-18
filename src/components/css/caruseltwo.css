@@ -120,7 +120,7 @@
 /* UPDATED TESTIMONIAL CARD STYLES FOR VERTICAL CENTER ALIGNMENT */
 .testmonial-card {
   background: url("/testimonialbg.png") center center / cover;
-  width: 90%;
+  width: 100%;
   display: flex;
   padding: 2em;
   border-radius: 74px;
@@ -357,4 +357,68 @@
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+}
+
+/* Place testimonial arrows at bottom center */
+.testmonialslide {
+  position: relative; /* ensure absolute children are positioned relative to this container */
+  padding-bottom: 80px; /* room for arrows */
+}
+
+/* Show and style Swiper navigation buttons, force visible if other rules hide them */
+.testmonialslide .swiper-button-prev,
+.testmonialslide .swiper-button-next {
+  position: absolute !important;
+  top: auto !important;
+  bottom: 16px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.95);
+  color: #000;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  z-index: 30;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Slight hover lift */
+.testmonialslide .swiper-button-prev:hover,
+.testmonialslide .swiper-button-next:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.16);
+}
+
+/* Position them side-by-side centered under the slider */
+.testmonialslide .swiper-button-prev {
+  left: calc(50% - 36px) !important; /* left of center */
+  transform: translateX(-50%) !important;
+}
+.testmonialslide .swiper-button-next {
+  left: calc(50% + 36px) !important; /* right of center */
+  transform: translateX(-50%) !important;
+}
+
+/* Adjust icons (if using default pseudo-elements) for contrast */
+.testmonialslide .swiper-button-prev::after,
+.testmonialslide .swiper-button-next::after {
+  font-size: 18px;
+  color: #111;
+}
+
+/* Ensure buttons are visible on small screens (overrides any display:none rules) */
+@media (max-width: 770px) {
+  .testmonialslide .swiper-button-prev,
+  .testmonialslide .swiper-button-next {
+    display: flex !important;
+    width: 44px;
+    height: 44px;
+    bottom: 12px !important;
+  }
+  .testmonialslide {
+    padding-bottom: 64px;
+  }
 }

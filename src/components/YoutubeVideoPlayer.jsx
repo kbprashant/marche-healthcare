@@ -6,17 +6,17 @@ import "../pages/css/homepage.css";
 
 const YOUTUBE_VIDEOS = {
   productvideo: {
-    src: "https://www.youtube.com/embed/aznxojO15M0?si=zQDqYiZfndtdVXFr",
-    title: "Product 1",
+    src: "https://www.youtube.com/embed/y_B7DDuFThw?si=EsluNUExi_M6Y3-d",
+    title: "NovaLap 360 D8",
   },
-  trainingvideo: {
-    src: "https://www.youtube.com/embed/Ttl8Gg-P-Ao?si=rpQhCp_Gc2PoRDjH",
-    title: "Product 2",
-  },
-  surgeryvideo: {
-    src: "https://www.youtube.com/embed/Nx6YOx1Kc_Y?si=DnLgLmTrvUL173id",
-    title: "Product 3",
-  },
+  // trainingvideo: {
+  //   src: "https://www.youtube.com/embed/Ttl8Gg-P-Ao?si=rpQhCp_Gc2PoRDjH",
+  //   title: "Product 2",
+  // },
+  // surgeryvideo: {
+  //   src: "https://www.youtube.com/embed/Nx6YOx1Kc_Y?si=DnLgLmTrvUL173id",
+  //   title: "Product 3",
+  // },
   newvideo: {
     // keep a valid src as fallback but this tab will be rendered as a link
     src: "https://www.youtube.com/embed/YOUR_VIDEO_ID",
