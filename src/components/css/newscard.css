@@ -1,3 +1,4 @@
+/* src\components\css\newscard.css */
 .blog-card {
   margin: 0 auto;
   width: 90%;
@@ -23,11 +24,33 @@
 /* MediaCard main image */
 .blog-image-3 {
   width: 100%;
-  height: auto;         /* keep aspect ratio */
-  max-height: 216px;    /* <= cap the height */
-  object-fit: cover;    /* crop overflow to keep it tidy */
+  height: 216px;        /* uniform image height */
+  object-fit: cover;    /* crop center to preserve composition */
   display: block;
-  border-radius: 12px;  /* optional, match your card style */
+  border-radius: 12px;  /* keep current look */
+}
+
+/* content text clamping + stable heights */
+.blog-content .blog-title {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  min-height: calc(1.2em * 2); /* keep a 2-line block even if title is 1 line */
+}
+
+.blog-content .blog-text {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  min-height: calc(1.4em * 3); /* keep a 3-line block for consistent card height */
 }
 
 .blog-content {
@@ -104,9 +127,7 @@
     text-align: center;
   }
 
-  /* .newspagecardcontainer .blog-card {
-    height: 55vh;
-  } */
+  .blog-image-3 { height: 180px; }
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -131,4 +152,6 @@
     width: 100%;
     padding: 2em;
   }
+
+  .blog-image-3 { height: 140px; }
 }
