@@ -28,50 +28,40 @@ html {
 
 .product-main .content h1 {
   color: var(--White, var(--Colors-Text-white, #fff));
-  /* Heading/H1 */
   /* font-family: Roboto; */
   font-size: var(--font-size-banner-primary);
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
-  /* 67.2px */
 }
 
 .product-main .content p {
   width: 70%;
   color: var(--White, var(--Colors-Text-white, #fff));
-
-  /* Text/Medium/Normal */
   /* font-family: Roboto; */
   font-size: var(--font-size-paragraph-primary);
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
-  /* 27px */
 }
 
 .product-action {
   position: relative;
   overflow: hidden;
-  /* keep existing padding */
   padding: 80px var(--page-margin-primary);
 }
 
-/* Background image placed via pseudo-element so content stays above it */
 .product-action::before {
   content: "";
   position: absolute;
-  inset: 0; /* top:0; right:0; bottom:0; left:0 */
-  background:
-    /* linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.78)), */
-    url("/products/sketch4.png") center / cover no-repeat;
-  opacity: 1;         /* adjust if you want more/less fade */
+  inset: 0;
+  background: url("/products/sketch4.png") center / cover no-repeat;
+  opacity: 1;
   z-index: 0;
   pointer-events: none;
   transform: translateZ(0);
 }
 
-/* Ensure content sits above the background */
 .product-action > .short-about,
 .product-action .short-about-action {
   position: relative;
@@ -80,10 +70,9 @@ html {
 
 .product-action .short-about {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start; /* Changed to 'flex-start' */
   align-items: flex-start;
   gap: 80px;
-  /* padding: 80px 64px; */
   padding: 80px var(--page-margin-primary);
 }
 
@@ -93,13 +82,11 @@ html {
 
 .product-action .short-about h2 {
   color: var(--Black, #000);
-  /* Heading/H1 */
   /* font-family: Roboto; */
   font-size: var(--font-size-banner-primary);
   font-style: normal;
   font-weight: 700;
   line-height: 220%;
-  /* 67.2px */
 }
 
 .btn-outline button.active {
@@ -114,13 +101,11 @@ html {
 
 .product-action .short-about p {
   color: var(--Black, #000);
-  /* Text/Medium/Normal */
   /* font-family: Roboto; */
   font-size: var(--font-size-paragraph-primary);
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
-  /* 27px */
 }
 
 .product-action .short-about-action {
@@ -135,20 +120,20 @@ html {
 .product-range-action {
   position: relative;
   width: 100%;
-  height: 740px;            /* same height as before */
-  background: #222222;      /* fallback color while video loads or if not supported */
+  height: 740px;
+  background: #222222;
   overflow: hidden;
 }
 
 .product-range-action .product-range-video {
   position: absolute;
-  inset: 0;                 /* top:0; right:0; bottom:0; left:0 */
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;        /* change to 'contain' if you prefer the whole video visible */
+  object-fit: cover;
   object-position: 50% 50%;
   z-index: 0;
-  pointer-events: none;     /* don't intercept clicks */
+  pointer-events: none;
 }
 
 .product-range-action .overlay {
@@ -161,7 +146,6 @@ html {
 }
 
 .functional {
-  /* padding: 112px 64px; */
   padding: 80px var(--page-margin-primary);
   display: flex;
   flex-direction: column;
@@ -176,23 +160,19 @@ html {
 
 .functional .func-header h2 {
   margin-bottom: 24px;
-  /* Heading/H2 */
   /* font-family: Roboto; */
   font-size: var(--font-size-heading-primary);
   font-style: normal;
   font-weight: 700;
-  line-height: 60%;
-  /* 57.6px */
+  line-height: 130%;
 }
 
 .functional .func-header p {
-  /* Text/Medium/Normal */
   /* font-family: Roboto; */
   font-size: var(--font-size-paragraph-primary);
   font-style: normal;
   font-weight: 400;
   line-height: 60%;
-  /* 27px */
 }
 
 .functional-1 .content {
@@ -259,8 +239,6 @@ html {
 
 .functional-desc {
   width: 100%;
-  /* margin: 0 auto; */
-  /* margin-bottom: 6em; */
   padding: 80px var(--page-margin-primary);
   display: flex;
   justify-content: space-between;
@@ -270,9 +248,6 @@ html {
 
 .functional-faq {
   width: 100%;
-  /* margin: 0 auto; */
-  /* margin-bottom: 6em; */
-  /* padding: 80px var(--page-margin-primary); */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -280,8 +255,28 @@ html {
 }
 
 .functional-desc .content,
-.functional-faq .content-img {
+.functional-desc .content-img,
+.functional-desc .functional-video {
   width: 50%;
+}
+
+.functional-video {
+  width: 50%; /* It makes the video half the width of its container */
+  height: auto; /* It maintains the video's original aspect ratio */
+  border-radius: 8px; /* To match the rounded corners on other elements */
+}
+
+/* For small mobile devices */
+@media only screen and (max-width: 770px) {
+  .functional-desc {
+    flex-direction: column; /* Stacks items vertically on small screens */
+  }
+  .functional-desc .content,
+  .functional-desc .content-img,
+  .functional-desc .functional-video {
+    text-align: center;
+    width: 100%; /* Makes the video full width on mobile */
+  }
 }
 
 .functional-desc .content h2 {
@@ -326,7 +321,7 @@ html {
 .fav-question .func-header {
   text-align: center;
   width: 100%;
-  max-width: 1100px; /* match page content width — adjust if needed */
+  max-width: 1100px;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 16px;
@@ -338,8 +333,8 @@ html {
 
 .fav-question .func-header p {
   margin: 0;
-  color: #555; /* optional: keep visual hierarchy */
-  max-width: 800px; /* limit line length for readability */
+  color: #555;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -361,15 +356,6 @@ html {
   border: 1px solid var(--Black, #000);
 }
 
-/* Put faded background image behind NovaLap (left column) only */
-.product-action .short-about {
-  position: relative; /* needed for the pseudo-element positioning */
-  z-index: 1;         /* keep text above the image */
-}
-
-/* The pseudo-element covers only the left half (NovaLap column) and applies a radial alpha gradient:
-   center is transparent (opacity 0) and edges are opaque (opacity 1).
-*/
 .product-action .short-about::before {
   content: "";
   position: absolute;
@@ -383,33 +369,166 @@ html {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  /* enable smooth filter transitions for the invert effect */
   transition: filter 360ms ease, transform 360ms ease, opacity 360ms ease;
 }
 
-/* When the product-action receives the 'invert-bg' class, invert the pseudo-element colors */
 .product-action.invert-bg .short-about::before {
   filter: invert(1) hue-rotate(180deg);
-  /* Optional small scale for a subtle pulse during hover */
   transform: translateZ(0) scale(1.02);
 }
 
-/* Make sure inner content sits above the pseudo background */
 .product-action .short-about > div {
   position: relative;
   z-index: 1;
 }
 
-/* ---------- Complete lineup accordions (updated) ---------- */
+/* Complete lineup accordion styles (updated) */
+.fav-question.complete-lineup .content {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
 
-/* ensure container matches FAQ width */
+.fav-question.complete-lineup .rc-accordion-card {
+  width: 100%;
+  max-width: none;
+  margin: 1rem 0;
+  border-bottom: 1px solid #e5e5e5;
+  transition: background-color 300ms ease, border-color 300ms ease;
+}
+
+.fav-question.complete-lineup .rc-accordion-card:hover {
+  background-color: rgba(93, 93, 255, 0.03);
+}
+
+.fav-question.complete-lineup .rc-accordion-header {
+  display: flex;
+  justify-content: space-between; /* title left, icon right */
+  align-items: center;
+  cursor: pointer;
+}
+
+.fav-question.complete-lineup .rc-accordion-header h5.rc-accordion-title {
+  flex: 1;
+  margin: 0;
+}
+
+.fav-question.complete-lineup .rc-accordion-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  transition: color 300ms ease;
+}
+
+.fav-question.complete-lineup .rc-accordion-icon {
+  font-size: 24px;
+  font-weight: 300;
+  color: #666;
+  transition: color 300ms ease, transform 300ms ease;
+    display: flex;
+  align-items: center; /* centers icon within its flex container */
+  line-height: 1;
+}
+
+.fav-question.complete-lineup .rc-accordion-card:hover .rc-accordion-header h3,
+.fav-question.complete-lineup .rc-accordion-card.active .rc-accordion-header h3 {
+  color: #5D5DFF;
+}
+
+.fav-question.complete-lineup .rc-accordion-card:hover .rc-accordion-icon,
+.fav-question.complete-lineup .rc-accordion-card.active .rc-accordion-icon {
+  color: #5D5DFF;
+  transform: rotate(180deg);
+}
+
+.fav-question.complete-lineup .rc-collapse {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  overflow: hidden;
+  transition: max-height 600ms cubic-bezier(0.2, 0.9, 0.2, 1),
+              opacity 500ms ease,
+              transform 500ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  padding: 0;
+}
+
+.fav-question.complete-lineup .rc-collapse.show,
+.fav-question.complete-lineup .rc-accordion-card.active .rc-collapse {
+  max-height: 1000px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 16px 0 24px 0;
+  
+}
+
+.product-row {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  align-items: flex-start;
+}
+
+.product-image {
+  flex: 1;
+  max-width: 280px;
+}
+
+.product-image img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.product-image h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 10px;
+}
+
+.product-image p {
+  font-size: 16px;
+  color: #555;
+  line-height: 150%;
+}
+
+.product-table {
+  flex: 2;
+  overflow-x: auto;
+}
+
+.product-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #e5e5e5;
+  padding: 8px;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #5D5DFF;
+  color: white;
+}
+
+.product-table td {
+  background-color: #f9f9f9;
+}
+
+.fav-question .rc-accordion-body {
+  padding: 16px;
+}
+
 .faq-accordion-container {
   width: 80%;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* base accordion */
 .faq-accordion {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 16px;
@@ -419,7 +538,6 @@ html {
   padding: 8px 0;
 }
 
-/* header (same as your faq header) */
 .faq-accordion-header {
   display: flex;
   justify-content: space-between;
@@ -444,46 +562,39 @@ html {
   transition: color 300ms ease, transform 300ms ease;
 }
 
-/* active color like FAQ */
 .faq-accordion.active .faq-accordion-header h3,
 .faq-accordion:hover .faq-accordion-header h3 {
   color: #5D5DFF;
 }
+
 .faq-accordion:hover .faq-accordion-icon,
 .faq-accordion.active .faq-accordion-icon {
   color: #5D5DFF;
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 
-/* CONTENT: initially collapsed */
 .faq-accordion-content {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  /* keep layout row on desktop */
-  flex-direction: row;
-  /* transition using max-height for smoothness */
   max-height: 0;
   opacity: 0;
   transform: translateY(-6px);
   overflow: hidden;
-  transition: max-height 600ms cubic-bezier(.2,.9,.2,1), opacity 500ms ease, transform 500ms cubic-bezier(.2,.9,.2,1);
-  padding: 0 0;
+  transition: max-height 600ms cubic-bezier(0.2, 0.9, 0.2, 1),
+              opacity 500ms ease,
+              transform 500ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  padding: 0;
 }
 
-/* when shown — smooth, slow */
 .faq-accordion-content.show,
 .faq-accordion.expanded .faq-accordion-content {
-  max-height: 1000px; /* large enough to contain content */
+  max-height: 1000px;
   opacity: 1;
   transform: translateY(0);
   padding: 16px 0 24px 0;
 }
 
-/* image styling */
 .faq-accordion-image {
-  flex: 0 0 36%; /* image takes ~36% width on desktop */
-  max-width: 360px;
+  flex: 0 0 40%;
+  max-width: 400px;
   height: auto;
   border-radius: 8px;
   overflow: hidden;
@@ -496,73 +607,46 @@ html {
   display: block;
 }
 
-/* text / description to the right */
-.faq-accordion-text {
-  flex: 1 1 64%;
-  color: #666;
-  line-height: 1.6;
-  font-size: 16px;
+.faq-accordion-table {
+  flex: 1 1 60%;
+  max-width: 600px;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* center the paragraph like the FAQs originally do? keep left alignment for product description */
-.faq-accordion-content p {
-  margin: 0;
+.faq-accordion-table th,
+.faq-accordion-table td {
+  border: 1px solid #e5e5e5;
+  padding: 8px;
   text-align: left;
 }
 
-/* Hover subtle background change */
+.faq-accordion-table th {
+  background-color: #5D5DFF;
+  color: white;
+}
+
+.faq-accordion-table td {
+  background-color: #f9f9f9;
+}
+
 .faq-accordion:hover {
-  background-color: rgba(93,93,255,0.03);
+  background-color: rgba(93, 93, 255, 0.03);
 }
 
-/* smaller icon when expanded */
 .faq-accordion.expanded .faq-accordion-icon {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 
-/* fallback/mobile: stack image above text and preserve spacing */
-@media only screen and (max-width: 770px) {
-  .faq-accordion-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .faq-accordion-image {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .faq-accordion-text {
-    width: 100%;
-  }
-
-  .faq-accordion-content.show,
-  .faq-accordion.expanded .faq-accordion-content {
-    max-height: 1200px;
-  }
-}
-
-/* fine-tune touch/click usability: add visible focus outline */
 .faq-accordion-header:focus {
-  outline: 2px dashed rgba(93,93,255,0.4);
+  outline: 2px dashed rgba(93, 93, 255, 0.4);
   outline-offset: 4px;
 }
 
-/* optionally, make header area slightly larger to match FAQ sizing exactly */
 .faq-accordion-header {
   padding: 22px 0;
 }
 
-/* Hover effects for other parts of page (kept from before) */
-.faq-accordion:hover .faq-accordion-header h3 {
-  color: #5D5DFF;
-}
-
-.faq-accordion:hover .faq-accordion-icon {
-  color: #5D5DFF;
-}
-
-/* Animation for accordion content (fallback when JS-added classes not present) */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -574,7 +658,6 @@ html {
   }
 }
 
-/* Center the asked-questions section */
 .asked-questions {
   display: flex;
   flex-direction: column;
@@ -587,215 +670,6 @@ html {
   text-align: center;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width:1100px) {
-  .product-main .content {
-    width: 100%;
-  }
-}
-
-/* Medium devices (landscape tablets, 770px and up) */
-@media only screen and (max-width: 770px) {
-  .product-main .content {
-    width: 100%;
-  }
-  
-  .functional {
-    padding: 3em 1em;
-  }
-  
-  .functional-2 .content img {
-    width: 100%;
-  }
-  
-  .functional-desc {
-    flex-direction: column;
-  }
-  
-  .functional-desc .content,
-  .functional-desc .content-img {
-    text-align: center;
-    width: 100%;
-  }
-  
-  .functional-desc .content h2 {
-    margin-bottom: 0.4em;
-  }
-  
-  .functional-3 {
-    padding: 0;
-  }
-  
-  .functional-3 img {
-    width: 100%;
-  }
-  
-  .asked-questions {
-    padding: 0;
-  }
-  
-  .asked-questions .func-header {
-    display: block;
-  }
-  
-  .asked-questions .functional-desc {
-    margin-top: 5em;
-    flex-direction: column-reverse;
-  }
-  
-  .asked-questions .functional-desc .content-img {
-    width: 100%;
-  }
-  
-  .faq-accordion-container {
-    width: 90%;
-  }
-  
-  .faq-accordion-header {
-    padding: 15px 0;
-  }
-  
-  .faq-accordion-header h3 {
-    font-size: 16px;
-  }
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .product-main {
-    padding: 0 1em;
-    height: 300px;
-  }
-  
-  .product-main .content {
-    width: 100%;
-  }
-
-  .product-main .content p {
-    width: 98%;
-  }
-
-  .functional-desc .content-img img {
-    width: 100%;
-  }
-
-  .product-action .short-about {
-    padding: 3em 1em;
-    flex-direction: column;
-  }
-
-  .product-action .short-about div {
-    width: 100%;
-  }
-
-  .functional-1 .content {
-    flex-direction: column;
-    gap: 2em;
-    margin-top: -50px;
-  }
-
-  .functional-1 .card {
-    width: 100%;
-  }
-  
-  .product-main .content h1 {
-    font-size: 2.5rem;
-  }
-  
-  .product-main .content p {
-    font-size: 1rem;
-  }
-  
-  .product-action .short-about h2 {
-    font-size: 2.5rem;
-  }
-  
-  .product-action .short-about p {
-    font-size: 1rem;
-    margin-top: -50px;
-  }
-  
-  .product-range-action {
-    height: 200px;
-  }
-  
-  .functional {
-    padding: 1em 1em;
-  }
-  
-  .functional .func-header h2 {
-    font-size: 2.5rem;
-  }
-  
-  .functional .func-header p {
-    font-size: 1rem;
-  }
-  
-  .functional-2 .content {
-    margin-top: -50px;
-  }
-  
-  .functional-desc .content h2 {
-    margin-top: -50px;
-    font-size: 2rem;
-  }
-  
-  .functional-desc .content p {
-    font-size: 1rem;
-  }
-  
-  .functional-desc {
-    padding: 30px 20px;
-  }
-  
-  .functional-3 img {
-    height: 180px;
-  }
-  
-  .functional-faq {
-    display: inline-block;
-  }
-  
-  .functional-faq .content-img,
-  .asked-questions .content,
-  .fav-question .func-header {
-    width: 100%;
-  }
-  
-  .functional-faq .content-img {
-    margin-bottom: 50px;
-  }
-  
-  .fav-question .func-header {
-    margin-bottom: 0px;
-  }
-  
-  .fav-footer {
-    margin-top: 30px;
-  }
-  
-  .faq-accordion-container {
-    width: 95%;
-  }
-  
-  .faq-accordion-header {
-    padding: 12px 0;
-  }
-  
-  .faq-accordion-header h3 {
-    font-size: 15px;
-  }
-  
-  .faq-accordion-content {
-    padding: 0 0 15px 0;
-  }
-  
-  .faq-accordion-content p {
-    font-size: 14px;
-  }
-}
-
-/* Styles for anchor-style outline button used on ProductPage */
 .btn-outline {
   display: inline-block;
   padding: 10px 20px;
@@ -809,7 +683,6 @@ html {
   text-align: center;
 }
 
-/* Hover / focus state — match requested color and make text white */
 .btn-outline:hover,
 .btn-outline:focus,
 .btn-outline:focus-visible {
@@ -821,13 +694,11 @@ html {
   text-align: center;
 }
 
-/* widen accordions inside the Complete lineup / fav-question section */
 .fav-question .content {
   width: 100%;
-   /* match FAQ area width — adjust as needed */
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0 16px; /* align with page gutters */
+  padding: 0 16px;
   display: block;
 }
 
@@ -848,11 +719,176 @@ html {
   padding: 16px;
 }
 
-@media (max-width: 768px) {
-  .fav-question .content {
+@media (max-width: 1100px) {
+  .product-main .content {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .product-main .content {
+    width: 100%;
+  }
+  .functional {
+    padding: 3em 1em;
+  }
+  .functional-2 .content img {
+    width: 100%;
+  }
+  .functional-desc {
+    flex-direction: column;
+  }
+  .functional-desc .content,
+  .functional-desc .content-img {
+    text-align: center;
+    width: 100%;
+  }
+  .functional-desc .content h2 {
+    margin-bottom: 0.4em;
+  }
+  .functional-3 {
+    padding: 0;
+  }
+  .functional-3 img {
+    width: 100%;
+  }
+  .asked-questions {
+    padding: 0;
+  }
+  .asked-questions .func-header {
+    display: block;
+  }
+  .asked-questions .functional-desc {
+    margin-top: 5em;
+    flex-direction: column-reverse;
+  }
+  .asked-questions .functional-desc .content-img {
+    width: 100%;
+  }
+  .faq-accordion-container {
+    width: 90%;
+  }
+  .faq-accordion-header {
+    padding: 15px 0;
+  }
+  .faq-accordion-header h3 {
+    font-size: 16px;
+  }
+  .product-row {
+    flex-direction: column;
+  }
+  .product-image {
+    max-width: 100%;
+  }
+  .fav-question.complete-lineup .content {
     padding: 0 12px;
   }
-  .fav-question .rc-accordion-body {
-    padding: 12px;
+  .fav-question.complete-lineup .rc-collapse.show,
+  .fav-question.complete-lineup .rc-accordion-card.active .rc-collapse {
+    max-height: 1200px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .product-main {
+    padding: 0 1em;
+    height: 300px;
+  }
+  .product-main .content {
+    width: 100%;
+  }
+  .product-main .content p {
+    width: 98%;
+  }
+  .functional-desc .content-img img {
+    width: 100%;
+  }
+  .product-action .short-about {
+    padding: 3em 1em;
+    flex-direction: column;
+  }
+  .product-action .short-about div {
+    width: 100%;
+  }
+  .functional-1 .content {
+    flex-direction: column;
+    gap: 2em;
+    margin-top: -50px;
+  }
+  .functional-1 .card {
+    width: 100%;
+  }
+  .product-main .content h1 {
+    font-size: 2.5rem;
+  }
+  .product-main .content p {
+    font-size: 1rem;
+  }
+  .product-action .short-about h2 {
+    font-size: 2.5rem;
+  }
+  .product-action .short-about p {
+    font-size: 1rem;
+    margin-top: -50px;
+  }
+  .product-range-action {
+    height: 200px;
+  }
+  .functional {
+    padding: 1em 1em;
+  }
+  .functional .func-header h2 {
+    font-size: 2.5rem;
+  }
+  .functional .func-header p {
+    font-size: 1rem;
+  }
+  .functional-2 .content {
+    margin-top: -50px;
+  }
+  .functional-desc .content h2 {
+    margin-top: -50px;
+    font-size: 2rem;
+  }
+  .functional-desc .content p {
+    font-size: 1rem;
+  }
+  .functional-desc {
+    padding: 30px 20px;
+  }
+  .functional-3 img {
+    height: 180px;
+  }
+  .functional-faq {
+    display: inline-block;
+  }
+  .functional-faq .content-img,
+  .asked-questions .content,
+  .fav-question .func-header {
+    width: 100%;
+  }
+  .functional-faq .content-img {
+    margin-bottom: 50px;
+  }
+  .fav-question .func-header {
+    margin-bottom: 0px;
+  }
+  .fav-footer {
+    margin-top: 30px;
+  }
+  .faq-accordion-container {
+    width: 95%;
+  }
+  .faq-accordion-header {
+    padding: 12px 0;
+  }
+  .faq-accordion-header h3 {
+    font-size: 15px;
+  }
+  .faq-accordion-content {
+    padding: 0 0 15px 0;
+  }
+  .faq-accordion-content p {
+    font-size: 14px;
   }
 }
