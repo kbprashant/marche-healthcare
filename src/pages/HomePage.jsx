@@ -148,8 +148,9 @@ export default function HomePage() {
   function resolveImageUrl(url) {
     if (!url) return null;
     if (/^https?:\/\//i.test(url)) return url;
-    // relative path begins with /uploads/... -> prefix origin
-    return `${window.location.origin}${url}`;
+    // Use the API_BASE URL to correctly resolve the image path
+    const apiOrigin = new URL(API_BASE, window.location.origin).origin;
+    return `${apiOrigin}${url}`;
   }
 
   useEffect(() => {

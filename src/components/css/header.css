@@ -4,26 +4,26 @@
 }
 
 .logo-container1 {
-  position: absolute; /* Changed from fixed to absolute */
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  /* No more absolute positioning here, it's now a flex item */
+  left: auto;
+  top: auto;
+  transform: none;
   transition: all 0.4s ease-in-out;
   width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  z-index: 1001; /* Ensure it stays above other elements */
+  z-index: 1001;
 }
 
 /* 🔥 When navbar expands, move the logo up and add glow */
 .navbar-expanded .logo-container1 {
   top: 0;
-  left: 100px;
-  transform: translateY(50%);
+  left: 0;
+  transform: translateY(50%) translateX(50%);
   height: 120px;
-  width: 120px; /* Explicitly set width */
+  width: 120px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.9);
 }
@@ -67,25 +67,24 @@ body.scrolled {
 }
 
 .navbar {
-  width: 94%; /* Reduced width from 100% */
+  width: 94%;
   background: #f0f0f0;
-  padding: 10px 0;
+  padding: 10px 25px; /* Added padding here to control spacing */
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* This is the key change */
   align-items: center;
   position: fixed;
-  top: 20px; /* Added margin above */
-  left: 50%; /* Ensure it stays centered */
-  transform: translateX(-50%); /* Prevents shifting */
-  border-radius: 30px; /* Added rounded edges */
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 30px;
   transition: all 0.4s ease-in-out;
   z-index: 1000;
-  padding: 0 25px;
 }
 
 /* Navbar Shrinks on Scroll - Apply glass morphism only here */
 .navbar-small {
-  width: 60%; /* Reduced from 80% */
+  width: 70%; /* Reduced from 80% */
   max-height: 50px;
   justify-content: center;
   padding: 1px 0;
@@ -113,7 +112,7 @@ body.scrolled {
   list-style: none;
   display: flex;
   gap: 30px;
-  margin: 0;
+  margin: 0 auto; /* This centers the list between the logo and search bar */
   padding: 0;
   flex-wrap: wrap;
   justify-content: center;
@@ -320,4 +319,61 @@ li:hover .submenu-item {
   .navbar-expanded .logo-container1 img {
     width: 60px;
   }
+}
+
+/* CSS for Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: auto;
+    /* No margin-left: auto; anymore, `justify-content: space-between` handles spacing */
+}
+
+.search-icon {
+  font-size: 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #555;
+  padding: 0; /* ⬅️ Removed all padding */
+  margin-right: 30px;
+  border-radius: 50%;
+  /* background-color: #f0f0f0; ⬅️ Added a background color for visibility */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px; /* ⬅️ Keep width and height equal */
+}
+
+.search-icon:hover {
+    background-color: #eee;
+    transform: scale(1.1);
+}
+
+/* Search input now has an animation */
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+    width: 200px; /* Full width for the search bar */
+    font-size: 16px;
+    opacity: 1; /* Start visible */
+}
+
+/* Adjustments for the small navbar state */
+.navbar-small .search-input {
+    width: 150px;
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+/* 📱 Mobile Responsive (Optional) */
+@media (max-width: 768px) {
+    .search-input {
+        width: 100%;
+        max-width: 250px;
+    }
 }

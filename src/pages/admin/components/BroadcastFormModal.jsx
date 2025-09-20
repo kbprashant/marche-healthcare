@@ -19,11 +19,13 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
     kind: initial?.kind || initial?.category || "social",
     title: initial?.title || "",
     summary: initial?.summary || "",
-    body: initial?.body || "",
+    body: initial?.body ?? initial?.body_html ?? "",
     status: initial?.status || "draft",
-    publish_at: toLocalInputValue(initial?.publish_at),
+    publish_at: toLocalInputValue(initial?.publish_at ?? initial?.scheduled_at),
     social_source: initial?.social_source || "",
-    image_path: initial?.image_path || "",
+    // new: preserve existing link_url if present
+    link_url: initial?.link_url || "",
+    image_path: initial?.image_path || initial?.image_url || "",
   });
   const [imageFile, setImageFile] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -67,6 +69,9 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
       }
       if (form.kind === "social" && form.social_source) fd.append("social_source", form.social_source);
       if (imageFile) fd.append("image", imageFile);
+
+      // This is the missing line 🎯
+      if (form.link_url) fd.append("link_url", form.link_url); 
 
       if (form.id) {
         await authFetch(`${apiBase}/broadcasts/${form.id}`, { method: "PUT", body: fd });
@@ -114,6 +119,15 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
               </label>
             ) : <span />}
 
+            <label className="grid-span-2">Link URL
+              <input
+                name="link_url"
+                value={form.link_url}
+                onChange={onChange}
+                placeholder="https://www.linkedin.com/company/..."
+              />
+            </label>
+            
             <label className="grid-span-2">Title
               <input name="title" value={form.title} onChange={onChange} required />
             </label>
@@ -139,6 +153,8 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
             <label className="grid-span-2">Publish At (optional)
               <input type="datetime-local" name="publish_at" value={form.publish_at} onChange={onChange} />
             </label>
+
+            
 
             <div className="grid-span-2" style={{ display:"flex", justifyContent:"flex-end", gap:8 }}>
               <button type="button" className="btn ghost" onClick={onClose}>Cancel</button>

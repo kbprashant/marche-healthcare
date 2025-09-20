@@ -29,6 +29,16 @@ const youtubeSvg = (
   <path d="M19.6 3.2c-.8-.3-2.8-.3-5.6-.3s-4.8 0-5.6.3c-.8.3-1.4.7-2 1.3-.5.5-1 1.2-1.3 2-.3.8-.3 2.8-.3 5.6s0 4.8.3 5.6c.3.8.7 1.4 1.3 2 .5.5 1.2 1 2 1.3.8.3 2.8.3 5.6.3s4.8 0 5.6-.3c.8-.3 1.4-.7 2-1.3.5-.5 1-1.2 1.3-2 .3-.8.3-2.8.3-5.6s0-4.8-.3-5.6c-.3-.8-.7-1.4-1.3-2-.5-.5-1.2-1-2-1.3zm-7.6 9.9v-5.4l4.6 2.7-4.6 2.7z" />
 );
 
+const getSocialIcon = (source) => {
+  switch (source) {
+    case "linkedin": return linkedInSvg;
+    case "twitter": return twitterSvg;
+    case "instagram": return instagramSvg;
+    case "youtube": return youtubeSvg;
+    default: return null;
+  }
+};
+
 // ------ tiny placeholders (only used if API fails or is empty) ------
 const blogCardDetails = [
   {
@@ -283,9 +293,10 @@ const NewsPage = () => {
                   const item = dbNewsPosts.length
                     ? {
                         id: p.id ?? idx,
-                        img: abs(p.image_url || ""),   // ✅ absolute URL
+                        img: abs(p.image_url || ""),
                         title: p.title || "",
                         content: p.summary || "",
+                        body_html: p.body_html || "",
                         profile: "./companyLogo.png",
                         names: "Marche Healthcare",
                         date: (p.scheduled_at || p.created_at || "").slice(0,10),
