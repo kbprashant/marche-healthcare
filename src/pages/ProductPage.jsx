@@ -13,13 +13,18 @@ import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import d8Video from "../assets/products/d8.mp4";
+import ergonomicVideo from "../assets/products/ergonomic.mp4";
+import CompatabilityVideo from "../assets/products/Compatability.mp4";
+import Lengthofshaft from "../assets/products/Lengthofshaft.mp4";
+
+
 
 
 const faqs = [
   {
     id: 1,
-    header: "What is Lorem Ipsum?",
-    text: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+    header: "How is NovaLap 360 D8 sterilized?",
+    text: `NovaLap 360 D8 is a reusable instrument. After each procedure, it should be cleaned, vetted, and sterilized by the hospital’s sterile processing team using either autoclave or ETO methods, in accordance with standard sterilization protocols.`,
   },
   {
     id: 2,
@@ -41,9 +46,9 @@ const faqs = [
 const faqProducts = [
   {
     id: 1,
-    title: "Product Name A",
+    title: "Fenestrated Forceps / Bipolar Fenestrated Forceps",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    // description: "Short description for Product A. Replace with real copy.",
     specs: [
       {
         itemCode: "AUF01-F",
@@ -82,9 +87,9 @@ const faqProducts = [
   },
   {
     id: 2,
-    title: "Product Name B",
+    title: "Maryland Dissector / Bipolar Maryland Dissector",
     img: "/products/faqimg.png",
-    description: "Short description for Product B. Replace with real copy.",
+    // description: "Short description for Product B. Replace with real copy.",
     specs: [
       {
         itemCode: "BTF01-F",
@@ -101,19 +106,483 @@ const faqProducts = [
   },
   {
     id: 3,
-    title: "Product Name C",
+    title: "Precise Dissector (Monopolar / Bipolar)",
     img: "/products/faqimg.png",
     description: "Short description for Product C. Replace with real copy.",
     specs: [],
   },
   {
     id: 4,
-    title: "Product Name D",
+    title: "Bipolar Blunt Tip Dissector",
     img: "/products/faqimg.png",
     description: "Short description for Product D. Replace with real copy.",
     specs: [],
   },
+{
+id: 5,
+    title: "Cobra Grasper",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 6,
+    title: "Tenaculum Forceps",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 7,
+    title: "Needle Holder / Precise Needle Holder with Suture Cut",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id:8,
+    title: "Clip Applier",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 9,
+    title: "Potts Scissors",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 10,
+    title: "Round Tip Scissors",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 11,
+    title: "Monopolar Scissors",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 12,
+    title: "Monopolar Spatula",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 13,
+    title: "Monopolar Hook",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 14,
+    title: "Vessel Sealer Extend",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
+  {
+id: 15,
+    title: "Clinch Forceps",
+    img: "/products/faqimg.png",
+    description: "Short description for Product A. Replace with real copy.",
+    specs: [
+      {
+        itemCode: "AUF01-F",
+        productDescription: "Fenestrated Forceps-38cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "38cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01-L",
+        productDescription: "Fenestrated Forceps-38cm-Lock",
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "38cm",
+        lock: "O",
+        electrode: "N/A",
+        unitsBox: "1EA/BOX",
+        uses: "Single Use",
+      },
+      {
+        itemCode: "AUF01S-F",
+        productDescription: "Fenestrated Forceps-25cm",
+        jawLength: "",
+        shaftDiameter: "",
+        shaftLength: "25cm",
+        lock: "N/A",
+        electrode: "N/A",
+        unitsBox: "",
+        uses: "Single Use",
+      },
+    ],
+  },
+
 ];
+
+
 
 const ProductPage = () => {
   const [activeProducts, setActiveProducts] = useState(null);
@@ -267,39 +736,38 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
+<motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ delay: 0.2, duration: 0.7 }}
+  className="functional-desc"
+>
+  <video
+    className="functional-video"
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="auto"
+  >
+    <source src={rangeVideo} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-        <motion.div
-          initial={{ opacity: 0, x: -100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-          className="functional-desc"
-        >
-          <section className="product-range-action">
-            <video
-              className="product-range-video"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-            >
-              <source src={rangeVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </section>
-          <div className="content">
-            <h2>360° End-Effector Rotation</h2>
-            <p>
-              The NovaLap 360 D8 is designed to move beyond the natural limitations of the human hand. 
-              Its unique 360° end-effector rotation provides surgeons with full circular motion inside the body, 
-              enabling greater precision and access to challenging angles. 
-              This innovation delivers a natural “feel like hands” experience, 
-              enhancing control during delicate procedures. 
-              As a result, surgeons can perform seamless suturing, 
-              dissection, and knot tying—even in the tightest anatomical spaces.
-            </p>
-          </div>
-        </motion.div>
+  <div className="content">
+    <h2>360° End-Effector Rotation</h2>
+    <p>
+      The NovaLap 360 D8 is designed to move beyond the natural limitations of the human hand. 
+      Its unique 360° end-effector rotation provides surgeons with full circular motion inside the body, 
+      enabling greater precision and access to challenging angles. 
+      This innovation delivers a natural “feel like hands” experience, 
+      enhancing control during delicate procedures. 
+      As a result, surgeons can perform seamless suturing, 
+      dissection, and knot tying—even in the tightest anatomical spaces.
+    </p>
+  </div>
+</motion.div>
+
 
         <motion.div
           initial={{ opacity: 0, x: 100 }}
@@ -326,7 +794,7 @@ const ProductPage = () => {
             playsInline
             preload="auto"
           >
-            <source src={d8Video} type="video/mp4" />
+            <source src={ergonomicVideo} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </motion.div>
@@ -341,41 +809,144 @@ const ProductPage = () => {
             <img src={functionl2Img} alt="functional-2" />
           </div>
           <div className="content">
-            <h2>Ergonomic Handle with Finger Support</h2>
+            <h2>Tactile Feedback</h2>
             <p>
-              The handle of NovaLap 360 D8 is designed to enhance comfort and reduce fatigue during prolonged surgeries. 
-              It features finger rests for steady handling and customizable silicone sleeves in varied sizes, 
-              allowing surgeons to choose the best fit for their hand. 
-              This adaptability ensures both stability and confidence while maintaining a lightweight, 
-              ergonomic design.
+              One of the defining features of NovaLap 360 D8 is its ability to provide direct tactile sensation during surgery.
+               By allowing surgeons to feel tissue resistance in real time, it enhances precision and safety, 
+               particularly in delicate dissections.
+                This natural feedback helps improve accuracy while preserving the surgeon’s sense of touch.
 
-            </p>
+              </p>
+              
           </div>
+
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
           className="functional-desc"
         >
           <div className="content">
-            <h2>Optimal Instrument Lengths</h2>
+            <h2>Ergonomic Handle with Finger Support</h2>
             <p>
-              To accommodate diverse surgical needs, 
-              NovaLap 360 D8 is available in multiple instrument lengths (25 cm, 38 cm, and 48 cm). 
-              Each length is engineered for compatibility with standard laparoscopic ports, 
-              providing surgeons with the ideal reach and accessibility for different procedures.
-               This flexibility supports both comfort in handling and seamless integration into existing workflows.
-
+              The handle of NovaLap 360 D8 is designed to enhance comfort and reduce fatigue during prolonged surgeries.
+              It features finger rests for steady handling and customizable silicone sleeves in varied sizes, 
+              allowing surgeons to choose the best fit for their hand. 
+              This adaptability ensures both stability and confidence while maintaining a lightweight, ergonomic design.
             </p>
           </div>
-          <div className="content-img">
-            <img src={functionl3Img} alt="functional-3" />
-          </div>
+          <video
+            className="functional-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          >
+            <source src={ergonomicVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </motion.div>
 
+       <motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ delay: 0.2, duration: 0.7 }}
+  className="functional-desc"
+>
+  <video
+    className="functional-video"
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="auto"
+    controls
+  >
+    <source src={CompatabilityVideo} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
+  <div className="content">
+    <h2>Compatibility</h2>
+    <p>
+      NovaLap 360 D8 is designed for seamless compatibility with equipment already available in the operating
+      room, including existing laparoscopic systems. 
+      Its plug-and-play design ensures smooth adoption without requiring additional specialized instruments, 
+      modifications, or workflow changes.
+    </p>
+  </div>
+</motion.div>
+
+
+      <motion.div
+  initial={{ opacity: 0, x: 100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ delay: 0.2, duration: 0.7 }}
+  className="functional-desc"
+>
+  <div className="content">
+    <h2>Optimal Instrument Lengths</h2>
+    <p>
+      To accommodate diverse surgical needs, NovaLap 360 D8 is available in multiple instrument 
+      lengths (25 cm, 38 cm, and 48 cm). Each length is engineered for compatibility with standard 
+      laparoscopic ports, providing surgeons with the ideal reach and accessibility for different procedures.
+      This flexibility supports both comfort in handling and seamless integration into existing 
+      workflows.
+    </p>
+  </div>
+
+  <video
+    className="functional-video"
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="auto"
+    controls
+  >
+    <source src={Lengthofshaft} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</motion.div>
+
+        <motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ delay: 0.2, duration: 0.7 }}
+  className="functional-desc"
+>
+  <video
+    className="functional-video"
+    autoPlay
+    muted
+    loop
+    playsInline
+    preload="auto"
+  >
+    <source src={rangeVideo} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div className="content">
+    <h2>Versatile</h2>
+    <p>
+      NovaLap 360 D8 is built with a range of specialized end-effector instruments, 
+      each designed for a specific function such as grasping, cutting, dissecting, 
+      or suturing. Surgeons can select the optimal instrument for each task while benefiting 
+      from the same ergonomic handle and interface across all instruments, ensuring comfort, 
+      precision, and control throughout the procedure.
+    </p>
+  </div>
+</motion.div>
+
+
+
+
+
+{/* 
         <div className="functional functional-3">
           <div className="func-header">
             <h2>Product Name</h2>
@@ -390,12 +961,12 @@ const ProductPage = () => {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
           <img src="./products/specification.png" alt="specification" />
-        </div>
+        </div> */}
 
         <div className="functional fav-question complete-lineup">
           <div className="func-header">
             <h2>Complete lineup</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing et.</p>
           </div>
           <div className="content">
             {faqProducts.map((p) => (
@@ -422,28 +993,28 @@ const ProductPage = () => {
                             <table>
                               <thead>
                                 <tr>
-                                  <th>Item Code</th>
-                                  <th>Description</th>
+                                  {/* <th>Item Code</th> */}
+                                  {/* <th>Description</th> */}
                                   <th>Jaw Length</th>
                                   <th>Shaft Diameter</th>
                                   <th>Shaft Length</th>
-                                  <th>Lock</th>
-                                  <th>Electrode</th>
-                                  <th>Units/Box</th>
+                                  {/* <th>Lock</th> */}
+                                 {<th>Electrode</th> }
+                                  {/* <th>Units/Box</th> */}
                                   <th>Uses</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 {p.specs.map((spec, i) => (
                                   <tr key={i}>
-                                    <td>{spec.itemCode}</td>
-                                    <td>{spec.productDescription}</td>
+                                    {/* <td>{spec.itemCode}</td> */}
+                                    {/* <td>{spec.productDescription}</td> */}
                                     <td>{spec.jawLength || "-"}</td>
                                     <td>{spec.shaftDiameter || "-"}</td>
                                     <td>{spec.shaftLength || "-"}</td>
-                                    <td>{spec.lock}</td>
+                                    {/* <td>{spec.lock}</td> */}
                                     <td>{spec.electrode}</td>
-                                    <td>{spec.unitsBox || "-"}</td>
+                                    {/* <td>{spec.unitsBox || "-"}</td> */}
                                     <td>{spec.uses}</td>
                                   </tr>
                                 ))}

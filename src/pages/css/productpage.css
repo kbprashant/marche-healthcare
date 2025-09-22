@@ -384,6 +384,9 @@ html {
 
 /* Complete lineup accordion styles (updated) */
 .fav-question.complete-lineup .content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+  gap: 20px; /* space between accordions */
   width: 100%;
   margin: 0 auto;
   padding: 0 16px;
@@ -392,7 +395,7 @@ html {
 .fav-question.complete-lineup .rc-accordion-card {
   width: 100%;
   max-width: none;
-  margin: 1rem 0;
+  margin: 0; /* reset margin since grid handles spacing */
   border-bottom: 1px solid #e5e5e5;
   transition: background-color 300ms ease, border-color 300ms ease;
 }
@@ -403,10 +406,12 @@ html {
 
 .fav-question.complete-lineup .rc-accordion-header {
   display: flex;
-  justify-content: space-between; /* title left, icon right */
+  justify-content: center; /* centers title */
   align-items: center;
   cursor: pointer;
+  gap: 8px; /* space between title and icon */
 }
+
 
 .fav-question.complete-lineup .rc-accordion-header h5.rc-accordion-title {
   flex: 1;
@@ -418,8 +423,9 @@ html {
   font-size: 18px;
   font-weight: 600;
   color: #333;
-  transition: color 300ms ease;
+  text-align: center; /* centers text inside h3 */
 }
+
 
 .fav-question.complete-lineup .rc-accordion-icon {
   font-size: 24px;
@@ -832,7 +838,7 @@ html {
     margin-top: -50px;
   }
   .product-range-action {
-    height: 200px;
+    height: 100px;
   }
   .functional {
     padding: 1em 1em;
