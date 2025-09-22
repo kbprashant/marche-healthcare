@@ -8,7 +8,8 @@ const UserFullDetails = ({ footerCard, selectedCardState, setCardList }) => {
     <div id="user-full-detials">
       <div className="user-header">
         <div className="content">
-          <h2>{detials.name}</h2>
+          <h2>{detials.name}<p>{detials.position}</p></h2>
+          
           <div className="social">
             <div className="social-links">
               <a href={detials.instagram} target="_blank">
@@ -62,76 +63,49 @@ const UserFullDetails = ({ footerCard, selectedCardState, setCardList }) => {
                 </motion.svg>
               </a>
             </div>
+            <br />
+            <br />
+            <p className="callout-text">{detials.tagline}</p>
           </div>
         </div>
         <div className="user-full-image">
-          <img src="./about/userfull.png" alt="User Profile" />
+          <img src={detials.fullImg} alt="User Profile" />
         </div>
       </div>
       <div className="user-content">
-        <h2>Introduction</h2>
-        <p>
-          Mi tincidunt elit, id quisque ligula ac diam, amet. Vel etiam
-          suspendisse morbi eleifend faucibus eget vestibulum felis. Dictum quis
-          montes, sit sit. Tellus aliquam enim urna, etiam. Mauris posuere
-          vulputate arcu amet, vitae nisi, tellus tincidunt. At feugiat sapien
-          varius id.
-        </p>
-        <p>
-          Eget quis mi enim, leo lacinia pharetra, semper. Eget in volutpat
-          mollis at volutpat lectus velit, sed auctor. Porttitor fames arcu quis
-          fusce augue enim. Quis at habitant diam at. Suscipit tristique risus,
-          at donec. In turpis vel et quam imperdiet. Ipsum molestie aliquet
-          sodales id est ac volutpat.
+        {/* <h2>Introduction</h2> */}
+        {/* <p >
+          Dr. Mariraj Mariappan is a passionate surgeon, innovator, and entrepreneur dedicated to democratizing healthcare through cutting-edge medical technology. As the Founder and CEO of Marche Healthcare, he leads the development of groundbreaking biomedical instruments designed to make advanced surgical care accessible, affordable, and precise.
+<br />
+<br />
+          He earned his MBBS at Tirunelveli Government Medical College, pursued his MS in General Surgery at B.J. Medical College, Ahmedabad, and further honed his clinical expertise during his Senior Residency at JIPMER, Pondicherry. His medical background fuels his vision of translating unmet clinical challenges into innovative, practical solutions.
+
+<br />
+<br />
+          With extensive experience in general surgery and a commitment to solving real-world healthcare problems, Dr. Mariraj bridges the gap between clinical need and engineering innovation. Under his leadership, Marche Healthcare has pioneered next-generation laparoscopic instruments, reloadable tackers, AI-powered diagnostic platforms, and smart healthcare devices—solutions that empower both surgeons and patients.
+Beyond product innovation, Dr. Mariraj envisions a future where healthcare is equitable, technology-driven, and patient-centered. His mission is simple yet powerful: to create first-of-its-kind medical technologies that improve outcomes and transform lives.
+        </p> */}
+        <p>{detials.body1}
+          <br />
+          <br />
+          {detials.body2}
+          <br />
+          <br />
+          {detials.body3}
         </p>
         
-        <p className="bold-text">
+        {/* <p className="bold-text">
           Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum, nulla
           odio nisl vitae. In aliquet pellentesque aenean hac vestibulum turpis
           mi bibendum diam. Tempor integer aliquam in vitae malesuada fringilla.
-        </p>
-        <p>
-          Elit nisi in eleifend sed nisi. Pulvinar at orci, proin imperdiet
-          commodo consectetur convallis risus. Sed condimentum enim dignissim
-          adipiscing faucibus consequat, urna. Viverra purus et erat auctor
-          aliquam. Risus, volutpat vulputate posuere purus sit congue convallis
-          aliquet. Arcu id augue ut feugiat donec porttitor neque. Mauris, neque
-          ultricies eu vestibulum, bibendum quam lorem id. Dolor lacus, eget
-          nunc lectus in tellus, pharetra, porttitor.
-        </p>
-        <p className="callout-text">
+        </p> */}
+        
+        {/* <p className="callout-text">
           "Ipsum sit mattis nulla quam nulla. Gravida id gravida ac enim mauris
           id. Non pellentesque congue eget consectetur turpis. Sapien, dictum
           molestie sem tempor. Diam elit, orci, tincidunt aenean tempus."
-        </p>
-        <p>
-          Tristique odio senectus nam posuere ornare leo metus, ultricies.
-          Blandit duis ultricies vulputate morbi feugiat cras placerat elit.
-          Aliquam tellus lorem sed ac. Montes, sed mattis pellentesque suscipit
-          accumsan. Cursus viverra aenean magna risus elementum faucibus
-          molestie pellentesque. Arcu ultricies sed mauris vestibulum.
-        </p>
-        <h2>Conclusion</h2>
-        <p>
-          Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id
-          scelerisque est ultricies ultricies. Duis est sit sed leo nisl,
-          blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at
-          scelerisque amet nulla purus habitasse.
-        </p>
-        <p>
-          Nunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas
-          condimentum mi massa. In tincidunt pharetra consectetur sed duis
-          facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit
-          dictum eget nibh tortor commodo cursus.
-        </p>
-        <p>
-          Odio felis sagittis, morbi feugiat tortor vitae feugiat fusce aliquet.
-          Nam elementum urna nisi aliquet erat dolor enim. Ornare id morbi eget
-          ipsum. Aliquam senectus neque ut id eget consectetur dictum. Donec
-          posuere pharetra odio consequat scelerisque et, nunc tortor. Nulla
-          adipiscing erat a erat. Condimentum lorem posuere gravida enim posuere
-          cursus diam.
-        </p>
+        </p> */}
+        
       </div>
       <div className="team-footer">
         {footerCard.map((card, idx) => (

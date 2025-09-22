@@ -34,11 +34,24 @@
 
 #user-full-detials .user-header .content p {
   font-family: Roboto;
-  font-size: 18px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
   color: #000;
   text-align: left;
+}
+
+#user-full-detials .user-header .callout-text {
+padding-left:1em ;
+  border-left: 2px solid black;
+  font-family: Inter;
+  font-size: 30px !important;
+  font-style: italic !important;
+  font-weight: 1000 !important;
+}
+#user-full-detials .user-header .bold-text {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 #user-full-detials .social {
@@ -110,6 +123,7 @@
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
+  line-height: 2em;
 }
 
 #user-full-detials .user-content .bold-text {
@@ -125,6 +139,8 @@ padding-left:1em ;
   font-style: italic;
   font-weight: 400;
 }
+
+
 
 
 .userdetailslogos:hover{
