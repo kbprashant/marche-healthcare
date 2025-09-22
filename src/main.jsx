@@ -1,4 +1,3 @@
-
 // css
 
 
@@ -21,6 +20,7 @@ import RequireAuth from './auth/RequireAuth';
 import Careers from './pages/careers'
 import CareersApply from './pages/careersapply'
 import { AdminLayout, VideosAdmin, CareersAdmin, BroadcastsAdmin, TestimonialsAdmin } from './pages/admin';
+import SearchResults from './pages/SearchResults';
 
 
 const router = createBrowserRouter([
@@ -47,9 +47,10 @@ const router = createBrowserRouter([
   }, {
     path: '/contact',
     element: <ContactPage />
-  }
-  ,
-    {
+  }, {
+    path: '/search',
+    element: <SearchResults />
+  }, {
     path: '/careers',        // 👈 New route
     element: <Careers />,
   },

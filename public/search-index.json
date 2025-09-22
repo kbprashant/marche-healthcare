@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Home",
+    "path": "/",
+    "text": "Home page Marche Healthcare. Welcome to Marche. Our solutions and products for surgical robotics and healthcare. Explore products, videos, and news."
+  },
+  {
+    "title": "About — Story",
+    "path": "/about#ourstory",
+    "text": "About Marche. Our story section. We started with a vision to improve surgical outcomes, focusing on compassion, collaboration and innovation."
+  },
+  {
+    "title": "About — Purpose",
+    "path": "/about#ourpurpose",
+    "text": "Purpose section: We create medical robotics that expand surgical capabilities, reduce patient trauma and enable better care."
+  },
+  {
+    "title": "About — Mission",
+    "path": "/about#ourmission",
+    "text": "Mission: Deliver exceptional medical devices that empower clinicians and patients."
+  },
+  {
+    "title": "About — Vision",
+    "path": "/about#ourvision",
+    "text": "Vision: To be a global leader in surgical robotics and to democratize access to high-quality surgical care."
+  },
+  {
+    "title": "Products",
+    "path": "/products",
+    "text": "Products listing: NovaLap 360, compatibility details, features, specs, and product resources."
+  },
+  {
+    "title": "Videos",
+    "path": "/videos",
+    "text": "Video gallery: product videos, training, surgery recordings, and demo content."
+  },
+  {
+    "title": "Broadcast",
+    "path": "/news",
+    "text": "Broadcast page: News, events and social posts from Marche Healthcare."
+  },
+  {
+    "title": "Careers",
+    "path": "/careers",
+    "text": "Careers at Marche: open positions, culture, apply now and join the team."
+  },
+  {
+    "title": "Contact",
+    "path": "/contact",
+    "text": "Contact us: reach out for partnerships, sales inquiries and support."
+  }
+]

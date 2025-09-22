@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./css/header.css";
 import logo from "../assets/logo_icon.png";
+import { createPortal } from "react-dom";
 
 const Nav = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -10,7 +11,9 @@ const Nav = () => {
   const [isSmallWindow, setIsSmallWindow] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSearchVisible, setIsSearchVisible] = useState(false); 
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  const navigate = useNavigate();
+  const inputRef = useRef(null);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -75,6 +78,89 @@ const Nav = () => {
     { title: "Careers", path: "/careers", subItems: [] },
     { title: "Contact", path: "/contact", subItems: [] },
   ];
+
+  // small hand-made suggestions list (menu items + extras)
+  const extraSuggestions = [
+    { label: "Home", path: "/" },
+    { label: "About — Story", path: "/about#ourstory" },
+    { label: "About — Purpose", path: "/about#ourpurpose" },
+    { label: "About — Mission", path: "/about#ourmission" },
+    { label: "About — Vision", path: "/about#ourvision" },
+    { label: "Products", path: "/products" },
+    { label: "Videos", path: "/videos" },
+    { label: "Broadcast (Social)", path: "/news#socialmedia" },
+    { label: "Broadcast (News & Events)", path: "/news#newsandevents" },
+    { label: "Careers", path: "/careers" },
+    { label: "Contact", path: "/contact" },
+  ];
+
+  const suggestionsSource = [
+    ...menuItems.map((m) => ({ label: m.title, path: m.path })),
+    ...extraSuggestions,
+  ];
+
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+
+  // focus the input when overlay opens
+  useEffect(() => {
+    if (isSearchVisible && inputRef.current) {
+      setTimeout(() => inputRef.current.focus(), 10);
+    }
+  }, [isSearchVisible]);
+
+  // lock body when search is open and ensure body class for styling
+  useEffect(() => {
+    if (isSearchVisible) {
+      document.body.classList.add("search-open");
+    } else {
+      document.body.classList.remove("search-open");
+    }
+    return () => document.body.classList.remove("search-open");
+  }, [isSearchVisible]);
+
+  function closeSearch() {
+    setIsSearchVisible(false);
+    setSearchQuery("");
+    setFilteredSuggestions([]);
+  }
+
+  function goToResults(q) {
+    closeSearch();
+    navigate(`/search?q=${encodeURIComponent(q)}`);
+  }
+
+  // live-filter suggestions
+  function updateQuery(q) {
+    setSearchQuery(q);
+    const v = (q || "").trim().toLowerCase();
+    if (!v) {
+      setFilteredSuggestions([]);
+      return;
+    }
+    const matches = suggestionsSource
+      .filter((s) => s.label.toLowerCase().includes(v))
+      .slice(0, 8);
+    setFilteredSuggestions(matches);
+  }
+
+  // keyboard handling: Enter -> results, Escape -> close
+  function onKeyDown(e) {
+    if (e.key === "Enter") {
+      if (searchQuery.trim()) goToResults(searchQuery.trim());
+    } else if (e.key === "Escape") {
+      closeSearch();
+    }
+  }
+
+  function onSuggestionClick(s) {
+    if (s.path) {
+      closeSearch();
+      // navigate to path (if path includes hash, router handles it)
+      navigate(s.path);
+    } else {
+      goToResults(s.label);
+    }
+  }
 
   return (
     <div className="master-navbar">
@@ -144,22 +230,69 @@ const Nav = () => {
           </ul>
           <div className="search-container">
             {!isSearchVisible ? (
-              <span 
-                className="material-symbols-outlined search-icon" // ⬅️ NEW icon class
+              <span
+                className="material-symbols-outlined search-icon"
                 onClick={() => setIsSearchVisible(true)}
+                role="button"
+                aria-label="Open site search"
               >
                 search
               </span>
             ) : (
-              <input
-                type="text"
-                className="search-input"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onBlur={() => setIsSearchVisible(false)}
-                autoFocus
-              />
+              createPortal(
+                <>
+                  <div className="search-overlay" onClick={closeSearch} />
+                  <div className="search-panel" role="dialog" aria-modal="true">
+                    <div className="search-panel-header">
+                      <input
+                        ref={inputRef}
+                        className="search-input-modal"
+                        placeholder="Search the site…"
+                        value={searchQuery}
+                        onChange={(e) => updateQuery(e.target.value)}
+                        onKeyDown={onKeyDown}
+                        aria-label="Search"
+                      />
+                      <button
+                        className="search-panel-close"
+                        onClick={closeSearch}
+                        aria-label="Close search"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    <div className="search-suggestions">
+                      {filteredSuggestions.length === 0 && searchQuery.trim() ? (
+                        <div className="suggestion-empty">
+                          No quick matches. Press Enter to search.
+                        </div>
+                      ) : null}
+
+                      {filteredSuggestions.map((s, i) => (
+                        <div
+                          key={i}
+                          className="suggestion-item"
+                          onMouseDown={(ev) => {
+                            ev.preventDefault();
+                            onSuggestionClick(s);
+                          }}
+                          role="button"
+                        >
+                          <div className="suggestion-left">
+                            <span className="suggestion-icon">🔎</span>
+                          </div>
+                          <div className="suggestion-center">
+                            <div className="suggestion-label">{s.label}</div>
+                            <div className="suggestion-path">{s.path}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>,
+                document.body
+              )
             )}
           </div>
         </nav>

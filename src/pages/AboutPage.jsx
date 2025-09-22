@@ -55,9 +55,17 @@ const USERS = {
       id: 1,
       isActive: false,
       profileImg: "./profilePic.png",
-      name: "Dr. Mari Raj",
+      fullImg: `./about/userfull.png`,
+      name: "Dr. Mariraj",
       position: "Founder & CEO",
-      twitter: "https://x.com/dr_mariraj?t=VuX2qMmZH_aW1omgQP0UQQ&s=08",
+      tagline: "\"Redefining healthcare with every invention, making advanced medical technology accessible to all.\"",
+      body1:"Dr. Mariraj Mariappan is a passionate surgeon, innovator, and entrepreneur dedicated to democratizing healthcare through cutting-edge medical technology. As the Founder and CEO of Marche Healthcare, he leads the development of groundbreaking biomedical instruments designed to make advanced surgical care accessible, affordable, and precise.",
+body2:"He earned his MBBS at Tirunelveli Government Medical College, pursued his MS in General Surgery at B.J. Medical College, Ahmedabad, and further honed his clinical expertise during his Senior Residency at JIPMER, Pondicherry. His medical background fuels his vision of translating unmet clinical challenges into innovative, practical solutions."+
+
+"With extensive experience in general surgery and a commitment to solving real-world healthcare problems, Dr. Mariraj bridges the gap between clinical need and engineering innovation. Under his leadership, Marche Healthcare has pioneered next-generation laparoscopic instruments, reloadable tackers, AI-powered diagnostic platforms, and smart healthcare devices—solutions that empower both surgeons and patients. Beyond product innovation, Dr. Mariraj envisions a future where healthcare is equitable, technology-driven, and patient-centered. His mission is simple yet powerful: to create first-of-its-kind medical technologies that improve outcomes and transform lives.",
+body3:"With extensive experience in general surgery and a commitment to solving real-world healthcare problems, Dr. Mariraj bridges the gap between clinical need and engineering innovation. Under his leadership, Marche Healthcare has pioneered next-generation laparoscopic instruments, reloadable tackers, AI-powered diagnostic platforms, and smart healthcare devices—solutions that empower both surgeons and patients. Beyond product innovation, Dr. Mariraj envisions a future where healthcare is equitable, technology-driven, and patient-centered. His mission is simple yet powerful: to create first-of-its-kind medical technologies that improve outcomes and transform lives.",      
+
+twitter: "https://x.com/dr_mariraj?t=VuX2qMmZH_aW1omgQP0UQQ&s=08",
       linkedin:
         "https://www.linkedin.com/in/dr-mariraj?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       instagram:
@@ -68,8 +76,16 @@ const USERS = {
       isActive: false,
       // profileImg: `./about/Photo.png`,
       profileImg: `./about/Photo.png`,
+      fullImg: `./about/userfull3.png`,
       name: "Dr. Muthukumar",
-      position: "Founder & CEO",
+      position: "Co-founder & CTO",
+      tagline: "\"Engineering the future of healthcare through materials and precision.\"",
+      body1:"Dr. Muthukumar Mariappan Co-Founder & Chief Technology Officer (CTO), Marche Healthcare Pvt. Ltd. Dr. Muthukumar Mariappan is an accomplished engineer, researcher, and educator who brings a rare blend of technical depth and innovative vision to Marche Healthcare.",
+body2:"As Co-Founder and Chief Technology Officer (CTO), he leads the company’s technology strategy, product development, and scientific research, ensuring that every innovation is grounded in robust engineering and material science. He holds a Bachelor’s degree in Aerospace Engineering from Anna University, Chennai, a Master’s in Aerospace Structures from IIT Kanpur, and a PhD in Mechanical Engineering from the Indian Institute of Science (IISc) Bangalore."+
+
+"With extensive experience in general surgery and a commitment to solving real-world healthcare problems, Dr. Mariraj bridges the gap between clinical need and engineering innovation. Under his leadership, Marche Healthcare has pioneered next-generation laparoscopic instruments, reloadable tackers, AI-powered diagnostic platforms, and smart healthcare devices—solutions that empower both surgeons and patients. Beyond product innovation, Dr. Mariraj envisions a future where healthcare is equitable, technology-driven, and patient-centered. His mission is simple yet powerful: to create first-of-its-kind medical technologies that improve outcomes and transform lives.",
+body3:"His academic excellence and multidisciplinary expertise enable him to bridge the worlds of aerospace, advanced materials, and biomedical engineering. Currently serving as an Associate Professor in Aeronautical Engineering at Acharya Institute of Technology, Bangalore, Dr. Muthukumar has spearheaded pioneering research in hydrogels for biomedical applications, including drug delivery systems, tissue engineering, and minimally invasive implants. His work on the mechanics and fracture behavior of hydrogels under needle insertion has direct implications for the design of stents, catheters, and implantable devices. Recognized as a recipient of a prestigious SERB research grant, Dr. Muthukumar is advancing next-generation hydrogel-based flexible electronics and biomedical devices. At Marche Healthcare, he leverages this expertise to develop first-of-its-kind medical technologies that merge clinical insights with engineering innovation.",      
+
       twitter: "https://x.com/info_march49738",
       linkedin: "https://www.linkedin.com/company/marche-healthcare/",
       instagram:
@@ -92,7 +108,7 @@ const USERS = {
       id: 2,
       isActive: false,
       profileImg: "./profilePic.png",
-      name: "Dr. Mari Raj",
+      name: "Dr. Mariraj",
       position: "Founder & CEO",
       twitter: "https://x.com/dr_mariraj?t=VuX2qMmZH_aW1omgQP0UQQ&s=08",
       linkedin:
@@ -115,7 +131,7 @@ const USERS = {
       id: 4,
       isActive: false,
       profileImg: "./profilePic.png",
-      name: "Dr. Mari Raj",
+      name: "Dr. Mariraj",
       position: "Founder & CEO",
       twitter: "https://x.com/info_march49738",
       linkedin: "https://www.linkedin.com/company/marche-healthcare/",
@@ -375,7 +391,7 @@ export default function AboutPage() {
                   className="author-image"
                 />
                 <div className="author-details">
-                  <p className="author-name">Dr. Mari Raj</p>
+                  <p className="author-name">Dr. Mariraj</p>
                   <p className="author-position">Founder & CEO</p>
                 </div>
               </div>
@@ -429,7 +445,7 @@ export default function AboutPage() {
                   className="author-image"
                 />
                 <div className="author-details">
-                  <p className="author-name">Dr. Mari Raj</p>
+                  <p className="author-name">Dr. Mariraj</p>
                   <p className="author-position">Founder & CEO</p>
                 </div>
               </div>

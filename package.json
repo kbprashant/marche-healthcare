@@ -6,15 +6,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "build-search-index": "node ./scripts/build-search-index.js",
+    "build": "npm run build-search-index && vite build"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@plasmicapp/react-web": "^0.2.366",
+    "flexsearch": "^0.8.212",
     "framer-motion": "^11.3.4",
     "gh-pages": "^6.3.0",
     "react": "^18.2.0",
