@@ -688,28 +688,27 @@ return (
     </main>
 
     <span id="marcherobo"></span>
-
-    {/* Product Action */}
-    <section className="product-action" ref={productActionRef}>
-      <div className="short-about">
-        <div>
-          <h2>NovaLap 360 D8</h2>
-          <p>
-            NovaLap 360D8 is a multi-DoF articulating laparoscopic system that
-            delivers robotic-like dexterity without robotic infrastructure.
-          </p>
-          <br />
-          <a
-            href="#complete-lineup"   // ✅ points to lineup heading
-            className="btn-outline"
-            onMouseEnter={handleInvertOn}
-            onMouseLeave={handleInvertOff}
-          >
-            <strong>Complete lineup</strong>
-          </a>
-        </div>
-      </div>
-    </section>
+{/* Product Action */}
+<section className="product-action" ref={productActionRef}>
+  <div className="short-about">
+    <div>
+      <h2>NovaLap 360 D8</h2>
+      <p>
+        NovaLap 360D8 is a multi-DoF articulating laparoscopic system that
+        delivers robotic-like dexterity without robotic infrastructure.
+      </p>
+      <br />
+      <a
+        href="#complete-lineup"   // ✅ points to lineup heading
+        className="btn-outline"
+        onMouseEnter={handleInvertOn}
+        onMouseLeave={handleInvertOff}
+      >
+        <strong>Complete lineup</strong>
+      </a>
+    </div>
+  </div>
+</section>
       <section className="product-range-action">
         <video
           className="product-range-video"
@@ -842,7 +841,7 @@ return (
             playsInline
             preload="auto"
           >
-            <source src={ergonomicVideo} type="video/mp4" />
+            <source src={d8Video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </motion.div>
@@ -959,7 +958,7 @@ return (
   </video>
 </motion.div>
 
-        <motion.div
+        {/* <motion.div
   initial={{ opacity: 0, x: -100 }}
   whileInView={{ opacity: 1, x: 0 }}
   transition={{ delay: 0.2, duration: 0.7 }}
@@ -987,7 +986,7 @@ return (
       precision, and control throughout the procedure.
     </p>
   </div>
-</motion.div>
+</motion.div> */}
 
 
 

@@ -1,0 +1,74 @@
+.terms-banner {
+  background: url("/terms&condition/terms.jpeg") center center / cover;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 20px;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  p {
+    font-size: 1.2vw;
+
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+}
+.terms-banner h1 {
+  text-align: center;
+  font-size: var(--font-size-banner-primary);
+  color: var(--text-primary);
+  font-weight: 700;
+  animation: fadeoff 0.8s forwards;
+  opacity: 0;
+}
+@keyframes fadeoff {
+  to {
+    opacity: 1;
+  }
+}
+
+
+.terms-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  line-height: 1.6;
+  font-size: 16px;
+  color: black;
+}
+
+.terms-container h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #0d47a1; /* dark blue */
+  text-align: center;
+}
+
+
+
+.terms-container h2 {
+  font-size: 22px;
+  margin-top: 30px;
+  color: black; /* orange highlight */
+}
+
+.terms-container p,
+.terms-container ul {
+  margin-bottom: 15px;
+}
+
+.terms-container ul {
+  padding-left: 20px;
+}
+
+.terms-container strong {
+  color: #000;
+}
