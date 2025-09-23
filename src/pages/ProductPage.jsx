@@ -905,17 +905,17 @@ return (
   className="functional-desc"
 >
   <video
-    className="functional-video"
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="auto"
-    controls
-  >
-    <source src={CompatabilityVideo} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+  className="functional-video"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+>
+  <source src={CompatabilityVideo} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 
   <div className="content">
     <h2>Compatibility</h2>
@@ -945,7 +945,6 @@ return (
       workflows.
     </p>
   </div>
-
   <video
     className="functional-video"
     autoPlay
@@ -953,7 +952,7 @@ return (
     loop
     playsInline
     preload="auto"
-    controls
+    onContextMenu={(e) => e.preventDefault()}
   >
     <source src={Lengthofshaft} type="video/mp4" />
     Your browser does not support the video tag.
@@ -966,18 +965,18 @@ return (
   transition={{ delay: 0.2, duration: 0.7 }}
   className="functional-desc"
 >
-  <video
+    <video
     className="functional-video"
     autoPlay
     muted
     loop
     playsInline
     preload="auto"
+    onContextMenu={(e) => e.preventDefault()}
   >
     <source src={rangeVideo} type="video/mp4" />
     Your browser does not support the video tag.
   </video>
-
   <div className="content">
     <h2>Versatile</h2>
     <p>
