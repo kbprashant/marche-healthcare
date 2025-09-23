@@ -667,25 +667,21 @@ const ProductPage = () => {
     setActiveProducts(null);
   };
 
-
-  
-
-return (
-  <Layouts title={"Product-Page"}>
-    <main className="product-main">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-        className="content"
-      >
-        <h1>Describe what your company does in a few words</h1>
-        <p>
-          Describe exactly what the company does and what a customer can expect
-          when working with the company. Avoid using verbose words or phrases.
-        </p>
-      </motion.div>
-    </main>
+  return (
+    <Layouts title={"Product-Page"}>
+      <main className="product-main">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="content"
+        >
+          <h1>Healthcare Innovation, Made Simple</h1>
+          <p>
+            Designing smart, affordable, and accessible medical technologies for hospitals and clinics everywhere.
+          </p>
+        </motion.div>
+      </main>
 
     <span id="marcherobo"></span>
 {/* Product Action */}

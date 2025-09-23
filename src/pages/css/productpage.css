@@ -24,6 +24,8 @@ html {
 .product-main .content {
   display: inline-block;
   width: 50%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .product-main .content h1 {
@@ -37,12 +39,14 @@ html {
 
 .product-main .content p {
   width: 70%;
+  margin: 0 auto;
   color: var(--White, var(--Colors-Text-white, #fff));
   /* font-family: Roboto; */
   font-size: var(--font-size-paragraph-primary);
   font-style: normal;
   font-weight: 400;
   line-height: 150%;
+  text-align: center;
 }
 
 .product-action {
