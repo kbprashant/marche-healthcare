@@ -92,11 +92,11 @@ body.scrolled {
   left: 50%;
   top: 2%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
-  backdrop-filter: blur(35px); /* Glass effect blur */
-  -webkit-backdrop-filter: blur(35px); /* Safari support */
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(50px); /* Glass effect blur */
+  -webkit-backdrop-filter: blur(50px); /* Safari support */
   padding: 0 25px;
-  border: 1px solid rgba(232, 232, 232, 0.2); /* Subtle border */
+  border: 1px solid rgba(255, 255, 255, 1); /* Subtle border */
   box-shadow: 0px 75px 21px 0px rgba(0, 0, 0, 0),
     0px 48px 19px 0px rgba(0, 0, 0, 0.01), 
     0px 27px 16px 0px rgba(0, 0, 0, 0.05),
@@ -346,9 +346,15 @@ li:hover .submenu-item {
   width: 40px; /* ⬅️ Keep width and height equal */
 }
 
+/* White search icon when navbar is expanded */
+.navbar.navbar-expanded .search-icon {
+  color: #fff;
+}
+
 .search-icon:hover {
     background-color: #eee;
     transform: scale(1.1);
+    color: #555 !important;
 }
 
 /* Search input now has an animation */

@@ -162,10 +162,9 @@ const ProductPage = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="content"
         >
-          <h1>Describe what your company does in a few words</h1>
+          <h1>Healthcare Innovation, Made Simple</h1>
           <p>
-            Describe exactly what the company does and what a customer can expect
-            when working with the company. Avoid using verbose words or phrases.
+            Designing smart, affordable, and accessible medical technologies for hospitals and clinics everywhere.
           </p>
         </motion.div>
       </main>
