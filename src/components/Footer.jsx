@@ -93,14 +93,14 @@ const Footer = () => {
           <div className="child-2">
             <p className="footer-header">Information</p>
             <ul>
-              <li>
+              {/* <li>
                 <a href="#">FAQ</a>
-              </li>
+              </li> */}
               <li>
                 <a href="#">Incubation</a>
               </li>
               <li>
-                <a href="#">Funding</a>
+                <a href="#">Investor</a>
               </li>
               <li>
                 <a href="#">Patents & IP</a>
