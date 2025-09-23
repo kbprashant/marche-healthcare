@@ -20,26 +20,71 @@ import Lengthofshaft from "../assets/products/Lengthofshaft.mp4";
 
 
 
+
 const faqs = [
-  {
-    id: 1,
-    header: "How is NovaLap 360 D8 sterilized?",
-    text: `NovaLap 360 D8 is a reusable instrument. After each procedure, it should be cleaned, vetted, and sterilized by the hospital’s sterile processing team using either autoclave or ETO methods, in accordance with standard sterilization protocols.`,
-  },
+{
+  id: 1,
+  header: "Is NovaLap 360 D8 reusable?",
+  text: (
+    <>
+      <b>Yes</b>, NovaLap 360 D8 is a <b>reusable instrument</b>. After each procedure, it should be cleaned, vetted, and sterilized by the hospital’s sterile processing team using either <b>autoclave or ETO methods</b>, in accordance with standard sterilization protocols.
+    </>
+  )
+},
+
+
+ 
   {
     id: 2,
-    header: "Where does it come from?",
-    text: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.`,
-  },
-  {
+    header: "Is special training required to use NovaLap 360 D8?",
+    text: (
+      <><b>No</b> special training is required for surgeons already familiar with conventional or robotic laparoscopy. For new beginners, the instrument has a very <b>short learning curve</b>. Additionally, we provide <b>demo videos</b> on our website and offer <b>in-person demonstrations</b> for better familiarization.,</>
+      
+      
+    )
+    },
+
+ 
+   {
     id: 3,
-    header: "Why do we use it?",
-    text: `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature,`,
+    header: "Is NovaLap 360 D8 compatible with existing laparoscopic and electrosurgical systems?",
+    text: (
+  <>
+    <br />
+    <b>Yes</b>. NovaLap 360 D8 is designed for seamless integration with <b>standard laparoscopic and electrosurgical systems</b> already available in the operating room. It requires no additional specialized setup.
+  </>
+)
   },
+
   {
     id: 4,
-    header: "Where can I get some?",
-    text: `There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.`,
+    header: "What types of surgeries can NovaLap 360 D8 be used for?",
+    text: (
+      <>
+      NovaLap 360 D8 Family have <b>versatile instruments</b> and suitable for a wide range of minimally invasive procedures, including <b>general surgery, gynecology, urology, cardiothoracic surgery, and other advanced laparoscopic applications</b>.,
+      </>
+    )
+  },
+
+
+  {
+    id: 5,
+    header: "What does “D8” mean in NovaLap 360 D8?",
+    text: (
+      <>
+      “D8” stands for <b> 8 Degrees of Freedom, a world-first innovation in laparoscopic instrumentation</b>. Each end-effector can be moved individually and independently, giving surgeons unmatched precision and flexibility. This breakthrough offers articulation beyond conventional instruments and even surpasses current robotic systems,      
+      </>
+    )
+  },
+
+   {
+    id: 6,
+    header: "Does NovaLap 360 D8 reduce surgical time?",
+    text: (
+      <>
+        <b>Yes</b>. Unlike conventional laparoscopic instruments or robotic systems—which often require long setup times—NovaLap <b>360 D8 is ready to use with 360° end-effector rotation, 8 degrees of freedom, and tactile feedback</b>, enabling surgeons to operate more precisely with fewer adjustments. This efficiency can help shorten overall surgical time.    
+      </>
+    )
   },
 ];
 
@@ -638,29 +683,29 @@ const ProductPage = () => {
         </motion.div>
       </main>
 
-      <span id="marcherobo"></span>
+    <span id="marcherobo"></span>
 
-      <section className="product-action" ref={productActionRef}>
-        <div className="short-about">
-          <div>
-            <h2>NovaLap 360 D8</h2>
-            <p>
-              NovaLap 360D8 is a multi-DoF articulating laparoscopic system that
-              delivers robotic-like dexterity without robotic infrastructure.
-            </p>
-            <br />
-            <a
-              href="#complete-lineup"
-              className="btn-outline"
-              onMouseEnter={handleInvertOn}
-              onMouseLeave={handleInvertOff}
-            >
-              <strong>Complete lineup</strong>
-            </a>
-          </div>
+    {/* Product Action */}
+    <section className="product-action" ref={productActionRef}>
+      <div className="short-about">
+        <div>
+          <h2>NovaLap 360 D8</h2>
+          <p>
+            NovaLap 360D8 is a multi-DoF articulating laparoscopic system that
+            delivers robotic-like dexterity without robotic infrastructure.
+          </p>
+          <br />
+          <a
+            href="#complete-lineup"   // ✅ points to lineup heading
+            className="btn-outline"
+            onMouseEnter={handleInvertOn}
+            onMouseLeave={handleInvertOff}
+          >
+            <strong>Complete lineup</strong>
+          </a>
         </div>
-      </section>
-
+      </div>
+    </section>
       <section className="product-range-action">
         <video
           className="product-range-video"
@@ -677,7 +722,7 @@ const ProductPage = () => {
       </section>
 
       <section className="product-functions">
-        <div className="functional functional-1">
+        {/* <div className="functional functional-1">
           <div className="func-header">
             <h2>How functional</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -716,9 +761,9 @@ const ProductPage = () => {
               </div>
             </motion.div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="functional functional-2">
+        {/* <div className="functional functional-2">
           <div className="func-header">
             <h2>How functional</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -734,7 +779,7 @@ const ProductPage = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
 <motion.div
   initial={{ opacity: 0, x: -100 }}
   whileInView={{ opacity: 1, x: 0 }}
@@ -808,7 +853,7 @@ const ProductPage = () => {
             <img src={functionl2Img} alt="functional-2" />
           </div>
           <div className="content">
-            <h2>Tactile Feedback</h2>
+            <h2>Natural Haptic</h2>
             <p>
               One of the defining features of NovaLap 360 D8 is its ability to provide direct tactile sensation during surgery.
                By allowing surgeons to feel tissue resistance in real time, it enhances precision and safety, 
@@ -856,17 +901,17 @@ const ProductPage = () => {
   className="functional-desc"
 >
   <video
-    className="functional-video"
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="auto"
-    controls
-  >
-    <source src={CompatabilityVideo} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+  className="functional-video"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+>
+  <source src={CompatabilityVideo} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 
   <div className="content">
     <h2>Compatibility</h2>
@@ -896,7 +941,6 @@ const ProductPage = () => {
       workflows.
     </p>
   </div>
-
   <video
     className="functional-video"
     autoPlay
@@ -904,7 +948,7 @@ const ProductPage = () => {
     loop
     playsInline
     preload="auto"
-    controls
+    onContextMenu={(e) => e.preventDefault()}
   >
     <source src={Lengthofshaft} type="video/mp4" />
     Your browser does not support the video tag.
@@ -917,18 +961,18 @@ const ProductPage = () => {
   transition={{ delay: 0.2, duration: 0.7 }}
   className="functional-desc"
 >
-  <video
+    <video
     className="functional-video"
     autoPlay
     muted
     loop
     playsInline
     preload="auto"
+    onContextMenu={(e) => e.preventDefault()}
   >
     <source src={rangeVideo} type="video/mp4" />
     Your browser does not support the video tag.
   </video>
-
   <div className="content">
     <h2>Versatile</h2>
     <p>
@@ -962,11 +1006,11 @@ const ProductPage = () => {
           <img src="./products/specification.png" alt="specification" />
         </div> */}
 
-        <div className="functional fav-question complete-lineup">
-          <div className="func-header">
-            <h2>Complete lineup</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing et.</p>
-          </div>
+         <div className="functional fav-question complete-lineup">
+      <div className="func-header" id="complete-lineup">
+        <h2>NovaLap 360 D8 lineup</h2>
+        <p>Complete and Versatile Instruments for Every Surgical Need</p>
+      </div>
           <div className="content">
             {faqProducts.map((p) => (
               <div
@@ -1022,6 +1066,7 @@ const ProductPage = () => {
                           ) : (
                             <p>No specifications available.</p>
                           )}
+                          
                         </div>
                       </div>
                     ),
@@ -1036,8 +1081,7 @@ const ProductPage = () => {
           <div className="func-header">
             <h2>FAQs</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              varius enim in eros elementum tristique.
+              Everything You Need to Know About Our Next-Generation Laparoscopic Instrument.
             </p>
           </div>
           <div className="content">

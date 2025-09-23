@@ -5,6 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./css/searchresults.css";
 // use named Document export
 import { Document } from "flexsearch";
+import FlexSearch from "flexsearch";
+
 
 // === DB API (env driven) - match NewsPage style ===
 const API_BASE =
