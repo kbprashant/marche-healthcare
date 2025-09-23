@@ -83,7 +83,7 @@ export default function Careers() {
   return (
     <Layouts title="Careers - Marche Healthcare">
       {/* Banner */}
-      <div className="banner">
+      <div className="careers-banner">
         <div className="banner-text">
           <h3>Careers at Marche Healthcare</h3>
           <p>Join our mission and grow with us</p>

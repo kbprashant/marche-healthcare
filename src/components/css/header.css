@@ -84,9 +84,9 @@ body.scrolled {
 
 /* Navbar Shrinks on Scroll - Apply glass morphism only here */
 .navbar-small {
-  width: 70%; /* Reduced from 80% */
+  width: 70%;
   max-height: 50px;
-  justify-content: center;
+  justify-content: space-between; /* was: center */
   padding: 1px 0;
   border-radius: 30px;
   left: 50%;
@@ -104,17 +104,24 @@ body.scrolled {
     0px 3px 7px 0px rgba(0, 0, 0, 0.1);
 }
 
+/* Ensure the search goes to the far right in small state */
+.navbar-small .search-container {
+  margin-left: auto;
+}
+
 .navbar-small img{
   opacity: 0%;
 }
 
+/* Center the nav items perfectly in the bar */
 .nav-list {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;              /* remove auto-centering hack */
+  padding: 0;
   list-style: none;
   display: flex;
-  gap: 30px;
-  margin: 0 auto; /* This centers the list between the logo and search bar */
-  padding: 0;
-  flex-wrap: wrap;
   justify-content: center;
   gap: min(5vw, 20px);
 }
@@ -334,7 +341,7 @@ li:hover .submenu-item {
   font-size: 28px;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #555;
+  color: #ffffff;
   padding: 0; /* ⬅️ Removed all padding */
   margin-right: 30px;
   border-radius: 50%;
@@ -344,11 +351,14 @@ li:hover .submenu-item {
   justify-content: center;
   height: 40px;
   width: 40px; /* ⬅️ Keep width and height equal */
+  background-color: var(--primary);
+    transform: scale(1.1);
 }
 
 /* White search icon when navbar is expanded */
 .navbar.navbar-expanded .search-icon {
-  color: #fff;
+  color: var(--primary);
+  background-color: white;
 }
 
 .search-icon:hover {
@@ -374,6 +384,11 @@ li:hover .submenu-item {
     width: 150px;
     font-size: 12px;
     padding: 5px 10px;
+    
+}
+.navbar-small .search-container .search-icon{
+  background-color: rgba(255, 255, 255, 0);
+  color: #eee;
 }
 
 /* 📱 Mobile Responsive (Optional) */

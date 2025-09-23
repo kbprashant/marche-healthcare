@@ -25,7 +25,7 @@ const ContactPage = () => {
     // I've kept the fetch example as it's a common approach for backend APIs.
     // If you're using a service like EmailJS, you'd replace this block.
     try {
-      const res = await fetch("http://localhost:8080/api/contact", {
+      const res = await fetch("http://localhost:8080/api/admin/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, purpose, message }),
