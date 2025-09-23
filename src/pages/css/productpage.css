@@ -348,6 +348,7 @@ html {
   margin-right: auto;
 }
 
+
 .fav-footer {
   margin-top: 80px;
   display: flex;
@@ -357,13 +358,29 @@ html {
 }
 
 .fav-footer button {
-  padding: 12px 24px;
-  /* font-family: Roboto; */
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  border: 1px solid var(--Black, #000);
+ display: inline-block;
+ padding: 10px 20px;
+  border: 1px solid #5D5DFF;
+  color: white !important;
+  background: #5D5DFF;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  cursor: pointer;
+  text-align: center;
 }
+
+.fav-footer button:hover,
+.fav-footer button:focus,
+.fav-footer button:focus-visible {
+  background: white;
+  color: #5D5DFF;
+  border-color: #5D5DFF;
+  text-decoration: none;
+  border: 2px solid #5D5DFF;
+  text-align: center;
+}
+
 
 .product-action .short-about::before {
   content: "";
@@ -483,15 +500,21 @@ html {
 
 .product-row {
   display: flex;
-  gap: 30px;
-  margin-top: 20px;
-  align-items: flex-start;
+  flex-direction: column; /* stack vertically */
+  align-items: center;    /* center image and table */
+  gap: 20px;              /* space between image and table */
 }
 
 .product-image {
-  flex: 1;
-  max-width: 280px;
+  text-align: center;
+  margin-bottom: 10px;
 }
+
+.product-table {
+  width: 100%;
+  overflow-x: auto; /* keep scroll if table is wide */
+}
+
 
 .product-image img {
   width: 100%;
@@ -515,6 +538,7 @@ html {
 .product-table {
   flex: 2;
   overflow-x: auto;
+  padding: 20px;
 }
 
 .product-table table {
@@ -658,7 +682,7 @@ html {
 }
 
 .faq-accordion-header:focus {
-  outline: 2px dashed rgba(93, 93, 255, 0.4);
+  outline: 2px dashed rgba(8, 8, 212, 0.863);
   outline-offset: 4px;
 }
 

@@ -192,8 +192,8 @@ const ContactPage = () => {
 
   return (
     <Layouts title={"Contact-Page"}>
-      <section className="banner">
-        <div className="banner-text">
+      <section className="contact-banner">
+        <div className="contact-banner-text">
           <h3>Contact us</h3>
           <p>
             Kindly submit your details and share your message to us, thankyou
