@@ -165,12 +165,135 @@ const Nav = () => {
   return (
     <div className="master-navbar">
       {isSmallWindow ? (
-        <nav
-          className={`navbar ${isScrolled ? "navbar-small" : ""} ${
-            isMenuOpen ? "navbar-bg-primary" : ""
-          }`}
-        >
-          {/* ... (Mobile Nav) ... */}
+        <nav className="mobile-navbar">
+          {/* Hamburger (left) */}
+          <button
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            className={`hamburger ${isMenuOpen ? "is-active" : ""}`}
+            onClick={() => setIsMenuOpen((p) => !p)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
+          {/* Centered logo */}
+          <Link
+            to="/"
+            className="mobile-logo"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Home"
+          >
+            <img src={logo} alt="Logo" className="logo" />
+          </Link>
+
+          {/* Search (right) */}
+          <button
+            type="button"
+            className="mobile-search-btn"
+            aria-label="Open search"
+            onClick={() => setIsSearchVisible(true)}
+          >
+            <span className="material-symbols-outlined">search</span>
+          </button>
+
+          {/* Slide-down menu */}
+          {isMenuOpen && (
+            <div className="mobile-menu">
+              <ul className="mobile-menu-list">
+                {menuItems.map((item, i) => (
+                  <li key={i} className="mobile-menu-item">
+                    <NavLink
+                      to={item.path}
+                      onClick={() => {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      {item.title}
+                    </NavLink>
+                    {item.subItems.length > 0 && (
+                      <ul className="mobile-submenu">
+                        {item.subItems.map((sub, si) => (
+                          <li key={si}>
+                            <NavLink
+                              to={sub.path}
+                              onClick={() => {
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                                setIsMenuOpen(false);
+                              }}
+                            >
+                              {sub.name}
+                            </NavLink>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Search overlay (portal) */}
+          {isSearchVisible &&
+            createPortal(
+              <>
+                <div
+                  className="search-overlay"
+                  onClick={() => setIsSearchVisible(false)}
+                />
+                <div className="search-panel" role="dialog" aria-modal="true">
+                  <div className="search-panel-header">
+                    <input
+                      ref={inputRef}
+                      className="search-input-modal"
+                      placeholder="Search the site…"
+                      value={searchQuery}
+                      onChange={(e) => updateQuery(e.target.value)}
+                      onKeyDown={onKeyDown}
+                      aria-label="Search"
+                    />
+                    <button
+                      className="search-panel-close"
+                      onClick={() => setIsSearchVisible(false)}
+                      aria-label="Close search"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div className="search-suggestions">
+                    {filteredSuggestions.length === 0 && searchQuery.trim() ? (
+                      <div className="suggestion-empty">
+                        No quick matches. Press Enter to search.
+                      </div>
+                    ) : null}
+                    {filteredSuggestions.map((s, i) => (
+                      <div
+                        key={i}
+                        className="suggestion-item"
+                        onMouseDown={(ev) => {
+                          ev.preventDefault();
+                          onSuggestionClick(s);
+                        }}
+                        role="button"
+                      >
+                        <div className="suggestion-left">
+                          <span className="suggestion-icon">🔎</span>
+                        </div>
+                        <div className="suggestion-center">
+                          <div className="suggestion-label">{s.label}</div>
+                          <div className="suggestion-path">{s.path}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>,
+              document.body
+            )}
         </nav>
       ) : (
         <nav
@@ -229,7 +352,7 @@ const Nav = () => {
             ))}
           </ul>
           <div className="search-container">
-            {!isSearchVisible ? (
+            {!isSearchVisible && (
               <span
                 className="material-symbols-outlined search-icon"
                 onClick={() => setIsSearchVisible(true)}
@@ -238,7 +361,8 @@ const Nav = () => {
               >
                 search
               </span>
-            ) : (
+            )}
+            {isSearchVisible &&
               createPortal(
                 <>
                   <div className="search-overlay" onClick={closeSearch} />
@@ -261,14 +385,12 @@ const Nav = () => {
                         ✕
                       </button>
                     </div>
-
                     <div className="search-suggestions">
                       {filteredSuggestions.length === 0 && searchQuery.trim() ? (
                         <div className="suggestion-empty">
                           No quick matches. Press Enter to search.
                         </div>
                       ) : null}
-
                       {filteredSuggestions.map((s, i) => (
                         <div
                           key={i}
@@ -292,8 +414,7 @@ const Nav = () => {
                   </div>
                 </>,
                 document.body
-              )
-            )}
+              )}
           </div>
         </nav>
       )}

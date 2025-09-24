@@ -119,7 +119,7 @@
 
 /* UPDATED TESTIMONIAL CARD STYLES FOR VERTICAL CENTER ALIGNMENT */
 .testmonial-card {
-  background: url("/testimonialbg.png") center center / cover;
+  background: url("/testimonialbg2.png") center center / cover;
   width: 100%;
   display: flex;
   padding: 2em;
@@ -420,5 +420,90 @@
   }
   .testmonialslide {
     padding-bottom: 64px;
+  }
+}
+
+/* Mobile consolidation: remove big gap & fixed heights */
+@media (max-width: 770px) {
+  /* Kill huge vertical margin around the whole testimonial section */
+  .testimonial-home .testimonoial-home-container {
+    margin: 1.25rem 0 0;   /* was 5em 0; */
+    padding-top: 0;
+  }
+
+  /* Let the slide auto-size instead of forcing a tall empty box */
+  .testimonial-home .swiper,
+  .swiper-container {
+    height: auto !important;
+    min-height: 0;
+  }
+
+  .testmonial-card {
+    /* Remove conflicting earlier min/max heights */
+    min-height: auto;
+    max-height: none;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;      /* keep normal order: image first (if you move img above content in JSX) */
+    padding: 1rem 1rem 1.25rem;
+    border-radius: 32px;
+    gap: 0.9rem;
+    background: #5d5dff;         /* keep or adjust */
+  }
+
+  /* If you want image on top without changing JSX, force order */
+  .testmonial-card img {
+    order: 0;
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin: 0;                   /* remove extra gap above */
+  }
+
+  .testmonial-card .content {
+    order: 1;
+    width: 100%;
+    padding: 0;
+    gap: 0.6rem;
+  }
+
+  .testmonial-card .review {
+    font-size: 0.95rem;
+    line-height: 1.35rem;
+    -webkit-line-clamp: 6;
+    max-height: none;
+    width: 100%;
+    margin: 0;
+    padding: 0 2px;
+  }
+
+  .testmonial-card .details {
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0;
+    gap: 0.75rem;
+  }
+
+  /* Tighter pagination spacing if needed */
+  .testmonialslide .swiper-pagination {
+    bottom: 12px !important;
+  }
+
+  /* Optional: hide nav arrows on small screens */
+  .testmonialslide .swiper-button-prev,
+  .testmonialslide .swiper-button-next {
+    display: none !important;
+  }
+}
+
+/* Ultra-small fine-tune (optional) */
+@media (max-width: 420px) {
+  .testmonial-card img {
+    height: 180px;
+  }
+  .testmonial-card .review {
+    -webkit-line-clamp: 7;
   }
 }
