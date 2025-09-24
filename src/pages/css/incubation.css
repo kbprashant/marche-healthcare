@@ -1,9 +1,9 @@
 /* Full width banner */
 .incubation-banner {
-  position: relative;
-  width: 100%;
-  margin-bottom: 50px;
+  background: none; /* Remove any background color */
+  padding: 0;       /* Remove extra spacing if needed */
 }
+
 
 .incubation-banner .banner-img {
   width: 100%;
@@ -13,21 +13,17 @@
 }
 
 .incubation-banner .banner-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 20px 30px;
-  border-radius: 10px;
+  background: none; /* Remove box background */
+  padding: 0;       /* Optional: remove padding inside box */
 }
 
 .incubation-banner .banner-content h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
+  color: #fff; /* Make text visible over banner */
 }
+
+
 
 .incubation-banner .banner-content p {
   font-size: 1.2rem;

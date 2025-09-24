@@ -9,8 +9,8 @@ const Incubation = () => {
       <section className="incubation-banner">
         <img src="/Incubation/3.jpg" alt="Incubation Banner" className="banner-img" />
         <div className="banner-content">
-          <h1>Marche Healthcare Incubation</h1>
-          <p>From Idea to Impact in Healthcare Innovation</p>
+          <h1>Incubation</h1>
+          {/* <p>From Idea to Impact in Healthcare Innovation</p> */}
         </div>
       </section>
 

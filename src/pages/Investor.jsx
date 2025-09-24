@@ -2,97 +2,65 @@ import React from "react";
 import { Layouts } from "../Layouts/Layouts";
 import "./css/investor.css";
 
-const Investor = () => {
+const Incubation = () => {
   return (
-    <Layouts title="Investor">
+    <Layouts title="Investors">
       {/* Full Width Banner Image */}
-      <section className="investor-banner">
-        <img
-          src="/images/investor1.jpg"
-          alt="Investor Banner"
-          className="banner-img"
-        />
-        <div className="banner-content">
-          <h1>Investors</h1>
-          <p>Partner with Marche Healthcare & Shape the Future of Healthcare</p>
-        </div>
+     <section className="investor-banner">
+  <img
+  src="/Investor/investor1.jpg"
+  alt="Investor Banner"
+  className="banner-img"
+/>
       </section>
 
       {/* Content Section */}
       <div className="investor-container">
-        <h2>About Our Investor Network</h2>
+        <h2>About Our Investors</h2>
         <div className="content-row">
           <div className="text-column">
             <p>
-              The <strong>Marche Healthcare Investor Network</strong> provides
-              unique opportunities for investors to support groundbreaking
-              healthcare innovations while achieving impactful returns.
+              Marche Healthcare Pvt. Ltd. is proudly incubated at the{" "}
+              <strong>Atal Incubation Centre (AIC), Pondicherry</strong>.
             </p>
             <p>
-              Our network connects visionary investors with promising startups
-              that are transforming patient care and medical technologies.
+              Being part of AIC has given us the opportunity to connect with mentors,
+              access innovation-driven resources, and grow alongside a network of
+              startups dedicated to solving India’s most pressing healthcare challenges.
             </p>
           </div>
           <div className="image-column">
-            <img src="/images/investor-footer.png" alt="Investor Network" />
+            <img src="/Incubation/1.jpg" alt="Incubation 1" />
           </div>
         </div>
 
-        <h3>Why Invest with Us?</h3>
+        
+
+        <h3>Marche Healthcare’s Journey at AIC</h3>
         <div className="content-row">
           <div className="text-column">
-            <ul>
-              <li>
-                <strong>Curated Startups:</strong> Access to pre-vetted healthcare
-                startups with strong growth potential.
-              </li>
-              <li>
-                <strong>Diverse Portfolio:</strong> Opportunities across medical
-                devices, biotech, digital health, and AI-driven solutions.
-              </li>
-              <li>
-                <strong>Early-Stage Access:</strong> Be among the first to fund
-                disruptive healthcare innovations.
-              </li>
-              <li>
-                <strong>Global Reach:</strong> Partner with innovators and hospitals
-                worldwide.
-              </li>
-            </ul>
+            <p>
+              Our flagship innovation, <strong>NovaLap 360 D8</strong>, was conceptualized and refined during our incubation period.
+              With the support of AIC, we are building not just devices, but also a strong foundation of R&D, Quality Management,
+              and Global Compliance to bring world-class surgical innovations from India to the world.
+            </p>
+            <p>
+              Being incubated at Atal Incubation Centre, Pondicherry, reaffirms our mission
+              to combine clinical insight, engineering expertise, and entrepreneurial spirit to
+              shape the future of minimally invasive surgery.
+            </p>
+          </div>
+          <div className="image-column">
+            <img src="/Incubation/6.jpg" alt="Incubation 4" />
+            
           </div>
         </div>
+        
 
-        <h3>Sample Investors in Our Network</h3>
-        <ul>
-          <li>💼 MedTech Capital Partners</li>
-          <li>🌍 Global Health Ventures</li>
-          <li>🏥 LifeScience Angels</li>
-          <li>💡 Healthcare Innovation Fund</li>
-          <li>🚀 NextGen Biotech Investors</li>
-        </ul>
-
-        <h3>Benefits for Investors</h3>
-        <ul>
-          <li>Exclusive access to deal flow in the healthcare sector.</li>
-          <li>Participation in demo days and pitch sessions.</li>
-          <li>Regular updates on portfolio startup performance.</li>
-          <li>Opportunities to co-invest with global healthcare leaders.</li>
-        </ul>
-
-        <h3>How to Join</h3>
-        <p>
-          Interested investors can register through our official website.
-          Approved members will gain access to our curated list of healthcare
-          startups and upcoming investment opportunities.
-        </p>
-
-        <p className="highlight-text">
-          💡 Be a part of the <strong>Marche Healthcare Investor Network</strong>{" "}
-          and help accelerate innovations that make a global impact.
-        </p>
+        {/* <p className="highlight-text">— Team Marche Healthcare</p> */}
       </div>
     </Layouts>
   );
 };
 
-export default Investor;
+export default Incubation;

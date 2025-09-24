@@ -118,7 +118,7 @@ const Footer = () => {
                <Link to="/Journal">Journal</Link>
               </li>
                  <li>
-               <Link to="">News & Events</Link> 
+               <Link to="/news#newsandevents">News & Events</Link> 
               </li>
               
             </ul>
