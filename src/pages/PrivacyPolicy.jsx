@@ -124,9 +124,8 @@ const PrivacyPolicy = () => {
         </p>
         <p>
           <strong>Marche Healthcare</strong> <br />
-          Email: support@marchehealthcare.com <br />
-          Phone: +91-XXXXXXXXXX <br />
-          Address: [Insert Company Address Here]
+          Email: info@marchehealthcare.com <br />
+                    
         </p>
       </div>
     </Layouts>

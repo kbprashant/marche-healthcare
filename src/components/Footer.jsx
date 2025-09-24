@@ -107,8 +107,9 @@ const Footer = () => {
                 <a href="#">FAQ</a>
               </li> */}
               <li>
-                <a href="#">Incubation</a>
-              </li>
+                <Link to="/Incubation">Incubation</Link>           
+            
+               </li>
               <li>
                 <a href="#">Investor</a>
               </li>

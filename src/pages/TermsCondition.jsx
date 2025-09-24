@@ -103,8 +103,8 @@ const TermsCondition = () => {
         </p>
         <p>
           <strong>Mache Healthcare</strong> <br />
-          Email: support@machehealthcare.com <br />
-          Phone: +91-XXXXXXXXXX
+          Email: info@machehealthcare.com <br />
+          
         </p>
       </div>
     </Layouts>

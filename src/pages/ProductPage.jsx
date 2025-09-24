@@ -108,6 +108,7 @@ const faqProducts = [
     id: 2,
     title: "Maryland Dissector / Bipolar Maryland Dissector",
     img: "/products/faqimg.png",
+
     specs: [
        {
         jawLength: "18mm",
