@@ -1,6 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
-import "./journal.css";
+import "./css/journal.css";
 
 const Journal = () => {
   return (

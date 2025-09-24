@@ -1,6 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
-import "./policy.css";
+import "./css/policy.css";
 
 const PrivacyPolicy = () => {
   return (

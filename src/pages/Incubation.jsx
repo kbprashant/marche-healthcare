@@ -1,6 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
-import "./Incubation.css";
+import "./css/Incubation.css";
 
 const Incubation = () => {
   return (

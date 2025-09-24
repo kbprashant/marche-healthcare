@@ -1,6 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
-import "./NewsEvent.css";
+import "./css/NewsEvent.css";
 
 const NewsEvent = () => {
   return (

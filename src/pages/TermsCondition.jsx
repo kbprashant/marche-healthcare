@@ -1,6 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts"; // keep if you use a common layout
-import "./terms.css"; // your CSS file
+import "./css/terms.css"; // your CSS file
 
 const TermsCondition = () => {
   return (

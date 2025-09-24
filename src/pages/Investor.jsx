@@ -1,6 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
-import "./investor.css";
+import "./css/investor.css";
 
 const Investor = () => {
   return (
