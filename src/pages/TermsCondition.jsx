@@ -4,7 +4,7 @@ import "./css/terms.css"; // your CSS file
 
 const TermsCondition = () => {
   return (
-    <Layouts>
+    <Layouts title="Terms & Conditions"> 
       {/* Optional Banner Section */}
       <section className="terms-banner">
         <div>

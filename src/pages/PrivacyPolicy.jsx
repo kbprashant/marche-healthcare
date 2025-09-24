@@ -4,7 +4,7 @@ import "./css/policy.css";
 
 const PrivacyPolicy = () => {
   return (
-    <Layouts>
+    <Layouts title="Privacy Policy">
       <section className="privacy-banner">
         <div>
           <h1></h1>

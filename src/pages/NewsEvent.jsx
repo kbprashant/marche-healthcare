@@ -4,7 +4,7 @@ import "./css/newsevent.css";
 
 const NewsEvent = () => {
   return (
-    <Layouts>
+    <Layouts title="News & Events">
       {/* Banner Section */}
       <section className="news-banner">
         <div className="banner-content">
