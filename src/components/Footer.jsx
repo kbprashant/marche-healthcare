@@ -110,14 +110,15 @@ const Footer = () => {
                 <Link to="/Incubation">Incubation</Link>           
             
                </li>
+                 <li>
+                <Link to="/Investor">Investor</Link>           
+            
+               </li>
               <li>
-                <a href="#">Investor</a>
-              </li>
-              <li>
-                <a href="#">Journal</a>
+               <Link to="/Journal">Journal</Link>
               </li>
                  <li>
-                <a href="#">News & Events</a>
+               <Link to="/NewsEvent">News & Events</Link> 
               </li>
               
             </ul>

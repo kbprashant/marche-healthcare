@@ -24,6 +24,10 @@ import SearchResults from './pages/SearchResults';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsCondition from './pages/TermsCondition';
 import Incubation from './pages/Incubation';
+import Investor from './pages/Investor';
+import Journal from './pages/Journal';
+import NewsEvent from './pages/NewsEvent';
+
 
 
 const router = createBrowserRouter([
@@ -72,6 +76,22 @@ const router = createBrowserRouter([
   path: '/Incubation',   // 👈 Add this route
   element: <Incubation/>,
 },
+
+{
+  path: '/Investor',   // 👈 Add this route
+  element: <Investor/>,
+},
+
+{
+  path: '/Journal',   // 👈 Add this route
+  element: <Journal/>,
+},
+{
+  path: '/NewsEvent',   // 👈 Add this route
+  element: <NewsEvent/>,
+},
+
+
 
   {
   path: '/careersapply',   // 👈 Add this route
