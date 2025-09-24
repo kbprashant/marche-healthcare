@@ -1,20 +1,18 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
-import bannerImg from "../assets/Investor/investor1.jpg"; // ✅ import banner image
-import footerImg from "../assets/Investor/investor-footer.png"; // ✅ import footer image
 import "./css/investor.css";
 
 const Investor = () => {
   return (
-    <Layouts>
-      {/* Banner Section */}
-      <section
-        className="investor-banner"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bannerImg})`,
-        }}
-      >
-        <div>
+    <Layouts title="Investor">
+      {/* Full Width Banner Section */}
+      <section className="investor-banner">
+        <img
+          src="/images/investor1.jpg"
+          alt="Investor Banner"
+          className="banner-img"
+        />
+        <div className="banner-content">
           <h1>Investors</h1>
           <h1>Partner with Marche Healthcare</h1>
           <h1>Shape the Future of Healthcare</h1>
@@ -83,7 +81,11 @@ const Investor = () => {
 
       {/* Footer Image */}
       <div className="investor-footer">
-        <img src={footerImg} alt="Investor Footer" className="footer-img" />
+        <img
+          src="/images/investor-footer.png"
+          alt="Investor Footer"
+          className="footer-img"
+        />
       </div>
     </Layouts>
   );
