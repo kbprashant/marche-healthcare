@@ -424,13 +424,12 @@ html {
   width: 100%;
   max-width: none;
   margin: 0; /* reset margin since grid handles spacing */
-  border-bottom: 1px solid #e5e5e5;
   transition: background-color 300ms ease, border-color 300ms ease;
 }
 
-.fav-question.complete-lineup .rc-accordion-card:hover {
+/* .fav-question.complete-lineup .rc-accordion-card:hover {
   background-color: rgba(93, 93, 255, 0.03);
-}
+} */
 
 
 
@@ -760,6 +759,52 @@ html {
 
 .fav-question .rc-accordion-body {
   padding: 16px;
+}
+
+/* Independent two-column layout for lineup */
+.lineup-columns {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.lineup-column {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lineup-column .rc-accordion-card {
+  margin: 0 0 28px;
+}
+
+.lineup-column .rc-accordion-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Remove old wrapping effect if still applied somewhere */
+.fav-question.complete-lineup .content {
+  display: block !important;
+  padding: 0;
+}
+
+/* Slow, unified transition override (in case older rule exists) */
+.fav-question.complete-lineup .rc-collapse {
+  transition: height 0.85s cubic-bezier(.6,.04,.2,1) !important;
+  will-change: height;
+}
+
+/* Mobile: stack */
+@media (max-width: 900px) {
+  .lineup-columns {
+    flex-direction: column;
+  }
+  .lineup-column .rc-accordion-card {
+    margin: 0 0 24px;
+  }
 }
 
 @media (max-width: 1100px) {

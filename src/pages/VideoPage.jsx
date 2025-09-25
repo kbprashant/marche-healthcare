@@ -47,6 +47,16 @@ export default function VideoPage() {
     }
   }, [location, subcatId]);
 
+  // NEW: sync topCat with hash (when arriving via /videos#surgery, etc.)
+  useEffect(() => {
+    if (!location.hash) return;
+    const h = location.hash.replace("#", "").toLowerCase();
+    // keys defined in TOPS
+    if (TOPS.some(t => t.key === h) && h !== topCat) {
+      setTopCat(h);
+    }
+  }, [location.hash, topCat]);
+
   // responsive helper (unchanged)
   useEffect(() => {
     const onResize = () => setMobileView(window.innerWidth <= 768);
@@ -133,7 +143,8 @@ export default function VideoPage() {
   return (
     <Layouts title={"Video-Page"}>
       <section className="vid-banner">
-        <video src="./videos/bulb-vedio .mp4" autoPlay muted loop></video>
+        <video src="./videos/bulb-vedio.mp4" autoPlay muted loop></video> 
+        {/* (optional) removed stray space before .mp4 if that was accidental */}
         <div className="banner-text">
           <h3>Videos</h3>
           <p>Browse {topLabel} videos by sub-category.</p>
@@ -141,9 +152,14 @@ export default function VideoPage() {
       </section>
 
       <section className="video-gallery">
+        {/* Invisible anchors so #product / #surgery / #training scroll targets exist */}
+        <span id="product" className="hash-anchor" />
+        <span id="surgery" className="hash-anchor" />
+        <span id="training" className="hash-anchor" />
+
         {/* Top categories */}
         <div className="category">
-          <div id="productvideo" className="category-container">
+          <div className="category-container">
             {mobileView ? (
               <select
                 className="btn-outline-rounded"
@@ -158,7 +174,11 @@ export default function VideoPage() {
               TOPS.map((c) => (
                 <button
                   key={c.key}
-                  className={topCat === c.key ? "btn-outline-rounded dark" : "btn-outline-rounded"}
+                  className={
+                    topCat === c.key
+                      ? "btn-outline-rounded dark"
+                      : "btn-outline-rounded"
+                  }
                   onClick={() => setTopCat(c.key)}
                 >
                   {c.label}

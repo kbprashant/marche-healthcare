@@ -343,8 +343,8 @@ const ProductPage = () => {
   const [activeProducts, setActiveProducts] = useState(null);
   const [activeFaq, setActiveFaq] = useState(null);
   const productActionRef = useRef(null);
-
   const location = useLocation();
+  const hoverCloseTimeout = useRef(null);
 
   useEffect(() => {
     if (location.hash) {
@@ -355,12 +355,40 @@ const ProductPage = () => {
     }
   }, [location]);
 
+  // Hover capability detection
+  const isHoverMode = useRef(
+    window.matchMedia('(hover: hover)').matches &&
+    window.matchMedia('(pointer: fine)').matches
+  );
+
+  // Product toggle (used for touch/mobile)
   const handleToggleProducts = (id) => {
-    setActiveProducts(activeProducts === id ? null : id);
+    setActiveProducts(prev => (prev === id ? null : id));
   };
 
+  // FAQ toggle
   const handleToggleFaq = (id) => {
-    setActiveFaq(activeFaq === id ? null : id);
+    setActiveFaq(prev => (prev === id ? null : id));
+  };
+
+  // Desktop hover open
+  const handleHoverOpenProducts = (id) => {
+    if (!isHoverMode.current) return;
+    if (hoverCloseTimeout.current) {
+      clearTimeout(hoverCloseTimeout.current);
+      hoverCloseTimeout.current = null;
+    }
+    setActiveProducts(id);
+  };
+
+  // Gentle delayed close so it doesn’t snap shut instantly
+  const handleHoverCloseProducts = () => {
+    if (!isHoverMode.current) return;
+    if (hoverCloseTimeout.current) clearTimeout(hoverCloseTimeout.current);
+    hoverCloseTimeout.current = setTimeout(() => {
+      setActiveProducts(null);
+      hoverCloseTimeout.current = null;
+    }, 140); // tweak delay if desired (120–180ms works well)
   };
 
   const handleInvertOn = () => {
@@ -370,15 +398,11 @@ const ProductPage = () => {
     productActionRef.current?.classList.remove("invert-bg");
   };
 
-  const handleHoverOpenProducts = (id) => {
-    setActiveProducts(id);
-  };
-  const handleHoverCloseProducts = () => {
-    setActiveProducts(null);
-  };
+  const leftColumnProducts  = faqProducts.filter((_, i) => i % 2 === 0);
+  const rightColumnProducts = faqProducts.filter((_, i) => i % 2 === 1);
 
   return (
-    <Layouts title={"Product-Page"}>
+    <Layouts title="Product-Page">
       <main className="product-main">
         <motion.div
           initial={{ opacity: 0 }}
@@ -608,14 +632,15 @@ const ProductPage = () => {
 </motion.div>
 
       
-         <div className="functional fav-question complete-lineup">
-      <div className="func-header" id="complete-lineup">
+         <div className="functional fav-question complete-lineup" id="complete-lineup">
+      <div className="func-header">
         <h2>NovaLap 360 D8 lineup</h2>
         <p>Complete and Versatile Instruments for Every Surgical Need</p>
       </div>
-          <div className="content">
-            {faqProducts.map((p) => (
-              <div
+      <div className="lineup-columns">
+        <div className="lineup-column">
+          {leftColumnProducts.map(p => (
+            <div
                 key={p.id}
                 onMouseEnter={() => handleHoverOpenProducts(p.id)}
                 onMouseLeave={handleHoverCloseProducts}
@@ -623,53 +648,109 @@ const ProductPage = () => {
                 <AccordionItem
                   active={activeProducts}
                   handleToggle={handleToggleProducts}
+                  disableClick={isHoverMode.current}
                   faq={{
                     header: p.title,
                     id: p.id,
                     text: (
-                     <div className="product-row">
-  <div className="product-image">
-    <img src={p.img} alt={p.title} />
-    {/* <h3>{p.title}</h3> */}
-    <p>{p.description}</p>
-  </div>
-
+                      <div className="product-row">
+                        <div className="product-image">
+                          <img src={p.img} alt={p.title} />
+                          <p>{p.description}</p>
+                        </div>
                         <div className="product-table">
-    {p.specs.length > 0 ? (
-      <table>
-        <thead>
-          <tr>
-            <th>Jaw Length</th>
-            <th>Shaft Diameter</th>
-            <th>Shaft Length</th>
-            <th>Electrode</th>
-            <th>Uses</th>
-          </tr>
-        </thead>
-        <tbody>
-          {p.specs.map((spec, i) => (
-            <tr key={i}>
-              <td>{spec.jawLength || "-"}</td>
-              <td>{spec.shaftDiameter || "-"}</td>
-              <td>{spec.shaftLength || "-"}</td>
-              <td>{spec.electrode}</td>
-              <td>{spec.uses}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    ) : (
-      <p>No specifications available.</p>
-    )}
-  </div>
-</div>
-                    ),
+                          {p.specs.length > 0 ? (
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Jaw Length</th>
+                                  <th>Shaft Diameter</th>
+                                  <th>Shaft Length</th>
+                                  <th>Electrode</th>
+                                  <th>Uses</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {p.specs.map((spec, i) => (
+                                  <tr key={i}>
+                                    <td>{spec.jawLength || '-'}</td>
+                                    <td>{spec.shaftDiameter || '-'}</td>
+                                    <td>{spec.shaftLength || '-'}</td>
+                                    <td>{spec.electrode}</td>
+                                    <td>{spec.uses}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          ) : (
+                            <p>No specifications available.</p>
+                          )}
+                        </div>
+                      </div>
+                    )
                   }}
                 />
               </div>
-            ))}
-          </div>
+          ))}
         </div>
+
+        <div className="lineup-column">
+          {rightColumnProducts.map(p => (
+            <div
+                key={p.id}
+                onMouseEnter={() => handleHoverOpenProducts(p.id)}
+                onMouseLeave={handleHoverCloseProducts}
+              >
+                <AccordionItem
+                  active={activeProducts}
+                  handleToggle={handleToggleProducts}
+                  disableClick={isHoverMode.current}
+                  faq={{
+                    header: p.title,
+                    id: p.id,
+                    text: (
+                      <div className="product-row">
+                        <div className="product-image">
+                          <img src={p.img} alt={p.title} />
+                          <p>{p.description}</p>
+                        </div>
+                        <div className="product-table">
+                          {p.specs.length > 0 ? (
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Jaw Length</th>
+                                  <th>Shaft Diameter</th>
+                                  <th>Shaft Length</th>
+                                  <th>Electrode</th>
+                                  <th>Uses</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {p.specs.map((spec, i) => (
+                                  <tr key={i}>
+                                    <td>{spec.jawLength || '-'}</td>
+                                    <td>{spec.shaftDiameter || '-'}</td>
+                                    <td>{spec.shaftLength || '-'}</td>
+                                    <td>{spec.electrode}</td>
+                                    <td>{spec.uses}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          ) : (
+                            <p>No specifications available.</p>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  }}
+                />
+              </div>
+          ))}
+        </div>
+      </div>
+    </div>
 
         <div className="functional fav-question">
           <div className="func-header">
