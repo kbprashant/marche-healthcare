@@ -93,59 +93,29 @@ const faqProducts = [
     id: 1,
     title: "Fenestrated Forceps / Bipolar Fenestrated Forceps",
     img: "/products/faqimg.png",
-    // description: "Short description for Product A. Replace with real copy.",
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      ,
     ],
   },
   {
     id: 2,
     title: "Maryland Dissector / Bipolar Maryland Dissector",
     img: "/products/faqimg.png",
-    // description: "Short description for Product B. Replace with real copy.",
+
     specs: [
-      {
-        itemCode: "BTF01-F",
-        productDescription: "Sample Forceps B - 30cm",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "30cm",
-        lock: "N/A",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
     ],
   },
@@ -153,55 +123,46 @@ const faqProducts = [
     id: 3,
     title: "Precise Dissector (Monopolar / Bipolar)",
     img: "/products/faqimg.png",
-    description: "Short description for Product C. Replace with real copy.",
-    specs: [],
+    
+    specs: [
+        {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrode: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
   },
   {
     id: 4,
     title: "Bipolar Blunt Tip Dissector",
     img: "/products/faqimg.png",
-    description: "Short description for Product D. Replace with real copy.",
-    specs: [],
+        specs: [
+
+         {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrode: "N/A",
+        uses: "Multiple Uses",
+      },
+        ],
   },
 {
 id: 5,
     title: "Cobra Grasper",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -209,41 +170,16 @@ id: 5,
 id: 6,
     title: "Tenaculum Forceps",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -251,41 +187,16 @@ id: 6,
 id: 7,
     title: "Needle Holder / Precise Needle Holder with Suture Cut",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -293,41 +204,16 @@ id: 7,
 id:8,
     title: "Clip Applier",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -335,41 +221,16 @@ id:8,
 id: 9,
     title: "Potts Scissors",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -377,41 +238,16 @@ id: 9,
 id: 10,
     title: "Round Tip Scissors",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -419,41 +255,16 @@ id: 10,
 id: 11,
     title: "Monopolar Scissors",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -461,41 +272,16 @@ id: 11,
 id: 12,
     title: "Monopolar Spatula",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -503,41 +289,16 @@ id: 12,
 id: 13,
     title: "Monopolar Hook",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -545,83 +306,32 @@ id: 13,
 id: 14,
     title: "Vessel Sealer Extend",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
-      {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
+       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-    ],
+          ],
   },
 
   {
 id: 15,
     title: "Clinch Forceps",
     img: "/products/faqimg.png",
-    description: "Short description for Product A. Replace with real copy.",
+    
     specs: [
       {
-        itemCode: "AUF01-F",
-        productDescription: "Fenestrated Forceps-38cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "38cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
-      {
-        itemCode: "AUF01-L",
-        productDescription: "Fenestrated Forceps-38cm-Lock",
         jawLength: "18mm",
         shaftDiameter: "8mm",
-        shaftLength: "38cm",
-        lock: "O",
+        shaftLength: "25cm,38cm,45cm",
         electrode: "N/A",
-        unitsBox: "1EA/BOX",
-        uses: "Single Use",
+        uses: "Multiple Uses",
       },
-      {
-        itemCode: "AUF01S-F",
-        productDescription: "Fenestrated Forceps-25cm",
-        jawLength: "",
-        shaftDiameter: "",
-        shaftLength: "25cm",
-        lock: "N/A",
-        electrode: "N/A",
-        unitsBox: "",
-        uses: "Single Use",
-      },
+      
     ],
   },
 
@@ -684,28 +394,27 @@ const ProductPage = () => {
       </main>
 
     <span id="marcherobo"></span>
-
-    {/* Product Action */}
-    <section className="product-action" ref={productActionRef}>
-      <div className="short-about">
-        <div>
-          <h2>NovaLap 360 D8</h2>
-          <p>
-            NovaLap 360D8 is a multi-DoF articulating laparoscopic system that
-            delivers robotic-like dexterity without robotic infrastructure.
-          </p>
-          <br />
-          <a
-            href="#complete-lineup"   // ✅ points to lineup heading
-            className="btn-outline"
-            onMouseEnter={handleInvertOn}
-            onMouseLeave={handleInvertOff}
-          >
-            <strong>Complete lineup</strong>
-          </a>
-        </div>
-      </div>
-    </section>
+{/* Product Action */}
+<section className="product-action" ref={productActionRef}>
+  <div className="short-about">
+    <div>
+      <h2>NovaLap 360 D8</h2>
+      <p>
+        NovaLap 360D8 is a multi-DoF articulating laparoscopic system that
+        delivers robotic-like dexterity without robotic infrastructure.
+      </p>
+      <br />
+      <a
+        href="#complete-lineup"   // ✅ points to lineup heading
+        className="btn-outline"
+        onMouseEnter={handleInvertOn}
+        onMouseLeave={handleInvertOff}
+      >
+        <strong>Complete lineup</strong>
+      </a>
+    </div>
+  </div>
+</section>
       <section className="product-range-action">
         <video
           className="product-range-video"
@@ -722,64 +431,7 @@ const ProductPage = () => {
       </section>
 
       <section className="product-functions">
-        {/* <div className="functional functional-1">
-          <div className="func-header">
-            <h2>How functional</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div className="content">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1, duration: 0.3 }}
-              className="card"
-            >
-              <img src={blogImg} alt="blog" />
-              <div className="card-body">
-                <h2>Blog title heading will go here</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse varius enim in eros. Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit.
-                </p>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1, duration: 0.3 }}
-              className="card"
-            >
-              <img src={blogImg} alt="blog" />
-              <div className="card-body">
-                <h2>Blog title heading will go here</h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Suspendisse varius enim in eros. Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div> */}
-
-        {/* <div className="functional functional-2">
-          <div className="func-header">
-            <h2>How functional</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div className="content">
-            <img src={function2Img} alt="tool" />
-            <div className="card-body">
-              <h2>Blog title heading will go here</h2>
-              <p>
-                When the locking mechanism is activated UP/DOWN, LEFT/RIGHT
-                articulating joint is fixed and cannot move, But OPEN/CLOSE action
-                of End-Tool is possible.
-              </p>
-            </div>
-          </div>
-        </div> */}
+      
 <motion.div
   initial={{ opacity: 0, x: -100 }}
   whileInView={{ opacity: 1, x: 0 }}
@@ -838,7 +490,7 @@ const ProductPage = () => {
             playsInline
             preload="auto"
           >
-            <source src={ergonomicVideo} type="video/mp4" />
+            <source src={d8Video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </motion.div>
@@ -917,7 +569,7 @@ const ProductPage = () => {
     <h2>Compatibility</h2>
     <p>
       NovaLap 360 D8 is designed for seamless compatibility with equipment already available in the operating
-      room, including existing laparoscopic systems. 
+      room, including existing laparoscopic systems and electrosurgical  systems or energy devices . 
       Its plug-and-play design ensures smooth adoption without requiring additional specialized instruments, 
       modifications, or workflow changes.
     </p>
@@ -955,57 +607,7 @@ const ProductPage = () => {
   </video>
 </motion.div>
 
-        <motion.div
-  initial={{ opacity: 0, x: -100 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ delay: 0.2, duration: 0.7 }}
-  className="functional-desc"
->
-    <video
-    className="functional-video"
-    autoPlay
-    muted
-    loop
-    playsInline
-    preload="auto"
-    onContextMenu={(e) => e.preventDefault()}
-  >
-    <source src={rangeVideo} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-  <div className="content">
-    <h2>Versatile</h2>
-    <p>
-      NovaLap 360 D8 is built with a range of specialized end-effector instruments, 
-      each designed for a specific function such as grasping, cutting, dissecting, 
-      or suturing. Surgeons can select the optimal instrument for each task while benefiting 
-      from the same ergonomic handle and interface across all instruments, ensuring comfort, 
-      precision, and control throughout the procedure.
-    </p>
-  </div>
-</motion.div>
-
-
-
-
-
-{/* 
-        <div className="functional functional-3">
-          <div className="func-header">
-            <h2>Product Name</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <img src="./products/specification.png" alt="specification" />
-        </div>
-
-        <div className="functional functional-3">
-          <div className="func-header">
-            <h2>Product Name</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <img src="./products/specification.png" alt="specification" />
-        </div> */}
-
+      
          <div className="functional fav-question complete-lineup">
       <div className="func-header" id="complete-lineup">
         <h2>NovaLap 360 D8 lineup</h2>
@@ -1025,50 +627,42 @@ const ProductPage = () => {
                     header: p.title,
                     id: p.id,
                     text: (
-                      <div className="product-row">
-                        <div className="product-image">
-                          <img src={p.img} alt={p.title} />
-                          <h3>{p.title}</h3>
-                          <p>{p.description}</p>
-                        </div>
+                     <div className="product-row">
+  <div className="product-image">
+    <img src={p.img} alt={p.title} />
+    {/* <h3>{p.title}</h3> */}
+    <p>{p.description}</p>
+  </div>
+
                         <div className="product-table">
-                          {p.specs.length > 0 ? (
-                            <table>
-                              <thead>
-                                <tr>
-                                  {/* <th>Item Code</th> */}
-                                  {/* <th>Description</th> */}
-                                  <th>Jaw Length</th>
-                                  <th>Shaft Diameter</th>
-                                  <th>Shaft Length</th>
-                                  {/* <th>Lock</th> */}
-                                 {<th>Electrode</th> }
-                                  {/* <th>Units/Box</th> */}
-                                  <th>Uses</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {p.specs.map((spec, i) => (
-                                  <tr key={i}>
-                                    {/* <td>{spec.itemCode}</td> */}
-                                    {/* <td>{spec.productDescription}</td> */}
-                                    <td>{spec.jawLength || "-"}</td>
-                                    <td>{spec.shaftDiameter || "-"}</td>
-                                    <td>{spec.shaftLength || "-"}</td>
-                                    {/* <td>{spec.lock}</td> */}
-                                    <td>{spec.electrode}</td>
-                                    {/* <td>{spec.unitsBox || "-"}</td> */}
-                                    <td>{spec.uses}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          ) : (
-                            <p>No specifications available.</p>
-                          )}
-                          
-                        </div>
-                      </div>
+    {p.specs.length > 0 ? (
+      <table>
+        <thead>
+          <tr>
+            <th>Jaw Length</th>
+            <th>Shaft Diameter</th>
+            <th>Shaft Length</th>
+            <th>Electrode</th>
+            <th>Uses</th>
+          </tr>
+        </thead>
+        <tbody>
+          {p.specs.map((spec, i) => (
+            <tr key={i}>
+              <td>{spec.jawLength || "-"}</td>
+              <td>{spec.shaftDiameter || "-"}</td>
+              <td>{spec.shaftLength || "-"}</td>
+              <td>{spec.electrode}</td>
+              <td>{spec.uses}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <p>No specifications available.</p>
+    )}
+  </div>
+</div>
                     ),
                   }}
                 />
@@ -1101,10 +695,17 @@ const ProductPage = () => {
           </div>
           <div className="fav-footer">
             <h2>Still have a question?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button>
+            {/* <button>
               <Link to="/contact">Contact</Link>
-            </button>
+            </button> */}
+            <a
+        href="/contact"   // ✅ points to lineup heading
+        className="btn-outline"
+        onMouseEnter={handleInvertOn}
+        onMouseLeave={handleInvertOff}
+      >
+        <strong>Contact</strong>
+      </a>
           </div>
         </div>
       </section>

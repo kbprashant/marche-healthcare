@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import footerLogo from "../assets/footer-logo.png";
 import "./css/footer.css";
@@ -86,10 +87,19 @@ const Footer = () => {
               </a>
             </div>
           </div>
-
-          <div className="child-1">
-            <p className="footer-header">Quick Links</p>
-          </div>
+<div className="child-1">
+  <p className="footer-header">Quick Links</p>
+  <ul>
+     <li>
+      {/* Navigate to ProductPage */}
+      <Link to="/products">NovaLap 360 D8</Link>
+    </li>
+    <li>
+      {/* Navigate to VideoPage.jsx */}
+      <Link to="/videos">Videos</Link>
+    </li>
+  </ul>
+</div>
           <div className="child-2">
             <p className="footer-header">Information</p>
             <ul>
@@ -97,13 +107,17 @@ const Footer = () => {
                 <a href="#">FAQ</a>
               </li> */}
               <li>
-                <a href="#">Incubation</a>
-              </li>
+                <Link to="/Incubation">Incubation</Link>           
+            
+               </li>
               <li>
                 <a href="#">Investor</a>
               </li>
               <li>
-                <a href="#">Patents & IP</a>
+                <a href="#">Journal</a>
+              </li>
+                 <li>
+                <a href="#">News & Events</a>
               </li>
               
             </ul>
@@ -111,11 +125,11 @@ const Footer = () => {
           <div className="child-3">
             <p className="footer-header">Legal & Policies</p>
             <ul>
+            <li>
+              <Link to="/Privacy-Policy">Privacy Policy</Link>
+            </li>     
               <li>
-                <a href="/pcp">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="/tnc">Terms & Conditions</a>
+              <Link to="/termscondition">Terms & condition</Link>
               </li>
               
             </ul>

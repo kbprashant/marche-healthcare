@@ -165,7 +165,8 @@ html {
 .functional .func-header h2 {
   margin-bottom: 24px;
   /* font-family: Roboto; */
-  font-size: var(--font-size-heading-primary);
+  /* font-size: var(--font-size-heading-primary); */
+  font-size: 60px;
   font-style: normal;
   font-weight: 700;
   line-height: 130%;
@@ -178,6 +179,7 @@ html {
   font-style: normal;
   font-weight: 400;
   line-height: 400%;
+  
 }
 
 .functional-1 .content {
@@ -300,6 +302,7 @@ html {
 
 .functional-3 .func-header {
   margin-bottom: 0px;
+  
 }
 
 .asked-questions .functional-desc {
@@ -330,6 +333,7 @@ html {
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 16px;
+  
 }
 
 .fav-question .func-header h2 {
@@ -338,11 +342,12 @@ html {
 
 .fav-question .func-header p {
   margin: 0;
-  color: #555;
+  color:black;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
+
 
 .fav-footer {
   margin-top: 80px;
@@ -353,13 +358,29 @@ html {
 }
 
 .fav-footer button {
-  padding: 12px 24px;
-  /* font-family: Roboto; */
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  border: 1px solid var(--Black, #000);
+ display: inline-block;
+ padding: 10px 20px;
+  border: 1px solid #5D5DFF;
+  color: white !important;
+  background: #5D5DFF;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+  cursor: pointer;
+  text-align: center;
 }
+
+.fav-footer button:hover,
+.fav-footer button:focus,
+.fav-footer button:focus-visible {
+  background: white;
+  color: #5D5DFF;
+  border-color: #5D5DFF;
+  text-decoration: none;
+  border: 2px solid #5D5DFF;
+  text-align: center;
+}
+
 
 .product-action .short-about::before {
   content: "";
@@ -397,6 +418,8 @@ html {
   padding: 0 16px;
 }
 
+
+
 .fav-question.complete-lineup .rc-accordion-card {
   width: 100%;
   max-width: none;
@@ -408,6 +431,8 @@ html {
 .fav-question.complete-lineup .rc-accordion-card:hover {
   background-color: rgba(93, 93, 255, 0.03);
 }
+
+
 
 .fav-question.complete-lineup .rc-accordion-header {
   display: flex;
@@ -475,15 +500,21 @@ html {
 
 .product-row {
   display: flex;
-  gap: 30px;
-  margin-top: 20px;
-  align-items: flex-start;
+  flex-direction: column; /* stack vertically */
+  align-items: center;    /* center image and table */
+  gap: 20px;              /* space between image and table */
 }
 
 .product-image {
-  flex: 1;
-  max-width: 280px;
+  text-align: center;
+  margin-bottom: 10px;
 }
+
+.product-table {
+  width: 100%;
+  overflow-x: auto; /* keep scroll if table is wide */
+}
+
 
 .product-image img {
   width: 100%;
@@ -507,6 +538,7 @@ html {
 .product-table {
   flex: 2;
   overflow-x: auto;
+  padding: 20px;
 }
 
 .product-table table {
@@ -650,7 +682,7 @@ html {
 }
 
 .faq-accordion-header:focus {
-  outline: 2px dashed rgba(93, 93, 255, 0.4);
+  outline: 2px dashed rgba(8, 8, 212, 0.863);
   outline-offset: 4px;
 }
 

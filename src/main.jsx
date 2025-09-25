@@ -21,6 +21,9 @@ import Careers from './pages/careers'
 import CareersApply from './pages/careersapply'
 import { AdminLayout, VideosAdmin, CareersAdmin, BroadcastsAdmin, TestimonialsAdmin } from './pages/admin';
 import SearchResults from './pages/SearchResults';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsCondition from './pages/TermsCondition';
+import Incubation from './pages/Incubation';
 
 
 const router = createBrowserRouter([
@@ -54,7 +57,22 @@ const router = createBrowserRouter([
     path: '/careers',        // 👈 New route
     element: <Careers />,
   },
+
+   {
+  path: '/Privacy-Policy',   // 👈 Add this route
+  element: <PrivacyPolicy />,
+},
+
+  {
+  path: '/TermsCondition',   // 👈 Add this route
+  element: <TermsCondition/>,
+},
   
+{
+  path: '/Incubation',   // 👈 Add this route
+  element: <Incubation/>,
+},
+
   {
   path: '/careersapply',   // 👈 Add this route
   element: <CareersApply />,
