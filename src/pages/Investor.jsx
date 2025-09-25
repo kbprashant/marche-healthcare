@@ -1,7 +1,7 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
-import bannerImg from "../assets/Investor/investor1.jpg"; // ✅ import banner image
-import footerImg from "../assets/Investor/investor-footer.png"; // ✅ import footer image
+// import bannerImg from "../assets/Investor/investor1.jpg"; // ✅ import banner image
+// import footerImg from "../assets/Investor/investor-footer.png"; // ✅ import footer image
 import "./css/investor.css";
 
 const Investor = () => {

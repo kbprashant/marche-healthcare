@@ -34,29 +34,7 @@ const Incubation = () => {
           </div>
         </div>
 
-        <h3>Why Incubation Matters</h3>
-        <div className="content-row reverse">
-          <div className="text-column">
-            <ul>
-              <li>
-                <strong>Support for Innovation:</strong> Access to expert guidance in medical device development and commercialization.
-              </li>
-              <li>
-                <strong>Infrastructure & Networking:</strong> State-of-the-art facilities and collaboration with other innovators in the healthcare ecosystem.
-              </li>
-              <li>
-                <strong>Compliance & Standards:</strong> Guidance in implementing global frameworks such as ISO 13485 and regulatory pathways for medical devices.
-              </li>
-              <li>
-                <strong>Sustainable Growth:</strong> A nurturing environment to refine ideas into scalable, impactful solutions.
-              </li>
-            </ul>
-          </div>
-          <div className="image-column">
-            <img src="/Incubation/2.jpg" alt="Incubation 2" />
-            {/* <img src="/Incubation/4.jpg" alt="Incubation 3" /> */}
-          </div>
-        </div>
+        
 
         <h3>Marche Healthcare’s Journey at AIC</h3>
         <div className="content-row">
@@ -73,16 +51,13 @@ const Incubation = () => {
             </p>
           </div>
           <div className="image-column">
-            <img src="/Incubation/5.jpg" alt="Incubation 4" />
+            <img src="/Incubation/6.jpg" alt="Incubation 4" />
             
           </div>
         </div>
-        <div className="side-by-side">
-              <img src="/Incubation/6.jpg" alt="Incubation 5" />
-              <img src="/Incubation/7.jpg" alt="Incubation 6" />
-            </div>
+        
 
-        <p className="highlight-text">— Team Marche Healthcare</p>
+        {/* <p className="highlight-text">— Team Marche Healthcare</p> */}
       </div>
     </Layouts>
   );
