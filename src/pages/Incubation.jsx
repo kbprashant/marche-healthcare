@@ -4,7 +4,7 @@ import "./css/incubation.css";
 
 const Incubation = () => {
   return (
-    <Layouts>
+    <Layouts title="Incubation">
       {/* Full Width Banner Image */}
       <section className="incubation-banner">
         <img src="/Incubation/3.jpg" alt="Incubation Banner" className="banner-img" />

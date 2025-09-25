@@ -4,7 +4,7 @@ import "./css/journal.css";
 
 const Journal = () => {
   return (
-    <Layouts>
+    <Layouts title="Journals">
       {/* Banner Section */}
       <section className="journal-banner">
         <div className="banner-content">

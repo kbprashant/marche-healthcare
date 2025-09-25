@@ -4,7 +4,7 @@ import "./css/investor.css";
 
 const Investor = () => {
   return (
-    <Layouts>
+    <Layouts title="Investors">
       {/* Banner Section */}
       <section className="investor-banner">
         <div>
