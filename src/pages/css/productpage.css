@@ -18,7 +18,7 @@ html {
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, 0.5) 132.07%
     ),
-    url("/products/mainbanner.jpg") lightgray 50% / cover no-repeat;
+    url("/products/mainbanner2.jpg") lightgray 50% / cover no-repeat;
 }
 
 .product-main .content {
