@@ -5,8 +5,8 @@ import img1 from "../images/new-img4.jpg";
 import img2 from "../images/new-img1.jpg";
 import img3 from "../images/new-img3.jpg";
 // Add mobile-specific images
-import img1Mobile from "../images/mob-img1.jpg";
-import img2Mobile from "../images/mob-img2.jpg";
+import img1Mobile from "../images/mob-img4.jpg";
+import img2Mobile from "../images/mob-img1.jpg";
 import img3Mobile from "../images/mob-img3.jpg";
 
 const Carousel = () => {
@@ -24,14 +24,14 @@ const Carousel = () => {
 
   const items = [
     { 
-      img: isMobile ? img3Mobile : img1, 
+      img: isMobile ? img1Mobile : img1, 
       author: "LUNDEV", 
       title: "NovaLap 360 D8", 
       topic: "Feel as your hands, Do more than your hands", 
       description:  "NovaLap 360D8 is a multi-DoF articulating laparoscopic system that delivers robotic-like dexterity without robotic infrastructure."
     },
       { 
-      img: isMobile ? img1Mobile : img2, 
+      img: isMobile ? img2Mobile : img2, 
       author: "LUNDEV", 
       title: "NovaLap 360 D8", 
       topic: "Feel as your hands, Do more than your hands", 

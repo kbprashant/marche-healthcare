@@ -353,6 +353,101 @@
   }
 }
 
+/* Enforce smaller corners for the YouTube player */
+.video-aspect,
+.video-aspect iframe,
+.video-aspect .youtube-iframe {
+  border-radius: 4px !important;
+  overflow: hidden;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .value-proposition {
+    height: auto;            /* was 100vh */
+    padding: 20px;           /* match testimonial side padding */
+    background: #fff;
+  }
+
+  /* Make the player align with testimonial card width */
+  .video-player {
+    width: 100%;                  /* was 100vw; avoids horizontal overflow */
+  }
+  .youtube-player{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Remove nested horizontal padding so edges line up with testimonials */
+  .youtube-player .video-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Clean, card-like video */
+  .video-aspect {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 21 / 9;         /* keep current ratio; switch to 16/9 if preferred */
+    border-radius: 12px;          /* match your card rounding */
+    overflow: hidden;
+  }
+
+  /* Tighten spacing for title/tabs */
+  .youtube-video-title {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  .value-proposition .videotabbuttons {
+    padding: 0.5em 0 0;
+    gap: 8px;
+    justify-content: center;
+  }
+}
+
+/* Fix spacing + layout for Values under Value Proposition (mobile) */
+@media (max-width: 768px) {
+  /* Add breathing room after the video section */
+  .value-proposition {
+    height: auto;
+    padding: 20px;
+    margin-bottom: 24px;  /* creates gap before values */
+  }
+
+  /* Remove negative pulls that caused overlap */
+  .home-our-team .overlay {
+    margin-top: 0 !important;
+    padding-top: 0;
+  }
+
+  .team-heading {
+    margin-top: 0 !important;    /* was -83px */
+    margin-bottom: 20px;
+  }
+
+  /* Make values cards match testimonial/value-prop content width */
+  .home-our-team .team-cards {
+    width: 100%;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .home-our-team .team-card {
+    width: 100%;
+    max-width: 100%;
+    transform: none;             /* remove offset */
+    margin: 0 0 16px;            /* tidy spacing between cards */
+  }
+
+  .home-our-team .card-paragraph {
+    width: 100%;                 /* remove 257px constraint */
+  }
+}
+
 /* ===== MARCHE VALUES SECTION ===== */
 .marche-values-div {
   display: flex;
@@ -908,10 +1003,141 @@
   opacity: 1 !important;
 }
 
-/* Enforce smaller corners for the YouTube player */
-.video-aspect,
-.video-aspect iframe,
-.video-aspect .youtube-iframe {
-  border-radius: 4px !important;
-  overflow: hidden;
+/* Stretch cards to the same width as testimonials/value-prop (content width) */
+@media (max-width: 768px) {
+  .home-our-team .team-cards {
+    width: 100%;
+    align-items: stretch;   /* let children expand to full width */
+    gap: 12px;
+  }
+
+  .home-our-team .team-card {
+    width: 100%;
+    max-width: 100%;
+    transform: none;        /* remove offset for a clean card stack */
+  }
+
+
+  /* Let text fill the card width (not capped at 257px) */
+  .home-our-team .card-paragraph {
+    width: 100%;
+  }
 }
+
+/* Reduce gap below the section title */
+@media (max-width: 768px) {
+  .team-heading {
+    margin-bottom: 12px; /* was 40px */
+  }
+
+  /* Compact the values section container */
+  .home-our-team {
+    padding: 0px; /* was 40px 20px */
+  }
+
+  /* Remove inner overlay padding to avoid extra space */
+  .home-our-team .overlay {
+    padding: 0; /* was 2em 0 */
+    margin-top: 0 !important; /* ensure no pull/push */
+  }
+
+  /* Pull cards closer to the title */
+  .home-our-team .team-cards-container {
+    margin-top: 12px; /* was 80px */
+  }
+
+  /* Full-width cards (match testimonial/value-prop content width) */
+  .home-our-team .team-cards {
+    width: 100%;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .home-our-team .team-card {
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    margin: 0; /* avoid extra vertical gaps */
+  }
+
+  /* Slightly reduce icon top offset for a tighter card */
+  .home-our-team .team-icon-container {
+    margin-top: 16px; /* was 40px */
+    padding: 0px !important;
+  }
+
+  /* Let text use full width */
+  .home-our-team .card-paragraph {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Blogs — mobile responsive */
+@media (max-width: 768px) {
+  .blogs-and-events {
+    margin: 40px 0 60px;
+    padding: 0 16px;            /* align with value-prop/testimonial inner width */
+  }
+
+  .blogs-and-events .blogs-cards-container {
+    width: 100%;
+    gap: 16px;                  /* tighter spacing */
+    padding: 0;
+  }
+
+  /* Each card stacks vertically */
+  .blogs-and-events .blog-card-1 {
+    flex-direction: column;     /* was row on larger screens */
+    align-items: stretch;
+    padding: 12px;
+    background: #f7f7ff;        /* subtle, readable */
+    border-radius: var(--border-radius-primary);
+  }
+
+  /* Make the image responsive and tidy */
+  .blogs-and-events .blog-image-1 {
+    width: 100% !important;     /* override fixed 533px */
+    height: auto;
+    max-height: 220px;          /* optional cap */
+    object-fit: cover;
+    border-radius: var(--border-radius-primary);
+    margin: 0;
+  }
+
+  .blogs-and-events .blog-content {
+    padding: 12px 8px;
+  }
+
+  .blogs-and-events .blog-title {
+    font-size: 20px;
+    line-height: 120%;
+    text-align: left;
+  }
+
+  .blogs-and-events .blog-text {
+    font-size: 14px;
+    line-height: 145%;
+  }
+
+  /* Footer line inside the card (author + icon row) */
+  .blogs-and-events .blog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .blogs-and-events .author-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .blogs-and-events .author {
+    width: 40px;
+    height: 40px;
+  }
+}
+

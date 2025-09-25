@@ -163,6 +163,23 @@ export default function HomePage() {
     }
   }, []);
 
+  // Card component for team values section
+  const Card = ({ delay = 0, children }) => {
+    if (isMobile) {
+      return <div className="team-card">{children}</div>;
+    }
+    return (
+      <motion.div
+        initial={{ x: -100, y: 100 }}
+        whileInView={{ x: 0, y: 0 }}
+        transition={{ delay, duration: 0.8 }}
+        className="team-card"
+      >
+        {children}
+      </motion.div>
+    );
+  };
+
   return (
     <Layouts title={"Home-Page"}>
       <div className="home-top">
@@ -175,7 +192,7 @@ export default function HomePage() {
       </div>
 
       {/* 3D Model Section */}
-      {/* <div className="model-3d-section">
+      {/* <div className="model-3d-section>
         <ModelViewer3D />
       </div> */}
 
@@ -198,12 +215,7 @@ export default function HomePage() {
 
             <div className="team-cards-container">
               <div className="team-cards">
-                <motion.div
-                  initial={{ x: -100, y: 100 }}
-                  whileInView={{ x: 0, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  className="team-card"
-                >
+                <Card delay={0.3}>
                   <div className="team-icon-container">
                     <img
                       src={`./money.png`}
@@ -218,14 +230,9 @@ export default function HomePage() {
                       Pushing Boundaries, Bridging Health Disparities
                     </p>
                   </div>
-                </motion.div>
+                </Card>
 
-                <motion.div
-                  initial={{ x: -100, y: 100 }}
-                  whileInView={{ x: 0, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className="team-card"
-                >
+                <Card delay={0.5}>
                   <div className="team-icon-container">
                     <img
                       src={`./Collab.png`}
@@ -240,14 +247,9 @@ export default function HomePage() {
                       Unite diverse expertise to create impactful innovations
                     </p>
                   </div>
-                </motion.div>
+                </Card>
 
-                <motion.div
-                  initial={{ x: -100, y: 100 }}
-                  whileInView={{ x: 0, y: 0 }}
-                  transition={{ delay: 0.7, duration: 0.8 }}
-                  className="team-card"
-                >
+                <Card delay={0.7}>
                   <div className="team-icon-container">
                     <img
                       src={`./Access.png`}
@@ -262,14 +264,9 @@ export default function HomePage() {
                       Bringing Modern Healthcare to Everyone
                     </p>
                   </div>
-                </motion.div>
+                </Card>
 
-                <motion.div
-                  initial={{ x: -100, y: 100 }}
-                  whileInView={{ x: 0, y: 0 }}
-                  transition={{ delay: 0.9, duration: 0.8 }}
-                  className="team-card"
-                >
+                <Card delay={0.9}>
                   <div className="team-icon-container">
                     <img
                       src={`./Compassion.png`}
@@ -284,7 +281,7 @@ export default function HomePage() {
                       Empathy at Our Core Enhancing Lives Worldwide
                     </p>
                   </div>
-                </motion.div>
+                </Card>
               </div>
             </div>
           </div>
