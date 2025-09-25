@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useLayoutEffect } from "react"; // add useLayoutEffect
 import { motion } from "framer-motion";
 import "./css/careersapply.css";
 import { Layouts } from "../Layouts/Layouts";
@@ -9,6 +9,23 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api
 export default function CareersApply() {
   const { state } = useLocation();
   const job = state?.job || null;
+
+  // 1) Run before paint if possible (prevents flicker on some browsers)
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // 2) Run again right after paint to defeat late layout shifts (images/fonts)
+  useEffect(() => {
+    // immediate
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+    // one more frame later
+    const id = requestAnimationFrame(() =>
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+    );
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const [formData, setFormData] = useState({
     name: "",
