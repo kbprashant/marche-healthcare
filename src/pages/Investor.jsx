@@ -6,12 +6,12 @@ const Incubation = () => {
   return (
     <Layouts title="Investors">
       {/* Full Width Banner Image */}
-      <section className="investor-banner">
-        <img src="/Incubation/3.jpg" alt="Investor Banner" className="banner-img" />
-        <div className="banner-content">
-          <h1>Investors</h1>
-          {/* <p>From Idea to Impact in Healthcare Innovation</p> */}
-        </div>
+     <section className="investor-banner">
+  <img
+  src="/Investor/investor1.jpg"
+  alt="Investor Banner"
+  className="banner-img"
+/>
       </section>
 
       {/* Content Section */}

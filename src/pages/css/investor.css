@@ -23,11 +23,18 @@
   padding: 20px 30px;
   border-radius: 10px;
 }
-
-.investor-banner .banner-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+.investor-banner .banner-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  background: none; /* remove gray background */
+  padding: 0;       /* remove extra space */
+  box-shadow: none; /* remove any shadow */
 }
+
 
 .investor-banner .banner-content p {
   font-size: 1.2rem;
