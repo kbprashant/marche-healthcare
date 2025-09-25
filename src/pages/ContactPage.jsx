@@ -4,6 +4,8 @@ import "./css/contactpage.css";
 import { Layouts } from "../Layouts/Layouts";
 import ContactCards from "../components/ContactCards";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+
 const ContactPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +27,7 @@ const ContactPage = () => {
     // I've kept the fetch example as it's a common approach for backend APIs.
     // If you're using a service like EmailJS, you'd replace this block.
     try {
-      const res = await fetch("http://localhost:8080/api/admin/contact", {
+      const res = await fetch(`${API_BASE}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, purpose, message }),
