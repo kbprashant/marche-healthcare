@@ -1,6 +1,6 @@
 /* src\pages\css\aboutpage.css */
 .abt-banner {
-  background: url("/about/aboutus.jpg") center center / cover;
+  background: url("/about/aboutus-compressed.jpg") center center / cover;
   height: 500px;
   display: flex;
   flex-direction: column;
