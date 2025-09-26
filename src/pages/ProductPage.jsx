@@ -328,8 +328,8 @@ id: 15,
         jawLength: "18mm",
         shaftDiameter: "8mm",
         shaftLength: "25cm,38cm,45cm",
-        electrodes: "N/A",
-        uses: "Multiple Uses",
+        electrode: "asf",
+        uses: "Multiple Uasses",
       },
       
     ],
@@ -676,7 +676,7 @@ const ProductPage = () => {
                                     <td>{spec.jawLength || '-'}</td>
                                     <td>{spec.shaftDiameter || '-'}</td>
                                     <td>{spec.shaftLength || '-'}</td>
-                                    <td>{spec.electrode}</td>
+                                    <td>{spec.electrodes}</td>
                                     <td>{spec.uses}</td>
                                   </tr>
                                 ))}
@@ -732,7 +732,7 @@ const ProductPage = () => {
                                     <td>{spec.jawLength || '-'}</td>
                                     <td>{spec.shaftDiameter || '-'}</td>
                                     <td>{spec.shaftLength || '-'}</td>
-                                    <td>{spec.electrode}</td>
+                                    <td>{spec.electrodes}</td>
                                     <td>{spec.uses}</td>
                                   </tr>
                                 ))}
