@@ -1,6 +1,7 @@
 // src/pages/SearchResults.jsx
 import React, { useEffect, useState, useMemo } from "react";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./css/searchresults.css";
 // use named Document export
@@ -261,7 +262,8 @@ export default function SearchResults() {
   }
 
   return (
-    <Layouts title={`Search: ${query || ""}`}>
+    <Layouts title={`Search: ${query || ""}`} description="Site search results for Marche Healthcare." canonical={`https://marchehealthcare.org/search${query ? `?q=${encodeURIComponent(query)}` : ''}`}>
+      <SEOJsonLd webpage={{ name: 'Search', description: 'Search results on Marche Healthcare.', url: 'https://marchehealthcare.org/search' }} breadcrumb />
       <div className="sr-topwrap">
         <div className="sr-inner">
           <form className="sr-searchbar" onSubmit={onSubmitSearch} role="search" aria-label="Site search">

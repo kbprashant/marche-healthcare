@@ -1,10 +1,12 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import "./css/newsevent.css";
 
 const NewsEvent = () => {
   return (
-    <Layouts title="News & Events">
+    <Layouts title="News & Events" description="News and events highlights from Marche Healthcare." canonical="https://marchehealthcare.org/NewsEvent">
+      <SEOJsonLd webpage={{ name: 'News & Events', description: 'News and events highlights from Marche Healthcare.', url: 'https://marchehealthcare.org/NewsEvent' }} breadcrumb />
       {/* Banner Section */}
       <section className="news-banner">
         <div className="banner-content">

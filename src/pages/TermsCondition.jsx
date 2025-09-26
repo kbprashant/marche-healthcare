@@ -1,10 +1,12 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts"; // keep if you use a common layout
+import SEOJsonLd from "../components/SEOJsonLd";
 import "./css/terms.css"; // your CSS file
 
 const TermsCondition = () => {
   return (
-    <Layouts title="Terms & Conditions"> 
+    <Layouts title="Terms & Conditions" description="Terms & Conditions governing the use of Marche Healthcare website and services." canonical="https://marchehealthcare.org/TermsCondition"> 
+      <SEOJsonLd webpage={{ name: 'Terms & Conditions', description: 'Website terms of use.', url: 'https://marchehealthcare.org/TermsCondition' }} breadcrumb />
       {/* Optional Banner Section */}
       <section className="terms-banner">
         <div>

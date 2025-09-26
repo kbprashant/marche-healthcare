@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import "./css/journal.css";
 import { motion } from "framer-motion";
 
@@ -124,7 +125,8 @@ const Journal = () => {
   }, []);
 
   return (
-    <Layouts title="Journals">
+    <Layouts title="Journals" description="Publications and research from Marche Healthcare." canonical="https://marchehealthcare.org/Journal">
+      <SEOJsonLd webpage={{ name: 'Journals', description: 'Publications and research from Marche Healthcare.', url: 'https://marchehealthcare.org/Journal' }} breadcrumb />
       {/* HERO */}
       <section className="journal-banner">
         <div className="journal-banner-text">

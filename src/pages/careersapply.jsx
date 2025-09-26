@@ -3,6 +3,7 @@ import { useState, useMemo, useEffect, useLayoutEffect } from "react"; // add us
 import { motion } from "framer-motion";
 import "./css/careersapply.css";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
@@ -98,7 +99,8 @@ export default function CareersApply() {
   };
 
   return (
-    <Layouts title={"Careers Apply"}>
+    <Layouts title={"Careers Apply"} description="Apply to roles at Marche Healthcare." canonical="https://marchehealthcare.org/careersapply">
+      <SEOJsonLd webpage={{ name: 'Careers Apply', description: 'Submit your application to Marche Healthcare.', url: 'https://marchehealthcare.org/careersapply' }} breadcrumb />
       <section className="banner">
         <div className="banner-text">
           <h3>Apply — {jobTitle}</h3>
