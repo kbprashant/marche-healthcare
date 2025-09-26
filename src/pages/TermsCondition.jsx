@@ -8,7 +8,7 @@ const TermsCondition = () => {
       {/* Optional Banner Section */}
       <section className="terms-banner">
         <div>
-          <h1></h1>
+          <h1>Terms & Condition</h1>
         </div>
       </section>
 

@@ -1,41 +1,44 @@
 .terms-banner {
-  background: url("/terms&condition/terms1.jpg") center center / cover;
+  background: url("/terms&condition/terms2.jpg") center center / cover no-repeat;
   height: 500px;
   display: flex;
   flex-direction: column;
-  padding-top: 100px;
-  justify-content: center;
-  align-items: flex-end;
-  padding-right: 20px;
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  p {
-    font-size: 1.2vw;
-
-    font-weight: 700;
-    color: var(--text-primary);
-  }
+  justify-content: center;  /* vertical centering */
+  align-items: center;      /* horizontal centering */
+  padding: 0 20px;          /* optional horizontal padding */
+  text-align: center;       /* ensures text inside div is centered */
 }
+
+.terms-banner div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .terms-banner h1 {
-  text-align: center;
   font-size: var(--font-size-banner-primary);
   color: var(--text-primary);
   font-weight: 700;
   animation: fadeoff 0.8s forwards;
   opacity: 0;
 }
+
+.terms-banner p {
+  font-size: 1.2vw;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 10px;
+}
+
+/* fade-in animation */
 @keyframes fadeoff {
   to {
     opacity: 1;
   }
 }
 
-
+/* Terms content container */
 .terms-container {
   max-width: 900px;
   margin: 60px auto;
@@ -52,12 +55,10 @@
   text-align: center;
 }
 
-
-
 .terms-container h2 {
   font-size: 22px;
   margin-top: 30px;
-  color: black; /* orange highlight */
+  color: black;
 }
 
 .terms-container p,
