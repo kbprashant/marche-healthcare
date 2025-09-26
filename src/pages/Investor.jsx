@@ -35,22 +35,26 @@ const Investor = () => {
         <div className="investor-rows">
           <motion.div {...fadeUp(0.05)} className="investor-row">
             <div className="text">
-              <h3>Enabling Growth & Collaboration</h3>
+              <h3>BIRAC – Biotechnology Industry Research Assistance Council</h3>
               <p>
-                Being part of AIC accelerates our access to clinical mentors,
-                regulatory insight, and prototyping resources. It empowers us
-                to iterate faster and build responsibly within the evolving
-                framework of global healthcare requirements.
+               Supported under the BIG (Biotechnology Ignition Grant) scheme,
+                BIRAC funded Marche Healthcare with ₹50 lakhs to develop breakthrough 
+                medical technologies. 
+                This grant has been instrumental in the early innovation
+                 of NovaLap – our advanced laparoscopic instrument series with 8 degrees 
+                 of freedom and 360° end-effector rotation.
+
+
               </p>
-              <p>
+              {/* <p>
                 We collaborate with multidisciplinary experts to refine design,
                 ergonomics, user safety, and manufacturability—ensuring our
                 solutions are scalable and sustainable.
-              </p>
+              </p> */}
             </div>
             <div className="media">
               <img
-                src="/Incubation/1.jpg"
+                src="/Investor/Birac.png"
                 alt="Team Marche working within incubation facilities"
                 loading="lazy"
               />
@@ -59,22 +63,23 @@ const Investor = () => {
 
           <motion.div {...fadeUp(0.1)} className="incubation-row alt">
             <div className="text">
-              <h3>Shaping NovaLap 360 D8</h3>
+              <h3>TANSIM – Tamil Nadu Startup and Innovation Mission</h3>
               <p>
-                Our flagship innovation, <strong>NovaLap 360 D8</strong>, was
-                conceptualized and refined during incubation. Focused
-                articulation design, tactile feedback fidelity, and surgeon-first
-                usability were matured here.
+               With an investment of ₹3 crores, 
+               TANSIM empowers Marche Healthcare to scale up manufacturing and commercialization 
+               of NovaLap. 
+               Their support enables us to bring world-class, 
+               affordable laparoscopic solutions to surgeons across India and beyond.
               </p>
-              <p>
+              {/* <p>
                 This journey strengthens our mission to bring world-class
                 minimally invasive surgical technologies from India to global
                 operating rooms—bridging accessibility and advanced capability.
-              </p>
+              </p> */}
             </div>
             <div className="media">
               <img
-                src="/Incubation/6.jpg"
+                src="/Investor/2.jpg"
                 alt="Prototype development imagery for NovaLap 360 D8"
                 loading="lazy"
               />

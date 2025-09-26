@@ -105,7 +105,7 @@ const TermsCondition = () => {
         </p>
         <p>
           <strong>Marche Healthcare</strong> <br />
-          Email: info@marchehealthcare.com <br />
+          Email: info@marchehealthcare.org <br />
         </p>
       </div>
     </Layouts>
