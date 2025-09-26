@@ -182,7 +182,7 @@ export default function HomePage() {
   };
 
   return (
-    <Layouts title={"Home-Page"} description="Marche Healthcare — Innovating to make advanced healthcare accessible for all." canonical="https://marchehealthcare.org/">
+    <Layouts title={"Marche Healthcare - Health Equality"} description="Marche Healthcare — Innovating to make advanced healthcare accessible for all." canonical="https://marchehealthcare.org/">
       <SEOJsonLd site webpage={{ name: 'Home', description: 'Marche Healthcare — Innovating to make advanced healthcare accessible for all.' }} breadcrumb />
       <div className="home-top">
         <Carousel />

@@ -142,7 +142,7 @@ export default function VideoPage() {
   const topLabel = TOPS.find(t => t.key === topCat)?.label || "";
 
   return (
-    <Layouts title={"Video-Page"} description={`Watch ${topLabel} videos by sub-category from Marche Healthcare.`} canonical={`https://marchehealthcare.org/videos`}>
+    <Layouts title={"Videos | Marche Healthcare"} description={`Watch ${topLabel} videos by sub-category from Marche Healthcare.`} canonical={`https://marchehealthcare.org/videos`}>
       { /* JSON-LD for this page */ }
       <SEOJsonLd webpage={{ name: `${topLabel} Videos`, description: `Browse ${topLabel} videos by sub-category.`, url: `https://marchehealthcare.org/videos` }} breadcrumb />
       <section className="vid-banner">

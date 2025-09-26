@@ -82,7 +82,7 @@ export default function Careers() {
   };
 
   return (
-    <Layouts title="Careers - Marche Healthcare" description="Join Marche Healthcare — build innovations that make advanced healthcare accessible." canonical="https://marchehealthcare.org/careers">
+    <Layouts title="Careers | Marche Healthcare" description="Join Marche Healthcare — build innovations that make advanced healthcare accessible." canonical="https://marchehealthcare.org/careers">
       <SEOJsonLd webpage={{ name: 'Careers', description: 'Open roles and internships at Marche Healthcare.', url: 'https://marchehealthcare.org/careers' }} breadcrumb />
       {/* Banner */}
       <div className="careers-banner">

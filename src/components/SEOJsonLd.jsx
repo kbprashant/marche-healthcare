@@ -74,9 +74,9 @@ function defaultBreadcrumbFromLocation() {
 			const map = {
 			'': 'Home',
 			home: 'Home',
-			about: 'About',
+			about: 'About Us',
 			products: 'Products',
-			news: 'News',
+			news: 'Broadcasts',
 			videos: 'Videos',
 			contact: 'Contact',
 			careers: 'Careers',
@@ -86,7 +86,6 @@ function defaultBreadcrumbFromLocation() {
 			incubation: 'Incubation',
 			investor: 'Investor',
 			journal: 'Journal',
-			newsevent: 'News & Events',
 		};
 		return map[seg?.toLowerCase?.()] || seg?.[0]?.toUpperCase() + seg?.slice(1);
 	};

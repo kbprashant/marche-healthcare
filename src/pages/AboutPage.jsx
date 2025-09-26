@@ -182,7 +182,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <Layouts title={"About - Marche Healthcare"} description="About Marche Healthcare — our story, mission, vision, and team building accessible healthcare innovations." canonical="https://marchehealthcare.org/about">
+    <Layouts title={"About Us | Marche Healthcare"} description="About Marche Healthcare — our story, mission, vision, and team building accessible healthcare innovations." canonical="https://marchehealthcare.org/about">
       <SEOJsonLd webpage={{ name: 'About', description: 'About Marche Healthcare — story, mission, vision, and team.', url: 'https://marchehealthcare.org/about' }} breadcrumb />
       <section className="abt-banner">
         <div>

@@ -194,7 +194,7 @@ const ContactPage = () => {
   ];
 
   return (
-    <Layouts title={"Contact - Marche Healthcare"} description="Contact Marche Healthcare — get in touch for demos, partnerships, purchases, or support." canonical="https://marchehealthcare.org/contact">
+    <Layouts title={"Contact Us | Marche Healthcare"} description="Contact Marche Healthcare — get in touch for demos, partnerships, purchases, or support." canonical="https://marchehealthcare.org/contact">
       <SEOJsonLd webpage={{ name: 'Contact', description: 'Get in touch with Marche Healthcare.', url: 'https://marchehealthcare.org/contact' }} breadcrumb />
       <section className="contact-banner">
         <div className="contact-banner-text">

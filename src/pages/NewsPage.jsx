@@ -355,7 +355,7 @@ const NewsPage = () => {
   };
 
   return (
-    <Layouts title={"Broadcast - News & Events"} description="Latest social updates, news, and events from Marche Healthcare." canonical="https://marchehealthcare.org/news">
+    <Layouts title={"Broadcast - News & Events | Marche Healthcare"} description="Latest social updates, news, and events from Marche Healthcare." canonical="https://marchehealthcare.org/news">
       <SEOJsonLd webpage={{ name: 'Broadcast', description: 'Latest social updates, news, and events from Marche Healthcare.', url: 'https://marchehealthcare.org/news' }} breadcrumb />
       <section className="headline">
         <div className="newsbanner">
