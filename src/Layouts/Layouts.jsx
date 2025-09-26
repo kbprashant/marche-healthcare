@@ -7,12 +7,50 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-export const Layouts = ({ children, title }) => {
+export const Layouts = ({ children, title, description, canonical }) => {
   const [upArrow, setUpArrow] = useState(false);
 
   useEffect(() => {
     document.title = title;
-  }, [title]);
+    // meta description
+    const metaName = 'description';
+    let meta = document.querySelector(`meta[name="${metaName}"]`);
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', metaName);
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', description || 'Marche Healthcare — Innovating to make advanced healthcare accessible for all.');
+
+    // canonical
+    const url = canonical || (typeof window !== 'undefined' ? window.location.href : undefined);
+    if (url) {
+      let link = document.querySelector('link[rel="canonical"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'canonical');
+        document.head.appendChild(link);
+      }
+      link.setAttribute('href', url);
+    }
+
+    // Open Graph basic tags
+    const ensureOg = (property, content) => {
+      if (!content) return;
+      let og = document.querySelector(`meta[property="${property}"]`);
+      if (!og) {
+        og = document.createElement('meta');
+        og.setAttribute('property', property);
+        document.head.appendChild(og);
+      }
+      og.setAttribute('content', content);
+    };
+    ensureOg('og:title', title);
+    ensureOg('og:description', description || 'Marche Healthcare — Innovating to make advanced healthcare accessible for all.');
+    ensureOg('og:type', 'website');
+    if (url) ensureOg('og:url', url);
+    ensureOg('og:site_name', 'Marche Healthcare');
+  }, [title, description, canonical]);
 
   useEffect(() => {
     const onScroll = () => {

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./css/productpage.css";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import blogImg from "../assets/products/card-img.png";
 import function2Img from "../assets/products/function2-img.png";
 import functionl0Img from "../assets/products/functional-0.png";
@@ -402,7 +403,8 @@ const ProductPage = () => {
   const rightColumnProducts = faqProducts.filter((_, i) => i % 2 === 1);
 
   return (
-    <Layouts title="Product-Page">
+    <Layouts title="Product-Page" description="NovaLap 360 D8 — multi-DoF articulating laparoscopic system delivering robotic-like dexterity without robotic infrastructure." canonical="https://marchehealthcare.org/products">
+      <SEOJsonLd webpage={{ name: 'Products', description: 'NovaLap 360 D8 lineup and features.', url: 'https://marchehealthcare.org/products' }} breadcrumb />
       <main className="product-main">
         <motion.div
           initial={{ opacity: 0 }}
