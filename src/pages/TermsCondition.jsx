@@ -14,7 +14,7 @@ const TermsCondition = () => {
 
       <div className="terms-container">
         <p>
-          Welcome to <strong>Mache Healthcare</strong>. By accessing or using
+          Welcome to <strong>Marche Healthcare</strong>. By accessing or using
           our website and services, you agree to comply with and be bound by
           the following Terms & Conditions. Please read them carefully.
         </p>
@@ -43,13 +43,13 @@ const TermsCondition = () => {
         <h2>3. Intellectual Property</h2>
         <p>
           All content on this website, including text, graphics, logos,
-          images, and software, is the property of <strong>Mache Healthcare</strong> 
-          or its licensors and is protected by copyright and other intellectual property laws.
+          images, and software, is the property of <strong>Marche Healthcare </strong>  
+           or its licensors and is protected by copyright and other intellectual property laws.
         </p>
 
         <h2>4. Limitation of Liability</h2>
         <p>
-          Mache Healthcare is not responsible for any direct, indirect,
+          Marche Healthcare is not responsible for any direct, indirect,
           incidental, or consequential damages arising out of your use of the
           website or services. The information provided on this website is for
           general purposes and does not replace professional medical advice.
@@ -83,7 +83,7 @@ const TermsCondition = () => {
 
         <h2>9. Changes to Terms</h2>
         <p>
-          Mache Healthcare may update these Terms & Conditions from time to
+          Marche Healthcare may update these Terms & Conditions from time to
           time. Changes will be posted on this page with the "Last Updated"
           date. Continued use of the website after changes constitutes your
           acceptance of the new terms.
@@ -102,9 +102,8 @@ const TermsCondition = () => {
           contact us at:
         </p>
         <p>
-          <strong>Mache Healthcare</strong> <br />
-          Email: info@machehealthcare.com <br />
-          
+          <strong>Marche Healthcare</strong> <br />
+          Email: info@marchehealthcare.com <br />
         </p>
       </div>
     </Layouts>
