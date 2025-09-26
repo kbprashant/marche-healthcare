@@ -94,8 +94,9 @@
   background: #5d5dff;
 }
 .video-gallery .video-section {
-  padding: 0px var(--page-margin-primary);
+  padding: 0px 130px;
   text-align: center;
+  /* width: 1444px; */
   /* height: 100vh; */
   .card-in-video {
     h2 {
@@ -134,10 +135,30 @@
   padding: 0.5em 0;
   font-size: 1.3rem;
 }
+/* Use the same sizing approach as the HomePage YouTube player */
 #youtubevideosection {
-  height: 45vw;
-  aspect-ratio: 4/2;
-  margin:-50px auto 4em;
+  margin: -50px auto 4em;
+}
+
+/* Leverage shared classes from homepage.css */
+#youtubevideosection.video-wrapper {
+  width: 100%;
+  max-width: 100vw;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#youtubevideosection .video-aspect {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 like the home video player */
+}
+
+#youtubevideosection .youtube-iframe,
+#youtubevideosection .video-aspect iframe {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  border-radius: 10px;
 }
 
 .dark {

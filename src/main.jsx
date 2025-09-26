@@ -27,6 +27,9 @@ import Incubation from './pages/Incubation';
 import Investor from './pages/Investor';
 import Journal from './pages/Journal';
 import NewsEvent from './pages/NewsEvent';
+import CookieConsent from './components/CookieConsent';
+import { setupConsentAnalytics } from './utils/consent-analytics';
+import SEOJsonLd from './components/SEOJsonLd';
 
 
 
@@ -121,7 +124,43 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
 <React.StrictMode>
 <AuthProvider>
+{/* Cookie consent banner appears globally once */}
+<CookieConsent />
+{/* Global Organization & Website JSON-LD for rich results */}
+<SEOJsonLd id="org-jsonld" data={{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Marche Healthcare",
+  "url": typeof window !== 'undefined' ? window.location.origin : "https://marchehealthcare.example",
+  "logo": `${typeof window !== 'undefined' ? window.location.origin : ''}/logo_icon.png`,
+  "sameAs": [
+    "https://www.linkedin.com/company/marche-healthcare/",
+    "https://x.com/info_march49738",
+    "https://youtube.com/@marchehealthcare"
+  ],
+  "contactPoint": [{
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "info@marchehealthcare.com",
+    "areaServed": "IN",
+    "availableLanguage": ["en"]
+  }]
+}} />
+<SEOJsonLd id="website-jsonld" data={{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": typeof window !== 'undefined' ? window.location.origin : "https://marchehealthcare.example",
+  "name": "Marche Healthcare",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${typeof window !== 'undefined' ? window.location.origin : ''}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+}} />
 <RouterProvider router={router} />
 </AuthProvider>
 </React.StrictMode>,
 )
+
+// Boot optional analytics after mount; it respects consent state
+setupConsentAnalytics();

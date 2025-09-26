@@ -8,6 +8,7 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import MediaCard from "../components/MediaCard";
 import NewsCard from "../components/NewsCard";
 import NewsfullDetails from "../components/NewsFullDetails";
+import SEOJsonLd from "../components/SEOJsonLd";
 
 
 // === DB API (env driven) ===
@@ -355,6 +356,14 @@ const NewsPage = () => {
 
   return (
     <Layouts title={"News & Events"}>
+      <SEOJsonLd id="breadcrumbs-news" data={{
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": typeof window!== 'undefined' ? window.location.origin : "" },
+          { "@type": "ListItem", "position": 2, "name": "News & Events", "item": typeof window!== 'undefined' ? `${window.location.origin}/news` : "" }
+        ]
+      }} />
       <section className="headline">
         <div className="newsbanner">
           <h1>Broadcast</h1>

@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./css/videopage.css";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import VideoPlayer from "../components/VideoPlayer";
 import { useLocation } from "react-router-dom";
 import SwiperCarousel from "../components/SwiperCarousel";
@@ -141,7 +142,9 @@ export default function VideoPage() {
   const topLabel = TOPS.find(t => t.key === topCat)?.label || "";
 
   return (
-    <Layouts title={"Video-Page"}>
+    <Layouts title={"Video-Page"} description={`Watch ${topLabel} videos by sub-category from Marche Healthcare.`} canonical={`https://marchehealthcare.org/videos`}>
+      { /* JSON-LD for this page */ }
+      <SEOJsonLd webpage={{ name: `${topLabel} Videos`, description: `Browse ${topLabel} videos by sub-category.`, url: `https://marchehealthcare.org/videos` }} breadcrumb />
       <section className="vid-banner">
         <video src="./videos/bulb-vedio.mp4" autoPlay muted loop></video> 
         {/* (optional) removed stray space before .mp4 if that was accidental */}

@@ -16,6 +16,7 @@ import YoutubeVideoPlayer from "../components/YoutubeVideoPlayer";
 import ModelViewer3D from "../components/ModelViewer3D";
 
 import { Link } from "react-router-dom";
+import SEOJsonLd from "../components/SEOJsonLd";
 
 /* API base (matches other pages) */
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "/api";
@@ -181,7 +182,8 @@ export default function HomePage() {
   };
 
   return (
-    <Layouts title={"Home-Page"}>
+    <Layouts title={"Home-Page"} description="Marche Healthcare — Innovating to make advanced healthcare accessible for all." canonical="https://marchehealthcare.org/">
+      <SEOJsonLd site webpage={{ name: 'Home', description: 'Marche Healthcare — Innovating to make advanced healthcare accessible for all.' }} breadcrumb />
       <div className="home-top">
         <Carousel />
       </div>
