@@ -96,13 +96,32 @@ export function setupConsentAnalytics() {
   // Initialize Consent Mode defaults early
   setConsentDefaults();
 
+  // If a static GTM snippet is present in index.html, mark it as loaded to prevent double-injection
+  const hasStaticGtm = () => {
+    try {
+      if (typeof window === 'undefined') return false;
+      if (window.google_tag_manager) {
+        // Check specific container if available, else any GTM presence
+        if (GTM_ID && (window.google_tag_manager[GTM_ID] || window.google_tag_manager[GTM_ID?.replace('GTM-', '')])) return true;
+        return true;
+      }
+      if (typeof document !== 'undefined' && GTM_ID) {
+        return !!document.querySelector(`script[src*="googletagmanager.com/gtm.js?id=${GTM_ID}"]`);
+      }
+    } catch {}
+    return false;
+  };
+  if (hasStaticGtm()) {
+    window.__gtmLoaded = true;
+  }
+
   const maybeLoadVendors = (detail) => {
     // Always push consent updates
     updateConsentFromChoices(detail);
 
     // Prefer GTM when configured; it can manage GA and other tags
     if (GTM_ID) {
-      if (detail && detail.performance) {
+      if (detail && detail.performance && !hasStaticGtm()) {
         loadGTMOnce(GTM_ID);
       }
       return;
