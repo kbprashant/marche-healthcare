@@ -111,11 +111,11 @@ const Footer = () => {
             
                </li>
                  <li>
-                <Link to="/Investor">Investor</Link>           
+                <Link to="/Investor">Investors</Link>           
             
                </li>
               <li>
-               <Link to="/Journal">Journal</Link>
+               <Link to="/Journal">Journals</Link>
               </li>
                  <li>
                <Link to="/news#newsandevents">News & Events</Link> 

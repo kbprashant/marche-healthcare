@@ -1,90 +1,367 @@
-/* Banner */
 .journal-banner {
-  background: linear-gradient(
-      rgba(0, 0, 0, 0.6),
-      rgba(0, 0, 0, 0.6)
-    ),
-    url("/images/journal-banner.jpg") center/cover no-repeat;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
+  background: url("/journals2.jpg")
+    center center / cover;
+  height: 500px;
+  width: 100%;
   position: relative;
-}
-
-.banner-content {
-  text-align: center;
-  max-width: 700px;
-}
-
-.banner-content h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.banner-content p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.btn-primary {
   display: inline-block;
-  padding: 12px 30px;
-  background-color: #e67e22; /* Marche orange */
-  color: #fff;
-  border-radius: 8px;
-  text-decoration: none;
+  filter: brightness(1.8);
+}
+.journal-banner img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+.journal-banner-text {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.678);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.journal-banner-text h3 {
+  font-size: var(--font-size-banner-primary);
+  line-height: 110%;
+  margin-bottom: 4%;
+  padding-top: 100px;
+}
+
+.journal-banner-text p {
+  font-size: var(--font-size-paragraph-primary);
+  color: rgba(255, 255, 255, 0.872);
+  padding:0 10px;
+
+}
+
+/* STATS */
+.journals-stats {
+  padding: 50px var(--page-margin-primary, 48px) 20px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.stats-wrap {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.stats-wrap > div {
+  flex: 1 1 180px;
+  min-width: 180px;
+  background: #f7f8fd;
+  border: 1px solid #e3e6f2;
+  border-radius: 14px;
+  padding: 26px 28px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  text-align: center;
+}
+
+.stats-wrap h3 {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  color: #000;
+}
+
+.stats-wrap p {
+  margin: 0;
+  font-size: .95rem;
+  font-weight: 500;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: #555;
+}
+
+/* FILTERS + SEARCH */
+.journals-filters {
+  padding: 30px var(--page-margin-primary,48px) 10px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-filter {
+  padding: 10px 18px;
+  font-size: .9rem;
   font-weight: 600;
-  transition: background 0.3s;
+  background: #f1f3fa;
+  border: 1px solid #d9deec;
+  color: #222;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
 }
 
-.btn-primary:hover {
-  background-color: #d96c1e;
+.btn-filter:hover {
+  background: #5D5DFF;
+  color: #fff;
+  border-color: #5D5DFF;
 }
 
-/* Content Section */
-.journal-container {
-  max-width: 1000px;
-  margin: 50px auto;
-  padding: 0 20px;
-  line-height: 1.7;
-  font-size: 1.1rem;
+.btn-filter.active {
+  background: #5D5DFF;
+  color: #fff;
+  border-color: #5D5DFF;
+}
+
+.search-box input {
+  padding: 10px 16px;
+  border: 1px solid #d9deec;
+  border-radius: 30px;
+  font-size: .95rem;
+  min-width: 240px;
+  background: #fff;
+  outline: none;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+.search-box input:focus {
+  border-color: #5D5DFF;
+  box-shadow: 0 0 0 2px rgba(93,93,255,0.15);
+}
+
+.query-note {
+  margin-top: 12px;
+  font-size: .85rem;
+  color: #444;
+}
+
+/* GRID */
+.journals-grid-section {
+  padding: 20px var(--page-margin-primary,48px) 70px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.journals-grid {
+  display: grid;
+  gap: 34px;
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+}
+
+.pub-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+  padding: 22px 22px 26px;
+  border-radius: 18px;
+  border: 1px solid #e3e6f2;
+  box-shadow: 0 4px 16px -6px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+  transition: transform .55s cubic-bezier(.22,.9,.22,1), box-shadow .45s ease, border-color .45s ease;
+}
+
+.pub-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px -8px rgba(0,0,0,0.14);
+  border-color: #d1d6e8;
+}
+
+.pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: .7rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #555;
+}
+
+.pub-year {
+  background: #f1f3fa;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.pub-status {
+  background: #eaf9ef;
+  color: #1d7c35;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.pill {
+  padding: 4px 10px;
+  border-radius: 30px;
+  background: #eceff6;
+  color: #222;
+}
+
+.pill-journal { background: #5D5DFF; color: #fff; }
+.pill-conference { background: #ff8c42; color: #fff; }
+.pill-preprint { background: #00a2b8; color: #fff; }
+.pill-media { background: #222; color: #fff; }
+
+.pub-title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 700;
+  line-height: 130%;
+  color: #121212;
+}
+
+.pub-venue {
+  margin: 0;
+  font-size: .8rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #5D5DFF;
+}
+
+.pub-summary {
+  margin: 0;
+  font-size: .9rem;
+  line-height: 150%;
+  color: #333;
+  flex: 1;
+}
+
+.pub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.pub-tags .tag {
+  background: #f1f3fa;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 30px;
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+
+.pub-actions {
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-link {
+  position: relative;
+  font-size: .85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #5D5DFF;
+  padding: 6px 12px 6px 0;
+  transition: color .3s ease;
+}
+
+.btn-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: #5D5DFF;
+  transition: width .4s cubic-bezier(.22,.9,.22,1);
+}
+
+.btn-link:hover {
+  color: #352aff;
+}
+
+.btn-link:hover::after {
+  width: 100%;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 80px 30px;
+  border: 2px dashed #d9deec;
+  border-radius: 18px;
+  background: #fafbff;
+  font-size: .95rem;
+  color: #555;
+}
+
+/* COLLAB CTA */
+.journals-collab {
+  padding: 80px var(--page-margin-primary,48px) 90px;
+  max-width: 1250px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.journals-collab h2 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 115%;
+  color: #000;
+}
+
+.journals-collab p {
+  margin: 0 auto 28px;
+  max-width: 780px;
+  line-height: 155%;
+  font-size: 1rem;
   color: #333;
 }
 
-.journal-container h2 {
-  margin-top: 40px;
-  margin-bottom: 15px;
-  font-size: 1.6rem;
-  color: #0b5394; /* Marche dark blue */
+/* RESPONSIVE */
+@media (max-width: 950px) {
+  .stats-wrap {
+    gap: 26px;
+  }
 }
 
-.journal-container ul {
-  margin-left: 20px;
-  list-style: disc;
+@media (max-width: 750px) {
+  .filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-buttons {
+    justify-content: flex-start;
+  }
+  .search-box input {
+    width: 100%;
+  }
 }
 
-.journal-container li {
-  margin-bottom: 10px;
-}
-
-.highlight-text {
-  margin-top: 30px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #e67e22; /* Marche orange */
-}
-
-/* Footer */
-.journal-footer {
-  text-align: center;
-  margin: 60px 0;
-}
-
-.footer-img {
-  max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+@media (max-width: 560px) {
+  .journals-hero-content {
+    padding-bottom: 54px;
+  }
+  .pub-card {
+    padding: 20px 20px 24px;
+  }
+  .pub-title {
+    font-size: .98rem;
+  }
+  .pub-summary {
+    font-size: .85rem;
+  }
 }

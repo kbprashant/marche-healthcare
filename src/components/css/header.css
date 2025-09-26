@@ -700,7 +700,7 @@ body.search-open {
     height: auto;
   }
 
-  /* Hamburger */
+  /* Hamburger - positioned on the left */
   .mobile-navbar .hamburger {
     width: 46px;
     height: 46px;
@@ -713,6 +713,8 @@ body.search-open {
     position: relative;
     cursor: pointer;
     transition: background .25s;
+    /* Remove any margin-left: auto that might be pushing it */
+    margin-left: 0;
   }
   .mobile-navbar .hamburger:hover {
     background: rgba(0,0,0,0.06);
@@ -743,9 +745,10 @@ body.search-open {
     transform: translateX(-50%) rotate(-45deg);
   }
 
-  /* Search (right) */
+  /* Search (right) - Push to the right end */
   .mobile-navbar .mobile-search-btn {
-    margin-left: auto;
+    margin-left: auto; /* This pushes the search button to the right */
+    margin-right: 0;   /* Remove any right margin */
     width: 46px;
     height: 46px;
     display: inline-flex;
@@ -897,7 +900,7 @@ body.search-open {
 }
 .navbar-small .search-container .search-icon{
   background-color: rgba(255, 255, 255, 0);
-  color: #eee;
+  color: #560cf5;
 }
 
 /* 📱 Mobile Responsive (Optional) */

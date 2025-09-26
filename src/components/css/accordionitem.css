@@ -1,3 +1,11 @@
+:root {
+  --accordion-speed: 0.9s;                 /* generic (used by regular FAQs) */
+  --accordion-speed-lineup: 1.15s;         /* slower for NovaLap lineup */
+  --accordion-ease: cubic-bezier(.55,.08,.24,1);
+  --accordion-ease-lineup: cubic-bezier(.65,.05,.36,1); /* gentler in/out */
+  --accordion-speed-lineup: 1.25s;
+}
+
 .rc-accordion-toggle {
     display: flex;
     padding: 20px 10px;
@@ -62,17 +70,28 @@
 }
 
 .rc-collapse {
-    position: relative;
-    height: 0;
-    overflow: hidden;
-    transition: height 0.35s ease;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height var(--accordion-speed) var(--accordion-ease);
+  will-change: height;
 }
 
+/* Explicit slower timing ONLY inside the complete lineup */
+.complete-lineup .rc-collapse {
+  transition: height var(--accordion-speed-lineup) var(--accordion-ease-lineup);
+}
+
+/* (Optional) If something still overrides this later, add !important:
+.complete-lineup .rc-collapse {
+  transition: height var(--accordion-speed-lineup) var(--accordion-ease-lineup) !important;
+}
+*/
+
 .rc-collapse.show {
-    height: auto;
-    border-right: 1px solid #000;
-    border-left: 1px solid #000;
-    border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
 }
 
 .rc-accordion-border{
@@ -157,16 +176,16 @@
 .complete-lineup .rc-accordion-header {
   padding: 0;
 }
-
+.complete-lineup .rc-accordion-card {
+  padding: 0px 0px 20px 20px;
+  }
 .complete-lineup .rc-accordion-toggle {
-  display: flex;
-  flex-direction: row;
-  justify-content: center; /* center title + icon horizontally */
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  text-align: center;
+      display: flex;
+    padding: 20px 10px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: 3s;
 }
 
 /* Ensure the title is centered */
@@ -204,9 +223,9 @@
   max-width: 900px;
 }
 
-/* Keep the collapse animation intact */
+/* New unified slower override (optional – only needed if something else overrides base) */
 .complete-lineup .rc-collapse {
-  transition: height 0.35s ease;
+  transition: height var(--accordion-speed) var(--accordion-ease);
 }
 
 /* Responsive adjustments */
@@ -255,6 +274,17 @@
 @media (max-width: 768px) {
   .rc-accordion-cta {
     justify-content: center;
+  }
+}
+
+.rc-accordion-card:hover .rc-accordion-header:not(.rc-accordion-active) {
+  background: #f5f7fa;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-collapse,
+  .complete-lineup .rc-collapse {
+    transition: none !important;
   }
 }
 
