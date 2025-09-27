@@ -28,14 +28,14 @@ const Carousel = () => {
       author: "LUNDEV", 
       title: "NovaLap 360 D8", 
       topic: "Feel as your hands, Do more than your hands", 
-      description:  "NovaLap 360D8 is a multi-DoF articulating laparoscopic system that delivers robotic-like dexterity without robotic infrastructure."
+      description:  "NovaLap 360 D8 is a multi-DoF articulating laparoscopic system that delivers robotic-like dexterity without robotic infrastructure."
     },
       { 
       img: isMobile ? img2Mobile : img2, 
       author: "LUNDEV", 
       title: "NovaLap 360 D8", 
       topic: "Feel as your hands, Do more than your hands", 
-      description:  "NovaLap 360D8 is a multi-DoF articulating laparoscopic system that delivers robotic-like dexterity without robotic infrastructure."
+      description:  "NovaLap 360 D8 is a multi-DoF articulating laparoscopic system that delivers robotic-like dexterity without robotic infrastructure."
     },
     // { 
     //   img: isMobile ? img2Mobile : img2, 
