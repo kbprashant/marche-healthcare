@@ -154,10 +154,12 @@ export default function Careers() {
 
         {!loading &&
           jobs.map((job) => {
+            const hasHtml = /<[^>]+>/.test(String(job.description || ""));
             const faqObj = {
               header: job.title,
               id: job.id,
               text: job.description || "",
+              html: hasHtml,
             };
 
             return (

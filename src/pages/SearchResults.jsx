@@ -7,6 +7,7 @@ import "./css/searchresults.css";
 // use named Document export
 import { Document } from "flexsearch";
 import FlexSearch from "flexsearch";
+import { ensureClientSearchLoaded, isClientSearchReady, searchClient } from "../utils/clientSearch";
 
 
 // === DB API (env driven) - match NewsPage style ===
@@ -66,6 +67,7 @@ export default function SearchResults() {
   const [pageIndex, setPageIndex] = useState([]); // pages loaded from search-index.json (type === 'page')
   const [filteredBroadcasts, setFilteredBroadcasts] = useState([]);
   const [filteredPages, setFilteredPages] = useState([]);
+  const [serverResults, setServerResults] = useState([]); // optional /api/search aggregator
 
   // FlexSearch in-memory structures
   const [index, setIndex] = useState(null); // Document instance
@@ -75,12 +77,19 @@ export default function SearchResults() {
   const [page, setPage] = useState(1);
   const perPage = 8;
 
+  // Ensure client search index is loaded on page mount for instant page results
+  useEffect(() => {
+    ensureClientSearchLoaded();
+  }, []);
+
   // load static page index (search-index.json) and build FlexSearch index
   useEffect(() => {
     let alive = true;
     (async () => {
       try {
-        const res = await fetch("/search-index.json", { cache: "no-cache" });
+        const base = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.BASE_URL) || '/';
+        const url = `${String(base).replace(/\/+$/,'')}/search-index.json`;
+        const res = await fetch(url, { cache: "no-cache" });
         if (!res.ok) {
           console.warn("search-index.json not found");
           return;
@@ -139,6 +148,7 @@ export default function SearchResults() {
     if (!query || !query.trim()) {
       setFilteredBroadcasts([]);
       setFilteredPages([]);
+      setServerResults([]);
       return;
     }
 
@@ -160,6 +170,20 @@ export default function SearchResults() {
         const items = Array.isArray(data.items) ? data.items : data.items ? [data.items] : [];
         if (!active) return;
         setBroadcasts(items);
+
+        // Optional aggregator endpoint: /api/search
+        try {
+          const agg = await fetch(`${API_BASE}/search?q=${encodeURIComponent(query)}&perPage=20`, { cache: 'no-store' });
+          if (agg.ok) {
+            const payload = await agg.json();
+            const aitems = Array.isArray(payload.items) ? payload.items : [];
+            if (active) setServerResults(aitems);
+          } else {
+            if (active) setServerResults([]);
+          }
+        } catch {
+          if (active) setServerResults([]);
+        }
       } catch (err) {
         console.error("Search fetch failed:", err);
         setError("Failed to fetch content for search.");
@@ -186,7 +210,19 @@ export default function SearchResults() {
     let matchedPages = [];
     if (index && docs.length) {
       try {
-        const results = index.search(needle, { enrich: true });
+        let results = index.search(needle, { enrich: true });
+        if (!results || results.length === 0) {
+          const parts = needle.split(/\s+/);
+          const last = parts.pop();
+          if (last && last.length >= 2) {
+            const prefix = last.toLowerCase();
+            const tries = [prefix, `${prefix}*`];
+            for (const t of tries) {
+              results = index.search(`${[...parts, t].join(' ')}`.trim(), { enrich: true });
+              if (results && results.length) break;
+            }
+          }
+        }
         const sidSet = new Set();
         results.forEach((resGroup) => {
           (resGroup.result || []).forEach((r) => {
@@ -199,6 +235,16 @@ export default function SearchResults() {
         console.warn("FlexSearch search error:", e);
         matchedPages = [];
       }
+    }
+
+    // text-contains fallback if index returns no matches
+    if (matchedPages.length === 0 && docs.length) {
+      const qlc = needle.toLowerCase();
+      matchedPages = docs
+        .filter((d) => (
+          ((d.type || 'page').toLowerCase() === 'page') &&
+          (((d.title || '').toLowerCase().includes(qlc)) || ((d.text || '').toLowerCase().includes(qlc)))
+        ));
     }
 
     // 2) search broadcasts (client-side filter)
@@ -227,7 +273,7 @@ export default function SearchResults() {
       id: p.path || p.title || p.__sid,
       title: p.title,
       path: p.path,
-      excerpt: (p.text || "").slice(0, 300),
+      excerpt: p.excerpt || (p.text || "").slice(0, 300),
     }));
     const broadcastAsResults = (filteredBroadcasts || []).map((b) => ({
       type: "broadcast",
@@ -239,8 +285,28 @@ export default function SearchResults() {
       link: b.link,
       raw: b,
     }));
-    return [...pagesAsResults, ...broadcastAsResults];
-  }, [filteredBroadcasts, filteredPages]);
+    const serverAsResults = (serverResults || []).map((i, n) => ({
+      type: i.type || 'item',
+      id: i.id || `srv_${n}`,
+      title: i.title || '',
+      excerpt: i.snippet || i.excerpt || '',
+      path: i.url || i.path,
+      image: i.image,
+      date: i.date,
+      score: i.score,
+      raw: i,
+    }));
+
+    // dedupe by key (prefer earlier sources order: pages > broadcasts > server)
+    const key = (r) => (r.path || r.link || r.id || '').toString();
+    const map = new Map();
+    ;[...pagesAsResults, ...broadcastAsResults, ...serverAsResults].forEach((r) => {
+      const k = key(r);
+      if (!k) return;
+      if (!map.has(k)) map.set(k, r);
+    });
+    return Array.from(map.values());
+  }, [filteredBroadcasts, filteredPages, serverResults]);
 
   const total = combined.length;
   const pages = Math.max(1, Math.ceil(total / perPage));

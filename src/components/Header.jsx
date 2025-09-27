@@ -3,6 +3,10 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./css/header.css";
 import logo from "../assets/logo_icon.png";
 import { createPortal } from "react-dom";
+import { ensureClientSearchLoaded, isClientSearchReady, searchClient } from "../utils/clientSearch";
+
+// Prepare API base for backend suggestions
+const API_BASE = (import.meta.env && import.meta.env.VITE_API_BASE_URL) || `${window.location.protocol}//${window.location.host}/api`;
 
 const Nav = () => {
   const [activeMenu, setActiveMenu] = useState(null);
@@ -79,32 +83,20 @@ const Nav = () => {
     { title: "Contact", path: "/contact", subItems: [] },
   ];
 
-  // small hand-made suggestions list (menu items + extras)
-  const extraSuggestions = [
-    { label: "Home", path: "/" },
-    { label: "About — Story", path: "/about#ourstory" },
-    { label: "About — Purpose", path: "/about#ourpurpose" },
-    { label: "About — Mission", path: "/about#ourmission" },
-    { label: "About — Vision", path: "/about#ourvision" },
-    { label: "Products", path: "/products" },
-    { label: "Videos", path: "/videos" },
-    { label: "Broadcast (Social)", path: "/news#socialmedia" },
-    { label: "Broadcast (News & Events)", path: "/news#newsandevents" },
-    { label: "Careers", path: "/careers" },
-    { label: "Contact", path: "/contact" },
-  ];
-
-  const suggestionsSource = [
-    ...menuItems.map((m) => ({ label: m.title, path: m.path })),
-    ...extraSuggestions,
-  ];
-
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]); // backend
+  const [clientHits, setClientHits] = useState([]); // client
+  const [clientReady, setClientReady] = useState(false);
+  const debounceRef = useRef(null);
+  const abortRef = useRef(null);
 
   // focus the input when overlay opens
   useEffect(() => {
     if (isSearchVisible && inputRef.current) {
       setTimeout(() => inputRef.current.focus(), 10);
+    }
+    if (isSearchVisible && !clientReady) {
+      // lazy-load client search index on first open
+      ensureClientSearchLoaded().then((s) => setClientReady(!!(s && s.ready)));
     }
   }, [isSearchVisible]);
 
@@ -122,6 +114,7 @@ const Nav = () => {
     setIsSearchVisible(false);
     setSearchQuery("");
     setFilteredSuggestions([]);
+    setClientHits([]);
   }
 
   function goToResults(q) {
@@ -135,12 +128,35 @@ const Nav = () => {
     const v = (q || "").trim().toLowerCase();
     if (!v) {
       setFilteredSuggestions([]);
+      setClientHits([]);
       return;
     }
-    const matches = suggestionsSource
-      .filter((s) => s.label.toLowerCase().includes(v))
-      .slice(0, 8);
-    setFilteredSuggestions(matches);
+    // debounce client + backend search to avoid typing thrash
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      if (clientReady) {
+        const hits = searchClient(v, { limit: 6 });
+        setClientHits(hits);
+      }
+      // backend suggestions (optional /api/search)
+      try {
+        if (abortRef.current) abortRef.current.abort();
+        const controller = new AbortController();
+        abortRef.current = controller;
+        fetch(`${API_BASE}/search?q=${encodeURIComponent(v)}&perPage=6`, { signal: controller.signal })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((data) => {
+            if (!data || !Array.isArray(data.items)) { setFilteredSuggestions([]); return; }
+            const mapped = data.items.map((i) => ({
+              label: i.title || i.url || '',
+              path: i.url || i.path || '',
+              type: i.type || 'item',
+            }));
+            setFilteredSuggestions(mapped);
+          })
+          .catch(() => {/* ignore typing aborts */});
+      } catch {/* noop */}
+    }, 180);
   }
 
   // keyboard handling: Enter -> results, Escape -> close
@@ -264,13 +280,33 @@ const Nav = () => {
                       ✕
                     </button>
                   </div>
-                  <div className="search-suggestions">
-                    {filteredSuggestions.length === 0 && searchQuery.trim() ? (
-                      <div className="suggestion-empty">
-                        No quick matches. Press Enter to search.
-                      </div>
-                    ) : null}
-                    {filteredSuggestions.map((s, i) => (
+                    <div className="search-suggestions">
+                      {clientReady && clientHits.length > 0 && (
+                        <div className="suggestion-section">
+                          <div className="suggestion-section-title">Pages</div>
+                          {clientHits.map((h, i) => (
+                            <div
+                              key={`h_${i}`}
+                              className="suggestion-item"
+                              onMouseDown={(ev) => {
+                                ev.preventDefault();
+                                onSuggestionClick({ path: h.path, label: h.title });
+                              }}
+                              role="button"
+                            >
+                              <div className="suggestion-left"><span className="suggestion-icon">📄</span></div>
+                              <div className="suggestion-center">
+                                <div className="suggestion-label">{h.title}</div>
+                                <div className="suggestion-path">{h.path}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {filteredSuggestions.length > 0 && (
+                        <div className="suggestion-section">
+                          <div className="suggestion-section-title">From server</div>
+                          {filteredSuggestions.map((s, i) => (
                       <div
                         key={i}
                         className="suggestion-item"
@@ -284,11 +320,16 @@ const Nav = () => {
                           <span className="suggestion-icon">🔎</span>
                         </div>
                         <div className="suggestion-center">
-                          <div className="suggestion-label">{s.label}</div>
-                          <div className="suggestion-path">{s.path}</div>
+                              <div className="suggestion-label">{s.label}</div>
+                              <div className="suggestion-path">{s.path}</div>
                         </div>
                       </div>
-                    ))}
+                          ))}
+                        </div>
+                      )}
+                      {clientReady && clientHits.length === 0 && filteredSuggestions.length === 0 && searchQuery.trim() && (
+                        <div className="suggestion-empty">No quick matches. Press Enter to search.</div>
+                      )}
                   </div>
                 </div>
               </>,
@@ -386,30 +427,57 @@ const Nav = () => {
                       </button>
                     </div>
                     <div className="search-suggestions">
-                      {filteredSuggestions.length === 0 && searchQuery.trim() ? (
-                        <div className="suggestion-empty">
-                          No quick matches. Press Enter to search.
+                      {clientReady && clientHits.length > 0 && (
+                        <div className="suggestion-section">
+                          <div className="suggestion-section-title">Pages</div>
+                          {clientHits.map((h, i) => (
+                            <div
+                              key={`dh_${i}`}
+                              className="suggestion-item"
+                              onMouseDown={(ev) => {
+                                ev.preventDefault();
+                                onSuggestionClick({ path: h.path, label: h.title });
+                              }}
+                              role="button"
+                            >
+                              <div className="suggestion-left"><span className="suggestion-icon">📄</span></div>
+                              <div className="suggestion-center">
+                                <div className="suggestion-label">{h.title}</div>
+                                <div className="suggestion-path">{h.path}</div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      ) : null}
-                      {filteredSuggestions.map((s, i) => (
-                        <div
-                          key={i}
-                          className="suggestion-item"
-                          onMouseDown={(ev) => {
-                            ev.preventDefault();
-                            onSuggestionClick(s);
-                          }}
-                          role="button"
-                        >
-                          <div className="suggestion-left">
-                            <span className="suggestion-icon">🔎</span>
-                          </div>
-                          <div className="suggestion-center">
-                            <div className="suggestion-label">{s.label}</div>
-                            <div className="suggestion-path">{s.path}</div>
-                          </div>
+                      )}
+
+                      {filteredSuggestions.length > 0 && (
+                        <div className="suggestion-section">
+                          <div className="suggestion-section-title">From server</div>
+                          {filteredSuggestions.map((s, i) => (
+                            <div
+                              key={`ds_${i}`}
+                              className="suggestion-item"
+                              onMouseDown={(ev) => {
+                                ev.preventDefault();
+                                onSuggestionClick(s);
+                              }}
+                              role="button"
+                            >
+                              <div className="suggestion-left">
+                                <span className="suggestion-icon">🔎</span>
+                              </div>
+                              <div className="suggestion-center">
+                                <div className="suggestion-label">{s.label}</div>
+                                <div className="suggestion-path">{s.path}</div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      )}
+
+                      {clientReady && clientHits.length === 0 && filteredSuggestions.length === 0 && searchQuery.trim() && (
+                        <div className="suggestion-empty">No quick matches. Press Enter to search.</div>
+                      )}
                     </div>
                   </div>
                 </>,

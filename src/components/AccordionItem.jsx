@@ -1,9 +1,28 @@
 import React, { useRef } from 'react';
 import './css/accordionitem.css';
 
+function sanitizeHtml(html = "") {
+  try {
+    // very small sanitizer: remove script/style, event handlers, and javascript: urls
+    let s = String(html);
+    s = s.replace(/<\/(?:script|style)>/gi, ""); // close tags safe
+    s = s.replace(/<\s*(script|style)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi, "");
+    s = s.replace(/ on[a-z]+\s*=\s*"[^"]*"/gi, "");
+    s = s.replace(/ on[a-z]+\s*=\s*'[^']*'/gi, "");
+    s = s.replace(/ on[a-z]+\s*=\s*[^\s>]+/gi, "");
+    s = s.replace(/href\s*=\s*"javascript:[^"]*"/gi, 'href="#"');
+    s = s.replace(/href\s*=\s*'javascript:[^']*'/gi, "href='#'");
+    s = s.replace(/src\s*=\s*"javascript:[^"]*"/gi, '');
+    s = s.replace(/src\s*=\s*'javascript:[^']*'/gi, '');
+    return s;
+  } catch {
+    return String(html || "");
+  }
+}
+
 const AccordionItem = ({ handleToggle, active, faq, disableClick = false }) => {
   const contentEl = useRef();
-  const { header, id, text, img, specs, cta } = faq;
+  const { header, id, text, img, specs, cta, html } = faq;
 
   const isOpen = active === id;
 
@@ -48,11 +67,19 @@ const AccordionItem = ({ handleToggle, active, faq, disableClick = false }) => {
             <div className="rc-accordion-body-row">
               <img src={img} alt={header} className="rc-accordion-img" />
               <div className="rc-accordion-text">
-                <p className="mb-0">{text}</p>
+                {html ? (
+                  <div className="mb-0" dangerouslySetInnerHTML={{ __html: sanitizeHtml(text) }} />
+                ) : (
+                  <p className="mb-0">{text}</p>
+                )}
               </div>
             </div>
           ) : (
-            <p className="mb-0">{text}</p>
+            html ? (
+              <div className="mb-0" dangerouslySetInnerHTML={{ __html: sanitizeHtml(text) }} />
+            ) : (
+              <p className="mb-0">{text}</p>
+            )
           )}
 
           {Array.isArray(specs) && specs.length > 0 && (

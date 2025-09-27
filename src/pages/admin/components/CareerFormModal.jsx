@@ -141,7 +141,7 @@ export default function CareerFormModal({ open, onClose, API_BASE, editId, onSav
               <input className="input" value={form.apply_email} onChange={e=>setForm(f=>({...f,apply_email:e.target.value}))} />
             </label>
 
-            <label className="grid-span-2">Description
+            <label className="grid-span-2">Description (HTML allowed)
               <textarea className="textarea" rows={6}
                         value={form.description} onChange={e=>setForm(f=>({...f,description:e.target.value}))} />
             </label>

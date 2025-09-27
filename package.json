@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "build": "node -e \"try{require('./scripts/build-search-index.js')}catch(e){console.warn('build-search-index skipped:', e.message)}\" && vite build",
+  "build": "node ./scripts/build-search-index.js && vite build",
     "build-search-index": "node ./scripts/build-search-index.js"
   },
   "dependencies": {
