@@ -468,7 +468,7 @@ export default function HomePage() {
             onClick={scrollToProduct}
             className="learn-more-button"
           >
-            More Update
+            More Updates
           </Link>
         </div>
       </div>

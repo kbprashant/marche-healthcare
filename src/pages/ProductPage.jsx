@@ -115,7 +115,7 @@ const faqProducts = [
         jawLength: "18mm",
         shaftDiameter: "8mm",
         shaftLength: "25cm,38cm,45cm",
-        electrodes: "Monopolar/Bipolar",
+        electrodes: ["Monopolar", "Bipolar"],
         uses: "Multiple Uses",
       },
     ],
@@ -130,7 +130,8 @@ const faqProducts = [
         jawLength: "18mm",
         shaftDiameter: "8mm",
         shaftLength: "25cm,38cm,45cm",
-        electrodes: "Monopolar/Bipolar",
+       electrodes: ["Monopolar", "Bipolar"],
+
         uses: "Multiple Uses",
       },
     ],
@@ -678,7 +679,13 @@ const ProductPage = () => {
                                     <td>{spec.jawLength || '-'}</td>
                                     <td>{spec.shaftDiameter || '-'}</td>
                                     <td>{spec.shaftLength || '-'}</td>
-                                    <td>{spec.electrodes}</td>
+                                    <td>
+                                      {Array.isArray(spec.electrodes)
+                                        ? spec.electrodes.map((item, i) => (
+                                            <div key={i}>{item}</div>
+                                          ))
+                                        : spec.electrodes}
+                                    </td>
                                     <td>{spec.uses}</td>
                                   </tr>
                                 ))}
@@ -734,7 +741,13 @@ const ProductPage = () => {
                                     <td>{spec.jawLength || '-'}</td>
                                     <td>{spec.shaftDiameter || '-'}</td>
                                     <td>{spec.shaftLength || '-'}</td>
-                                    <td>{spec.electrodes}</td>
+                                    <td>
+                                      {Array.isArray(spec.electrodes)
+                                        ? spec.electrodes.map((item, i) => (
+                                            <div key={i}>{item}</div>
+                                          ))
+                                        : spec.electrodes}
+                                    </td>
                                     <td>{spec.uses}</td>
                                   </tr>
                                 ))}

@@ -510,10 +510,11 @@ html {
 }
 
 .product-table {
-  width: 100%;
-  overflow-x: auto; /* keep scroll if table is wide */
+  display: flex;
+  justify-content: center; /* center table horizontally */
+  padding: 20px;
+  overflow-x: auto;
 }
-
 
 .product-image img {
   width: 100%;
@@ -541,26 +542,32 @@ html {
 }
 
 .product-table table {
-  width: 100%;
   border-collapse: collapse;
+  width: auto; /* keeps it compact */
+  max-width: 80%; /* 🔹 shrink table size overall */
+  text-align: center;
+  margin: 0 auto;
 }
 
 .product-table th,
 .product-table td {
   border: 1px solid #e5e5e5;
-  padding: 8px;
-  text-align: left;
+  padding: 4px 8px; /* 🔹 smaller padding for compact cells */
+  text-align: center;
+  white-space: nowrap;
 }
+
 
 .product-table th {
   background-color: #5D5DFF;
   color: white;
+  white-space: nowrap; /* keep headers in one line */
 }
 
 .product-table td {
   background-color: #f9f9f9;
+  font-size: 14px;
 }
-
 .fav-question .rc-accordion-body {
   padding: 16px;
 }

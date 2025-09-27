@@ -41,7 +41,7 @@ const Investor = () => {
                 BIRAC funded Marche Healthcare with ₹50 lakhs to develop breakthrough 
                 medical technologies. 
                 This grant has been instrumental in the early innovation
-                 of NovaLap – our advanced laparoscopic instrument series with 8 degrees 
+                 of NovaLap 360 D8 – our advanced laparoscopic instrument series with 8 degrees 
                  of freedom and 360° end-effector rotation.
 
 
@@ -67,7 +67,7 @@ const Investor = () => {
               <p>
                With an investment of ₹3 crores, 
                TANSIM empowers Marche Healthcare to scale up manufacturing and commercialization 
-               of NovaLap. 
+               of NovaLap 360 D8. 
                Their support enables us to bring world-class, 
                affordable laparoscopic solutions to surgeons across India and beyond.
               </p>
