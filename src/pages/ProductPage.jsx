@@ -403,7 +403,7 @@ const ProductPage = () => {
   const rightColumnProducts = faqProducts.filter((_, i) => i % 2 === 1);
 
   return (
-    <Layouts title="Product-Page" description="NovaLap 360 D8 — multi-DoF articulating laparoscopic system delivering robotic-like dexterity without robotic infrastructure." canonical="https://marchehealthcare.org/products">
+    <Layouts title="Products | Marche Healthcare" description="NovaLap 360 D8 — multi-DoF articulating laparoscopic system delivering robotic-like dexterity without robotic infrastructure." canonical="https://marchehealthcare.org/products">
       <SEOJsonLd webpage={{ name: 'Products', description: 'NovaLap 360 D8 lineup and features.', url: 'https://marchehealthcare.org/products' }} breadcrumb />
       <main className="product-main">
         <motion.div

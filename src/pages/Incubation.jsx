@@ -1,5 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import "./css/incubation.css";
 import { motion } from "framer-motion";
 
@@ -12,7 +13,8 @@ const fadeUp = (delay = 0) => ({
 
 const Incubation = () => {
   return (
-    <Layouts title={"Incubation - Marche Healthcare"} description={"Discover how Marche Healthcare thrives at the Atal Incubation Centre, leveraging resources and expertise to innovate in minimally invasive surgical technologies."}>
+    <Layouts title={"Incubation - Marche Healthcare"} description={"Discover Marche Healthcare incubation journey and resources enabling innovation."} canonical="https://marchehealthcare.org/Incubation">
+      <SEOJsonLd webpage={{ name: 'Incubation', description: 'Our incubation journey and resources.', url: 'https://marchehealthcare.org/Incubation' }} breadcrumb />
       <section className="incubation-banner">
         <div className="incubation-banner-text">
           <h3>Incubation</h3>

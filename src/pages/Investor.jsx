@@ -1,5 +1,6 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import "./css/investor.css";
 import { motion } from "framer-motion";
 
@@ -12,7 +13,8 @@ const fadeUp = (delay = 0) => ({
 
 const Investor = () => {
   return (
-    <Layouts title={"Investors - Marche Healthcare"} description={"Discover how Marche Healthcare thrives at the Atal Incubation Centre, leveraging resources and expertise to innovate in minimally invasive surgical technologies."}>
+    <Layouts title={"Investors - Marche Healthcare"} description={"Investor relations and opportunities at Marche Healthcare."} canonical="https://marchehealthcare.org/Investor">
+      <SEOJsonLd webpage={{ name: 'Investors', description: 'Investor relations and opportunities.', url: 'https://marchehealthcare.org/Investor' }} breadcrumb />
       <section className="investor-banner">
         <div className="investor-banner-text">
           <h3>Investors</h3>

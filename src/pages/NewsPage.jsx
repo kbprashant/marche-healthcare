@@ -1,6 +1,7 @@
 import "./css/newspage.css";
 import { useLocation } from "react-router-dom";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,7 +9,6 @@ import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
 import MediaCard from "../components/MediaCard";
 import NewsCard from "../components/NewsCard";
 import NewsfullDetails from "../components/NewsFullDetails";
-import SEOJsonLd from "../components/SEOJsonLd";
 
 
 // === DB API (env driven) ===
@@ -355,15 +355,8 @@ const NewsPage = () => {
   };
 
   return (
-    <Layouts title={"News & Events"}>
-      <SEOJsonLd id="breadcrumbs-news" data={{
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": typeof window!== 'undefined' ? window.location.origin : "" },
-          { "@type": "ListItem", "position": 2, "name": "News & Events", "item": typeof window!== 'undefined' ? `${window.location.origin}/news` : "" }
-        ]
-      }} />
+    <Layouts title={"Broadcast - News & Events | Marche Healthcare"} description="Latest social updates, news, and events from Marche Healthcare." canonical="https://marchehealthcare.org/news">
+      <SEOJsonLd webpage={{ name: 'Broadcast', description: 'Latest social updates, news, and events from Marche Healthcare.', url: 'https://marchehealthcare.org/news' }} breadcrumb />
       <section className="headline">
         <div className="newsbanner">
           <h1>Broadcast</h1>

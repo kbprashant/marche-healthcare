@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import "./css/contactpage.css";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import ContactCards from "../components/ContactCards";
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
@@ -193,7 +194,8 @@ const ContactPage = () => {
   ];
 
   return (
-    <Layouts title={"Contact-Page"}>
+    <Layouts title={"Contact Us | Marche Healthcare"} description="Contact Marche Healthcare — get in touch for demos, partnerships, purchases, or support." canonical="https://marchehealthcare.org/contact">
+      <SEOJsonLd webpage={{ name: 'Contact', description: 'Get in touch with Marche Healthcare.', url: 'https://marchehealthcare.org/contact' }} breadcrumb />
       <section className="contact-banner">
         <div className="contact-banner-text">
           <h3>Contact us</h3>

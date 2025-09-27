@@ -1,10 +1,12 @@
 import React from "react";
 import { Layouts } from "../Layouts/Layouts";
+import SEOJsonLd from "../components/SEOJsonLd";
 import "./css/policy.css";
 
 const PrivacyPolicy = () => {
   return (
-    <Layouts title="Privacy Policy">
+    <Layouts title="Privacy Policy" description="Privacy Policy — how Marche Healthcare collects, uses, and protects your data." canonical="https://marchehealthcare.org/Privacy-Policy">
+      <SEOJsonLd webpage={{ name: 'Privacy Policy', description: 'How we collect, use, and protect your data.', url: 'https://marchehealthcare.org/Privacy-Policy' }} breadcrumb />
       <section className="privacy-banner">
         <div>
           <h1></h1>

@@ -10,6 +10,7 @@ import CardUserProfile from "../components/CardUserProfile";
 import UserFullDetails from "../components/UserFullDetails";
 import ScrollingContainer from "../components/ScrollingContainer";
 import { SplitStringUsingRegex } from "../utils/SplitStringUsingRegex";
+import SEOJsonLd from "../components/SEOJsonLd";
 const ourVissionPara =
   "Our vision is a world where health equality is not just an aspiration but a fundamental human right, where every individual, regardless of background or circumstance, has access to equitable healthcare and opportunities for a healthy life.";
 
@@ -181,7 +182,8 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <Layouts title={"About-Page"}>
+    <Layouts title={"About Us | Marche Healthcare"} description="About Marche Healthcare — our story, mission, vision, and team building accessible healthcare innovations." canonical="https://marchehealthcare.org/about">
+      <SEOJsonLd webpage={{ name: 'About', description: 'About Marche Healthcare — story, mission, vision, and team.', url: 'https://marchehealthcare.org/about' }} breadcrumb />
       <section className="abt-banner">
         <div>
           <h1>Welcome</h1>
