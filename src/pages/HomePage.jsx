@@ -296,10 +296,13 @@ export default function HomePage() {
       </div>
 
       <div className="our-partners">
-        <SectionHeader
+        <div className="partners-header">
+          <SectionHeader
           title={`Our Partners`}
           content={`Your support fuels our mission to innovate and ensure health equity worldwide. Together, we are making advanced healthcare accessible for all.`}
         />
+        </div>
+        
         <div className="partners-logos-container">
           <div className="partners-logos-scroll">
             <motion.div
@@ -328,6 +331,19 @@ export default function HomePage() {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
+              <img src={`./home/partner4.png`} alt="startupTn Logo" />
+            </motion.div>
+            {/* Duplicate logos for infinite scroll effect (kept as-is) */}
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+              <img src={`./home/partner1.png`} alt="birac Logo" />
+            </motion.div>
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+              <img src={`./home/partner2.png`} alt="aic-pecf Logo" />
+            </motion.div>
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+              <img src={`./home/partner3.png`} alt="incubation Logo" />
+            </motion.div>
+            <motion.div className="logo-container" whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
               <img src={`./home/partner4.png`} alt="startupTn Logo" />
             </motion.div>
             {/* Duplicate logos for infinite scroll effect (kept as-is) */}
@@ -372,7 +388,8 @@ export default function HomePage() {
                   const imageSrc = resolveImageUrl(broadcast.image_url) || "./home/surgery.jpg";
                   const title = broadcast.title || "Untitled Broadcast";
                   const summary = broadcast.summary || (broadcast.body_html ? String(broadcast.body_html).replace(/<[^>]+>/g, '') : "");
-                  const dateStr = broadcast.created_at ? new Date(broadcast.created_at).toLocaleDateString() : "";
+                  const when = broadcast.posted_at || broadcast.scheduled_at || broadcast.created_at;
+                  const dateStr = when ? new Date(when).toLocaleDateString() : "";
                   const externalLink = broadcast.link_url && /^https?:\/\//i.test(broadcast.link_url) ? broadcast.link_url : null;
                   const cardHref = externalLink || "/news";
 

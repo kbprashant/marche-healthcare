@@ -639,6 +639,11 @@
   overflow: hidden;
 }
 
+.our-partners .section-header h2 {
+  font-size: 76px;
+  font-weight: 700;
+}
+
 .partners-logos-container {
   width: 100%;
   overflow: hidden;
@@ -756,11 +761,13 @@
   /* gap: 80px; */
 }
 
-.blogs-and-events .blog-event-column {
+.blogs-and-events .blog-event-column h2{
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  font-size: 76px;
+  font-weight: 700;
 }
 
 .blogs-and-events .blog-event-content {
@@ -814,6 +821,7 @@
 
 .blogs-and-events .blog-card-1 {
   width: 100%;
+height: 500px;
   display: flex;
   padding: 0.7em;
   justify-content: center;
@@ -823,11 +831,16 @@
 
 .blogs-and-events .blog-image-1 {
   width: 533px;
+  height: 100%;                /* fill the card’s height */
   margin-left: 0px;
   flex-shrink: 0;
   border-radius: var(--border-radius-primary);
-  background: url("../assets/blog-image1.png") lightgray 50% / cover no-repeat;
+  /* background: url("../assets/blog-image1.png") lightgray 50% / cover no-repeat;  remove, not used for <img> */
+  object-fit: cover;           /* key: crop/zoom to fill box */
+  object-position: center;     /* center the crop */
+  display: block;
 }
+
 .blogs-and-events .blog-content-inside {
   width: 100%;
   display: flex;
@@ -974,11 +987,7 @@
   .blogs-and-events .blog-image-1 {
     width: 533px;
     margin-left: 0px;
-  }
-  
-  .blog-frame-column {
-    flex-direction: row;
-    margin-left: 20px;
+    /* object-fit/object-position already set above */
   }
 }
 
@@ -1099,6 +1108,7 @@
     height: auto;
     max-height: 220px;          /* optional cap */
     object-fit: cover;
+    object-position: center;
     border-radius: var(--border-radius-primary);
     margin: 0;
   }

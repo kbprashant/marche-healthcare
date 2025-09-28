@@ -234,7 +234,7 @@ const NewsPage = () => {
                     content: p.summary || "",               // use summary; body_html is for detail pages
                     profile: "./companyLogo.png",
                     names: (p.social_source ? p.social_source[0].toUpperCase() + p.social_source.slice(1) : "Marche Healthcare"),
-                    date: (p.scheduled_at || p.created_at || "").slice(0,10),
+                    date: (p.posted_at || p.scheduled_at || p.created_at || "").slice(0,10),
                     link: p.link_url || "",
                     social_source: p.social_source || null,
                   }
@@ -292,7 +292,7 @@ const NewsPage = () => {
                   </SwiperSlide>
                 )}
 
-                {(dbNewsPosts.length ? dbNewsPosts : newsCardDetails).map((p, idx) => {
+                { (dbNewsPosts.length ? dbNewsPosts : newsCardDetails).map((p, idx) => {
                   const item = dbNewsPosts.length
                     ? {
                         id: p.id ?? idx,
@@ -302,7 +302,7 @@ const NewsPage = () => {
                         body_html: p.body_html || "",
                         profile: "./companyLogo.png",
                         names: "Marche Healthcare",
-                        date: (p.scheduled_at || p.created_at || "").slice(0,10),
+                        date: (p.posted_at || p.scheduled_at || p.created_at || "").slice(0,10),
                       }
                     : p;
 
@@ -323,7 +323,7 @@ const NewsPage = () => {
                       />
                     </SwiperSlide>
                   );
-                })}
+                }) }
               </Swiper>
               <div className="custom-pagination"></div>
             </>
@@ -342,7 +342,7 @@ const NewsPage = () => {
                       content: p.summary || "",
                       profile: "./companyLogo.png",
                       names: "Marche Healthcare",
-                      date: (p.scheduled_at || p.created_at || "").slice(0, 10),
+                      date: (p.posted_at || p.scheduled_at || p.created_at || "").slice(0, 10),
                     }))
                   : (newsCardDetails.length ? newsCardDetails : blogCardDetails)
                 ).filter((obj) => obj.id !== activeCard?.id)

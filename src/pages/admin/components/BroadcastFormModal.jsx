@@ -21,7 +21,8 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
     summary: initial?.summary || "",
     body: initial?.body ?? initial?.body_html ?? "",
     status: initial?.status || "draft",
-    publish_at: toLocalInputValue(initial?.publish_at ?? initial?.scheduled_at),
+  publish_at: toLocalInputValue(initial?.publish_at ?? initial?.scheduled_at),
+  posted_at: toLocalInputValue(initial?.posted_at),
     social_source: initial?.social_source || "",
     // new: preserve existing link_url if present
     link_url: initial?.link_url || "",
@@ -66,6 +67,9 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
       if (form.publish_at) {
         // convert local datetime-local to ISO
         fd.append("publish_at", new Date(form.publish_at).toISOString());
+      }
+      if (form.posted_at) {
+        fd.append("posted_at", new Date(form.posted_at).toISOString());
       }
       if (form.kind === "social" && form.social_source) fd.append("social_source", form.social_source);
       if (imageFile) fd.append("image", imageFile);
@@ -152,6 +156,10 @@ export default function BroadcastFormModal({ apiBase, token, initial, onClose, o
 
             <label className="grid-span-2">Publish At (optional)
               <input type="datetime-local" name="publish_at" value={form.publish_at} onChange={onChange} />
+            </label>
+
+            <label className="grid-span-2">Original Posted At (optional)
+              <input type="datetime-local" name="posted_at" value={form.posted_at || ""} onChange={onChange} />
             </label>
 
             
