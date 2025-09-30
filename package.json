@@ -10,12 +10,13 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-  "build": "node ./scripts/build-search-index.js && vite build",
+    "build": "node ./scripts/build-search-index.js && vite build",
     "build-search-index": "node ./scripts/build-search-index.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@plasmicapp/react-web": "^0.2.366",
+    "bcryptjs": "^3.0.2",
     "flexsearch": "^0.8.212",
     "framer-motion": "^11.3.4",
     "gh-pages": "^6.3.0",

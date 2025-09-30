@@ -15,7 +15,9 @@ const TOPS = [
   { key: "product", label: "Product" },
   { key: "surgery", label: "Surgery" },
   { key: "training", label: "Training" },
+  { key: "others", label: "Others" }, // ✅ new
 ];
+
 
 // helper: build embed or empty string
 function toYouTubeEmbed(url) {
@@ -156,9 +158,11 @@ export default function VideoPage() {
 
       <section className="video-gallery">
         {/* Invisible anchors so #product / #surgery / #training scroll targets exist */}
-        <span id="product" className="hash-anchor" />
-        <span id="surgery" className="hash-anchor" />
-        <span id="training" className="hash-anchor" />
+{/* Invisible anchors so #product / #surgery / #training / #others scroll targets exist */}
+<span id="product" className="hash-anchor" />
+<span id="surgery" className="hash-anchor" />
+<span id="training" className="hash-anchor" />
+<span id="others" className="hash-anchor" />  {/* ✅ new */}
 
         {/* Top categories */}
         <div className="category">
