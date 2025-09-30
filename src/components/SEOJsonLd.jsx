@@ -6,7 +6,7 @@ import React, { useMemo } from 'react';
 //  <SEOJsonLd items={[ customJsonLdObject, ... ]} />
 
 const SITE_URL = 'https://marchehealthcare.org';
-const LOGO_URL = `${SITE_URL}/logo_icon.png`;
+const LOGO_URL = `${SITE_URL}/logo_icon2.png`;
 
 function siteJson() {
 	return [
