@@ -427,7 +427,7 @@ const ProductPage = () => {
     <div>
       <h2>NovaLap 360 D8</h2>
       <p>
-        NovaLap 360D8 is a multi-DoF articulating laparoscopic system that
+        NovaLap 360 D8 is a multi-DoF articulating laparoscopic system that
         delivers robotic-like dexterity without robotic infrastructure.
       </p>
       <br />
