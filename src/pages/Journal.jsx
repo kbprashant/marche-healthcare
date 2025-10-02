@@ -84,8 +84,8 @@ const FILTERS = [
   { key: "all", label: "All" },
   { key: "journal", label: "Journals" },
   { key: "conference", label: "Conferences" },
-  { key: "preprint", label: "Preprints" },
-  { key: "media", label: "Media" },
+  // { key: "preprint", label: "Preprints" },
+  // { key: "media", label: "Media" },
 ];
 
 const fade = (delay = 0) => ({
