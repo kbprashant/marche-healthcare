@@ -273,18 +273,16 @@ body {
   cursor: pointer;
 }
 
-  .rc-accordion-cta .btn-apply {
-    width: 90%; /* make it visible on small screens */
-    max-width: 300px;
-    text-align: center;
-  }
-
+.rc-accordion-cta .btn-apply:hover {
+  opacity: 0.9;
+}
 
 /* Responsive */
-@media (max-width: 768px) {
-  .rc-accordion-cta {
-    justify-content: center;
-    width: 100%;
+@media (min-width: 768px) {
+  .expectations-grid {
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
   }
 
   .expectations-text,
