@@ -534,39 +534,46 @@ html {
   color: #555;
   line-height: 150%;
 }
-
 .product-table {
-  flex: 2;
-  overflow-x: auto;
+  display: flex;
+  justify-content: center;
   padding: 20px;
+  overflow-x: auto;
 }
 
 .product-table table {
   border-collapse: collapse;
-  width: auto; /* keeps it compact */
-  max-width: 80%; /* 🔹 shrink table size overall */
+  width: auto;
+  max-width: 90%; /* Slightly increased for better readability */
   text-align: center;
   margin: 0 auto;
+  font-size: 14px;
 }
 
 .product-table th,
 .product-table td {
   border: 1px solid #e5e5e5;
-  padding: 4px 8px; /* 🔹 smaller padding for compact cells */
+  padding: 8px 12px; /* Slightly increased for better spacing */
   text-align: center;
   white-space: nowrap;
 }
 
-
 .product-table th {
   background-color: #5D5DFF;
   color: white;
-  white-space: nowrap; /* keep headers in one line */
+  font-weight: 600;
 }
 
 .product-table td {
   background-color: #f9f9f9;
-  font-size: 14px;
+}
+
+/* Ensure consistent image display */
+.product-image img {
+  width: 100%;
+  max-width: 300px; /* Add max-width for consistency */
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 .fav-question .rc-accordion-body {
   padding: 16px;
