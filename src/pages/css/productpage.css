@@ -542,6 +542,8 @@ html {
 }
 
 .product-table table {
+  width: 100%; /* Ensure table takes full width of container */
+  min-width: 300px
   border-collapse: collapse;
   width: auto; /* keeps it compact */
   max-width: 80%; /* 🔹 shrink table size overall */
