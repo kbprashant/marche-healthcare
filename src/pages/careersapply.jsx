@@ -74,7 +74,7 @@ export default function CareersApply() {
     formDataToSend.append("resume", formData.resumeFile);
 
     try {
-      const res = await fetch(`${API_BASE}/admin/apply`, {
+      const res = await fetch(`${API_BASE}/apply`, {
         method: "POST",
         body: formDataToSend,
       });
