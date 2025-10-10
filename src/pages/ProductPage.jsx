@@ -95,23 +95,21 @@ const faqProducts = [
     title: "Fenestrated Forceps / Bipolar Fenestrated Forceps",
     img: "/products/faqimg.png",
     specs: [
-       {
+      {
         jawLength: "18mm",
         shaftDiameter: "8mm",
         shaftLength: "25cm,38cm,45cm",
         electrodes: "Bipolar",
         uses: "Multiple Uses",
       },
-      ,
     ],
   },
   {
     id: 2,
     title: "Maryland Dissector / Bipolar Maryland Dissector",
     img: "/products/faqimg.png",
-
     specs: [
-       {
+      {
         jawLength: "18mm",
         shaftDiameter: "8mm",
         shaftLength: "25cm,38cm,45cm",
@@ -124,14 +122,12 @@ const faqProducts = [
     id: 3,
     title: "Precise Dissector (Monopolar / Bipolar)",
     img: "/products/faqimg.png",
-    
     specs: [
-        {
+      {
         jawLength: "18mm",
         shaftDiameter: "8mm",
         shaftLength: "25cm,38cm,45cm",
-       electrodes: ["Monopolar", "Bipolar"],
-
+        electrodes: ["Monopolar", "Bipolar"],
         uses: "Multiple Uses",
       },
     ],
@@ -140,203 +136,170 @@ const faqProducts = [
     id: 4,
     title: "Bipolar Blunt Tip Dissector",
     img: "/products/faqimg.png",
-        specs: [
-
-         {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "Bipolar",
-        uses: "Multiple Uses",
-      },
-        ],
-  },
-{
-id: 5,
-    title: "Cobra Grasper",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "N/A",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 6,
-    title: "Tenaculum Forceps",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "N/A",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 7,
-    title: "Needle Holder / Precise Needle Holder with Suture Cut",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "N/A",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id:8,
-    title: "Clip Applier",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrode: "N/A",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 9,
-    title: "Potts Scissors",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "N/A",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 10,
-    title: "Round Tip Scissors",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "N/A",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 11,
-    title: "Monopolar Scissors",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "Monopolar",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 12,
-    title: "Monopolar Spatula",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "Monopolar",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 13,
-    title: "Monopolar Hook",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "Monopolar",
-        uses: "Multiple Uses",
-      },
-      
-    ],
-  },
-
-  {
-id: 14,
-    title: "Vessel Sealer Extend",
-    img: "/products/faqimg.png",
-    
-    specs: [
-       {
-        jawLength: "18mm",
-        shaftDiameter: "8mm",
-        shaftLength: "25cm,38cm,45cm",
-        electrodes: "Bipolar",
-        uses: "Multiple Uses",
-      },
-          ],
-  },
-
-  {
-id: 15,
-    title: "Clinch Forceps",
-    img: "/products/faqimg.png",
-    
     specs: [
       {
         jawLength: "18mm",
         shaftDiameter: "8mm",
         shaftLength: "25cm,38cm,45cm",
-        electrode: "asf",
-        uses: "Multiple Uasses",
+        electrodes: "Bipolar",
+        uses: "Multiple Uses",
       },
-      
     ],
   },
-
+  {
+    id: 5,
+    title: "Cobra Grasper",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrodes: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: "Tenaculum Forceps",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrodes: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 7,
+    title: "Needle Holder / Precise Needle Holder with Suture Cut",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrodes: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 8,
+    title: "Clip Applier",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrodes: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 9,
+    title: "Potts Scissors",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,36cm,45cm",
+        electrodes: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 10,
+    title: "Round Tip Scissors",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,36cm,45cm",
+        electrodes: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 11,
+    title: "Monopolar Scissors",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrodes: "Monopolar",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 12,
+    title: "Monopolar Spatula",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,36cm,45cm",
+        electrodes: "Monopolar",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 13,
+    title: "Monopolar Hook",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrodes: "Monopolar",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 14,
+    title: "Vessel Sealer Extend",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,36cm,45cm",
+        electrodes: "Bipolar",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
+  {
+    id: 15,
+    title: "Clinch Forceps",
+    img: "/products/faqimg.png",
+    specs: [
+      {
+        jawLength: "18mm",
+        shaftDiameter: "8mm",
+        shaftLength: "25cm,38cm,45cm",
+        electrodes: "N/A",
+        uses: "Multiple Uses",
+      },
+    ],
+  },
 ];
 
 
