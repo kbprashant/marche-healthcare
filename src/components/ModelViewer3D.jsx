@@ -32,12 +32,6 @@ export default function ModelViewer3D({ src = sceneModel, alt = "3D model", heig
           exposure="1"
           camera-orbit="0deg 75deg 80%"
           field-of-view="45deg"
-          style={{
-            width: "100%",
-            height: `${height}px`,
-            borderRadius: 8,
-            display: "block",
-          }}
         >
           {/* Fallback for browsers without web component support */}
           <div style={{ padding: 20 }}>

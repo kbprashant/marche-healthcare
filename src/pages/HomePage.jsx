@@ -194,9 +194,7 @@ export default function HomePage() {
       </div>
 
       {/* 3D Model Section */}
-      {/* <div className="model-3d-section>
-        <ModelViewer3D />
-      </div> */}
+            {/*<ModelViewer3D />*/}
 
       <div className="marche-values-div">
         <h2 className="team-heading">Marche’s Values</h2>

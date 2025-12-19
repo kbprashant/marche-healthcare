@@ -5,6 +5,13 @@
   margin-top: -110px;
 }
 
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .home-top {
+    margin-top: -60px;
+  }
+}
+
 /* ===== CAROUSEL/CONTENT SECTION ===== */
 .main-content {
   width: 100%;
@@ -62,7 +69,8 @@
   justify-content: center;
   align-items: center;
   background: #fff;
-  width: 90%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .youtube-player {
@@ -71,11 +79,14 @@
   align-items: center;
   padding: 20px;
   background: #fff;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .youtube-player .video-wrapper {
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   margin-bottom: 0px; /* was 20px */
   padding-left: 20px;
   padding-right: 20px;
@@ -85,6 +96,7 @@
   position: relative;
   width: 100%;
   padding-bottom: 56.25%; /* 16:9 Aspect Ratio (was 43%) */
+  margin: 0 auto;
 }
 
 .youtube-iframe {
@@ -99,6 +111,9 @@
 .video-tabs-container {
   margin-top: 0px;    /* bring tabs closer */
   margin-bottom: 0;   /* remove extra bottom gap */
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 /* Updated styles for the new video tabs */
@@ -362,19 +377,30 @@
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .value-proposition {
-    height: auto;            /* was 100vh */
-    padding: 20px;           /* match testimonial side padding */
+    height: auto;
+    padding: 16px;
     background: #fff;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /* Make the player align with testimonial card width */
   .video-player {
-    width: 100%;                  /* was 100vw; avoids horizontal overflow */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  
   .youtube-player{
     width: 100%;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   /* Remove nested horizontal padding so edges line up with testimonials */
@@ -389,20 +415,30 @@
   .video-aspect {
     width: 100%;
     max-width: 100%;
-    aspect-ratio: 21 / 9;         /* keep current ratio; switch to 16/9 if preferred */
-    border-radius: 12px;          /* match your card rounding */
+    aspect-ratio: 21 / 9;
+    border-radius: 10px;
     overflow: hidden;
   }
 
   /* Tighten spacing for title/tabs */
   .youtube-video-title {
-    font-size: 18px;
-    margin-top: 8px;
+    font-size: 17px;
+    margin-top: 6px;
+    line-height: 1.3;
+    text-align: center;
   }
 
   .value-proposition .videotabbuttons {
-    padding: 0.5em 0 0;
-    gap: 8px;
+    padding: 0.4em 0 0;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+  }
+  
+  .video-tabs-container {
+    width: 100%;
+    display: flex;
     justify-content: center;
   }
 }
@@ -626,6 +662,13 @@
   padding: 60px 20px;
 }
 
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .testmonialslide {
+    padding: 32px 16px;
+  }
+}
+
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .testmonialslide {
@@ -635,8 +678,41 @@
 
 /* ===== PARTNERS SECTION ===== */
 .our-partners {
-  padding: 30px 20px; /* Reduced from 60px 20px */
+  padding: 0 20px 30px 20px;
   overflow: hidden;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .our-partners {
+    padding: 0 16px 24px 16px;
+    margin-top: 0;
+  }
+  
+  .our-partners .section-header {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  .our-partners .section-header h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+  
+  .our-partners .section-header p {
+    margin-top: 8px;
+  }
+  
+  .our-partners .logo-container {
+    width: 120px;
+    height: 80px;
+    margin: 0 12px;
+  }
+  
+  .partners-logos-scroll {
+    padding: 20px 10px;
+    padding-top: 0 !important;
+  }
 }
 
 .our-partners .section-header h2 {
@@ -1034,23 +1110,25 @@ height: 500px;
 /* Reduce gap below the section title */
 @media (max-width: 768px) {
   .team-heading {
-    margin-bottom: 12px; /* was 40px */
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    padding: 0 16px;
   }
 
   /* Compact the values section container */
   .home-our-team {
-    padding: 0px; /* was 40px 20px */
+    padding: 0;
   }
 
   /* Remove inner overlay padding to avoid extra space */
   .home-our-team .overlay {
-    padding: 0; /* was 2em 0 */
-    margin-top: 0 !important; /* ensure no pull/push */
+    padding: 0 16px;
+    margin-top: 0 !important;
   }
 
   /* Pull cards closer to the title */
   .home-our-team .team-cards-container {
-    margin-top: 12px; /* was 80px */
+    margin-top: 16px;
   }
 
   /* Full-width cards (match testimonial/value-prop content width) */
@@ -1064,40 +1142,48 @@ height: 500px;
     width: 100%;
     max-width: 100%;
     transform: none;
-    margin: 0; /* avoid extra vertical gaps */
+    margin: 0;
+    padding: 16px;
   }
 
   /* Slightly reduce icon top offset for a tighter card */
   .home-our-team .team-icon-container {
-    margin-top: 16px; /* was 40px */
-    padding: 0px !important;
+    margin-top: 12px;
+    padding: 0 !important;
+  }
+  
+  .home-our-team .card-heading {
+    font-size: 1.1rem;
+    margin: 8px 0;
   }
 
   /* Let text use full width */
   .home-our-team .card-paragraph {
     width: 100%;
-    padding: 10px;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
 }
 
 /* Blogs — mobile responsive */
 @media (max-width: 768px) {
   .blogs-and-events {
-    margin: 40px 0 60px;
-    padding: 0 16px;            /* align with value-prop/testimonial inner width */
+    margin: 24px 0 40px;
+    padding: 0 16px;
   }
 
   .blogs-and-events .blogs-cards-container {
     width: 100%;
-    gap: 16px;                  /* tighter spacing */
+    gap: 14px;
     padding: 0;
   }
 
   /* Each card stacks vertically */
   .blogs-and-events .blog-card-1 {
-    flex-direction: column;     /* was row on larger screens */
+    flex-direction: column;
     align-items: stretch;
-    padding: 12px;
+    padding: 14px;
     background: #f7f7ff;        /* subtle, readable */
     border-radius: var(--border-radius-primary);
   }

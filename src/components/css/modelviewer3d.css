@@ -1,7 +1,7 @@
 /* src/components/css/modelviewer3d.css */
 /* 3D model section */
 .model-3d-section {
-  padding: 20px 0px;
+  padding: 0px;
 }
 
 .model-viewer-container {
@@ -17,6 +17,7 @@ model-viewer {
   height: 500px;
   display: block;
   --poster-color: transparent;
+  background-color: #000;
 }
 
 /* Adjust the model size within the viewer */
@@ -29,8 +30,27 @@ model-viewer::part(model) {
   transform: scale(1.1) !important;
 }
 
-@media (max-width: 900px) {
+/* Mobile optimization - make it taller and fullscreen-like */
+@media (max-width: 768px) {
+  .model-3d-section {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .model-viewer-container {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+  }
+  
   model-viewer {
-    height: 340px;
+    height: calc(100vh - 60px); /* Full height minus header */
+    border-radius: 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 900px) {
+  model-viewer {
+    height: 400px;
   }
 }

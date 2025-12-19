@@ -320,32 +320,39 @@ padding-top: 30px;
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
   .carousel {
-    margin-top: 70px; /* Reduced margin for mobile */
-    height: 80vh; /* Reduced height for mobile */
+    margin-top: 60px; /* Optimized margin below header for mobile */
+    height: 85vh; /* Optimized height for mobile */
   }
   
   .carousel .list .item .content {
     position: absolute;
-    top: 15% !important; /* Adjusted for mobile */
-    width: 90% !important;
-    padding-right: 0 !important;
+    top: 5% !important; /* Optimized spacing for mobile */
+    width: 92% !important;
+    padding: 0 4% !important;
     text-align: center;
   }
   
   .carousel .list .item .author {
-    font-size: 0.8rem;
-    letter-spacing: 5px;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
   }
   
-  .carousel .list .item .title,
-  .carousel .list .item .topic {
-    font-size: 2rem !important;
+  .carousel .list .item .title {
+    font-size: 1.75rem !important;
     line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  
+  .carousel .list .item .topic {
+    font-size: 1.5rem !important;
+    line-height: 1.3;
+    margin-bottom: 12px;
   }
   
   .carousel .list .item .des {
-    font-size: 0.9rem;
-    margin: 10px 0;
+    font-size: 0.85rem;
+    margin: 8px 0 12px;
+    line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -355,32 +362,42 @@ padding-top: 30px;
   .carousel .list .item .buttons {
     grid-template-columns: 1fr !important;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: 12px;
   }
   
   .carousel .list .item .buttons button {
-    width: 150px;
+    width: 160px;
+    height: 44px;
     margin: 0 auto;
+    font-size: 14px;
+    min-height: 44px; /* Touch-friendly */
   }
   
   .thumbnail {
-    bottom: 20px;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
+    gap: 12px;
   }
   
   .thumbnail .item {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
   }
   
   .arrows {
     top: auto;
-    bottom: 100px;
+    bottom: 90px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
+    width: 85%;
     justify-content: space-between;
+  }
+  
+  .arrows button {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
   }
 }
 
