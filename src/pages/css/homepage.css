@@ -127,18 +127,20 @@
 }
 
 .video-tabbutton button {
-  background: #e0e0e0;
+  background: transparent;
   border: none;
   border-radius: 25px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  color: #5d5dff;
 }
 
 .video-tabbutton.active button {
-  background: var(--primary);
-  color: #fff;
+  background: transparent;
+  color: #5d5dff;
+  font-weight: 600;
 }
 
 .youtube-video-title {
@@ -342,6 +344,20 @@
   
   .videotabbuttons::-webkit-scrollbar {
     display: none;
+  }
+  
+  /* Remove background and border from video tab buttons on mobile */
+  .video-tabbutton button {
+    background: transparent;
+    border: none;
+    color: #5d5dff;
+    padding: 10px 20px;
+  }
+  
+  .video-tabbutton.active button {
+    background: transparent;
+    color: #5d5dff;
+    font-weight: 600;
   }
 }
 
@@ -664,8 +680,13 @@
 
 /* Mobile optimization */
 @media (max-width: 768px) {
+  /* Reduce bottom margin of values section */
+  .marche-values-div {
+    margin-bottom: 0px;
+  }
+  
   .testmonialslide {
-    padding: 32px 16px;
+    padding: 8px 16px;
   }
 }
 
@@ -686,7 +707,7 @@
 @media (max-width: 768px) {
   .our-partners {
     padding: 0 16px 24px 16px;
-    margin-top: 0;
+    margin-top: -24px;
   }
   
   .our-partners .section-header {

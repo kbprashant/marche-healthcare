@@ -387,15 +387,19 @@ const ProductPage = () => {
 {/* Product Action */}
 <section className="product-action" ref={productActionRef}>
   <div className="short-about">
-    <div>
+    <div className="product-text-content">
       <h2>NovaLap 360 D8</h2>
       <p>
         NovaLap 360 D8 is a multi-DoF articulating laparoscopic system that
         delivers robotic-like dexterity without robotic infrastructure.
       </p>
-      <br />
+    </div>
+    <div className="product-image-mobile">
+      <img src="/products/sketch5.png" alt="NovaLap 360 D8" />
+    </div>
+    <div className="product-button-wrapper">
       <a
-        href="#complete-lineup"   // ✅ points to lineup heading
+        href="#complete-lineup"
         className="btn-outline"
         onMouseEnter={handleInvertOn}
         onMouseLeave={handleInvertOff}

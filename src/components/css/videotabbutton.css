@@ -6,8 +6,8 @@
   padding: 0.5em 1.2em;
   min-height: 44px;
   border-radius: 45px;
-  border: 1.5px solid #5d5dff;
-  background: #fff;
+  border: none;
+  background: transparent;
   color: #5d5dff;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -18,13 +18,14 @@
 }
 
 .video-tabbutton:hover {
-  background-color: #f0f0ff;
+  background-color: transparent;
 }
 
 .video-tabbutton-active {
-  background-color: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
+  background-color: transparent;
+  color: #5d5dff;
+  border-color: transparent;
+  font-weight: 600;
 }
 
 /* Medium devices (tablets, 768px and down) */
@@ -33,6 +34,17 @@
     font-size: 13px;
     padding: 0.5em 1em;
     min-height: 40px;
+    background: transparent;
+    border: none;
+  }
+  
+  .video-tabbutton button {
+    background: transparent;
+    color: #5d5dff;
+  }
+  
+  .video-tabbutton:hover {
+    background: transparent;
   }
 }
 
