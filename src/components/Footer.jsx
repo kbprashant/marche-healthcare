@@ -140,7 +140,7 @@ const Footer = () => {
       <hr />
       <div className="social">
         <div className="social-links">
-          <a href="#de">© 2025 Marche Healthcare All rights reserved</a>
+          <a href="#de">© 2026 Marche Healthcare All rights reserved</a>
         </div>
       </div>
     </footer>
