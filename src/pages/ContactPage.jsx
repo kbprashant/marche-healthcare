@@ -188,7 +188,7 @@ const ContactPage = () => {
       content: "Find our office and location to reach us",
       link: {
         url: "https://www.google.com/maps/place/Marche+Healthcare+Pvt+Ltd/@11.9862735,79.78756,852m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3a53675b21d0d3f5:0x535ff5483afb8303!8m2!3d11.9862735!4d79.78756!16s%2Fg%2F11tjhrl9ds", // Updated with a more direct Google Maps link
-        text: "129, Opp to KFC, VIP Nagar, Pattanur, Vanur, Villupuram, Tamil Nadu - 605006",
+        text: "129, Opp to KFC, VIP Nagar, Pattanur, Vanur, Villupuram, Tamil Nadu - 605109",
       },
     },
   ];
